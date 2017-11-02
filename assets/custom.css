@@ -9,10 +9,10 @@ webview {
   height: 100%;
 }
 
-.hide {
-  height: 0%;
-  width: 0%;
-  visibility: hidden;
+.hidden {
+  height: 0 !important;
+  width: 0 !important;
+  visibility: hidden !important;
 }
 
 .container-fluid {
@@ -27,7 +27,12 @@ webview {
   padding: 0 0 0 0;
 }
 
+.heightcorrection {
+  height: calc(100% - 2px) !important;
+}
+
 #titlebar {
+  background: #222222;
   height: 25px;
   width: 100%;
   -webkit-app-region: drag;
@@ -60,7 +65,7 @@ webview {
   min-width: 25px;
 }
 
-#row {
+#main {
   height: calc(100% - 27px);
 }
 
@@ -70,7 +75,7 @@ webview {
   height: 100%;
 }
 
-#main {
+#content {
   background: #555;
   width: calc(100% - 72px);
   height: 100%;

@@ -16,26 +16,23 @@
 <body class="bg-dark">
   <div class="container-fluid">
 
-    <div class="row">
-      <div id="titlebar">
-        <div class="text-center">
-          <div id="windowtitle" class="text-white">Wrapbox</div>
-          <div id="windowbuttons" class="pull-right">
-            <button id="minimize" class="btn text-white">
-              <i class="fa fa-window-minimize"></i>
-            </button>
-            <button id="maximize" class="btn text-white">
-              <i class="fa fa-window-maximize"></i>
-            </button>
-            <button id="close" class="btn text-white">
-              <i class="fa fa-window-close"></i>
-            </button>
-          </div>
+    <div id="titlebar" class="row text-center">
+      <div id="windowtitle" class="text-white">Wrapbox
+        <div id="windowbuttons" class="pull-right">
+          <button id="minimize" class="btn text-white">
+            <i class="fa fa-window-minimize"></i>
+          </button>
+          <button id="maximize" class="btn text-white">
+            <i class="fa fa-window-maximize"></i>
+          </button>
+          <button id="close" class="btn text-white">
+            <i class="fa fa-window-close"></i>
+          </button>
         </div>
       </div>
     </div>
 
-    <div id="row" class="row">
+    <div id="main" class="row">
 
       <div id="sidepanel" class="col-auto p-0 text-center">
         <button class="btn btn-primary rounded-circle mt-2 mb-2 active shadow" data-target="googleinbox">
@@ -46,9 +43,9 @@
         </button>
       </div>
 
-      <div id="main" class="col-auto p-0 shadow">
+      <div id="content" class="col-auto p-0 shadow">
         <webview id="googleinbox" src="https://inbox.google.com/"></webview>
-        <webview id="outlookcalendar" class="hide" src="https://outlook.live.com/owa/?path=/calendar/view/Month"></webview>
+        <webview id="outlookcalendar" class="hidden" src="https://outlook.live.com/owa/?path=/calendar/view/Month"></webview>
       </div>
 
     </div>

@@ -1,16 +1,18 @@
 const $ = require("./assets/jquery.min.js");
 const { shell, ipcRenderer } = require("electron");
 
-console.log("load");
 $(() => {
+  if (process.platform !== "win32") {
+    $("#titlebar").addClass("hidden");
+    $("#main").addClass("heightcorrection");
+  }
   $("#sidepanel .btn").click((event) => {
-    $("webview").addClass("hide");
-    $(`#${$(event.currentTarget).data("target")}`).removeClass("hide");
+    $("webview").addClass("hidden");
+    $(`#${$(event.currentTarget).data("target")}`).removeClass("hidden");
     $("#sidepanel .btn").removeClass("active");
     $(event.currentTarget).addClass("active");
   });
   $($("webview").on("new-window", (event) => {
-    console.log(event);
     try {
       shell.openExternal(event.originalEvent.url);
     } catch (error) {
