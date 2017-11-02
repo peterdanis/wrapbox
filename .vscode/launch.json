@@ -1,0 +1,77 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Chrome",
+      "file": "${file}",
+      "webRoot": "${workspaceRoot}",
+      "userDataDir": "${workspaceRoot}/.chromedebug"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Node",
+      "program": "${file}"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Node (w/o internals)",
+      "program": "${file}",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Node (w/o internals/modules)",
+      "program": "${file}",
+      "skipFiles": ["node_modules/**", "<node_internals>/**"]
+    },
+
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Node (attach: 9229)",
+      "address": "localhost",
+      "port": 9229
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Node (w/o internals attach: 9229)",
+      "address": "localhost",
+      "port": 9229,
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Node (w/o internals/modules attach: 9229)",
+      "address": "localhost",
+      "port": 9229,
+      "skipFiles": ["node_modules/**", "<node_internals>/**"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Jest",
+      "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
+      "args": ["-i"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Jest pattern",
+      "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
+      "args": ["-i", "${fileBasename}"]
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Full-Stack",
+      "configurations": ["Node", "Chrome"]
+    }
+  ]
+}
