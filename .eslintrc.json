@@ -1,0 +1,23 @@
+{
+  /* cSpell:disable */
+  "extends": "airbnb",
+  "rules": {
+    "linebreak-style": "off",
+    "quotes": ["warn", "double"],
+    "no-plusplus": "off",
+    "comma-dangle": [
+      "warn",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "ignore"
+      }
+    ]
+  },
+  "overrides": {
+    "files": "**/*.spec.js",
+    "env": { "jest": true }
+  }
+}
