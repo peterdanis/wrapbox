@@ -1,5 +1,6 @@
 html,
 body {
+  /* background-color: #444444; */
   height: 100%;
   width: 100%;
 }
@@ -8,18 +9,59 @@ webview {
   height: 100%;
 }
 
+.hide {
+  height: 0%;
+  width: 0%;
+  visibility: hidden;
+}
+
 .container-fluid {
   height: 100%;
 }
 
+.shadow {
+  box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.5) !important;
+}
+
 .btn {
+  padding: 0 0 0 0;
+}
+
+#titlebar {
+  height: 25px;
+  width: 100%;
+  -webkit-app-region: drag;
+  z-index: 2000;
+}
+
+#windowtitle {
+  display: inline;
+}
+
+#windowbuttons {
+  line-height: 1.2;
+  -webkit-app-region: no-drag;
+  display: inline;
+}
+
+#sidepanel .btn {
   font-size: 25px;
   min-height: 50px;
   min-width: 50px;
 }
 
+#titlebar .btn {
+  border-radius: 0;
+  background: inherit;
+  font-size: 12px;
+  max-height: 25px;
+  min-height: 25px;
+  max-width: 25px;
+  min-width: 25px;
+}
+
 #row {
-  height: 100%;
+  height: calc(100% - 27px);
 }
 
 #sidepanel {
@@ -29,6 +71,7 @@ webview {
 }
 
 #main {
-  width: calc(100% - 70px);
+  background: #555;
+  width: calc(100% - 72px);
   height: 100%;
 }

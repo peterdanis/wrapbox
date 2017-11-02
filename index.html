@@ -5,34 +5,55 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Wrapbox</title>
   <link rel="stylesheet" href="assets/bootstrap.min.css">
   <link rel="stylesheet" href="assets/custom.css">
   <link rel="stylesheet" href="assets/font-awesome.min.css">
-  <script src="assets/jquery-3.2.1.min.js" type="text/javascript"></script>
-  <script src="assets/bootstrap.min.js" type="text/javascript"></script>
+  <script src="renderer.js"></script>
 
 </head>
 
-<body>
+<body class="bg-dark">
   <div class="container-fluid">
+
+    <div class="row">
+      <div id="titlebar">
+        <div class="text-center">
+          <div id="windowtitle" class="text-white">Wrapbox</div>
+          <div id="windowbuttons" class="pull-right">
+            <button id="minimize" class="btn text-white">
+              <i class="fa fa-window-minimize"></i>
+            </button>
+            <button id="maximize" class="btn text-white">
+              <i class="fa fa-window-maximize"></i>
+            </button>
+            <button id="close" class="btn text-white">
+              <i class="fa fa-window-close"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="row" class="row">
-      <div id="sidepanel" class="col-auto p-0 bg-dark text-center">
-        <button class="btn btn-primary rounded-circle mt-2 mb-2">
+
+      <div id="sidepanel" class="col-auto p-0 text-center">
+        <button class="btn btn-primary rounded-circle mt-2 mb-2 active shadow" data-target="googleinbox">
           <i class="fa fa-inbox"></i>
         </button>
-        <button class="btn btn-primary rounded-circle mb-2">
+        <button class="btn btn-primary rounded-circle mb-2 shadow" data-target="outlookcalendar">
           <i class="fa fa-calendar"></i>
         </button>
       </div>
 
-      <div id="main" class="col-auto p-0">
-        <webview id="googleinbox" src="https://inbox.google.com/" frameborder="0" style="width:0%; height:0%; visibility: hidden;"></webview>
-        <webview id="outlookcalendar" src="https://outlook.live.com/owa/?path=/calendar/view/Month" frameborder="0" style=""></webview>
-
+      <div id="main" class="col-auto p-0 shadow">
+        <webview id="googleinbox" src="https://inbox.google.com/"></webview>
+        <webview id="outlookcalendar" class="hide" src="https://outlook.live.com/owa/?path=/calendar/view/Month"></webview>
       </div>
+
     </div>
   </div>
+
 </body>
 
 </html>

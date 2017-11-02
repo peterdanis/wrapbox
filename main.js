@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const url = require("url");
 
@@ -10,6 +10,7 @@ function createWindow() {
     width: 1200,
     height: 700,
     webviewTag: true,
+    frame: false,
   });
 
   win.loadURL(url.format({
@@ -20,6 +21,24 @@ function createWindow() {
 
   win.on("closed", () => {
     win = null;
+  });
+
+  ipcMain.on("minimize", () => {
+    win.minimize();
+  });
+
+  ipcMain.on("maximize", () => {
+    if (win.isMaximized()) {
+      win.unmaximize();
+    } else {
+      win.maximize();
+    }
+  });
+
+  ipcMain.on("close", () => {
+    if (process.platform !== "darwin") {
+      app.quit();
+    }
   });
 }
 
