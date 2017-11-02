@@ -7,7 +7,7 @@ $(() => {
     $("webview").addClass("hide");
     $(`#${$(event.currentTarget).data("target")}`).removeClass("hide");
     $("#sidepanel .btn").removeClass("active");
-    $(this).addClass("active");
+    $(event.currentTarget).addClass("active");
   });
   $($("webview").on("new-window", (event) => {
     console.log(event);
