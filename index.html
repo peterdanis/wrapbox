@@ -16,34 +16,45 @@
 <body class="bg-dark">
   <div class="container-fluid">
 
-    <div id="titlebar" class="row text-center">
-      <div id="windowtitle" class="text-white">Wrapbox
-        <div id="windowbuttons" class="pull-right">
-          <button id="minimize" class="btn text-white">
-            <i class="fa fa-window-minimize"></i>
-          </button>
-          <button id="maximize" class="btn text-white">
-            <i class="fa fa-window-maximize"></i>
-          </button>
-          <button id="close" class="btn text-white">
-            <i class="fa fa-window-close"></i>
-          </button>
-        </div>
+    <div id="titlebar" class="row">
+
+      <div id="prevnext" class="col text-left p-0"></div>
+      <div id="windowtitle" class="col text-white text-center p-0">Wrapbox</div>
+      <div id="windowbuttons" class="col text-right p-0">
+        <button id="minimize" class="btn text-white">
+          <i class="fa fa-window-minimize"></i>
+        </button>
+        <button id="maximize" class="btn text-white">
+          <i class="fa fa-window-maximize"></i>
+        </button>
+        <button id="close" class="btn text-white">
+          <i class="fa fa-window-close"></i>
+        </button>
       </div>
     </div>
 
     <div id="main" class="row">
 
-      <div id="sidepanel" class="col-auto p-0 text-center">
-        <button class="btn btn-primary rounded-circle mt-2 mb-2 active shadow" data-target="googleinbox">
-          <i class="fa fa-inbox"></i>
+      <div id="sidepanel" class="col p-0 text-center">
+        <div>
+          <button class="btn btn-primary rounded-circle mt-2 mb-2 active shadow" data-target="googleinbox">
+            <i class="fa fa-inbox"></i>
+          </button>
+          <button class="btn btn-primary rounded-circle mb-2 shadow" data-target="outlookcalendar">
+            <i class="fa fa-calendar"></i>
+          </button>
+        </div>
+        <button id="refresh" class="btn btn-success rounded-circle mb-2 shadow" data-target="settings">
+          <i class="fa fa-cogs"></i>
         </button>
-        <button class="btn btn-primary rounded-circle mb-2 shadow" data-target="outlookcalendar">
-          <i class="fa fa-calendar"></i>
-        </button>
+        <div>
+          <button id="settings" class="btn btn-secondary rounded-circle mb-2 shadow" data-target="settings">
+            <i class="fa fa-cogs"></i>
+          </button>
+        </div>
       </div>
 
-      <div id="content" class="col-auto p-0 shadow">
+      <div id="content" class="col p-0 shadow bg-secondary">
         <webview id="googleinbox" src="https://inbox.google.com/"></webview>
         <webview id="outlookcalendar" class="hidden" src="https://outlook.live.com/owa/?path=/calendar/view/Month"></webview>
       </div>

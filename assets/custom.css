@@ -32,37 +32,37 @@ webview {
 }
 
 #titlebar {
-  background: #222222;
+  /* background: rgba(34, 34, 34, 0.4); */
   height: 25px;
-  width: 100%;
   -webkit-app-region: drag;
-  z-index: 2000;
-}
-
-#windowtitle {
-  display: inline;
+  /* z-index: 2000;*/
 }
 
 #windowbuttons {
-  line-height: 1.2;
   -webkit-app-region: no-drag;
-  display: inline;
 }
 
 #sidepanel .btn {
+  line-height: 1;
+  height: 50px;
+  width: 50px;
+}
+
+#sidepanel .btn i {
   font-size: 25px;
-  min-height: 50px;
-  min-width: 50px;
 }
 
 #titlebar .btn {
+  margin-top: -1px;
+  box-shadow: 0 0 0 #000;
   border-radius: 0;
   background: inherit;
-  font-size: 12px;
-  max-height: 25px;
-  min-height: 25px;
-  max-width: 25px;
-  min-width: 25px;
+  height: 25px;
+  width: 25px;
+}
+
+#titlebar .btn i {
+  font-size: 13px;
 }
 
 #main {
@@ -76,7 +76,6 @@ webview {
 }
 
 #content {
-  background: #555;
   width: calc(100% - 72px);
   height: 100%;
 }

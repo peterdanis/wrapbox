@@ -13,6 +13,8 @@ function createWindow() {
     frame: process.platform !== "win32",
   });
 
+  //win.setMenu(null);
+
   win.loadURL(url.format({
     pathname: path.join(__dirname, "index.html"),
     protocol: "file:",
@@ -43,10 +45,6 @@ function createWindow() {
 }
 
 app.on("ready", createWindow);
-
-app.on("browser-window-created", (e, window) => {
-  window.setMenu(null);
-});
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
