@@ -10,10 +10,10 @@ function createWindow() {
     width: 1200,
     height: 700,
     webviewTag: true,
-    frame: process.platform !== "win32",
+    frame: true, //process.platform !== "win32",
   });
 
-  //win.setMenu(null);
+  win.setMenu(null);
 
   win.loadURL(url.format({
     pathname: path.join(__dirname, "index.html"),

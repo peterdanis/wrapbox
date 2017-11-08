@@ -43,6 +43,12 @@
           <button class="btn btn-primary rounded-circle mb-2 shadow" data-target="outlookcalendar">
             <i class="fa fa-calendar"></i>
           </button>
+          <button class="btn btn-primary rounded-circle mb-2 shadow" data-target="facebookmessenger">
+            <i class="fa fa-facebook"></i>
+          </button>
+          <button class="btn btn-primary rounded-circle mb-2 shadow" data-target="feedly">
+            <i class="fa fa-rss"></i>
+          </button>
         </div>
         <button id="refresh" class="btn btn-success rounded-circle mb-2 shadow" data-target="settings">
           <i class="fa fa-cogs"></i>
@@ -57,6 +63,9 @@
       <div id="content" class="col p-0 shadow bg-secondary">
         <webview id="googleinbox" src="https://inbox.google.com/"></webview>
         <webview id="outlookcalendar" class="hidden" src="https://outlook.live.com/owa/?path=/calendar/view/Month"></webview>
+        <webview id="facebookmessenger" class="hidden" src="https://www.messenger.com"></webview>
+        <webview id="feedly" class="hidden" src="https://feedly.com/i/latest"></webview>
+
       </div>
 
     </div>
