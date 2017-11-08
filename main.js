@@ -4,22 +4,16 @@ const url = require("url");
 
 let win;
 
-function createWindow() {
-  // Create the browser window.
+function createWindow(target) {
   win = new BrowserWindow({
     width: 1200,
     height: 700,
-    webviewTag: true,
-    frame: true, //process.platform !== "win32",
+    frame: true, // process.platform !== "win32",
   });
 
   win.setMenu(null);
 
-  win.loadURL(url.format({
-    pathname: path.join(__dirname, "index.html"),
-    protocol: "file:",
-    slashes: true,
-  }));
+  win.loadURL(target);
 
   win.on("closed", () => {
     win = null;
@@ -42,9 +36,19 @@ function createWindow() {
       app.quit();
     }
   });
+
+  ipcMain.on("newBrowserWindow", (event, arg) => {
+    createWindow(arg);
+  });
 }
 
-app.on("ready", createWindow);
+app.on("ready", () => {
+  createWindow(url.format({
+    pathname: path.join(__dirname, "index.html"),
+    protocol: "file:",
+    slashes: true,
+  }));
+});
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {

@@ -15,7 +15,8 @@ $(() => {
   $($("webview").on("new-window", (event) => {
     try {
       // shell.openExternal(event.originalEvent.url);
-      $(event.currentTarget).attr("src", event.originalEvent.url);
+      // $(event.currentTarget).attr("src", event.originalEvent.url);
+      ipcRenderer.send("newBrowserWindow", event.originalEvent.url);
     } catch (error) {
       console.log(`Ignoring ${event} due to ${error.message}`);
     }
