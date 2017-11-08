@@ -2,7 +2,7 @@ const $ = require("./assets/jquery.min.js");
 const { shell, ipcRenderer } = require("electron");
 
 $(() => {
-  if (process.platform !== "win32") {
+  if (process.platform === "win32") {
     $("#titlebar").addClass("hidden");
     $("#main").addClass("heightcorrection");
   }
