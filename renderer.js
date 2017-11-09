@@ -16,14 +16,17 @@ $(() => {
   });
 
   $($("webview").on("new-window", (event) => {
+    console.log(event);
     try {
+      // event.preventDefault();
       // TODO Allow user to choose whether to open
       // in external browser or in the same electron window
-      if (true) {
+      if (event.originalEvent.disposition !== "new-window") {
         shell.openExternal(event.originalEvent.url);
-      } else {
-        $(event.currentTarget).attr("src", event.originalEvent.url);
-      }
+      } 
+      // else {
+      //   $(event.currentTarget).attr("src", event.originalEvent.url);
+      // }
     } catch (error) {
       console.log(`Ignoring ${event} due to ${error.message}`);
     }
