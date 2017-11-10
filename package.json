@@ -1,7 +1,7 @@
 {
   "name": "wrapbox",
   "description": "An Electron wrapper for web pages",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "main": "main.js",
   "scripts": {
@@ -10,6 +10,7 @@
   "dependencies": {},
   "devDependencies": {
     "electron": "*",
+    "electron-packager": "*",
     "eslint": "*",
     "eslint-config-airbnb": "*",
     "eslint-plugin-import": "*",

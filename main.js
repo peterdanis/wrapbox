@@ -8,7 +8,7 @@ function createWindow(target) {
   win = new BrowserWindow({
     width: 1200,
     height: 700,
-    frame: true, // process.platform !== "win32"
+    frame: false,
   });
 
   // TODO Un-comment to disable menu and DevTools
@@ -37,11 +37,6 @@ function createWindow(target) {
       app.quit();
     }
   });
-
-  // TODO Not used currently, delete
-  // ipcMain.on("newBrowserWindow", (event, arg) => {
-  //   createWindow(arg);
-  // });
 }
 
 app.on("ready", () => {
