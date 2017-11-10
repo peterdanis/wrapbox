@@ -3996,7 +3996,7 @@ input.mdl-button[type="submit"] {
 .mdl-button--primary.mdl-button--primary {
   color: rgb(63,81,181); }
   .mdl-button--primary.mdl-button--primary .mdl-ripple {
-    background: rgb(255,255,255); }
+    background: rgb(255, 255, 255); }
   .mdl-button--primary.mdl-button--primary.mdl-button--raised, .mdl-button--primary.mdl-button--primary.mdl-button--fab {
     color: rgb(255,255,255);
     background-color: rgb(63,81,181); }

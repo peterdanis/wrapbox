@@ -9,6 +9,7 @@ function createWindow(target) {
     width: 1200,
     height: 700,
     frame: false,
+    backgroundColor: "#283593",
   });
 
   // TODO Un-comment to disable menu and DevTools

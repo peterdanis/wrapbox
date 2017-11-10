@@ -8,7 +8,11 @@ function insertWebview(index, src) {
   const webview = document.createElement("webview");
   const button = document.createElement("button");
   webview.setAttribute("id", `webview${index}`);
-  webview.setAttribute("class", "webview");
+  if (index === 0) {
+    webview.setAttribute("class", "webview");
+  } else {
+    webview.setAttribute("class", "webview invisible");
+  }
   webview.setAttribute("src", src);
   webview.setAttribute("allowpopups", "");
   content.appendChild(webview);
@@ -16,9 +20,50 @@ function insertWebview(index, src) {
 
 function insertButton(index, icon) {
   const button = document.createElement("button");
+  const i = document.createElement("i");
+  const activeButton = [
+    "mdl-button",
+    "mdl-button--primary",
+    "mdl-button--fab",
+    "mdl-js-button",
+    "mdl-js-ripple-effect",
+    "mdl-shadow--4dp",
+    "mdl-color--cyan-A700",
+  ].join(" ");
+  const inactiveButton = [
+    "mdl-button",
+    "mdl-button--primary",
+    "mdl-button--fab",
+    "mdl-js-button",
+    "mdl-js-ripple-effect",
+    "mdl-shadow--4dp",
+    "mdl-color--cyan-A400",
+  ].join(" ");
+
   button.setAttribute("id", `button${index}`);
-  button.setAttribute("class", "mdl-button mdl-button--accent mdl-button-fab");
+  if (index === 0) {
+    button.setAttribute("class", activeButton);
+  } else {
+    button.setAttribute("class", inactiveButton);
+  }
   leftpanel.appendChild(button);
+  i.setAttribute("class", "material-icons");
+  i.innerText = icon;
+  button.appendChild(i);
+  button.addEventListener("click", () => {
+    const allButtons = document.querySelectorAll("#leftpanel button");
+    const allWebviews = document.querySelectorAll("#content webview");
+    const webview = document.querySelector(button.id.replace("button", "#webview"));
+
+    allWebviews.forEach((element) => {
+      element.setAttribute("class", "webview invisible");
+    });
+    allButtons.forEach((element) => {
+      element.setAttribute("class", inactiveButton);
+    });
+    button.setAttribute("class", activeButton);
+    webview.setAttribute("class", "webview");
+  });
 }
 
 function run() {
@@ -38,46 +83,3 @@ if (document.readyState === "loading") {
 } else {
   run();
 }
-
-/*
-$(() => {
-  // TODO FramelessWindow
-  // if (process.platform === "win32") {
-  //   $("#titlebar").addClass("hidden");
-  //   $("#main").addClass("heightcorrection");
-  // }
-
-  $("#sidepanel .btn").click((event) => {
-    $("webview").addClass("hidden");
-    $(`#${$(event.currentTarget).data("target")}`).removeClass("hidden");
-    $("#sidepanel .btn").removeClass("active");
-    $(event.currentTarget).addClass("active");
-  });
-
-  $($("webview").on("new-window", (event) => {
-    try {
-      // event.preventDefault();
-      // TODO Allow user to choose whether to open
-      // in external browser or in the same electron window
-      if (event.originalEvent.disposition !== "new-window") {
-        shell.openExternal(event.originalEvent.url);
-      }
-      // else {
-      //   $(event.currentTarget).attr("src", event.originalEvent.url);
-      // }
-    } catch (error) {
-      console.log(`Ignoring ${event} due to ${error.message}`);
-    }
-  }));
-
-  $("#minimize").click(() => {
-    ipcRenderer.send("minimize");
-  });
-  $("#maximize").click(() => {
-    ipcRenderer.send("maximize");
-  });
-  $("#close").click(() => {
-    ipcRenderer.send("close");
-  });
-});
-*/
