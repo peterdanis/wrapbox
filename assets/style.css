@@ -1,33 +1,59 @@
-/* html,
-body {
-  height: 100%;
-  width: 100%;
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  src: url(Roboto-Regular.ttf);
 }
 
-.webview {
-  height: 100%;
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: url(OpenSans-Regular.ttf);
 }
 
-.hidden {
-  height: 0 !important;
-  width: 0 !important;
-  visibility: hidden !important;
-} */
 #titlebar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 130px;
+  height: 115px;
   -webkit-app-region: drag;
+}
+
+#windowtitle {
+  padding-top: 7.5px;
+  letter-spacing: 0.3px;
+  font-family: "Open Sans";
+}
+
+#windowbuttons {
+  position: fixed;
+  top: 5px;
+  right: 5px;
+  -webkit-app-region: no-drag;
+}
+
+#windowbuttons button {
+  height: 25px;
+  width: 25px;
+  min-width: 25px;
+  padding: 0;
+}
+
+#windowbuttons i {
+  position: absolute;
+  top: 4.5px;
+  left: 4.5px;
+  font-size: 16px;
 }
 
 #leftpanel {
   position: fixed;
-  top: 102px;
+  top: 87px;
   left: 8px;
   width: 64px;
-  height: calc(100% - 130px);
+  height: calc(100% - 97px);
 }
 
 #rightpanel {
@@ -35,7 +61,7 @@ body {
   bottom: 12px;
   right: 6px;
   width: 60px;
-  height: calc(100% - 110px);
+  height: calc(100% - 115px);
 }
 
 #leftpanel button {
@@ -46,18 +72,18 @@ body {
 #content {
   -webkit-app-region: no-drag;
   position: fixed;
-  top: 60px;
+  top: 45px;
   left: 72px;
   width: calc(100% - 130px);
-  height: calc(100% - 70px);
+  height: calc(100% - 55px);
 }
 
 #content .webview {
   position: fixed;
-  top: 60px;
+  top: 45px;
   left: 72px;
   width: calc(100% - 130px);
-  height: calc(100% - 70px);
+  height: calc(100% - 55px);
 }
 
 /* .mdl-button--primary.mdl-button--primary .mdl-ripple {

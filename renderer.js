@@ -6,7 +6,6 @@ let leftpanel;
 
 function insertWebview(index, src) {
   const webview = document.createElement("webview");
-  const button = document.createElement("button");
   webview.setAttribute("id", `webview${index}`);
   if (index === 0) {
     webview.setAttribute("class", "webview");
@@ -28,7 +27,7 @@ function insertButton(index, icon) {
     "mdl-js-button",
     "mdl-js-ripple-effect",
     "mdl-shadow--4dp",
-    "mdl-color--cyan-A700",
+    "mdl-color--cyan-800",
   ].join(" ");
   const inactiveButton = [
     "mdl-button",
@@ -37,7 +36,7 @@ function insertButton(index, icon) {
     "mdl-js-button",
     "mdl-js-ripple-effect",
     "mdl-shadow--4dp",
-    "mdl-color--cyan-A400",
+    "mdl-color--cyan-A700",
   ].join(" ");
 
   button.setAttribute("id", `button${index}`);
