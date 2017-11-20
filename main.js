@@ -54,6 +54,10 @@ app.on("window-all-closed", () => {
   }
 });
 
+app.on('before-quit', () => {
+  win.removeAllListeners('close');
+});
+
 app.on("activate", () => {
   if (win === null) {
     createWindow();
