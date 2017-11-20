@@ -1,9 +1,6 @@
 const { shell, ipcRenderer } = require("electron");
 const config = require("./config.js");
 
-let content;
-let leftpanel;
-
 function insertWebview(index, src) {
   const webview = document.createElement("webview");
   webview.setAttribute("id", `webview${index}`);
@@ -65,9 +62,23 @@ function insertButton(index, icon) {
   });
 }
 
+function activateWindowButton() {
+  document.querySelector("#minimize").addEventListener("click", () => {
+    ipcRenderer.send("minimize");
+  });
+  document.querySelector("#maximize").addEventListener("click", () => {
+    ipcRenderer.send("maximize");
+  });
+  document.querySelector("#close").addEventListener("click", () => {
+    ipcRenderer.send("close");
+  });
+}
+
 function run() {
-  content = document.querySelector("#content");
-  leftpanel = document.querySelector("#leftpanel");
+  activateWindowButton();
+
+  const content = document.querySelector("#content");
+  const leftpanel = document.querySelector("#leftpanel");
 
   for (let i = 0; i < config.webviews.length; i++) {
     insertWebview(i, config.webviews[i][0]);
