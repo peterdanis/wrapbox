@@ -1,5 +1,5 @@
 const { shell, ipcRenderer } = require("electron");
-const config = require("./config.js");
+const config = require("./config");
 
 function insertWebview(index, src) {
   const webview = document.createElement("webview");

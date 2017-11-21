@@ -1,21 +1,21 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
-const url = require("url");
+const config = require("./config");
 
 let win;
 
-function createWindow(target) {
+function createWindow() {
   win = new BrowserWindow({
-    width: 1200,
-    height: 700,
+    width: config.windowWidth,
+    height: config.windowHeight,
     frame: false,
-    backgroundColor: "#E0E0E0",
+    backgroundColor: config.backgroundColor,
   });
 
   // TODO Un-comment to disable menu and DevTools
   // win.setMenu(null);
 
-  win.loadURL(target);
+  win.loadURL(path.join(__dirname, "index.html"));
 
   win.on("closed", () => {
     win = null;
@@ -41,11 +41,7 @@ function createWindow(target) {
 }
 
 app.on("ready", () => {
-  createWindow(url.format({
-    pathname: path.join(__dirname, "index.html"),
-    protocol: "file:",
-    slashes: true,
-  }));
+  createWindow();
 });
 
 app.on("window-all-closed", () => {
