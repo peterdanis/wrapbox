@@ -1,3 +1,4 @@
+/* eslint-env node, browser */
 const { shell, ipcRenderer } = require("electron");
 const config = require("./config");
 
