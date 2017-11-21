@@ -2,7 +2,7 @@
 const { shell, ipcRenderer } = require("electron");
 const config = require("./config");
 
-function insertWebview(index, src) {
+function insertWebview(index, src, parent) {
   const webview = document.createElement("webview");
   webview.setAttribute("id", `webview${index}`);
   if (index === 0) {
@@ -12,10 +12,10 @@ function insertWebview(index, src) {
   }
   webview.setAttribute("src", src);
   webview.setAttribute("allowpopups", "");
-  content.appendChild(webview);
+  parent.appendChild(webview);
 }
 
-function insertButton(index, icon) {
+function insertButton(index, icon, parent) {
   const button = document.createElement("button");
   const i = document.createElement("i");
   const activeButton = [
@@ -43,7 +43,7 @@ function insertButton(index, icon) {
   } else {
     button.setAttribute("class", inactiveButton);
   }
-  leftpanel.appendChild(button);
+  parent.appendChild(button);
   i.setAttribute("class", "material-icons");
   i.innerText = icon;
   button.appendChild(i);
@@ -82,8 +82,8 @@ function run() {
   const leftpanel = document.querySelector("#leftpanel");
 
   for (let i = 0; i < config.webviews.length; i++) {
-    insertWebview(i, config.webviews[i][0]);
-    insertButton(i, config.webviews[i][1]);
+    insertWebview(i, config.webviews[i][0], content);
+    insertButton(i, config.webviews[i][1], leftpanel);
   }
 }
 
