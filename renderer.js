@@ -12,6 +12,14 @@ function insertWebview(index, src, parent) {
   }
   webview.setAttribute("src", src);
   webview.setAttribute("allowpopups", "");
+  webview.addEventListener("console-message", (event) => {
+    console.log(`${webview.src} page logged a message:`, event.message);
+  });
+  webview.addEventListener("new-window", (event) => {
+    if (event.disposition !== "new-window") {
+      shell.openExternal(event.url);
+    }
+  });
   parent.appendChild(webview);
 }
 
