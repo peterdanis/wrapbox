@@ -1,6 +1,6 @@
 /* eslint-env node, browser */
 const { shell, ipcRenderer } = require("electron");
-const config = require("./config");
+const settings = require("./settings");
 
 let activeWebview;
 
@@ -95,9 +95,9 @@ function run() {
   const content = document.querySelector("#content");
   const leftpanel = document.querySelector("#leftpanel");
 
-  for (let i = 0; i < config.webviews.length; i++) {
-    insertWebview(i, config.webviews[i][0], content);
-    insertButton(i, config.webviews[i][1], leftpanel);
+  for (let i = 0; i < settings.webviews.length; i++) {
+    insertWebview(i, settings.webviews[i][0], content);
+    insertButton(i, settings.webviews[i][1], leftpanel);
   }
 
   activateSettingsButton();

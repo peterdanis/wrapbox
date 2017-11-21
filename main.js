@@ -1,15 +1,15 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
-const config = require("./config");
+const settings = require("./settings");
 
 let win;
 
 function createWindow() {
   win = new BrowserWindow({
-    width: config.windowWidth,
-    height: config.windowHeight,
+    width: settings.windowWidth,
+    height: settings.windowHeight,
     frame: false,
-    backgroundColor: config.backgroundColor,
+    backgroundColor: settings.backgroundColor,
   });
 
   // TODO Un-comment to disable menu and DevTools
@@ -17,7 +17,7 @@ function createWindow() {
 
   win.loadURL(path.join(__dirname, "index.html"));
 
-  if (config.startMaximized) {
+  if (settings.startMaximized) {
     win.maximize();
   }
 
