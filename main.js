@@ -17,6 +17,10 @@ function createWindow() {
 
   win.loadURL(path.join(__dirname, "index.html"));
 
+  if (config.startMaximized) {
+    win.maximize();
+  }
+
   win.on("closed", () => {
     win = null;
   });
