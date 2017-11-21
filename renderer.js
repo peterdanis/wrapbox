@@ -2,6 +2,8 @@
 const { shell, ipcRenderer } = require("electron");
 const config = require("./config");
 
+let activeWebview;
+
 function insertWebview(index, src, parent) {
   const webview = document.createElement("webview");
   webview.setAttribute("id", `webview${index}`);
@@ -13,7 +15,7 @@ function insertWebview(index, src, parent) {
   webview.setAttribute("src", src);
   webview.setAttribute("allowpopups", "");
   webview.addEventListener("console-message", (event) => {
-    console.log(`${webview.src} page logged a message:`, event.message);
+    console.log(`${webview.src} console message:`, event.message);
   });
   webview.addEventListener("new-window", (event) => {
     if (event.disposition !== "new-window") {
@@ -28,21 +30,21 @@ function insertButton(index, icon, parent) {
   const i = document.createElement("i");
   const activeButton = [
     "mdl-button",
-    "mdl-button--primary",
     "mdl-button--fab",
     "mdl-js-button",
     "mdl-js-ripple-effect",
     "mdl-shadow--4dp",
     "mdl-color--cyan-800",
+    "mdl-color-text--white",
   ].join(" ");
   const inactiveButton = [
     "mdl-button",
-    "mdl-button--primary",
     "mdl-button--fab",
     "mdl-js-button",
     "mdl-js-ripple-effect",
     "mdl-shadow--4dp",
     "mdl-color--cyan-A700",
+    "mdl-color-text--white",
   ].join(" ");
 
   button.setAttribute("id", `button${index}`);
@@ -59,7 +61,7 @@ function insertButton(index, icon, parent) {
     const allButtons = document.querySelectorAll("#leftpanel button");
     const allWebviews = document.querySelectorAll("#content webview");
     const webview = document.querySelector(button.id.replace("button", "#webview"));
-
+    activeWebview = webview;
     allWebviews.forEach((element) => {
       element.setAttribute("class", "webview invisible");
     });
@@ -71,7 +73,7 @@ function insertButton(index, icon, parent) {
   });
 }
 
-function activateWindowButton() {
+function activateWindowButtons() {
   document.querySelector("#minimize").addEventListener("click", () => {
     ipcRenderer.send("minimize");
   });
@@ -83,8 +85,12 @@ function activateWindowButton() {
   });
 }
 
+function activateSettingsButton() {}
+
+function activateNavigationButtons() {}
+
 function run() {
-  activateWindowButton();
+  activateWindowButtons();
 
   const content = document.querySelector("#content");
   const leftpanel = document.querySelector("#leftpanel");
@@ -93,6 +99,9 @@ function run() {
     insertWebview(i, config.webviews[i][0], content);
     insertButton(i, config.webviews[i][1], leftpanel);
   }
+
+  activateSettingsButton();
+  activateNavigationButtons();
 }
 
 if (document.readyState === "loading") {
