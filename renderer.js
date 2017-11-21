@@ -96,7 +96,7 @@ function run() {
 }
 
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", (event) => {
+  document.addEventListener("DOMContentLoaded", () => {
     run();
   });
 } else {
