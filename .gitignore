@@ -45,3 +45,6 @@ jspm_packages
 
 # Secrets
 ApiKeys.js
+
+# Release-builds
+release-builds
