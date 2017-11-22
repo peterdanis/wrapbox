@@ -6,17 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Wrapbox</title>
-  <link rel="stylesheet" href="assets/material.css">
+  <link rel="stylesheet" href="node_modules/material-design-lite/material.min.css">
   <link rel="stylesheet" href="assets/material-icons.css">
   <link rel="stylesheet" href="assets/style.css">
   <script src="renderer.js"></script>
-  <script defer src="assets/material.js"></script>
-
+  <script defer src="node_modules/material-design-lite/material.min.js"></script>
 </head>
 
 <body class="mdl-color--grey-300">
-  <div id="titlebar" class="mdl-shadow--4dp mdl-color--indigo-500">
-    <div id="windowbuttons">
+
+  <div id="titlebar" class="mdl-shadow--4dp mdl-color--indigo-500 fadeInDown">
+    <div id="windowbuttons" class="right">
       <button id="minimize" class="mdl-button mdl-js-button mdl-color-text--white">
         <i class="material-icons">expand_more</i>
       </button>
@@ -29,16 +29,10 @@
     </div>
   </div>
 
-  <div id="leftpanel">
+  <div id="leftpanel" class="fadeInLeft">
   </div>
 
-  <div id="rightpanel">
-    <button id="settings" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white mdl-color--indigo-500 mdl-button--fab mdl-button--mini-fab">
-        <i class="material-icons">expand_less</i>
-    </button>
-  </div>
-
-  <div id="content" class="mdl-shadow--8dp mdl-color--grey-100">
+  <div id="content" class="fadeInUp mdl-shadow--8dp mdl-color--grey-100">
   </div>
 
 </body>

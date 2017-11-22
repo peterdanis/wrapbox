@@ -1,4 +1,5 @@
 const settings = Object.create(null);
+settings.version = "0.1.0";
 
 settings.startMaximized = false;
 settings.windowWidth = 1200;
