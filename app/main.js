@@ -11,6 +11,7 @@ function createWindow() {
     height: settings.windowHeight,
     frame: false,
     backgroundColor: settings.backgroundColor,
+    titleBarStyle: "hiddenInset",
   });
 
   // TODO Un-comment to disable menu and DevTools
