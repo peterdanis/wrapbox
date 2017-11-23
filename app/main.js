@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const settings = require("./settings");
+const url = require("url");
 
 let win;
 
@@ -15,7 +16,11 @@ function createWindow() {
   // TODO Un-comment to disable menu and DevTools
   // win.setMenu(null);
 
-  win.loadURL(path.join(__dirname, "index.html"));
+  win.loadURL(url.format({
+    pathname: path.join(__dirname, "index.html"),
+    protocol: "file:",
+    slashes: true,
+  }));
 
   if (settings.startMaximized) {
     win.maximize();
