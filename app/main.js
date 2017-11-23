@@ -12,20 +12,22 @@ function createWindow() {
     frame: false,
     backgroundColor: settings.backgroundColor,
     titleBarStyle: "hiddenInset",
+    show: false,
   });
 
-  // TODO Un-comment to disable menu and DevTools
-  // win.setMenu(null);
+  if (settings.startMaximized) {
+    win.maximize();
+  }
+
+  win.once("ready-to-show", () => {
+    win.show();
+  });
 
   win.loadURL(url.format({
     pathname: path.join(__dirname, "index.html"),
     protocol: "file:",
     slashes: true,
   }));
-
-  if (settings.startMaximized) {
-    win.maximize();
-  }
 
   win.on("closed", () => {
     win = null;
