@@ -12,13 +12,8 @@
   src: url(OpenSans-Regular.ttf);
 }
 
-#titlebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 115px;
-  -webkit-app-region: drag;
+.zinvisible {
+  z-index: -10000;
 }
 
 .left {
@@ -33,6 +28,15 @@
   top: 3px;
   right: 5px;
   -webkit-app-region: no-drag;
+}
+
+#titlebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 115px;
+  -webkit-app-region: drag;
 }
 
 #titlebar button {
