@@ -4,13 +4,25 @@ const settings = require("./settings");
 
 let activeWebview;
 
+function webviewShow(element) {
+  element.setAttribute("class", "webview");
+}
+
+function webviewHide(element) {
+  if (process.platform === "darwin") {
+    element.setAttribute("class", "webview zinvisible");
+  } else {
+    element.setAttribute("class", "webview invisible");
+  }
+}
+
 function insertWebview(index, src, parent) {
   const webview = document.createElement("webview");
   webview.setAttribute("id", `webview${index}`);
   if (index === 0) {
-    webview.setAttribute("class", "webview");
+    webviewShow(webview);
   } else {
-    webview.setAttribute("class", "webview invisible");
+    webviewHide(webview);
   }
   webview.setAttribute("src", src);
   webview.setAttribute("allowpopups", "");
@@ -63,13 +75,13 @@ function insertButton(index, icon, parent) {
     const webview = document.querySelector(button.id.replace("button", "#webview"));
     activeWebview = webview;
     allWebviews.forEach((element) => {
-      element.setAttribute("class", "webview invisible");
+      webviewHide(element);
     });
     allButtons.forEach((element) => {
       element.setAttribute("class", inactiveButton);
     });
     button.setAttribute("class", activeButton);
-    webview.setAttribute("class", "webview");
+    webviewShow(webview);
   });
 }
 
