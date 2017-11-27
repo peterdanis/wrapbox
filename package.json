@@ -15,7 +15,7 @@
     "package-mac":
       "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=app-icons/mac/icon.icns --packageManager=yarn --out=release-builds",
     "package-win":
-      "electron-packager . --overwrite --platform=win32 --arch=x64 --icon=app-icons/win/icon.ico --packageManager=yarn --out=release-builds --ignore=app-icons --ignore=../hello.json",
+      "electron-packager . --overwrite --platform=win32 --arch=x64 --icon=app-icons/win/icon.ico --packageManager=yarn --out=release-builds --ignore=app-icons",
     "package-linux":
       "electron-packager . --overwrite --platform=linux --arch=x64 --icon=app-icons/png/256x256.png --packageManager=yarn --out=release-builds --asar=true"
   },
@@ -23,14 +23,14 @@
   "devDependencies": {
     "electron": "1.7.9",
     "electron-packager": "10.1.0",
-    "eslint": "4.11.0",
+    "eslint": "4.12.0",
     "eslint-config-airbnb": "16.1.0",
     "eslint-plugin-import": "2.8.0",
     "eslint-plugin-jsx-a11y": "6.0.2",
     "eslint-plugin-react": "7.5.1",
     "prettier-eslint": "8.2.2",
     "prettier-stylelint": "0.4.2",
-    "stylelint": "8.2.0",
-    "stylelint-config-standard": "17.0.0"
+    "stylelint": "8.3.1",
+    "stylelint-config-standard": "18.0.0"
   }
 }
