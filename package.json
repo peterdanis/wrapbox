@@ -9,13 +9,13 @@
     "type": "git",
     "url": "https://github.com/peterdanis/wrapbox"
   },
-  "main": "app/main.js",
+  "main": "app/app.js",
   "scripts": {
     "start": "electron .",
     "package-mac":
       "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=app-icons/mac/icon.icns --packageManager=yarn --out=release-builds",
     "package-win":
-      "electron-packager . --overwrite --platform=win32 --arch=x64 --icon=app-icons/win/icon.ico --packageManager=yarn --out=release-builds --ignore=app-icons",
+      "electron-packager . --overwrite --platform=win32 --arch=x64 --icon=app-icons/win/icon.ico --packageManager=yarn --out=release-builds --ignore=app-icons --ignore=yarn.lock --ignore=.vscode --ignore=.eslintrc.json --ignore=.gitignore --ignore=.stylelintrc",
     "package-linux":
       "electron-packager . --overwrite --platform=linux --arch=x64 --icon=app-icons/png/256x256.png --packageManager=yarn --out=release-builds --asar=true"
   },

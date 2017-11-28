@@ -12,6 +12,19 @@
   src: url(OpenSans-Regular.ttf);
 }
 
+/* detete */
+#bt1 {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+#bt2 {
+  position: fixed;
+  bottom: 60px;
+  left: 0;
+}
+/* detete */
+
 .zinvisible {
   z-index: -10000;
 }

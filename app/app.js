@@ -1,6 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
-const settings = require("./settings");
+const settings = require("./scripts/settings");
 const url = require("url");
 
 let win;
@@ -24,7 +24,7 @@ function createWindow() {
   });
 
   win.loadURL(url.format({
-    pathname: path.join(__dirname, "index.html"),
+    pathname: path.join(__dirname, "pages", "index.html"),
     protocol: "file:",
     slashes: true,
   }));
