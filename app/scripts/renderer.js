@@ -1,9 +1,9 @@
 /* eslint-env node, browser */
 const { shell, ipcRenderer } = require("electron");
 const settings = require("./settings");
-// const ui = require("./ui");
+const ui = require("./ui");
 
-// let activeWebview;
+let activeWebview;
 
 function webviewShow(element) {
   element.setAttribute("class", "webview");
@@ -104,16 +104,13 @@ function activateNavigationButtons() {}
 
 function run() {
   // Delete below
-  // new ui.Button("bt1").appendTo("body").element.addEventListener("click", () => {
-  //   alert("hallo");
-  // });
+  new ui.FabButton("bt1", ["add", "Add"]).appendTo("body").element.addEventListener("click", () => {
+    alert("hallo");
+  });
 
-  // const bt2 = new ui.FabButton("bt2");
-  // bt2.appendTo("body");
+  const bt2 = new ui.Button("bt2", "etx");
+  bt2.appendTo("body");
 
-  // bt2.element.addEventListener("click", () => {
-  //   alert("hello");
-  // });
   // Delete above
 
   activateWindowButtons();
