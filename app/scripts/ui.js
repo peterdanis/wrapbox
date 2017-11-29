@@ -51,7 +51,7 @@ class Button extends Element {
       "mdl-button",
       "mdl-js-button",
       `mdl-color--${color}`,
-      `mdl--text-color--${textColor}`,
+      `mdl-color-text--${textColor}`,
     ];
     super("button", id, cls);
     switch (true) {
@@ -63,7 +63,7 @@ class Button extends Element {
         const icon = new Element("i", "", "material-icons");
         icon.element.innerText = buttonText[0];
 console.log(icon)
-        this.element.innerText = icon.element.outerHTML + buttonText[1];
+        this.element.innerHTML = icon.element.outerHTML + buttonText[1];
         break;
 
       default:
