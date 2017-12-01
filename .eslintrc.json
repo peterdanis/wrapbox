@@ -16,6 +16,10 @@
       }
     ]
   },
+  "env": {
+    "browser": true,
+    "node": true
+  },
   "overrides": {
     "files": "**/*.spec.js",
     "env": { "jest": true }
