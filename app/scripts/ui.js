@@ -1,32 +1,28 @@
-/* eslint-env node, browser */
-
-class Element {
+class BaseElement {
   /**
-   * Creates basic DOM element
-   * @param {string} type Element type, e.g. button
-   * @param {string} id Element id
-   * @param {string}
+   * Creates any non-specialized element
+   * @param {object} options - Options object
+   * @param {string} options.type - Type of element (a.k.a. tag)
+   * @param {string} [options.id] - Element id
+   * @param {string} [options.class] - Element class
+   * @param {string} [options.innerHTML] - Element innerHTML
    */
-  constructor(type, id, cls) {
-    this.element = document.createElement(type);
-    if (id) {
-      this.element.setAttribute("id", id);
+  constructor(options) {
+    this.element = document.createElement(options.type);
+    if (options.id) {
+      this.element.setAttribute("id", options.id);
     }
-    switch (true) {
-      case typeof cls === "string":
-        this.element.setAttribute("class", cls);
-        break;
-      case Array.isArray(cls):
-        this.element.setAttribute("class", cls.join(" "));
-        break;
-      default:
-        break;
+    if (options.class) {
+      this.element.setAttribute("class", options.class);
+    }
+    if (options.innerHTML) {
+      this.element.innerHTML = options.innerHTML;
     }
   }
 
   /**
-   * Appends to a DOM node
-   * @param {string} parent Parent node
+   * Appends to a DOM node or element
+   * @param {{}|string} parent Parent object, or a string for document.querySelector()
    */
   appendTo(parent) {
     if (typeof parent === "object") {
@@ -38,70 +34,53 @@ class Element {
   }
 }
 
-class Button extends Element {
+class Button extends BaseElement {
   /**
-   * @param {string} id Element id
-   * @param {string | string[]} buttonText Text or array, where first element
-   * being material-icon and rest the button text
-   * @param {string} color MDL color, e.g. "light-blue-A700"
-   * @param {string} textColor MDL color, e.g. "light-blue-A700"
+   * Creates an MDL button
+   * @param {object} options - Options object
+   * @param {string} [options.id] - Element id
+   * @param {string} [options.class] - Element class
+   * @param {string} [options.innerHTML] - Element innerHTML
+   * @param {string} [options.color] - Button color
+   * @param {string} [options.textColor] - Button text color
    */
-  constructor(id, buttonText, color = "primary", textColor = "primary") {
-    const cls = [
-      "mdl-button",
-      "mdl-js-button",
-      `mdl-color--${color}`,
-      `mdl-color-text--${textColor}`,
-    ];
-    super("button", id, cls);
-    switch (true) {
-      case typeof buttonText === "string":
-        this.element.innerText = buttonText;
-        break;
-
-      case Array.isArray(buttonText):
-        const icon = new Element("i", "", "material-icons");
-        icon.element.innerText = buttonText[0];
-console.log(icon)
-        this.element.innerHTML = icon.element.outerHTML + buttonText[1];
-        break;
-
-      default:
-        break;
+  constructor(options) {
+    options.type = "button";
+    options.class = (options.class && `${options.class} `) || "";
+    console.log(options);
+    options.class += "mdl-button mdl-js-button";
+    console.log(options);
+    if (options.color) {
+      options.class += ` mdl-color--${options.color}`;
     }
+    if (options.textColor) {
+      options.class += ` mdl-color-text--${options.textColor}`;
+    }
+    super(options);
+  }
+
+  addRipple() {
+    this.element.classList.add("mdl-js-ripple-effect");
+    return this;
   }
 }
 
 class FabButton extends Button {
-  /**
-   * @param {string} id Element id
-   * @param {string | string[]} buttonText Text or array, where first element
-   * being material-icon and rest the button text
-   * @param {string} color MDL color, e.g. "light-blue-A700"
-   * @param {string} textColor MDL color, e.g. "light-blue-A700"
-   */
-  constructor(id, buttonText, color = "primary", textColor = "primary") {
-    super(id, buttonText, color, textColor);
+  constructor(options) {
+    super(options);
     this.element.classList.add("mdl-button--fab");
   }
 }
 
 class IconButton extends Button {
-  /**
-   * @param {string} id Element id
-   * @param {string | string[]} buttonText Text or array, where first element
-   * being material-icon and rest the button text
-   * @param {string} color MDL color, e.g. "light-blue-A700"
-   * @param {string} textColor MDL color, e.g. "light-blue-A700"
-   */
-  constructor(id, buttonText, color = "primary", textColor = "primary") {
-    super(id, buttonText, color, textColor);
+  constructor(options) {
+    super(options);
     this.element.classList.add("mdl-button--icon");
   }
 }
 
 module.exports = {
-  Element,
+  BaseElement,
   Button,
   FabButton,
   IconButton,

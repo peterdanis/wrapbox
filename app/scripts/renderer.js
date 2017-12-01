@@ -104,11 +104,13 @@ function activateNavigationButtons() {}
 
 function run() {
   // Delete below
-  new ui.FabButton("bt1", ["add", "Add"]).appendTo("body").element.addEventListener("click", () => {
-    alert("hallo");
-  });
+  new ui.Button({ id: "bt1", innerHTML: "Button", class: "mdl-shadow--4dp" })
+    .appendTo("body")
+    .element.addEventListener("click", () => {
+      alert("hallo");
+    });
 
-  const bt2 = new ui.Button("bt2", "etx");
+  const bt2 = new ui.FabButton({ id: "bt2" });
   bt2.appendTo("body");
 
   // Delete above
