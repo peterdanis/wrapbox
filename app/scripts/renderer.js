@@ -3,8 +3,6 @@ const { shell, ipcRenderer } = require("electron");
 const settings = require("./settings");
 const ui = require("./ui");
 
-let activeWebview;
-
 function webviewShow(element) {
   element.setAttribute("class", "webview");
 }
@@ -28,7 +26,7 @@ function insertWebview(index, src, parent) {
   webview.setAttribute("src", src);
   webview.setAttribute("allowpopups", "");
   webview.addEventListener("console-message", (event) => {
-    console.log(`${webview.src} console message:`, event.message);
+    console.log(`${src} console message:`, event.message);
   });
   webview.addEventListener("new-window", (event) => {
     if (event.disposition !== "new-window") {
@@ -86,36 +84,83 @@ function insertButton(index, icon, parent) {
   });
 }
 
-function activateWindowButtons() {
-  document.querySelector("#minimize").addEventListener("click", () => {
-    ipcRenderer.send("minimize");
-  });
-  document.querySelector("#maximize").addEventListener("click", () => {
-    ipcRenderer.send("maximize");
-  });
-  document.querySelector("#close").addEventListener("click", () => {
-    ipcRenderer.send("close");
+/**
+ * Add minimize, maximize and close buttons to titlebar.
+ * @param {string} side
+ */
+function addWindowButtons(side) {
+  // Create containing div.
+  const windowButtonsSection = new ui.BaseElement({ type: "div", class: side }).appendTo("#titlebar");
+  const windowButtons = [
+    // Minimize button.
+    new ui.Button({
+      id: "minimize",
+      innerHTML: new ui.MaterialIcon({ innerHTML: "expand_more" }).element.outerHTML,
+      textColor: "white",
+    }),
+    // Maximize button.
+    new ui.Button({
+      id: "maximize",
+      innerHTML: new ui.MaterialIcon({ innerHTML: "expand_less" }).element.outerHTML,
+      textColor: "white",
+    }),
+    // Close button.
+    new ui.Button({
+      id: "close",
+      innerHTML: new ui.MaterialIcon({ innerHTML: "close" }).element.outerHTML,
+      textColor: "white",
+    }),
+  ];
+  // Append each button to the containing div and add onclick event listeners.
+  windowButtons.forEach((button) => {
+    button.appendTo(windowButtonsSection.element);
+    button.addEventListener("click", () => {
+      // Send events to main thread.
+      ipcRenderer.send(button.element.id);
+    });
   });
 }
 
-function activateSettingsButton() {}
-
-function activateNavigationButtons() {}
-
-function run() {
-  // Delete below
-  new ui.Button({ id: "bt1", innerHTML: "Button", class: "mdl-shadow--4dp" })
-    .appendTo("body")
-    .element.addEventListener("click", () => {
-      alert("hallo");
+/**
+ * Add minimize, maximize and close buttons to titlebar.
+ * @param {string} side
+ */
+function addPageNavigationButtons(side) {
+  // Create containing div.
+  const windowButtonsSection = new ui.BaseElement({ type: "div", class: side }).appendTo("#titlebar");
+  const windowButtons = [
+    // Minimize button.
+    new ui.Button({
+      id: "minimize",
+      innerHTML: new ui.MaterialIcon({ innerHTML: "expand_more" }).element.outerHTML,
+      textColor: "white",
+    }),
+    // Maximize button.
+    new ui.Button({
+      id: "maximize",
+      innerHTML: new ui.MaterialIcon({ innerHTML: "expand_less" }).element.outerHTML,
+      textColor: "white",
+    }),
+    // Close button.
+    new ui.Button({
+      id: "close",
+      innerHTML: new ui.MaterialIcon({ innerHTML: "close" }).element.outerHTML,
+      textColor: "white",
+    }),
+  ];
+  // Append each button to the containing div and add onclick event listeners.
+  windowButtons.forEach((button) => {
+    button.appendTo(windowButtonsSection.element);
+    button.addEventListener("click", () => {
+      // Send events to main thread.
+      ipcRenderer.send(button.element.id);
     });
+  });
+}
 
-  const bt2 = new ui.FabButton({ id: "bt2" });
-  bt2.appendTo("body");
-
-  // Delete above
-
-  activateWindowButtons();
+// Main function running all sub-tasks.
+function start() {
+  addWindowButtons(settings.windowButtonsPosition);
 
   const content = document.querySelector("#content");
   const leftpanel = document.querySelector("#leftpanel");
@@ -124,15 +169,13 @@ function run() {
     insertWebview(i, settings.webviews[i][0], content);
     insertButton(i, settings.webviews[i][1], leftpanel);
   }
-
-  activateSettingsButton();
-  activateNavigationButtons();
 }
 
+// Start the main function when the page is ready.
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", () => {
-    run();
+    start();
   });
 } else {
-  run();
+  start();
 }

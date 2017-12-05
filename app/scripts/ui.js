@@ -1,11 +1,12 @@
 class BaseElement {
   /**
-   * Creates any non-specialized element
-   * @param {object} options - Options object
-   * @param {string} options.type - Type of element (a.k.a. tag)
-   * @param {string} [options.id] - Element id
-   * @param {string} [options.class] - Element class
-   * @param {string} [options.innerHTML] - Element innerHTML
+   * Creates any non-specialized element.
+   * @param {object} options
+   * @param {string} options.type
+   * @param {string} [options.id]
+   * @param {string} [options.class]
+   * @param {string} [options.style]
+   * @param {string} [options.innerHTML]
    */
   constructor(options) {
     this.element = document.createElement(options.type);
@@ -15,14 +16,18 @@ class BaseElement {
     if (options.class) {
       this.element.setAttribute("class", options.class);
     }
+    if (options.style) {
+      this.element.setAttribute("style", options.style);
+    }
     if (options.innerHTML) {
       this.element.innerHTML = options.innerHTML;
     }
   }
 
   /**
-   * Appends to a DOM node or element
-   * @param {{}|string} parent Parent object, or a string for document.querySelector()
+   * Appends to a DOM node or element. Chainable.
+   * @param {{}|string} parent Parent object, or a string for document.querySelector().
+   * @returns this
    */
   appendTo(parent) {
     if (typeof parent === "object") {
@@ -32,24 +37,33 @@ class BaseElement {
     }
     return this;
   }
+
+  /**
+   * Add event listener. Chainable.
+   * @param {HTMLElementEventMap} type Event listener type.
+   * @param {function} listener Executed after the event fires.
+   */
+  addEventListener(type, listener) {
+    this.element.addEventListener(type, listener);
+    return this;
+  }
 }
 
 class Button extends BaseElement {
   /**
-   * Creates an MDL button
-   * @param {object} options - Options object
-   * @param {string} [options.id] - Element id
-   * @param {string} [options.class] - Element class
-   * @param {string} [options.innerHTML] - Element innerHTML
-   * @param {string} [options.color] - Button color
-   * @param {string} [options.textColor] - Button text color
+   * Creates an MDL button.
+   * @param {object} options
+   * @param {string} [options.id]
+   * @param {string} [options.class]
+   * @param {string} [options.style]
+   * @param {string} [options.innerHTML]
+   * @param {string} [options.color]
+   * @param {string} [options.textColor]
    */
   constructor(options) {
     options.type = "button";
     options.class = (options.class && `${options.class} `) || "";
-    console.log(options);
     options.class += "mdl-button mdl-js-button";
-    console.log(options);
     if (options.color) {
       options.class += ` mdl-color--${options.color}`;
     }
@@ -59,6 +73,10 @@ class Button extends BaseElement {
     super(options);
   }
 
+  /**
+   * Add ripple effect to button. Chainable.
+   * @returns this
+   */
   addRipple() {
     this.element.classList.add("mdl-js-ripple-effect");
     return this;
@@ -66,16 +84,75 @@ class Button extends BaseElement {
 }
 
 class FabButton extends Button {
+  /**
+   * Creates a floating MDL button.
+   * @param {object} options
+   * @param {string} [options.id]
+   * @param {string} [options.class]
+   * @param {string} [options.style]
+   * @param {string} [options.innerHTML]
+   * @param {string} [options.color]
+   * @param {string} [options.textColor]
+   */
   constructor(options) {
     super(options);
     this.element.classList.add("mdl-button--fab");
   }
 }
 
+class MiniFabButton extends FabButton {
+  /**
+   * Creates a smaller floating MDL button.
+   * @param {object} options
+   * @param {string} [options.id]
+   * @param {string} [options.class]
+   * @param {string} [options.style]
+   * @param {string} [options.innerHTML]
+   * @param {string} [options.color]
+   * @param {string} [options.textColor]
+   */
+  constructor(options) {
+    super(options);
+    this.element.classList.add("mdl-button--mini-fab");
+  }
+}
+
 class IconButton extends Button {
+  /**
+   * Creates an icon MDL button.
+   * @param {object} options
+   * @param {string} [options.id]
+   * @param {string} [options.class]
+   * @param {string} [options.style]
+   * @param {string} [options.innerHTML]
+   * @param {string} [options.color]
+   * @param {string} [options.textColor]
+   */
   constructor(options) {
     super(options);
     this.element.classList.add("mdl-button--icon");
+  }
+}
+
+class MaterialIcon extends BaseElement {
+  /**
+   * Creates a material-icons icon.
+   * @param {object} options
+   * @param {string} [options.id]
+   * @param {string} [options.class]
+   * @param {string} [options.style]
+   * @param {string} [options.innerHTML]
+   * @param {string} [options.fontSize]
+   */
+  constructor(options) {
+    options.type = "i";
+    options.class = (options.class && `${options.class} `) || "";
+    options.class += "material-icons";
+    if (options.fontSize) {
+      options.style = (options.style && `${options.style} `) || "";
+      options.style += `font-size: ${options.fontSize};`;
+    }
+    super(options);
   }
 }
 
@@ -83,5 +160,7 @@ module.exports = {
   BaseElement,
   Button,
   FabButton,
+  MiniFabButton,
   IconButton,
+  MaterialIcon,
 };
