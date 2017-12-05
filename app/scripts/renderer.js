@@ -3,7 +3,7 @@ const { shell, ipcRenderer } = require("electron");
 const settings = require("./settings");
 const ui = require("./ui");
 
-
+let test;
 
 function webviewShow(element) {
   element.setAttribute("class", "webview");
@@ -87,6 +87,50 @@ function insertButton(index, icon, parent) {
 }
 
 /**
+ * Add page navigation buttons to titlebar.
+ * @param {string} side
+ */
+function addNavigationButtons(parent) {
+  // Create containing div.
+  const navigationButtonsSection = new ui.BaseElement({ type: "div", id: "navbuttons" }).appendTo(parent);
+  const navigationButtons = [
+    // Back button.
+    new ui.MiniFabButton({
+      id: "back",
+      innerHTML: new ui.MaterialIcon({ innerHTML: "navigate_before" }).element.outerHTML,
+      textColor: "white",
+      color: "accent",
+    }),
+
+    // Home button.
+    new ui.MiniFabButton({
+      id: "home",
+      innerHTML: new ui.MaterialIcon({ innerHTML: "home" }).element.outerHTML,
+      textColor: "white",
+    }),
+    // Reload button.
+    new ui.MiniFabButton({
+      id: "reload",
+      innerHTML: new ui.MaterialIcon({ innerHTML: "refresh" }).element.outerHTML,
+      textColor: "white",
+    }),
+    // Forward button.
+    new ui.MiniFabButton({
+      id: "forward",
+      innerHTML: new ui.MaterialIcon({ innerHTML: "navigate_next" }).element.outerHTML,
+      textColor: "white",
+    }),
+  ];
+  // Append each button to the containing div and add onclick event listeners.
+  navigationButtons.forEach((button) => {
+    button.appendTo(navigationButtonsSection.element);
+    button.addEventListener("click", () => {
+      // TODO
+    });
+  });
+}
+
+/**
  * Add minimize, maximize and close buttons to titlebar.
  * @param {string} side
  */
@@ -120,48 +164,11 @@ function addWindowButtons(side) {
       // Send events to main thread.
       ipcRenderer.send(button.element.id);
     });
-  });
-}
-
-/**
- * Add page navigation buttons to titlebar.
- * @param {string} side
- */
-function addNavigationButtons(side) {
-  // Create containing div.
-  const navigationButtonsSection = new ui.BaseElement({ type: "div", class: side }).appendTo("#titlebar");
-  const navigationButtons = [
-    // Back button.
-    new ui.Button({
-      id: "back",
-      innerHTML: new ui.MaterialIcon({ innerHTML: "navigate_before" }).element.outerHTML,
-      textColor: "white",
-    }),
-
-    // Home button.
-    new ui.Button({
-      id: "home",
-      innerHTML: new ui.MaterialIcon({ innerHTML: "home" }).element.outerHTML,
-      textColor: "white",
-    }),
-    // Reload button.
-    new ui.Button({
-      id: "reload",
-      innerHTML: new ui.MaterialIcon({ innerHTML: "refresh" }).element.outerHTML,
-      textColor: "white",
-    }),
-    // Forward button.
-    new ui.Button({
-      id: "forward",
-      innerHTML: new ui.MaterialIcon({ innerHTML: "navigate_next" }).element.outerHTML,
-      textColor: "white",
-    }),
-  ];
-  // Append each button to the containing div and add onclick event listeners.
-  navigationButtons.forEach((button) => {
-    button.appendTo(navigationButtonsSection.element);
-    button.addEventListener("click", () => {
+    button.addEventListener("mouseover", () => {
       // TODO
+      if (true) {
+        addNavigationButtons(button.element);
+      }
     });
   });
 }
@@ -169,7 +176,8 @@ function addNavigationButtons(side) {
 // Main function running all sub-tasks.
 function start() {
   addWindowButtons(settings.windowButtonsPosition);
-  addNavigationButtons(settings.windowButtonsPosition === "right" ? "left" : "right");
+
+  // addNavigationButtons(settings.windowButtonsPosition === "right" ? "left" : "right");
 
   const content = document.querySelector("#content");
   const leftpanel = document.querySelector("#leftpanel");
