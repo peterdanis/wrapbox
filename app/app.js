@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron"); // eslint-disable-line
 const path = require("path");
 const settings = require("./scripts/settings");
 const url = require("url");
