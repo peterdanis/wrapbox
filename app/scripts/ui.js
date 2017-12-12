@@ -1,3 +1,15 @@
+/**
+ * Creates array of elements combining individual their and common properties.
+ * @param {*} ElementClass BaseElement or one of its subclasses.
+ * @param {{}[]} [elements] An array of individual BaseElement constructor parameters.
+ * @param {{}} [commonOptions] BaseElement constructor parameters, common for all elements.
+ * @returns A new array of constructed BaseElement or of its subclasses elements.
+ */
+function arrayToElements(ElementClass, elements, commonOptions) {
+  // Object.assign() combines an empty object, object in elements array and commonOptions object.
+  return (elements || []).map(e => new ElementClass(Object.assign({}, e, commonOptions)));
+}
+
 class BaseElement {
   /**
    * Creates any non-specialized element.
@@ -7,6 +19,7 @@ class BaseElement {
    * @param {string} [options.class]
    * @param {string} [options.style]
    * @param {string} [options.innerHTML]
+   * @param {string[]} [options.customAttr]
    */
   constructor(options) {
     this.element = document.createElement(options.type);
@@ -21,6 +34,9 @@ class BaseElement {
     }
     if (options.innerHTML) {
       this.element.innerHTML = options.innerHTML;
+    }
+    if (options.customAttr) {
+      this.element.setAttribute(options.customAttr[0], options.customAttr[1]);
     }
   }
 
@@ -59,8 +75,10 @@ class Button extends BaseElement {
    * @param {string} [options.innerHTML]
    * @param {string} [options.color]
    * @param {string} [options.textColor]
+   * @param {string[]} [options.customAttr]
    */
   constructor(options) {
+    /* eslint-disable no-param-reassign */
     options.type = "button";
     options.class = (options.class && `${options.class} `) || "";
     options.class += "mdl-button mdl-js-button";
@@ -70,6 +88,7 @@ class Button extends BaseElement {
     if (options.textColor) {
       options.class += ` mdl-color-text--${options.textColor}`;
     }
+    /* eslint-enable no-param-reassign */
     super(options);
   }
 
@@ -93,6 +112,7 @@ class FabButton extends Button {
    * @param {string} [options.innerHTML]
    * @param {string} [options.color]
    * @param {string} [options.textColor]
+   * @param {string[]} [options.customAttr]
    */
   constructor(options) {
     super(options);
@@ -110,6 +130,7 @@ class MiniFabButton extends FabButton {
    * @param {string} [options.innerHTML]
    * @param {string} [options.color]
    * @param {string} [options.textColor]
+   * @param {string[]} [options.customAttr]
    */
   constructor(options) {
     super(options);
@@ -127,6 +148,7 @@ class IconButton extends Button {
    * @param {string} [options.innerHTML]
    * @param {string} [options.color]
    * @param {string} [options.textColor]
+   * @param {string[]} [options.customAttr]
    */
   constructor(options) {
     super(options);
@@ -143,8 +165,10 @@ class MaterialIcon extends BaseElement {
    * @param {string} [options.style]
    * @param {string} [options.innerHTML]
    * @param {string} [options.fontSize]
+   * @param {string[]} [options.customAttr]
    */
   constructor(options) {
+    /* eslint-disable no-param-reassign */
     options.type = "i";
     options.class = (options.class && `${options.class} `) || "";
     options.class += "material-icons";
@@ -152,11 +176,13 @@ class MaterialIcon extends BaseElement {
       options.style = (options.style && `${options.style} `) || "";
       options.style += `font-size: ${options.fontSize};`;
     }
+    /* eslint-enable no-param-reassign */
     super(options);
   }
 }
 
 module.exports = {
+  arrayToElements,
   BaseElement,
   Button,
   FabButton,
