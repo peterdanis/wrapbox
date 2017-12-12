@@ -1,10 +1,9 @@
 /* eslint-env node, browser */
-const { shell, ipcRenderer } = require("electron");
+const { shell, ipcRenderer } = require("electron"); // eslint-disable-line
 const settings = require("./settings");
 const ui = require("./ui");
 
-let test;
-
+/*
 function webviewShow(element) {
   element.setAttribute("class", "webview");
 }
@@ -16,7 +15,9 @@ function webviewHide(element) {
     element.setAttribute("class", "webview invisible");
   }
 }
+*/
 
+/*
 function insertWebview(index, src, parent) {
   const webview = document.createElement("webview");
   webview.setAttribute("id", `webview${index}`);
@@ -28,7 +29,7 @@ function insertWebview(index, src, parent) {
   webview.setAttribute("src", src);
   webview.setAttribute("allowpopups", "");
   webview.addEventListener("console-message", (event) => {
-    console.log(`${src} console message:`, event.message);
+    console.log(`${src} console message:`, event.message); // eslint-disable-line no-console
   });
   webview.addEventListener("new-window", (event) => {
     if (event.disposition !== "new-window") {
@@ -37,7 +38,59 @@ function insertWebview(index, src, parent) {
   });
   parent.appendChild(webview);
 }
+*/
 
+/**
+ * Add page navigation buttons to titlebar.
+ * @param {string} side
+ */
+function addNavigationButtons(parent) {
+  // Create containing div.
+  const navigationButtonsSection = new ui.BaseElement({
+    type: "div",
+    id: "navbuttons",
+    class: "mdl-typography--text-right",
+  })
+    .appendTo(parent)
+    .addEventListener("mouseleave", () =>
+      navigationButtonsSection.element.setAttribute("class", "invisible"));
+  // Create array with buttons
+  const navigationButtons = ui.arrayToElements(
+    ui.MiniFabButton,
+    [
+      {
+        id: "back",
+        innerHTML: new ui.MaterialIcon({ innerHTML: "navigate_before" }).element.outerHTML,
+      },
+      {
+        id: "home",
+        innerHTML: new ui.MaterialIcon({ innerHTML: "home" }).element.outerHTML,
+      },
+      {
+        id: "reload",
+        innerHTML: new ui.MaterialIcon({ innerHTML: "refresh" }).element.outerHTML,
+      },
+      {
+        id: "forward",
+        innerHTML: new ui.MaterialIcon({ innerHTML: "navigate_next" }).element.outerHTML,
+      },
+    ],
+    {
+      textColor: "white",
+      color: "cyan-A400",
+      class: "mdl-shadow--4dp",
+    }
+  );
+  // Append each button to the containing div and add onclick event listeners.
+  navigationButtons.forEach((button) => {
+    button.appendTo(navigationButtonsSection.element);
+    button.addEventListener("click", () => {
+      // TODO
+    });
+  });
+}
+
+/*
 function insertButton(index, icon, parent) {
   const button = document.createElement("button");
   const i = document.createElement("i");
@@ -70,11 +123,16 @@ function insertButton(index, icon, parent) {
   i.setAttribute("class", "material-icons");
   i.innerText = icon;
   button.appendChild(i);
+  button.addEventListener("contextmenu", () => {
+    // TODO
+    if (true) {
+      addNavigationButtons(button);
+    }
+  });
   button.addEventListener("click", () => {
     const allButtons = document.querySelectorAll("#leftpanel button");
     const allWebviews = document.querySelectorAll("#content webview");
     const webview = document.querySelector(button.id.replace("button", "#webview"));
-    activeWebview = webview;
     allWebviews.forEach((element) => {
       webviewHide(element);
     });
@@ -85,78 +143,35 @@ function insertButton(index, icon, parent) {
     webviewShow(webview);
   });
 }
-
-/**
- * Add page navigation buttons to titlebar.
- * @param {string} side
- */
-function addNavigationButtons(parent) {
-  // Create containing div.
-  const navigationButtonsSection = new ui.BaseElement({ type: "div", id: "navbuttons" }).appendTo(parent);
-  const navigationButtons = [
-    // Back button.
-    new ui.MiniFabButton({
-      id: "back",
-      innerHTML: new ui.MaterialIcon({ innerHTML: "navigate_before" }).element.outerHTML,
-      textColor: "white",
-      color: "accent",
-    }),
-
-    // Home button.
-    new ui.MiniFabButton({
-      id: "home",
-      innerHTML: new ui.MaterialIcon({ innerHTML: "home" }).element.outerHTML,
-      textColor: "white",
-    }),
-    // Reload button.
-    new ui.MiniFabButton({
-      id: "reload",
-      innerHTML: new ui.MaterialIcon({ innerHTML: "refresh" }).element.outerHTML,
-      textColor: "white",
-    }),
-    // Forward button.
-    new ui.MiniFabButton({
-      id: "forward",
-      innerHTML: new ui.MaterialIcon({ innerHTML: "navigate_next" }).element.outerHTML,
-      textColor: "white",
-    }),
-  ];
-  // Append each button to the containing div and add onclick event listeners.
-  navigationButtons.forEach((button) => {
-    button.appendTo(navigationButtonsSection.element);
-    button.addEventListener("click", () => {
-      // TODO
-    });
-  });
-}
+*/
 
 /**
  * Add minimize, maximize and close buttons to titlebar.
- * @param {string} side
+ * @param {string|{}} parent Parent object, or a string for document.querySelector().
+ * @param {"right"|"left"} side Side will translate to CSS class .right or .left
  */
-function addWindowButtons(side) {
+function addWindowButtons(parent, side) {
   // Create containing div.
-  const windowButtonsSection = new ui.BaseElement({ type: "div", class: side }).appendTo("#titlebar");
-  const windowButtons = [
-    // Minimize button.
-    new ui.Button({
-      id: "minimize",
-      innerHTML: new ui.MaterialIcon({ innerHTML: "expand_more" }).element.outerHTML,
-      textColor: "white",
-    }),
-    // Maximize button.
-    new ui.Button({
-      id: "maximize",
-      innerHTML: new ui.MaterialIcon({ innerHTML: "expand_less" }).element.outerHTML,
-      textColor: "white",
-    }),
-    // Close button.
-    new ui.Button({
-      id: "close",
-      innerHTML: new ui.MaterialIcon({ innerHTML: "close" }).element.outerHTML,
-      textColor: "white",
-    }),
-  ];
+  const windowButtonsSection = new ui.BaseElement({ type: "div", class: side }).appendTo(parent);
+  // Create array with window buttons
+  const windowButtons = ui.arrayToElements(
+    ui.Button,
+    [
+      {
+        id: "minimize",
+        innerHTML: new ui.MaterialIcon({ innerHTML: "expand_more" }).element.outerHTML,
+      },
+      {
+        id: "maximize",
+        innerHTML: new ui.MaterialIcon({ innerHTML: "expand_less" }).element.outerHTML,
+      },
+      {
+        id: "close",
+        innerHTML: new ui.MaterialIcon({ innerHTML: "close" }).element.outerHTML,
+      },
+    ],
+    { textColor: "white" }
+  );
   // Append each button to the containing div and add onclick event listeners.
   windowButtons.forEach((button) => {
     button.appendTo(windowButtonsSection.element);
@@ -164,21 +179,31 @@ function addWindowButtons(side) {
       // Send events to main thread.
       ipcRenderer.send(button.element.id);
     });
-    button.addEventListener("mouseover", () => {
-      // TODO
-      if (true) {
-        addNavigationButtons(button.element);
-      }
-    });
+  });
+}
+
+/**
+ * Add minimize, maximize and close buttons to titlebar.
+ * @param {string|{}} parent Parent object, or a string for document.querySelector().
+ * @param {{}[]} webviewSettings Array of objects, containing url and icon for creating webviews
+ */
+function addWebviews(parent, webviewSettings) {
+  webviewSettings.forEach((e, i) => {
+    new ui.BaseElement({
+      type: "webview",
+      id: `webview${i}`,
+      class: "webview",
+      customAttr: ["src", e.url],
+    }).appendTo(parent);
   });
 }
 
 // Main function running all sub-tasks.
 function start() {
-  addWindowButtons(settings.windowButtonsPosition);
+  addWindowButtons("#titlebar", settings.windowButtonsPosition);
+  addWebviews("#content", settings.webviews);
 
-  // addNavigationButtons(settings.windowButtonsPosition === "right" ? "left" : "right");
-
+  /*
   const content = document.querySelector("#content");
   const leftpanel = document.querySelector("#leftpanel");
 
@@ -186,6 +211,7 @@ function start() {
     insertWebview(i, settings.webviews[i][0], content);
     insertButton(i, settings.webviews[i][1], leftpanel);
   }
+  */
 }
 
 // Start the main function when the page is ready.

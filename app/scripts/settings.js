@@ -8,10 +8,10 @@ settings.windowHeight = 700;
 settings.backgroundColor = "#E0E0E0";
 
 settings.webviews = [
-  ["https://inbox.google.com/", "inbox"],
-  ["https://outlook.live.com/owa/?path=/calendar/view/Month", "today"],
-  ["https://feedly.com/i/latest", "rss_feed"],
-  ["https://www.messenger.com", "message"],
+  { url: "https://inbox.google.com/", icon: "inbox" },
+  { url: "https://outlook.live.com/owa/?path=/calendar/view/Month", icon: "today" },
+  { url: "https://feedly.com/i/latest", icon: "rss_feed" },
+  { url: "https://www.messenger.com", icon: "message" },
 ];
 
 module.exports = settings;
