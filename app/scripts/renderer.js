@@ -2,7 +2,11 @@
 const { shell, ipcRenderer } = require("electron"); // eslint-disable-line
 const settings = require("./settings");
 const ui = require("./ui");
+const Mediator = require("./mediator");
+const EventEmitter = require("events");
 
+const mediator = new Mediator();
+const watcher = new EventEmitter();
 /*
 function webviewShow(element) {
   element.setAttribute("class", "webview");
@@ -41,8 +45,8 @@ function insertWebview(index, src, parent) {
 */
 
 /**
- * Add page navigation buttons to titlebar.
- * @param {string} side
+ * TODO
+ *
  */
 function addNavigationButtons(parent) {
   // Create containing div.
@@ -183,9 +187,9 @@ function addWindowButtons(parent, side) {
 }
 
 /**
- * Add minimize, maximize and close buttons to titlebar.
+ * TODO
  * @param {string|{}} parent Parent object, or a string for document.querySelector().
- * @param {{}[]} webviewSettings Array of objects, containing url and icon for creating webviews
+ * @param {{}[]} webviewSettings Array of objects, containing url and icon for creating webviews.
  */
 function addWebviews(parent, webviewSettings) {
   webviewSettings.forEach((e, i) => {
@@ -198,20 +202,35 @@ function addWebviews(parent, webviewSettings) {
   });
 }
 
+/**
+ * TODO
+ * @param {string|{}} parent Parent object, or a string for document.querySelector().
+ * @param {{}[]} webviewSettings Array of objects, containing url and icon for creating webviews.
+ */
+function addWebviewButtons(parent, webviewSettings) {
+  const webviewButtons = ui.arrayToElements(
+    ui.FabButton,
+    webviewSettings.map((e, i) => ({
+      id: `button${i}`,
+      innerHTML: new ui.MaterialIcon({ innerHTML: e.icon }).element.outerHTML,
+    })),
+    { class: "mdl-shadow--4dp", color: "blue-A200", textColor: "white" }
+  );
+  webviewButtons.forEach((button) => {
+    button
+      .addRipple()
+      .addEventListener("click", (event) => {
+        watcher.emit("changeWebview", event.currentTarget);
+      })
+      .appendTo(parent);
+  });
+}
+
 // Main function running all sub-tasks.
 function start() {
   addWindowButtons("#titlebar", settings.windowButtonsPosition);
   addWebviews("#content", settings.webviews);
-
-  /*
-  const content = document.querySelector("#content");
-  const leftpanel = document.querySelector("#leftpanel");
-
-  for (let i = 0; i < settings.webviews.length; i++) {
-    insertWebview(i, settings.webviews[i][0], content);
-    insertButton(i, settings.webviews[i][1], leftpanel);
-  }
-  */
+  addWebviewButtons("#leftpanel", settings.webviews);
 }
 
 // Start the main function when the page is ready.

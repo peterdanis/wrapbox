@@ -12,6 +12,28 @@
   src: url(OpenSans-Regular.ttf);
 }
 
+.zinvisible {
+  z-index: -10000;
+}
+
+.active {
+  background-color: #3f51b5 !important;
+}
+
+.left {
+  position: fixed;
+  top: 3px;
+  left: 5px;
+  -webkit-app-region: no-drag;
+}
+
+.right {
+  position: fixed;
+  top: 3px;
+  right: 5px;
+  -webkit-app-region: no-drag;
+}
+
 /* detete */
 #navbuttons {
   position: absolute;
@@ -30,24 +52,6 @@
 }
 
 /* detete */
-
-.zinvisible {
-  z-index: -10000;
-}
-
-.left {
-  position: fixed;
-  top: 3px;
-  left: 5px;
-  -webkit-app-region: no-drag;
-}
-
-.right {
-  position: fixed;
-  top: 3px;
-  right: 5px;
-  -webkit-app-region: no-drag;
-}
 
 #titlebar {
   position: fixed;
@@ -144,6 +148,16 @@
 @keyframes fadeInLeft {
   from {
     transform: translate3d(-100%, 0, 0);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    transform: translate3d(100%, 0, 0);
   }
 
   to {
