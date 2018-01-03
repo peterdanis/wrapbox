@@ -189,6 +189,15 @@ class MaterialIcon extends BaseElement {
 }
 
 class Webview extends BaseElement {
+  /**
+   * Creates a webview.
+   * @param {object} options
+   * @param {string} [options.id]
+   * @param {string} [options.class]
+   * @param {string} [options.style]
+   * @param {string} [options.innerHTML]
+   * @param {string[]} [options.customAttr]
+   */
   constructor(options) {
     /* eslint-disable no-param-reassign */
     options.type = "webview";
@@ -197,6 +206,7 @@ class Webview extends BaseElement {
     /* eslint-enable no-param-reassign */
     super(options);
   }
+
   /**
    * Hide the webview. Chainable.
    * @returns this
@@ -205,6 +215,7 @@ class Webview extends BaseElement {
     this.element.classList.add("invisible");
     return this;
   }
+
   /**
    * Show the webview. Chainable.
    * @returns this
