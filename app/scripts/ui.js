@@ -36,7 +36,9 @@ class BaseElement {
       this.element.innerHTML = options.innerHTML;
     }
     if (options.customAttr) {
-      this.element.setAttribute(options.customAttr[0], options.customAttr[1]);
+      for (let i = 0; i < options.customAttr.length; i += 2) {
+        this.element.setAttribute(options.customAttr[i], options.customAttr[i + 1]);
+      }
     }
   }
 
@@ -61,6 +63,11 @@ class BaseElement {
    */
   addEventListener(type, listener) {
     this.element.addEventListener(type, listener);
+    return this;
+  }
+
+  listenTo(emitter, message, fn) {
+    emitter.on(message, fn);
     return this;
   }
 }
@@ -181,6 +188,33 @@ class MaterialIcon extends BaseElement {
   }
 }
 
+class Webview extends BaseElement {
+  constructor(options) {
+    /* eslint-disable no-param-reassign */
+    options.type = "webview";
+    options.customAttr = options.customAttr || [];
+    options.customAttr.push("src", options.src);
+    /* eslint-enable no-param-reassign */
+    super(options);
+  }
+  /**
+   * Hide the webview. Chainable.
+   * @returns this
+   */
+  hide() {
+    this.element.classList.add("invisible");
+    return this;
+  }
+  /**
+   * Show the webview. Chainable.
+   * @returns this
+   */
+  show() {
+    this.element.classList.remove("invisible");
+    return this;
+  }
+}
+
 module.exports = {
   arrayToElements,
   BaseElement,
@@ -189,4 +223,5 @@ module.exports = {
   MiniFabButton,
   IconButton,
   MaterialIcon,
+  Webview,
 };

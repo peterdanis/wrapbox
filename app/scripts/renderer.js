@@ -2,47 +2,9 @@
 const { shell, ipcRenderer } = require("electron"); // eslint-disable-line
 const settings = require("./settings");
 const ui = require("./ui");
-const Mediator = require("./mediator");
 const EventEmitter = require("events");
 
-const mediator = new Mediator();
 const watcher = new EventEmitter();
-/*
-function webviewShow(element) {
-  element.setAttribute("class", "webview");
-}
-
-function webviewHide(element) {
-  if (process.platform === "darwin") {
-    element.setAttribute("class", "webview zinvisible");
-  } else {
-    element.setAttribute("class", "webview invisible");
-  }
-}
-*/
-
-/*
-function insertWebview(index, src, parent) {
-  const webview = document.createElement("webview");
-  webview.setAttribute("id", `webview${index}`);
-  if (index === 0) {
-    webviewShow(webview);
-  } else {
-    webviewHide(webview);
-  }
-  webview.setAttribute("src", src);
-  webview.setAttribute("allowpopups", "");
-  webview.addEventListener("console-message", (event) => {
-    console.log(`${src} console message:`, event.message); // eslint-disable-line no-console
-  });
-  webview.addEventListener("new-window", (event) => {
-    if (event.disposition !== "new-window") {
-      shell.openExternal(event.url);
-    }
-  });
-  parent.appendChild(webview);
-}
-*/
 
 /**
  * TODO
@@ -94,61 +56,6 @@ function addNavigationButtons(parent) {
   });
 }
 
-/*
-function insertButton(index, icon, parent) {
-  const button = document.createElement("button");
-  const i = document.createElement("i");
-  const activeButton = [
-    "mdl-button",
-    "mdl-button--fab",
-    "mdl-js-button",
-    "mdl-js-ripple-effect",
-    "mdl-shadow--4dp",
-    "mdl-color--cyan-800",
-    "mdl-color-text--white",
-  ].join(" ");
-  const inactiveButton = [
-    "mdl-button",
-    "mdl-button--fab",
-    "mdl-js-button",
-    "mdl-js-ripple-effect",
-    "mdl-shadow--4dp",
-    "mdl-color--cyan-A700",
-    "mdl-color-text--white",
-  ].join(" ");
-
-  button.setAttribute("id", `button${index}`);
-  if (index === 0) {
-    button.setAttribute("class", activeButton);
-  } else {
-    button.setAttribute("class", inactiveButton);
-  }
-  parent.appendChild(button);
-  i.setAttribute("class", "material-icons");
-  i.innerText = icon;
-  button.appendChild(i);
-  button.addEventListener("contextmenu", () => {
-    // TODO
-    if (true) {
-      addNavigationButtons(button);
-    }
-  });
-  button.addEventListener("click", () => {
-    const allButtons = document.querySelectorAll("#leftpanel button");
-    const allWebviews = document.querySelectorAll("#content webview");
-    const webview = document.querySelector(button.id.replace("button", "#webview"));
-    allWebviews.forEach((element) => {
-      webviewHide(element);
-    });
-    allButtons.forEach((element) => {
-      element.setAttribute("class", inactiveButton);
-    });
-    button.setAttribute("class", activeButton);
-    webviewShow(webview);
-  });
-}
-*/
-
 /**
  * Add minimize, maximize and close buttons to titlebar.
  * @param {string|{}} parent Parent object, or a string for document.querySelector().
@@ -192,13 +99,32 @@ function addWindowButtons(parent, side) {
  * @param {{}[]} webviewSettings Array of objects, containing url and icon for creating webviews.
  */
 function addWebviews(parent, webviewSettings) {
-  webviewSettings.forEach((e, i) => {
-    new ui.BaseElement({
-      type: "webview",
+  const webviews = ui.arrayToElements(
+    ui.Webview,
+    webviewSettings.map((e, i) => ({
       id: `webview${i}`,
-      class: "webview",
-      customAttr: ["src", e.url],
-    }).appendTo(parent);
+      src: e.url,
+    })),
+    { customAttr: ["allowpopups", ""] }
+  );
+  webviews.forEach((webview, i) => {
+    webview
+      .appendTo(parent)
+      .hide()
+      .addEventListener("new-window", (event) => {
+        if (event.disposition !== "new-window") {
+          shell.openExternal(event.url);
+        }
+      })
+      .listenTo(watcher, "changeWebview", (button) => {
+        console.log(webview);
+        // eslint-disable-next-line eqeqeq
+        if (button.id.replace("button", "") == i) {
+          webview.show();
+        } else {
+          webview.hide();
+        }
+      });
   });
 }
 

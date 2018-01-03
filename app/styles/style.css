@@ -99,7 +99,7 @@
   height: calc(100% - 32px);
 }
 
-#content .webview {
+#content webview {
   position: absolute;
   width: 100%;
   height: 100%;
