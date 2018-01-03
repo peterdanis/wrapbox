@@ -121,10 +121,15 @@ function addWebviews(parent, webviewSettings) {
         // eslint-disable-next-line eqeqeq
         if (button.id.replace("button", "") == i) {
           webview.show();
+          webview.element.classList.add("fadeIn");
         } else {
           webview.hide();
+          webview.element.classList.remove("fadeIn");
         }
       });
+    if (i === 0) {
+      webview.show();
+    }
   });
 }
 
@@ -147,6 +152,9 @@ function addWebviewButtons(parent, webviewSettings) {
       .addRipple()
       .addEventListener("click", (event) => {
         watcher.emit("changeWebview", event.currentTarget);
+      })
+      .addEventListener("mouseover", (event) => {
+        // TODO
       })
       .appendTo(parent);
   });

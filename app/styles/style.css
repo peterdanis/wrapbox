@@ -125,6 +125,11 @@
   animation-duration: 0.75s;
 }
 
+.fadeIn {
+  animation-name: fadeIn;
+  animation-duration: 0.25s;
+}
+
 @keyframes fadeInDown {
   from {
     transform: translate3d(0, -100%, 0);
@@ -162,5 +167,15 @@
 
   to {
     transform: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }
