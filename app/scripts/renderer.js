@@ -94,7 +94,7 @@ function addWindowButtons(parent, side) {
 }
 
 /**
- * TODO
+ * Add a webview from settings.
  * @param {string|{}} parent Parent object, or a string for document.querySelector().
  * @param {{}[]} webviewSettings Array of objects, containing url and icon for creating webviews.
  */
@@ -117,7 +117,6 @@ function addWebviews(parent, webviewSettings) {
         }
       })
       .listenTo(watcher, "changeWebview", (button) => {
-        console.log(webview);
         // eslint-disable-next-line eqeqeq
         if (button.id.replace("button", "") == i) {
           webview.show();
@@ -134,7 +133,7 @@ function addWebviews(parent, webviewSettings) {
 }
 
 /**
- * TODO
+ * Add a button for each webview (from settings).
  * @param {string|{}} parent Parent object, or a string for document.querySelector().
  * @param {{}[]} webviewSettings Array of objects, containing url and icon for creating webviews.
  */
