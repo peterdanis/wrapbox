@@ -70,6 +70,24 @@ class BaseElement {
     emitter.on(message, fn);
     return this;
   }
+
+  /**
+   * Hide the element. Chainable.
+   * @returns this
+   */
+  hide() {
+    this.element.classList.add("hidden");
+    return this;
+  }
+
+  /**
+   * Show the element. Chainable.
+   * @returns this
+   */
+  show() {
+    this.element.classList.remove("hidden");
+    return this;
+  }
 }
 
 class Button extends BaseElement {
@@ -205,32 +223,6 @@ class Webview extends BaseElement {
     options.customAttr.push("src", options.src);
     /* eslint-enable no-param-reassign */
     super(options);
-  }
-
-  /**
-   * Hide the webview. Chainable.
-   * @returns this
-   */
-  hide() {
-    if (process.platform === "darwin") {
-      this.element.classList.add("hidden");
-    } else {
-      this.element.classList.add("invisible");
-    }
-    return this;
-  }
-
-  /**
-   * Show the webview. Chainable.
-   * @returns this
-   */
-  show() {
-    if (process.platform === "darwin") {
-      this.element.classList.remove("hidden");
-    } else {
-      this.element.classList.remove("invisible");
-    }
-    return this;
   }
 }
 

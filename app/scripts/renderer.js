@@ -17,12 +17,20 @@ function addNavigationButtons(parent) {
     id: "navbuttons",
     class: "mdl-typography--text-right",
   })
+    .hide()
     .appendTo(parent)
-    .addEventListener("mouseleave", () =>
-      navigationButtonsSection.element.setAttribute("class", "invisible"));
+    // .addEventListener("mouseleave", () => navigationButtonsSection.hide())
+    .listenTo(watcher, "showNavButtons", (button) => {
+      if (parent.classList.contains("active") && parent === button) {
+        navigationButtonsSection.show();
+      }
+    })
+    .listenTo(watcher, "hideNavButtons", () => {
+      navigationButtonsSection.hide();
+    });
   // Create array with buttons
   const navigationButtons = ui.arrayToElements(
-    ui.MiniFabButton,
+    ui.IconButton,
     [
       {
         id: "back",
@@ -43,15 +51,14 @@ function addNavigationButtons(parent) {
     ],
     {
       textColor: "white",
-      color: "cyan-A400",
-      class: "mdl-shadow--4dp",
+      color: "teal-A400",
+      class: "mdl-shadow--8dp",
     }
   );
   // Append each button to the containing div and add onclick event listeners.
   navigationButtons.forEach((button) => {
-    button.appendTo(navigationButtonsSection.element);
-    button.addEventListener("click", () => {
-      // TODO
+    button.appendTo(navigationButtonsSection.element).addEventListener("click", (event) => {
+      console.log(event);
     });
   });
 }
@@ -109,8 +116,8 @@ function addWebviews(parent, webviewSettings) {
   );
   webviews.forEach((webview, i) => {
     webview
-      .appendTo(parent)
       .hide()
+      .appendTo(parent)
       .addEventListener("new-window", (event) => {
         if (event.disposition !== "new-window") {
           shell.openExternal(event.url);
@@ -153,7 +160,10 @@ function addWebviewButtons(parent, webviewSettings) {
         watcher.emit("changeWebview", event.currentTarget);
       })
       .addEventListener("mouseover", (event) => {
-        // TODO
+        watcher.emit("showNavButtons", event.currentTarget);
+      })
+      .addEventListener("mouseleave", (event) => {
+        watcher.emit("hideNavButtons", event.currentTarget);
       })
       .appendTo(parent)
       .listenTo(watcher, "changeWebview", (_button) => {
@@ -166,6 +176,7 @@ function addWebviewButtons(parent, webviewSettings) {
     if (i === 0) {
       button.element.classList.add("active");
     }
+    addNavigationButtons(button.element);
   });
 }
 
