@@ -146,7 +146,7 @@ function addWebviewButtons(parent, webviewSettings) {
     })),
     { class: "mdl-shadow--4dp", color: "blue-A200", textColor: "white" }
   );
-  webviewButtons.forEach((button) => {
+  webviewButtons.forEach((button, i) => {
     button
       .addRipple()
       .addEventListener("click", (event) => {
@@ -155,7 +155,17 @@ function addWebviewButtons(parent, webviewSettings) {
       .addEventListener("mouseover", (event) => {
         // TODO
       })
-      .appendTo(parent);
+      .appendTo(parent)
+      .listenTo(watcher, "changeWebview", (_button) => {
+        if (_button === button.element) {
+          button.element.classList.add("active");
+        } else {
+          button.element.classList.remove("active");
+        }
+      });
+    if (i === 0) {
+      button.element.classList.add("active");
+    }
   });
 }
 

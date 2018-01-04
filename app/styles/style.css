@@ -16,7 +16,7 @@
   z-index: -10000;
 }
 
-.active {
+#leftpanel .active {
   background-color: #3f51b5 !important;
 }
 
