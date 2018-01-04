@@ -171,7 +171,9 @@ function addWebviewButtons(parent, webviewSettings) {
 
 // Main function running all sub-tasks.
 function start() {
-  addWindowButtons("#titlebar", settings.windowButtonsPosition);
+  if (process.platform !== "darwin") {
+    addWindowButtons("#titlebar", settings.windowButtonsPosition);
+  }
   addWebviews("#content", settings.webviews);
   addWebviewButtons("#leftpanel", settings.webviews);
 }
