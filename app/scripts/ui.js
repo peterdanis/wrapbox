@@ -212,7 +212,11 @@ class Webview extends BaseElement {
    * @returns this
    */
   hide() {
-    this.element.classList.add("invisible");
+    if (process.platform === "darwin") {
+      this.element.classList.add("hidden");
+    } else {
+      this.element.classList.add("invisible");
+    }
     return this;
   }
 
@@ -221,7 +225,11 @@ class Webview extends BaseElement {
    * @returns this
    */
   show() {
-    this.element.classList.remove("invisible");
+    if (process.platform === "darwin") {
+      this.element.classList.remove("hidden");
+    } else {
+      this.element.classList.remove("invisible");
+    }
     return this;
   }
 }
