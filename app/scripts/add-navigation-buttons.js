@@ -23,7 +23,7 @@ function addNavigationButtons(parent, eventAggregator) {
     });
   // Create array with buttons.
   const navigationButtons = ui.arrayToElements(
-    ui.IconButton,
+    ui.FabButton,
     [
       {
         id: "back",
