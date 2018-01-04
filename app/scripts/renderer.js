@@ -4,11 +4,12 @@ const settings = require("./settings");
 const ui = require("./ui");
 const EventEmitter = require("events");
 
+// Event aggregator.
 const watcher = new EventEmitter();
 
 /**
- * TODO
- *
+ * Add webview navigation buttons to each webview button.
+ * @param {string|{}} parent Parent object, or a string for document.querySelector().
  */
 function addNavigationButtons(parent) {
   // Create containing div.
@@ -19,7 +20,6 @@ function addNavigationButtons(parent) {
   })
     .hide()
     .appendTo(parent)
-    // .addEventListener("mouseleave", () => navigationButtonsSection.hide())
     .listenTo(watcher, "showNavButtons", (button) => {
       if (parent.classList.contains("active") && parent === button) {
         navigationButtonsSection.show();
@@ -28,7 +28,7 @@ function addNavigationButtons(parent) {
     .listenTo(watcher, "hideNavButtons", () => {
       navigationButtonsSection.hide();
     });
-  // Create array with buttons
+  // Create array with buttons.
   const navigationButtons = ui.arrayToElements(
     ui.IconButton,
     [
@@ -51,14 +51,28 @@ function addNavigationButtons(parent) {
     ],
     {
       textColor: "white",
-      color: "teal-A400",
+      color: "blue-grey-700",
       class: "mdl-shadow--8dp",
     }
   );
   // Append each button to the containing div and add onclick event listeners.
   navigationButtons.forEach((button) => {
     button.appendTo(navigationButtonsSection.element).addEventListener("click", (event) => {
-      console.log(event);
+      // eslint-disable-next-line default-case
+      switch (event.currentTarget.id) {
+        case "back":
+          document.querySelector(`#${parent.id.replace("button", "webview")}`).goBack();
+          break;
+        case "home":
+          document.querySelector(`#${parent.id.replace("button", "webview")}`).goToIndex(0);
+          break;
+        case "reload":
+          document.querySelector(`#${parent.id.replace("button", "webview")}`).reload();
+          break;
+        case "forward":
+          document.querySelector(`#${parent.id.replace("button", "webview")}`).goForward();
+          break;
+      }
     });
   });
 }
@@ -66,7 +80,7 @@ function addNavigationButtons(parent) {
 /**
  * Add minimize, maximize and close buttons to titlebar.
  * @param {string|{}} parent Parent object, or a string for document.querySelector().
- * @param {"right"|"left"} side Side will translate to CSS class .right or .left
+ * @param {"right"|"left"} side Side will translate to CSS class .right or .left.
  */
 function addWindowButtons(parent, side) {
   // Create containing div.
@@ -106,6 +120,7 @@ function addWindowButtons(parent, side) {
  * @param {{}[]} webviewSettings Array of objects, containing url and icon for creating webviews.
  */
 function addWebviews(parent, webviewSettings) {
+  // Create webviews and store them in array
   const webviews = ui.arrayToElements(
     ui.Webview,
     webviewSettings.map((e, i) => ({
@@ -114,6 +129,7 @@ function addWebviews(parent, webviewSettings) {
     })),
     { customAttr: ["allowpopups", ""] }
   );
+  // Append each webview to parent, hide it (except the first one) and add event listeners.
   webviews.forEach((webview, i) => {
     webview
       .hide()
@@ -145,6 +161,7 @@ function addWebviews(parent, webviewSettings) {
  * @param {{}[]} webviewSettings Array of objects, containing url and icon for creating webviews.
  */
 function addWebviewButtons(parent, webviewSettings) {
+  // Create buttons and store them in array.
   const webviewButtons = ui.arrayToElements(
     ui.FabButton,
     webviewSettings.map((e, i) => ({
@@ -153,6 +170,7 @@ function addWebviewButtons(parent, webviewSettings) {
     })),
     { class: "mdl-shadow--4dp", color: "blue-A200", textColor: "white" }
   );
+  // Append each button to parent, add effects and event listeners.
   webviewButtons.forEach((button, i) => {
     button
       .addRipple()
@@ -176,6 +194,7 @@ function addWebviewButtons(parent, webviewSettings) {
     if (i === 0) {
       button.element.classList.add("active");
     }
+    // Add webview navigation section to each button.
     addNavigationButtons(button.element);
   });
 }
