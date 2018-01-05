@@ -12,6 +12,19 @@
   src: url(OpenSans-Regular.ttf);
 }
 
+.wbcontainer {
+  border-radius: 50%;
+  height: 56px;
+  margin: auto;
+  min-width: 56px;
+  width: 56px;
+  padding: 0;
+  overflow: visible;
+  position: relative;
+  -webkit-app-region: no-drag;
+  margin-bottom: 8px;
+}
+
 .zinvisible {
   z-index: -10000;
 }
@@ -82,12 +95,6 @@
   left: 8px;
   width: 56px;
   height: calc(100% - 97px);
-}
-
-#leftpanel button {
-  overflow: visible;
-  -webkit-app-region: no-drag;
-  margin-bottom: 8px;
 }
 
 #content {

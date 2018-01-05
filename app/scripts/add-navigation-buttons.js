@@ -14,7 +14,12 @@ function addNavigationButtons(parent, eventAggregator) {
     .hide()
     .appendTo(parent)
     .listenTo(eventAggregator, "showNavButtons", (button) => {
-      if (parent.classList.contains("active") && parent === button) {
+      console.log(parent.firstElementChild.classList.contains("active"));
+      console.log(parent === button)
+      if (
+        parent.firstElementChild.classList.contains("active") &&
+        parent === button
+      ) {
         navigationButtonsSection.show();
       }
     })
@@ -50,23 +55,26 @@ function addNavigationButtons(parent, eventAggregator) {
   );
   // Append each button to the containing div and add onclick event listeners.
   navigationButtons.forEach((button) => {
-    button.appendTo(navigationButtonsSection.element).addEventListener("click", (event) => {
-      // eslint-disable-next-line default-case
-      switch (event.currentTarget.id) {
-        case "back":
-          document.querySelector(`#${parent.id.replace("button", "webview")}`).goBack();
-          break;
-        case "home":
-          document.querySelector(`#${parent.id.replace("button", "webview")}`).goToIndex(0);
-          break;
-        case "reload":
-          document.querySelector(`#${parent.id.replace("button", "webview")}`).reload();
-          break;
-        case "forward":
-          document.querySelector(`#${parent.id.replace("button", "webview")}`).goForward();
-          break;
-      }
-    });
+    button
+      .appendTo(navigationButtonsSection.element)
+      .addEventListener("click", (event) => {
+        // eslint-disable-next-line default-case
+        switch (event.currentTarget.id) {
+          case "back":
+            document.querySelector(`#${parent.id.replace("wbdiv", "webview")}`).goBack();
+            break;
+          case "home":
+            document.querySelector(`#${parent.id.replace("wbdiv", "webview")}`).goToIndex(0);
+            break;
+          case "reload":
+            document.querySelector(`#${parent.id.replace("wbdiv", "webview")}`).reload();
+            break;
+          case "forward":
+            document.querySelector(`#${parent.id.replace("wbdiv", "webview")}`).goForward();
+            break;
+        }
+      })
+      .addRipple();
   });
 }
 
