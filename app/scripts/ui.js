@@ -1,5 +1,5 @@
 /**
- * Creates array of elements combining individual their and common properties.
+ * Creates array of elements combining individual and common properties.
  * @param {*} ElementClass BaseElement or one of its subclasses.
  * @param {{}[]} [elements] An array of individual BaseElement constructor parameters.
  * @param {{}} [commonOptions] BaseElement constructor parameters, common for all elements.
