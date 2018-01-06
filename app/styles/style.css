@@ -58,10 +58,8 @@
   position: fixed;
   top: 87px;
   left: 8px;
-  width: 64px;
+  width: 56px;
   height: calc(100% - 97px);
-  /* overflow-x: visible;
-  overflow-y: scroll; */
 }
 
 #leftpanel .active {
