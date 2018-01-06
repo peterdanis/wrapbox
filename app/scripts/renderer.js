@@ -7,6 +7,7 @@ const addWebviewButtons = require("./add-webview-buttons");
 
 // Event aggregator. Passed to functions as argument.
 const watcher = new EventEmitter();
+watcher.setMaxListeners(0);
 
 // Main function running all sub-tasks.
 function start() {
