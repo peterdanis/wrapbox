@@ -14,12 +14,7 @@ function addNavigationButtons(parent, eventAggregator) {
     .hide()
     .appendTo(parent)
     .listenTo(eventAggregator, "showNavButtons", (button) => {
-      console.log(parent.firstElementChild.classList.contains("active"));
-      console.log(parent === button)
-      if (
-        parent.firstElementChild.classList.contains("active") &&
-        parent === button
-      ) {
+      if (parent.firstElementChild.classList.contains("active") && parent === button) {
         navigationButtonsSection.show();
       }
     })
