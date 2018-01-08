@@ -26,6 +26,16 @@
   -webkit-app-region: no-drag;
 }
 
+.settingsButton {
+  position: fixed;
+  bottom: 8px;
+  left: 20px;
+}
+
+.settingsButton.active {
+  color: rgb(68, 138, 255) !important;
+}
+
 .wbcontainer {
   border-radius: 50%;
   height: 56px;

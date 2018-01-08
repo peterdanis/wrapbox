@@ -2,6 +2,7 @@
 const settings = require("./settings");
 const EventEmitter = require("events");
 const addWindowButtons = require("./add-window-buttons");
+const addSettingsPage = require("./add-settings-page");
 const addWebviews = require("./add-webviews");
 const addWebviewButtons = require("./add-webview-buttons");
 const PerfectScrollbar = require("./perfect-scrollbar.common");
@@ -16,8 +17,16 @@ function start() {
   if (process.platform !== "darwin") {
     addWindowButtons("#titlebar", settings.windowButtonsPosition);
   }
-  addWebviews("#content", settings.webviews, watcher);
+
   addWebviewButtons("#leftpanel", settings.webviews, watcher);
+  addSettingsPage(watcher);
+  addWebviews("#content", settings.webviews, watcher);
+  const a = document.querySelector(`#webview${settings.webviews.length - 1}`);
+  a.setAttribute("nodeintegration", "");
+  a.addEventListener("dom-ready", () => {
+    a.openDevTools();
+  });
+
   // eslint-disable-next-line no-new
   new PerfectScrollbar("#leftpanel");
 }
