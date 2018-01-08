@@ -2,7 +2,7 @@
 const settings = require("./settings");
 const EventEmitter = require("events");
 const addWindowButtons = require("./add-window-buttons");
-const addSettingsPage = require("./add-settings-page");
+const setUpSettingsPage = require("./set-up-settings-page");
 const addWebviews = require("./add-webviews");
 const addWebviewButtons = require("./add-webview-buttons");
 const PerfectScrollbar = require("./perfect-scrollbar.common");
@@ -19,13 +19,11 @@ function start() {
   }
 
   addWebviewButtons("#leftpanel", settings.webviews, watcher);
-  addSettingsPage(watcher);
+  // Insert settings webview after the buttons have been created
+  // Settings has its own button
+  settings.webviews.push({ url: "../pages/settings.html" });
   addWebviews("#content", settings.webviews, watcher);
-  const a = document.querySelector(`#webview${settings.webviews.length - 1}`);
-  a.setAttribute("nodeintegration", "");
-  a.addEventListener("dom-ready", () => {
-    a.openDevTools();
-  });
+  setUpSettingsPage(watcher);
 
   // eslint-disable-next-line no-new
   new PerfectScrollbar("#leftpanel");
