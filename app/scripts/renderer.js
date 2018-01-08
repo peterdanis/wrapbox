@@ -12,6 +12,7 @@ watcher.setMaxListeners(0);
 
 // Main function running all sub-tasks.
 function start() {
+  // Do not display control buttons on MacOS, it has own inset buttons
   if (process.platform !== "darwin") {
     addWindowButtons("#titlebar", settings.windowButtonsPosition);
   }
