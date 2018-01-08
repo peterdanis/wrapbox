@@ -7,8 +7,8 @@ let win;
 
 function createWindow() {
   win = new BrowserWindow({
-    width: settings.windowWidth,
-    height: settings.windowHeight,
+    width: settings.windowWidth || 1200,
+    height: settings.windowHeight || 700,
     frame: false,
     backgroundColor: settings.backgroundColor,
     titleBarStyle: "hiddenInset",
