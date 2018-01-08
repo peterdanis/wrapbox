@@ -13,14 +13,21 @@ function addNavigationButtons(parent, eventAggregator) {
   })
     .hide()
     .appendTo(parent)
-    .listenTo(eventAggregator, "showNavButtons", (button) => {
-      if (parent.firstElementChild.classList.contains("active") && parent === button) {
+    .listenTo(eventAggregator, "showNavButtons", (buttonContainer) => {
+      // Show navbuttons only for webview button with .active class and set position
+      if (parent.firstElementChild.classList.contains("active") && parent === buttonContainer) {
+        navigationButtonsSection.element.style.top = `${buttonContainer.getBoundingClientRect()
+          .top + 13}px`;
+        navigationButtonsSection.element.style.left = `${
+          buttonContainer.getBoundingClientRect().left
+        }px`;
         navigationButtonsSection.show();
       }
     })
     .listenTo(eventAggregator, "hideNavButtons", () => {
       navigationButtonsSection.hide();
     });
+
   // Create array with buttons.
   const navigationButtons = ui.arrayToElements(
     ui.FabButton,
@@ -48,6 +55,7 @@ function addNavigationButtons(parent, eventAggregator) {
       class: "mdl-shadow--8dp",
     }
   );
+
   // Append each button to the containing div and add onclick event listeners.
   navigationButtons.forEach((button) => {
     button

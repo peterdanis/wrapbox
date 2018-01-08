@@ -4,6 +4,7 @@ const EventEmitter = require("events");
 const addWindowButtons = require("./add-window-buttons");
 const addWebviews = require("./add-webviews");
 const addWebviewButtons = require("./add-webview-buttons");
+const PerfectScrollbar = require("./perfect-scrollbar.common");
 
 // Event aggregator. Passed to functions as argument.
 const watcher = new EventEmitter();
@@ -16,6 +17,8 @@ function start() {
   }
   addWebviews("#content", settings.webviews, watcher);
   addWebviewButtons("#leftpanel", settings.webviews, watcher);
+  // eslint-disable-next-line no-new
+  new PerfectScrollbar("#leftpanel");
 }
 
 // Start the main function when the page is ready.
