@@ -34,8 +34,6 @@ function setUpSettingsPage(eventAggregator) {
   // TODO delete after work on settings page is done
   settingsWebview.addEventListener("did-finish-load", () => {
     settingsWebview.openDevTools();
-    const a = settingsWebview.getWebContents();
-    console.log(a);
   });
 }
 

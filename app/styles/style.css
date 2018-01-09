@@ -12,6 +12,10 @@
   src: url(OpenSans-Regular.ttf);
 }
 
+.block {
+  display: block;
+}
+
 .left {
   position: fixed;
   top: 3px;
@@ -24,6 +28,11 @@
   top: 3px;
   right: 5px;
   -webkit-app-region: no-drag;
+}
+
+.roboto {
+  font-family: "Roboto" !important;
+  font-size: 14px !important;
 }
 
 .settingsButton {

@@ -11,16 +11,77 @@
   <link rel="stylesheet" href="../styles/material-icons.css">
   <link rel="stylesheet" href="../styles/style.css">
   <link rel="stylesheet" href="../styles/perfect-scrollbar.css">
+  <script>require("../scripts/settings-renderer.js");</script>
   <script>require("../scripts/material.js");</script>
 
 </head>
 
 <body class="mdl-color--grey-100">
-  <div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--12-col">
-      <span>Settings</span>
-    </div>
 
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__drawer-button">
+        <i class="material-icons">settings</i>
+      </div>
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title">Settings</span>
+      </div>
+    </header>
+
+    <main class="mdl-layout__content">
+      <div class="page-content">
+
+        <form action="#">
+          <div class="mdl-grid">
+
+            <div class="mdl-cell mdl-cell--12-col">
+              <div class="mdl-cell mdl-cell--12-col">Starting resolution</div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--2-col">
+                <input class="mdl-textfield__input roboto" type="text" id="resx" pattern="-?[0-9]*(\.[0-9]+)?" value="1200">
+                <label class="mdl-textfield__label roboto" for="resx">Horizontal, in pixels</label>
+                <span class="mdl-textfield__error roboto">Digits only</span>
+              </div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--2-col">
+                <input class="mdl-textfield__input roboto" type="text" id="resy" pattern="-?[0-9]*(\.[0-9]+)?" value="700">
+                <label class="mdl-textfield__label roboto" for="resy">Vertical, in pixels</label>
+                <span class="mdl-textfield__error roboto">Digits only</span>
+              </div>
+              <div class="mdl-cell mdl-cell--4-col">
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="maximized">
+                  <input type="checkbox" id="maximized" class="mdl-checkbox__input">
+                  <span class="mdl-checkbox__label roboto">Start maximized</span>
+                </label>
+              </div>
+              <div class="mdl-cell mdl-cell--4-col">
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="right">
+                  <input type="checkbox" id="right" class="mdl-checkbox__input" checked>
+                  <span class="mdl-checkbox__label roboto">Window buttons on right</span>
+                </label>
+              </div>
+              <!-- <hr> -->
+            </div>
+
+            <div class="mdl-cell mdl-cell--12-col">
+              <div class="mdl-cell mdl-cell--12-col">Webviews</div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--8-col">
+                <input class="mdl-textfield__input roboto" type="text" id="w0" pattern="" value="">
+                <label class="mdl-textfield__label roboto" for="w0">Webview</label>
+                <span class="mdl-textfield__error roboto">Must be a valid URL</span>
+              </div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--2-col">
+                <input class="mdl-textfield__input roboto" type="text" id="w0i" pattern="" value="">
+                <label class="mdl-textfield__label roboto" for="w0i">Icon</label>
+                <span class="mdl-textfield__error roboto">Error</span>
+              </div>
+              <!-- <hr> -->
+            </div>
+
+          </div>
+
+        </form>
+      </div>
+
+    </main>
   </div>
 
 </body>
