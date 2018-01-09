@@ -26,6 +26,10 @@ function addWebviews(parent, webviewSettings, eventAggregator) {
           shell.openExternal(event.url);
         }
       })
+      .addEventListener("console-message", (event) => {
+        // eslint-disable-next-line no-console
+        console.log(`${webview.element.src} console message:`, event.message);
+      })
       .listenTo(eventAggregator, "changeWebview", (button) => {
         // eslint-disable-next-line eqeqeq
         if (button.id.replace("button", "") == i) {

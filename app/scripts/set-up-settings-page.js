@@ -32,8 +32,10 @@ function setUpSettingsPage(eventAggregator) {
   settingsWebview.setAttribute("nodeintegration", "");
 
   // TODO delete after work on settings page is done
-  settingsWebview.addEventListener("dom-ready", () => {
+  settingsWebview.addEventListener("did-finish-load", () => {
     settingsWebview.openDevTools();
+    const a = settingsWebview.getWebContents();
+    console.log(a);
   });
 }
 
