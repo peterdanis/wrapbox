@@ -76,7 +76,7 @@ class BaseElement {
    * @returns this
    */
   hide() {
-    this.element.classList.add("hidden");
+    this.element.classList.add("invisible");
     return this;
   }
 
@@ -85,7 +85,7 @@ class BaseElement {
    * @returns this
    */
   show() {
-    this.element.classList.remove("hidden");
+    this.element.classList.remove("invisible");
     return this;
   }
 }
