@@ -25,6 +25,7 @@ function start() {
   addWebviews("#content", settings.webviews, watcher);
   setUpSettingsPage(watcher);
 
+  // Add a custom scrollbar to leftpanel (panel with webview buttons)
   // eslint-disable-next-line no-new
   new PerfectScrollbar("#leftpanel");
 }
