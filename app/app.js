@@ -5,6 +5,13 @@ const url = require("url");
 
 let win;
 
+try {
+  // eslint-disable-next-line
+  require("electron-reload")(__dirname);
+} catch (error) {
+  // Do nothing, electron-reload is used only for development
+}
+
 function createWindow() {
   win = new BrowserWindow({
     width: settings.windowWidth || 1200,
