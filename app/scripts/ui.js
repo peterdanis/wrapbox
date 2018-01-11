@@ -92,7 +92,7 @@ class BaseElement {
 
 class Button extends BaseElement {
   /**
-   * Creates an MDL button.
+   * Creates a MDL button.
    * @param {object} options
    * @param {string} [options.id]
    * @param {string} [options.class]
@@ -226,6 +226,48 @@ class Webview extends BaseElement {
   }
 }
 
+class TextField extends BaseElement {
+  /**
+   * Creates a MDL textfield.
+   * @param {object} options
+   * @param {string} [options.id]
+   * @param {string} [options.class]
+   * @param {string} [options.style]
+   * @param {string} [options.innerHTML]
+   * @param {string[]} [options.customAttr]
+   * @param {string} [options.innerId]
+   * @param {string} [options.pattern]
+   * @param {string} [options.value]
+   * @param {string} [options.text]
+   * @param {string} [options.errorText]
+   */
+  constructor(options) {
+    /* eslint-disable no-param-reassign */
+    options.type = "div";
+    options.class = (options.class && `${options.class} `) || "";
+    options.class += "mdl-textfield mdl-js-textfield mdl-textfield--floating-label";
+    /* eslint-enable no-param-reassign */
+    super(options);
+    new BaseElement({
+      type: "input",
+      id: options.innerId,
+      class: "mdl-textfield__input",
+      customAttr: ["type", "text", "pattern", options.pattern || "", "value", options.value || ""],
+    }).appendTo(this.element);
+    new BaseElement({
+      type: "label",
+      class: "mdl-textfield__label",
+      customAttr: ["for", options.innerId],
+      innerHTML: options.text,
+    }).appendTo(this.element);
+    new BaseElement({
+      type: "span",
+      class: "mdl-textfield__error",
+      innerHTML: options.errorText,
+    }).appendTo(this.element);
+  }
+}
+
 module.exports = {
   arrayToElements,
   BaseElement,
@@ -235,4 +277,5 @@ module.exports = {
   IconButton,
   MaterialIcon,
   Webview,
+  TextField,
 };

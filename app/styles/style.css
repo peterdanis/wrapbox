@@ -30,7 +30,10 @@
   -webkit-app-region: no-drag;
 }
 
-.roboto {
+.mdl-textfield__input,
+.mdl-textfield__label,
+.mdl-textfield__error,
+.mdl-checkbox__label {
   font-family: "Roboto" !important;
   font-size: 14px !important;
 }
