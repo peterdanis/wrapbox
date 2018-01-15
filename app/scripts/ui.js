@@ -236,6 +236,7 @@ class TextField extends BaseElement {
    * @param {string} [options.innerHTML]
    * @param {string[]} [options.customAttr]
    * @param {string} [options.innerId]
+   * @param {string} [options.innerClass]
    * @param {string} [options.pattern]
    * @param {string} [options.value]
    * @param {string} [options.text]
@@ -245,13 +246,15 @@ class TextField extends BaseElement {
     /* eslint-disable no-param-reassign */
     options.type = "div";
     options.class = (options.class && `${options.class} `) || "";
-    options.class += "mdl-textfield mdl-js-textfield mdl-textfield--floating-label";
+    options.class += "mdl-textfield mdl-js-textfield";
+    options.innerClass = (options.innerClass && `${options.innerClass} `) || "";
+    options.innerClass += "mdl-textfield__input";
     /* eslint-enable no-param-reassign */
     super(options);
     new BaseElement({
       type: "input",
       id: options.innerId,
-      class: "mdl-textfield__input",
+      class: options.innerClass,
       customAttr: ["type", "text", "pattern", options.pattern || "", "value", options.value || ""],
     }).appendTo(this.element);
     new BaseElement({

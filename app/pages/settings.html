@@ -31,47 +31,76 @@
     <main class="mdl-layout__content">
       <div class="page-content">
 
-        <form action="#">
+        <div id="settings">
           <div class="mdl-grid">
-
-            <div class="mdl-cell mdl-cell--12-col">
-              <div class="mdl-cell mdl-cell--12-col">Starting resolution</div>
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--2-col">
+            <div class="mdl-cell mdl-cell--12-col" style="margin-bottom: -4px;">
+              <strong class="mdl-color-text--primary">General</strong>
+            </div>
+            <div class="mdl-cell mdl-cell--12-col" style="padding-top: 16px; margin-bottom: -6px;">Starting resolution</div>
+            <div class="mdl-cell mdl-cell--2-col">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <input class="mdl-textfield__input" type="text" id="resx" pattern="[0-9]*" value="">
                 <label class="mdl-textfield__label" for="resx">Horizontal, in pixels</label>
-                <span class="mdl-textfield__error">Number only</span>
+                <span class="mdl-textfield__error">Numbers only</span>
               </div>
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--2-col">
+            </div>
+            <div class="mdl-cell mdl-cell--2-col">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <input class="mdl-textfield__input" type="text" id="resy" pattern="[0-9]*" value="">
                 <label class="mdl-textfield__label" for="resy">Vertical, in pixels</label>
-                <span class="mdl-textfield__error">Number only</span>
+                <span class="mdl-textfield__error">Numbers only</span>
               </div>
-              <div class="mdl-cell mdl-cell--4-col">
-                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="maximized">
-                  <input type="checkbox" id="maximized" class="mdl-checkbox__input">
-                  <span class="mdl-checkbox__label">Start maximized</span>
-                </label>
-              </div>
-              <div class="mdl-cell mdl-cell--4-col">
-                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="windowButtons">
-                  <input type="checkbox" id="windowButtons" class="mdl-checkbox__input">
-                  <span class="mdl-checkbox__label">Window buttons on right</span>
-                </label>
-              </div>
-              <br>
-              <hr>
             </div>
-
-            <div id="webviews" class="mdl-cell mdl-cell--12-col">
-              <div class="mdl-cell mdl-cell--12-col">Webviews:</div>
-            </div>
-
           </div>
 
-        </form>
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col">
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="maximized">
+                <input type="checkbox" id="maximized" class="mdl-checkbox__input">
+                <span class="mdl-checkbox__label">Start maximized</span>
+              </label>
+            </div>
+            <div class="mdl-cell mdl-cell--12-col" style="margin-top: -4px;">
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="windowButtons">
+                <input type="checkbox" id="windowButtons" class="mdl-checkbox__input">
+                <span class="mdl-checkbox__label">Window buttons on right</span>
+              </label>
+            </div>
+          </div>
+
+          <hr style="border: 0;">
+
+          <div id="webviews" class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col" style="margin-bottom: 8px;">
+              <strong class="mdl-color-text--primary">Webviews</strong>
+            </div>
+          </div>
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col">
+              <button id="addwebview" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color--primary mdl-color-text--white mdl-shadow--4dp">Add webview</button>
+            </div>
+          </div>
+
+        </div>
+
+        <hr style="border: 0;">
+        <hr style="border: 0;">
+
+        <footer class="footer">
+          <i class="material-icons">info_outline</i>
+          Version
+          <a href="https://github.com/peterdanis/wrapbox/releases" id="version" target="_blank"></a>. Created by
+          <a href="https://github.com/peterdanis" target="_blank">Peter Danis</a>. App icon made by
+          <a href="https://www.flaticon.com/free-icon/layer_179546" target="_blank">Pixel Buddha</a> from
+          <a href="https://www.flaticon.com" target="_blank">www.flaticon.com</a>.
+        </footer>
+        <button id="save" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color--primary mdl-color-text--white mdl-shadow--4dp">Save</button>
+        <button id="discard" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color--grey-300 mdl-color-text--primary mdl-shadow--4dp">Discard</button>
+
       </div>
 
     </main>
+
   </div>
 
   <!-- TODO Add footer, mention the icon autor:
