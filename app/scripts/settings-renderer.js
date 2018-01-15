@@ -6,6 +6,11 @@ const { app } = require("electron").remote; // eslint-disable-line
 // Global variable, needed for addWebviewSetting function
 let index = 0;
 
+/**
+ * Creates a textfield for webviews.
+ * @param {string|{}} parent
+ * @param {string} url
+ */
 function addWebviewSetting(parent, url) {
   // Create new MDL textfield and fill in the values.
   new ui.TextField({
@@ -35,27 +40,45 @@ function loadSettings() {
   if (settings.windowButtonsPosition === "right") {
     windowButtons.checked = true;
   }
+  // Delete all existing webview setting fields
+  document.querySelectorAll(".wb").forEach((e) => {
+    e.parentNode.remove();
+  });
+  // Load webview settings
   settings.webviews.forEach((e) => {
     addWebviewSetting("#webviews", e.url);
   });
+}
 
+function activateButtons() {
   const webviewButton = document.querySelector("#addwebview");
   webviewButton.addEventListener("click", () => {
     addWebviewSetting("#webviews");
-    //
+    // Register newly created button to MDL
+    // eslint-disable-next-line no-undef
+    componentHandler.upgradeAllRegistered();
+  });
+
+  const saveButton = document.querySelector("#save");
+  saveButton.addEventListener("click", () => {});
+
+  const discardButton = document.querySelector("#discard");
+  discardButton.addEventListener("click", () => {
+    loadSettings();
     // eslint-disable-next-line no-undef
     componentHandler.upgradeAllRegistered();
   });
 }
 
+// Add version info to footer.
 function version() {
-  console.log(app.getVersion());
   document.querySelector("#version").innerText = app.getVersion();
 }
 
 // Main function running all sub-tasks.
 function start() {
   loadSettings();
+  activateButtons();
   version();
 }
 
