@@ -11,4 +11,9 @@ install:
 build_script:
   - cmd: yarn dist
 test: off
-deploy: off
+deploy:
+  - provider: GitHub
+    auth_token:
+      secure: 1aigA+tF1hWwZVVARvg+fhwGlJmgNLfs4FDdlgW8mOWqe9MA+gjKLgKT99wO4D0e
+    artifact: release-builds/*.*
+    draft: true

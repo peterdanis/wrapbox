@@ -20,11 +20,7 @@
     "productName": "Wrapbox",
     "copyright": "Copyright © 2018 Peter Danis",
     "win": {
-      "target": [
-        "nsis",
-        "portable",
-        "zip"
-      ]
+      "target": ["nsis", "portable", "zip"]
     },
     "nsis": {
       "oneClick": false,
@@ -35,15 +31,9 @@
     "portable": {
       "artifactName": "${productName}_${version}_${env.platform}_Portable.${ext}"
     },
-    "files": [
-      "app/**"
-    ],
+    "files": ["app/**"],
     "directories": {
       "output": "./release-builds"
-    },
-    "publish": {
-      "provider": "github",
-      "protocol": "https"
     }
   },
   "dependencies": {},
