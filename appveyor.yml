@@ -1,13 +1,15 @@
-version: '{branch}.{build}'
+version: '{branch}.{version}.{build}'
 image: Visual Studio 2017
+platform:
+  - x86
+  - x64
+environment:
+  GH_TOKEN:
+    secure: txHq0BJrAjFPHzzwDe4mAY3/WnUsOeaKnOmM6Lf2mt3Gt+r4LpM4bvXo1C08t21q 6c028c77457824feff76c40fb7ae48820ba0f83b
 install:
-- ps: Install-Product node 8
-- cmd: yarn
+  - ps: Install-Product node 8
+  - cmd: yarn
 build_script:
-- cmd: yarn dist
+  - cmd: yarn dist
 test: off
-deploy:
-- provider: GitHub
-  auth_token:
-    secure: txHq0BJrAjFPHzzwDe4mAY3/WnUsOeaKnOmM6Lf2mt3Gt+r4LpM4bvXo1C08t21q
-  draft: true
+deploy: off
