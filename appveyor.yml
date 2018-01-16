@@ -1,7 +1,12 @@
 version: '{branch}-{build}'
 image: Visual Studio 2017
+environment:
+  - nodejs_version: "8"
+platform:
+  - x86
+  - x64
 install:
-  - ps: Install-Product node 8
+  - ps: Install-Product node $env:nodejs_version $env:platform
   - cmd: yarn
 build_script:
   - cmd: yarn dist
