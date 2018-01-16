@@ -1,6 +1,7 @@
 version: '{branch}.{build}'
 image: Visual Studio 2017
 install:
+- ps: Install-Product node 8
 - cmd: yarn
 build_script:
 - cmd: yarn dist
