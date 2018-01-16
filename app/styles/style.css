@@ -83,6 +83,12 @@
   margin-bottom: 8px;
 }
 
+.zinvisible {
+  width: 0;
+  height: 0;
+  flex: 0 1;
+}
+
 #content {
   -webkit-app-region: no-drag;
   position: fixed;
