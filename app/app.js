@@ -14,15 +14,15 @@ try {
 
 function createWindow() {
   win = new BrowserWindow({
-    width: utils.windowWidth,
-    height: utils.windowHeight,
+    width: utils.settings.windowWidth,
+    height: utils.settings.windowHeight,
     frame: false,
-    backgroundColor: utils.backgroundColor,
+    backgroundColor: utils.settings.backgroundColor,
     titleBarStyle: "hiddenInset",
     show: false,
   });
 
-  if (utils.startMaximized) {
+  if (utils.settings.startMaximized) {
     win.maximize();
   }
 

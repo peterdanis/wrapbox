@@ -15,13 +15,13 @@ watcher.setMaxListeners(0);
 function start() {
   // Do not display control buttons on MacOS, it has own inset buttons
   if (process.platform !== "darwin") {
-    addWindowButtons("#titlebar", utils.windowButtonsPosition);
+    addWindowButtons("#titlebar", utils.settings.windowButtonsPosition);
   }
 
   // Insert settings webview, for addWebviews function call
-  const webviews = utils.webviews.concat([{ url: "../pages/settings.html" }]);
+  const webviews = utils.settings.webviews.concat([{ url: "../pages/settings.html" }]);
 
-  addWebviewButtons("#leftpanel", utils.webviews, watcher);
+  addWebviewButtons("#leftpanel", utils.settings.webviews, watcher);
   addWebviews("#content", webviews, watcher);
   setUpSettingsPage(watcher);
 

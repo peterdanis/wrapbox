@@ -3,11 +3,11 @@ const utils = require("electron").remote.require("./scripts/utils"); // eslint-d
 
 function setUpSettingsPage(eventAggregator) {
   // Webview is already inserted by addWebviews function
-  const settingsWebview = document.querySelector(`#webview${utils.webviews.length}`);
+  const settingsWebview = document.querySelector(`#webview${utils.settings.webviews.length}`);
 
   // Create settings button
   const settingsButton = new ui.IconButton({
-    id: `button${utils.webviews.length}`,
+    id: `button${utils.settings.webviews.length}`,
     class: "settingsButton fadeInLeft",
     innerHTML: new ui.MaterialIcon({ innerHTML: "settings" }).element.outerHTML,
     textColor: "grey-500",

@@ -30,13 +30,13 @@ async function saveSettings(data) {
   }
 
   try {
-    const a = await writeFileAsync(path.join(app.getPath("userData"), "config.json"), dataJSON);
+    await writeFileAsync(path.join(app.getPath("userData"), "config.json"), dataJSON);
     return "success";
   } catch (error) {
     return error;
   }
 }
-settings.saveSettings = saveSettings;
-settings.version = (() => app.getVersion())();
 
-module.exports = settings;
+const version = (() => app.getVersion())();
+
+module.exports = { settings, version, saveSettings };

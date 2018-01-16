@@ -27,16 +27,16 @@ function addWebviewSetting(parent, url) {
 
 function loadSettings() {
   const resX = document.querySelector("#resx");
-  resX.value = utils.windowWidth;
+  resX.value = utils.settings.windowWidth;
 
   const resY = document.querySelector("#resy");
-  resY.value = utils.windowHeight;
+  resY.value = utils.settings.windowHeight;
 
   const maximized = document.querySelector("#maximized");
-  maximized.checked = utils.startMaximized;
+  maximized.checked = utils.settings.startMaximized;
 
   const windowButtons = document.querySelector("#windowButtons");
-  if (utils.windowButtonsPosition === "right") {
+  if (utils.settings.windowButtonsPosition === "right") {
     windowButtons.checked = true;
   }
   // Delete all existing webview setting fields
@@ -44,7 +44,7 @@ function loadSettings() {
     e.parentNode.remove();
   });
   // Load webview settings
-  utils.webviews.forEach((e) => {
+  utils.settings.webviews.forEach((e) => {
     addWebviewSetting("#webviews", e.url);
   });
 }
