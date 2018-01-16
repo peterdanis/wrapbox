@@ -21,7 +21,6 @@ settings.webviews = [
 ];
 
 async function saveSettings(data) {
-  console.log(app);
   let dataJSON;
 
   try {

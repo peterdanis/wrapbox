@@ -18,11 +18,11 @@ function start() {
     addWindowButtons("#titlebar", utils.windowButtonsPosition);
   }
 
+  // Insert settings webview, for addWebviews function call
+  const webviews = utils.webviews.concat([{ url: "../pages/settings.html" }]);
+
   addWebviewButtons("#leftpanel", utils.webviews, watcher);
-  // Insert settings webview after the buttons have been created
-  // Settings has its own button
-  utils.webviews.push({ url: "../pages/settings.html" });
-  addWebviews("#content", utils.webviews, watcher);
+  addWebviews("#content", webviews, watcher);
   setUpSettingsPage(watcher);
 
   // Add a custom scrollbar to leftpanel (panel with webview buttons)
