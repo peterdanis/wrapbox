@@ -30,10 +30,10 @@
       "oneClick": false,
       "perMachine": false,
       "allowToChangeInstallationDirectory": true,
-      "artifactName": "${productName}_${version}_${arch}_Installer.${ext}"
+      "artifactName": "${productName}_${version}_${env.platform}_Installer.${ext}"
     },
     "portable": {
-      "artifactName": "${productName}_${version}_${arch}_Portable.${ext}"
+      "artifactName": "${productName}_${version}_${env.platform}_Portable.${ext}"
     },
     "files": [
       "app/**"
