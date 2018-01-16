@@ -1,9 +1,12 @@
+version: '{branch}.{build}'
 image: Visual Studio 2017
-
-platform: x64
-
 install:
-  - ps: Install-Product node 9 x64
-  - yarn
-
+- cmd: yarn
+build_script:
+- cmd: yarn dist
 test: off
+deploy:
+- provider: GitHub
+  auth_token:
+    secure: txHq0BJrAjFPHzzwDe4mAY3/WnUsOeaKnOmM6Lf2mt3Gt+r4LpM4bvXo1C08t21q
+  draft: true
