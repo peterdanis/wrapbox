@@ -1,4 +1,4 @@
-version: '{branch}.{version}.{build}'
+version: '{branch}-{build}'
 image: Visual Studio 2017
 install:
   - ps: Install-Product node 8
