@@ -1,5 +1,5 @@
 /* eslint-env node, browser */
-const settings = require("./settings");
+const utils = require("electron").remote.require("./scripts/utils"); // eslint-disable-line
 const EventEmitter = require("events");
 const addWindowButtons = require("./add-window-buttons");
 const setUpSettingsPage = require("./set-up-settings-page");
@@ -15,14 +15,14 @@ watcher.setMaxListeners(0);
 function start() {
   // Do not display control buttons on MacOS, it has own inset buttons
   if (process.platform !== "darwin") {
-    addWindowButtons("#titlebar", settings.windowButtonsPosition);
+    addWindowButtons("#titlebar", utils.windowButtonsPosition);
   }
 
-  addWebviewButtons("#leftpanel", settings.webviews, watcher);
+  addWebviewButtons("#leftpanel", utils.webviews, watcher);
   // Insert settings webview after the buttons have been created
   // Settings has its own button
-  settings.webviews.push({ url: "../pages/settings.html" });
-  addWebviews("#content", settings.webviews, watcher);
+  utils.webviews.push({ url: "../pages/settings.html" });
+  addWebviews("#content", utils.webviews, watcher);
   setUpSettingsPage(watcher);
 
   // Add a custom scrollbar to leftpanel (panel with webview buttons)

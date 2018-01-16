@@ -1,6 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require("electron"); // eslint-disable-line
 const path = require("path");
-const settings = require("./scripts/settings");
+const utils = require("./scripts/utils");
 const url = require("url");
 
 let win;
@@ -14,15 +14,15 @@ try {
 
 function createWindow() {
   win = new BrowserWindow({
-    width: settings.windowWidth || 1200,
-    height: settings.windowHeight || 700,
+    width: utils.windowWidth,
+    height: utils.windowHeight,
     frame: false,
-    backgroundColor: settings.backgroundColor,
+    backgroundColor: utils.backgroundColor,
     titleBarStyle: "hiddenInset",
     show: false,
   });
 
-  if (settings.startMaximized) {
+  if (utils.startMaximized) {
     win.maximize();
   }
 

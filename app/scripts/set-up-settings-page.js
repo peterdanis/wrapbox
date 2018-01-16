@@ -1,13 +1,13 @@
 const ui = require("./ui");
-const settings = require("./settings");
+const utils = require("electron").remote.require("./scripts/utils"); // eslint-disable-line
 
 function setUpSettingsPage(eventAggregator) {
   // Webview is already inserted by addWebviews function
-  const settingsWebview = document.querySelector(`#webview${settings.webviews.length - 1}`);
+  const settingsWebview = document.querySelector(`#webview${utils.webviews.length - 1}`);
 
   // Create settings button
   const settingsButton = new ui.IconButton({
-    id: `button${settings.webviews.length - 1}`,
+    id: `button${utils.webviews.length - 1}`,
     class: "settingsButton fadeInLeft",
     innerHTML: new ui.MaterialIcon({ innerHTML: "settings" }).element.outerHTML,
     textColor: "grey-500",
@@ -30,11 +30,6 @@ function setUpSettingsPage(eventAggregator) {
 
   // Nodeintegration is needed for require and fs to work
   settingsWebview.setAttribute("nodeintegration", "");
-
-  // TODO delete after work on settings page is done
-  settingsWebview.addEventListener("did-finish-load", () => {
-    settingsWebview.openDevTools();
-  });
 }
 
 module.exports = setUpSettingsPage;

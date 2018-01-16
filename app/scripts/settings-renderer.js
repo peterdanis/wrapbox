@@ -1,7 +1,6 @@
 /* eslint-env node, browser */
-const settings = require("./settings");
+const utils = require("electron").remote.require("./scripts/utils"); // eslint-disable-line
 const ui = require("./ui");
-const { app } = require("electron").remote; // eslint-disable-line
 
 // Global variable, needed for addWebviewSetting function
 let index = 0;
@@ -28,16 +27,16 @@ function addWebviewSetting(parent, url) {
 
 function loadSettings() {
   const resX = document.querySelector("#resx");
-  resX.value = settings.windowWidth;
+  resX.value = utils.windowWidth;
 
   const resY = document.querySelector("#resy");
-  resY.value = settings.windowHeight;
+  resY.value = utils.windowHeight;
 
   const maximized = document.querySelector("#maximized");
-  maximized.checked = settings.startMaximized;
+  maximized.checked = utils.startMaximized;
 
   const windowButtons = document.querySelector("#windowButtons");
-  if (settings.windowButtonsPosition === "right") {
+  if (utils.windowButtonsPosition === "right") {
     windowButtons.checked = true;
   }
   // Delete all existing webview setting fields
@@ -45,7 +44,7 @@ function loadSettings() {
     e.parentNode.remove();
   });
   // Load webview settings
-  settings.webviews.forEach((e) => {
+  utils.webviews.forEach((e) => {
     addWebviewSetting("#webviews", e.url);
   });
 }
@@ -60,7 +59,16 @@ function activateButtons() {
   });
 
   const saveButton = document.querySelector("#save");
-  saveButton.addEventListener("click", () => {});
+  saveButton.addEventListener("click", () => {
+    utils
+      .saveSettings("test")
+      .then((success) => {
+        console.log(`s: ${success}`);
+      })
+      .catch((failure) => {
+        console.log(`f: ${failure}`);
+      });
+  });
 
   const discardButton = document.querySelector("#discard");
   discardButton.addEventListener("click", () => {
@@ -72,7 +80,7 @@ function activateButtons() {
 
 // Add version info to footer.
 function version() {
-  document.querySelector("#version").innerText = app.getVersion();
+  document.querySelector("#version").innerText = utils.version;
 }
 
 // Main function running all sub-tasks.
