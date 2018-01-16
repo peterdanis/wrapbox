@@ -10,5 +10,7 @@ install:
   - ps: Install-Product node 9 x64
   - yarn
 
-build:
+build-script:
   - yarn run dist
+
+test: off
