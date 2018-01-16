@@ -40,6 +40,10 @@
     ],
     "directories": {
       "output": "./release-builds"
+    },
+    "publish": {
+      "provider": "github",
+      "protocol": "https"
     }
   },
   "dependencies": {},
