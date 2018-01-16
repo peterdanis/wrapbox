@@ -1,8 +1,5 @@
 version: '{branch}.{version}.{build}'
 image: Visual Studio 2017
-platform:
-  - x86
-  - x64
 install:
   - ps: Install-Product node 8
   - cmd: yarn

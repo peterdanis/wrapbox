@@ -29,7 +29,14 @@
     "nsis": {
       "oneClick": false,
       "perMachine": false,
-      "allowToChangeInstallationDirectory": true
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "${productName}_${version}_${arch}_Installer.${ext}"
+    },
+    "portable": {
+      "artifactName": "${productName}_${version}_${arch}_Portable.${ext}"
+    },
+    "zip": {
+      "artifactName": "${productName}_${version}_${os}-${arch}.${ext}"
     },
     "files": [
       "app/**"
