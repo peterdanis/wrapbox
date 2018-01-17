@@ -5,7 +5,7 @@ environment:
     secure: 1aigA+tF1hWwZVVARvg+fhwGlJmgNLfs4FDdlgW8mOWqe9MA+gjKLgKT99wO4D0e
 install:
   - ps: Install-Product node 8 x64
-  - cmd: yarn --no-color
+  - cmd: yarn
 build_script:
-  - cmd: yarn run dist --no-color --ia32 --x64
+  - cmd: yarn run dist --ia32 --x64
 test: off
