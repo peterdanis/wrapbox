@@ -26,10 +26,10 @@
       "oneClick": false,
       "perMachine": false,
       "allowToChangeInstallationDirectory": true,
-      "artifactName": "${productName}_${version}_${env.platform}_Installer.${ext}"
+      "artifactName": "${productName}_${version}_Installer.${ext}"
     },
     "portable": {
-      "artifactName": "${productName}_${version}_${env.platform}_Portable.${ext}"
+      "artifactName": "${productName}_Portable.${ext}"
     },
     "files": ["app/**"],
     "directories": {
