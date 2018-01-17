@@ -2,6 +2,8 @@ version: '{branch}-{build}'
 image: Visual Studio 2017
 environment:
   nodejs_version: "8"
+  GH_TOKEN:
+    secure: 1aigA+tF1hWwZVVARvg+fhwGlJmgNLfs4FDdlgW8mOWqe9MA+gjKLgKT99wO4D0e
 platform:
   - x86
   - x64
@@ -11,9 +13,3 @@ install:
 build_script:
   - cmd: yarn dist
 test: off
-deploy:
-  - provider: GitHub
-    auth_token:
-      secure: 1aigA+tF1hWwZVVARvg+fhwGlJmgNLfs4FDdlgW8mOWqe9MA+gjKLgKT99wO4D0e
-    artifact: release-builds/*.*
-    draft: true
