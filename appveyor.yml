@@ -7,5 +7,5 @@ install:
   - ps: Install-Product node 8 x64
   - cmd: yarn --no-color
 build_script:
-  - cmd: yarn dist --ia32 --x64
+  - cmd: yarn run dist --no-color --ia32 --x64
 test: off
