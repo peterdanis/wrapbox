@@ -2,7 +2,7 @@
   "name": "wrapbox",
   "productName": "Wrapbox",
   "description": "An Electron wrapper for web pages",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "license": "MIT",
   "author": "Peter Danis",
   "repository": {
@@ -36,7 +36,9 @@
       "output": "./release-builds"
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "electron-updater": "^2.18.2"
+  },
   "devDependencies": {
     "electron": "1.8.2-beta.3",
     "electron-builder": "^19.53.6",
