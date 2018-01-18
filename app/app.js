@@ -2,6 +2,9 @@ const { app, BrowserWindow, ipcMain } = require("electron"); // eslint-disable-l
 const path = require("path");
 const utils = require("./scripts/utils");
 const url = require("url");
+const log = require("electron-log");
+
+log.info("App start");
 
 let win;
 
