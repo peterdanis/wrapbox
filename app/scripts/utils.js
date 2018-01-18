@@ -2,8 +2,8 @@ const fs = require("fs");
 const { promisify } = require("util");
 const path = require("path");
 const { app } = require("electron"); // eslint-disable-line
+const log = require("electron-log");
 
-const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
 
 const settings = Object.create(null);
@@ -26,6 +26,8 @@ async function saveSettings(data) {
   try {
     dataJSON = JSON.stringify(data);
   } catch (error) {
+    log.error("Error trying to JSON.stringify");
+    log.error(error);
     return error;
   }
 
@@ -33,6 +35,8 @@ async function saveSettings(data) {
     await writeFileAsync(path.join(app.getPath("userData"), "config.json"), dataJSON);
     return "success";
   } catch (error) {
+    log.error("Error during saving settings to disk");
+    log.error(error);
     return error;
   }
 }

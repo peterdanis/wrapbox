@@ -1,10 +1,23 @@
 const { app, BrowserWindow, ipcMain } = require("electron"); // eslint-disable-line
+const log = require("electron-log");
+
+// Change log level for file log to info and log app start
+log.transports.file.level = "info";
+log.info("App start");
+log.info(`Version: ${app.getVersion()}`);
+log.info(`Platform: ${process.platform}`);
+log.info(`Arch: ${process.arch}`);
+/*
+File log locations:
+  on Linux: ~/.config/<app name>/log.log
+  on OS X: ~/Library/Logs/<app name>/log.log
+  on Windows: %USERPROFILE%\AppData\Roaming\<app name>\log.log
+*/
+
+// Require rest of the dependencies
 const path = require("path");
 const utils = require("./scripts/utils");
 const url = require("url");
-const log = require("electron-log");
-
-log.info("App start");
 
 let win;
 
@@ -57,6 +70,7 @@ function createWindow() {
 
   ipcMain.on("close", () => {
     if (process.platform !== "darwin") {
+      log.info("App quit");
       app.quit();
     }
   });
@@ -68,6 +82,7 @@ app.on("ready", () => {
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
+    log.info("App quit");
     app.quit();
   }
 });
