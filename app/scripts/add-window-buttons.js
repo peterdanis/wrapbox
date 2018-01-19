@@ -1,4 +1,4 @@
-const { shell, ipcRenderer } = require("electron"); // eslint-disable-line
+const { ipcRenderer } = require("electron"); // eslint-disable-line
 const ui = require("./ui");
 
 /**

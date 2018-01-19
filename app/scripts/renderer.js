@@ -5,7 +5,7 @@ const addWindowButtons = require("./add-window-buttons");
 const setUpSettingsPage = require("./set-up-settings-page");
 const addWebviews = require("./add-webviews");
 const addWebviewButtons = require("./add-webview-buttons");
-const PerfectScrollbar = require("./perfect-scrollbar.common");
+const PerfectScrollbar = require("../dependencies/perfect-scrollbar.common");
 
 // Event aggregator. Passed to functions as argument.
 const watcher = new EventEmitter();

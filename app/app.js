@@ -16,8 +16,8 @@ File log locations:
 
 // Require rest of the dependencies
 const path = require("path");
-const utils = require("./scripts/utils");
 const url = require("url");
+const utils = require("./scripts/utils");
 
 let win;
 

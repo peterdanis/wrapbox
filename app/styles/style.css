@@ -2,14 +2,14 @@
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
-  src: url(Roboto-Regular.ttf);
+  src: url(../dependencies/Roboto-Regular.ttf);
 }
 
 @font-face {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 400;
-  src: url(OpenSans-Regular.ttf);
+  src: url(../dependencies/OpenSans-Regular.ttf);
 }
 
 .footer {
