@@ -2,8 +2,13 @@
 const utils = require("electron").remote.require("./scripts/utils"); // eslint-disable-line
 const ui = require("./ui");
 
-// Global variable, needed for addWebviewSetting function
+// Global variables, needed for addWebviewSetting and loadSettingsInPage functions
 let index = 0;
+let resX;
+let resY;
+let maximized;
+let windowButtons;
+let webviews;
 
 /**
  * Creates a textfield for webviews.
@@ -25,24 +30,27 @@ function addWebviewSetting(parent, url) {
   index++;
 }
 
-function loadSettings() {
-  const resX = document.querySelector("#resx");
+function loadSettingsInPage() {
+  resX = document.getElementById("resx");
   resX.value = utils.settings.windowWidth;
 
-  const resY = document.querySelector("#resy");
+  resY = document.getElementById("resy");
   resY.value = utils.settings.windowHeight;
 
-  const maximized = document.querySelector("#maximized");
+  maximized = document.getElementById("maximized");
   maximized.checked = utils.settings.startMaximized;
 
-  const windowButtons = document.querySelector("#windowButtons");
+  windowButtons = document.getElementById("windowButtons");
   if (utils.settings.windowButtonsPosition === "right") {
     windowButtons.checked = true;
   }
+
+  webviews = document.getElementsByClassName("wb");
   // Delete all existing webview setting fields
-  document.querySelectorAll(".wb").forEach((e) => {
+  webviews.forEach((e) => {
     e.parentNode.remove();
   });
+
   // Load webview settings
   utils.settings.webviews.forEach((e) => {
     addWebviewSetting("#webviews", e.url);
@@ -61,18 +69,36 @@ function activateButtons() {
   const saveButton = document.querySelector("#save");
   saveButton.addEventListener("click", () => {
     utils
-      .saveSettings("test")
+      .saveSettings({
+        windowButtonsPosition: (() => {
+          if (windowButtons.checked) {
+            return "right";
+          }
+          return "left";
+        })(),
+        startMaximized: maximized.checked,
+        windowWidth: resX.value,
+        windowHeight: resY.value,
+        webviews: (() => {
+          console.log(webviews[0]);
+          const arr = [];
+          webviews.forEach(e => arr.push(e));
+          return arr;
+        })(),
+      })
       .then((success) => {
-        console.log(`s: ${success}`);
+        console.log("s");
+        // TODO: Add MDL snackbar here, with option to reload
       })
       .catch((failure) => {
-        console.log(`f: ${failure}`);
+        console.log("f");
+        // Add MDL snackbar here
       });
   });
 
   const discardButton = document.querySelector("#discard");
   discardButton.addEventListener("click", () => {
-    loadSettings();
+    loadSettingsInPage();
     // eslint-disable-next-line no-undef
     componentHandler.upgradeAllRegistered();
   });
@@ -85,7 +111,7 @@ function version() {
 
 // Main function running all sub-tasks.
 function start() {
-  loadSettings();
+  loadSettingsInPage();
   activateButtons();
   version();
 }

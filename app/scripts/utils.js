@@ -5,20 +5,49 @@ const { app } = require("electron"); // eslint-disable-line
 const log = require("electron-log");
 
 const writeFileAsync = promisify(fs.writeFile);
-
+const version = (() => app.getVersion())();
 const settings = Object.create(null);
+let config = {};
+let settingsLocation;
 
-settings.windowButtonsPosition = "right";
-settings.startMaximized = false;
-settings.windowWidth = 1200;
-settings.windowHeight = 700;
+(function loadSettings() {
+  // Allow using app root dir for saving the settings file,
+  // helpful for portable usage. Only for win platform.
+  if (process.platform === "win32") {
+    try {
+      settingsLocation = path.join(app.getPath("exe"), "config.json");
+      config = JSON.parse(fs.readFileSync(settingsLocation, "utf8"));
+      return;
+    } catch (error) {
+      // Ignore ENOENT errors (file does not exist), this is expected
+      if (error.code !== "ENOENT") {
+        log.error("Error in loadSettings");
+        log.error(error);
+      }
+    }
+  }
+
+  settingsLocation = path.join(app.getPath("userData"), "config.json");
+
+  try {
+    config = JSON.parse(fs.readFileSync(settingsLocation, "utf8"));
+  } catch (error) {
+    // Ignore ENOENT errors (file does not exist), this is expected
+    if (error.code !== "ENOENT") {
+      log.error("Error in loadSettings");
+      log.error(error);
+    }
+  }
+}());
+
+log.info(`Settings location: ${settingsLocation}`);
+
+settings.windowButtonsPosition = config.windowButtonsPosition || "right";
+settings.startMaximized = config.startMaximized || false;
+settings.windowWidth = config.windowWidth || 1200;
+settings.windowHeight = config.windowHeight || 700;
 settings.backgroundColor = "#E0E0E0";
-settings.webviews = [
-  { url: "https://inbox.google.com/", icon: "inbox" },
-  { url: "https://outlook.live.com/owa/?path=/calendar/view/Month", icon: "today" },
-  { url: "https://feedly.com/i/latest", icon: "rss_feed" },
-  { url: "https://www.messenger.com", icon: "message" },
-];
+settings.webviews = config.webviews || [];
 
 async function saveSettings(data) {
   let dataJSON;
@@ -32,7 +61,7 @@ async function saveSettings(data) {
   }
 
   try {
-    await writeFileAsync(path.join(app.getPath("userData"), "config.json"), dataJSON);
+    await writeFileAsync(settingsLocation, dataJSON);
     return "success";
   } catch (error) {
     log.error("Error during saving settings to disk");
@@ -40,7 +69,5 @@ async function saveSettings(data) {
     return error;
   }
 }
-
-const version = (() => app.getVersion())();
 
 module.exports = { settings, version, saveSettings };
