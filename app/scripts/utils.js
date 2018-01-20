@@ -44,8 +44,8 @@ log.info(`Settings location: ${settingsLocation}`);
 
 settings.windowButtonsPosition = config.windowButtonsPosition || "right";
 settings.startMaximized = config.startMaximized || false;
-settings.windowWidth = config.windowWidth || 1200;
-settings.windowHeight = config.windowHeight || 700;
+settings.windowWidth = parseInt(config.windowWidth, 10) || 1200;
+settings.windowHeight = parseInt(config.windowHeight, 10) || 700;
 settings.backgroundColor = "#E0E0E0";
 settings.webviews = config.webviews || [];
 
