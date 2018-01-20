@@ -1,6 +1,7 @@
 /* eslint-env node, browser */
 const utils = require("electron").remote.require("./scripts/utils"); // eslint-disable-line
 const ui = require("./ui");
+const log = require("electron-log");
 
 // Global variables, needed for addWebviewSetting and loadSettingsInPage functions
 let index = 0;
@@ -47,9 +48,9 @@ function loadSettingsInPage() {
 
   webviews = document.getElementsByClassName("wb");
   // Delete all existing webview setting fields
-  webviews.forEach((e) => {
-    e.parentNode.remove();
-  });
+  for (let i = 0; i < webviews.length; i++) {
+    webviews[i].parentNode.remove();
+  }
 
   // Load webview settings
   utils.settings.webviews.forEach((e) => {
@@ -80,9 +81,12 @@ function activateButtons() {
         windowWidth: resX.value,
         windowHeight: resY.value,
         webviews: (() => {
-          console.log(webviews[0]);
           const arr = [];
-          webviews.forEach(e => arr.push(e));
+          for (let i = 0; i < webviews.length; i++) {
+            if (webviews[i].value) {
+              arr.push({ url: webviews[i].value });
+            }
+          }
           return arr;
         })(),
       })
