@@ -93,6 +93,17 @@ function activateButtons() {
       .then((success) => {
         console.log("s");
         // TODO: Add MDL snackbar here, with option to reload
+        const snackbarContainer = document.querySelector("#settingssnackbar");
+        const handler = function (event) {
+          // TODO
+        };
+        const data = {
+          message: "Settings saved",
+          timeout: 5000,
+          actionHandler: handler,
+          actionText: "Reload app",
+        };
+        snackbarContainer.MaterialSnackbar.showSnackbar(data);
       })
       .catch((failure) => {
         console.log("f");
