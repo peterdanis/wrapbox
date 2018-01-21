@@ -2,6 +2,7 @@
 const utils = require("electron").remote.require("./scripts/utils"); // eslint-disable-line
 const ui = require("./ui");
 const log = require("electron-log");
+const { app } = require("electron").remote; // eslint-disable-line
 
 // Global variables, needed for addWebviewSetting and loadSettingsInPage functions
 let index = 0;
@@ -96,6 +97,8 @@ function activateButtons() {
         const snackbarContainer = document.querySelector("#settingssnackbar");
         const handler = function (event) {
           // TODO
+          app.relaunch();
+          app.quit();
         };
         const data = {
           message: "Settings saved",
