@@ -57,16 +57,15 @@ async function saveSettings(data) {
   } catch (error) {
     log.error("Error trying to JSON.stringify");
     log.error(error);
-    return error;
+    throw error;
   }
 
   try {
     await writeFileAsync(settingsLocation, dataJSON);
-    return "success";
   } catch (error) {
     log.error("Error during saving settings to disk");
     log.error(error);
-    return error;
+    throw error;
   }
 }
 
