@@ -61,6 +61,9 @@ function loadSettingsInPage() {
 
 function activateButtons() {
   const webviewButton = document.querySelector("#addwebview");
+  const saveButton = document.querySelector("#save");
+  const discardButton = document.querySelector("#discard");
+
   webviewButton.addEventListener("click", () => {
     addWebviewSetting("#webviews");
     // Register newly created button to MDL
@@ -68,10 +71,24 @@ function activateButtons() {
     componentHandler.upgradeAllRegistered();
   });
 
-  const saveButton = document.querySelector("#save");
-  saveButton.addEventListener("click", () => {
-    utils
-      .saveSettings({
+  saveButton.addEventListener("click", async () => {
+    const snackbarContainer = document.querySelector("#settingssnackbar");
+    const successData = {
+      message: "Settings saved",
+      timeout: 5000,
+      actionHandler: () => {
+        app.relaunch();
+        app.quit();
+      },
+      actionText: "Reload app",
+    };
+    const failureData = {
+      message: "Error, settings are not saved",
+      timeout: 5000,
+    };
+
+    try {
+      await utils.saveSettings({
         windowButtonsPosition: (() => {
           if (windowButtons.checked) {
             return "right";
@@ -90,31 +107,14 @@ function activateButtons() {
           }
           return arr;
         })(),
-      })
-      .then((success) => {
-        console.log("s");
-        // TODO: Add MDL snackbar here, with option to reload
-        const snackbarContainer = document.querySelector("#settingssnackbar");
-        const handler = function (event) {
-          // TODO
-          app.relaunch();
-          app.quit();
-        };
-        const data = {
-          message: "Settings saved",
-          timeout: 5000,
-          actionHandler: handler,
-          actionText: "Reload app",
-        };
-        snackbarContainer.MaterialSnackbar.showSnackbar(data);
-      })
-      .catch((failure) => {
-        console.log("f");
-        // Add MDL snackbar here
       });
+
+      snackbarContainer.MaterialSnackbar.showSnackbar(successData);
+    } catch (error) {
+      snackbarContainer.MaterialSnackbar.showSnackbar(failureData);
+    }
   });
 
-  const discardButton = document.querySelector("#discard");
   discardButton.addEventListener("click", () => {
     loadSettingsInPage();
     // eslint-disable-next-line no-undef
