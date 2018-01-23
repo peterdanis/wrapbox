@@ -32,6 +32,10 @@ function addWebviewSetting(parent, url) {
   index++;
 }
 
+/**
+ * Assigns DOM elements to global variables and sets their values
+ * to values read from saved settings.
+ */
 function loadSettingsInPage() {
   resX = document.getElementById("resx");
   resX.value = utils.settings.windowWidth;
@@ -59,14 +63,24 @@ function loadSettingsInPage() {
   });
 }
 
+/**
+ * Add event listeners to buttons on settings page.
+ */
 function activateButtons() {
   const webviewButton = document.querySelector("#addwebview");
-  const saveButton = document.querySelector("#save");
   const discardButton = document.querySelector("#discard");
+  const saveButton = document.querySelector("#save");
 
   webviewButton.addEventListener("click", () => {
     addWebviewSetting("#webviews");
     // Register newly created button to MDL
+    // eslint-disable-next-line no-undef
+    componentHandler.upgradeAllRegistered();
+  });
+
+  discardButton.addEventListener("click", () => {
+    loadSettingsInPage();
+    // Register webview settings to MDL
     // eslint-disable-next-line no-undef
     componentHandler.upgradeAllRegistered();
   });
@@ -77,6 +91,7 @@ function activateButtons() {
       message: "Settings saved",
       timeout: 5000,
       actionHandler: () => {
+        // Register the app to relaunch after close and close it.
         app.relaunch();
         app.quit();
       },
@@ -86,39 +101,34 @@ function activateButtons() {
       message: "Error, settings are not saved",
       timeout: 5000,
     };
+    const settingsData = {
+      windowButtonsPosition: (() => {
+        if (windowButtons.checked) {
+          return "right";
+        }
+        return "left";
+      })(),
+      startMaximized: maximized.checked,
+      windowWidth: resX.value,
+      windowHeight: resY.value,
+      webviews: (() => {
+        const arr = [];
+        for (let i = 0; i < webviews.length; i++) {
+          if (webviews[i].value) {
+            arr.push({ url: webviews[i].value });
+          }
+        }
+        return arr;
+      })(),
+    };
 
+    // Call utils.saveSettings and displays snackbar with success or failure message.
     try {
-      await utils.saveSettings({
-        windowButtonsPosition: (() => {
-          if (windowButtons.checked) {
-            return "right";
-          }
-          return "left";
-        })(),
-        startMaximized: maximized.checked,
-        windowWidth: resX.value,
-        windowHeight: resY.value,
-        webviews: (() => {
-          const arr = [];
-          for (let i = 0; i < webviews.length; i++) {
-            if (webviews[i].value) {
-              arr.push({ url: webviews[i].value });
-            }
-          }
-          return arr;
-        })(),
-      });
-
+      await utils.saveSettings(settingsData);
       snackbarContainer.MaterialSnackbar.showSnackbar(successData);
     } catch (error) {
       snackbarContainer.MaterialSnackbar.showSnackbar(failureData);
     }
-  });
-
-  discardButton.addEventListener("click", () => {
-    loadSettingsInPage();
-    // eslint-disable-next-line no-undef
-    componentHandler.upgradeAllRegistered();
   });
 }
 
