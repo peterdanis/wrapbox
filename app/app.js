@@ -7,6 +7,7 @@ log.info("App start");
 log.info(`Version: ${app.getVersion()}`);
 log.info(`Platform: ${process.platform}`);
 log.info(`Arch: ${process.arch}`);
+log.info(`Log file location: ${log.transports.file.file}`);
 /*
 File log locations:
   on Linux: ~/.config/<app name>/log.log
