@@ -13,7 +13,10 @@
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "test": "jest --noStackTrace",
+    "watch": "jest --watch --noStackTrace --notify",
+    "cover": "jest --coverage --silent --noStackTrace"
   },
   "build": {
     "appId": "com.peterdanis.wrapbox",
@@ -49,6 +52,7 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
+    "jest": "^22.1.4",
     "prettier-eslint": "^8.7.4",
     "prettier-stylelint": "^0.4.2",
     "stylelint": "^8.4.0",
