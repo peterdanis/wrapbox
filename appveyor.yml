@@ -6,7 +6,8 @@ environment:
 install:
   - ps: Install-Product node 8 x64
   - cmd: yarn
+build: off
 test_script:
   - cmd: yarn test
-build_script:
+deploy_script:
   - cmd: yarn run dist --ia32 --x64
