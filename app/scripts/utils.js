@@ -8,15 +8,14 @@ const writeFileAsync = promisify(fs.writeFile);
 const version = (() => app.getVersion())();
 const settings = Object.create(null);
 let config = {};
-let settingsLocation;
 
 (function loadSettings() {
   // Allow using app root dir for saving the settings file,
-  // helpful for portable usage. Only for win platform.
+  // helpful for portable usage. Only for win32 platform.
   if (process.platform === "win32") {
     try {
-      settingsLocation = path.join(app.getPath("exe"), "config.json");
-      config = JSON.parse(fs.readFileSync(settingsLocation, "utf8"));
+      settings.configFilePath = path.join(app.getPath("exe"), "config.json");
+      config = JSON.parse(fs.readFileSync(settings.configFilePath, "utf8"));
       return;
     } catch (error) {
       // Ignore ENOENT errors (file does not exist), this is expected
@@ -27,10 +26,10 @@ let settingsLocation;
     }
   }
 
-  settingsLocation = path.join(app.getPath("userData"), "config.json");
+  settings.configFilePath = path.join(app.getPath("userData"), "config.json");
 
   try {
-    config = JSON.parse(fs.readFileSync(settingsLocation, "utf8"));
+    config = JSON.parse(fs.readFileSync(settings.configFilePath, "utf8"));
   } catch (error) {
     // Ignore ENOENT errors (file does not exist), this is expected
     if (error.code !== "ENOENT") {
@@ -40,7 +39,7 @@ let settingsLocation;
   }
 }());
 
-log.info(`Settings location: ${settingsLocation}`);
+log.info(`Settings location: ${settings.configFilePath}`);
 
 settings.windowButtonsPosition = config.windowButtonsPosition || "right";
 settings.startMaximized = config.startMaximized || false;
@@ -61,7 +60,7 @@ async function saveSettings(data) {
   }
 
   try {
-    await writeFileAsync(settingsLocation, dataJSON);
+    await writeFileAsync(settings.configFilePath, dataJSON);
   } catch (error) {
     log.error("Error during saving settings to disk");
     log.error(error);
