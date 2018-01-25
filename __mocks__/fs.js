@@ -1,7 +1,7 @@
 const fs = {
   writeFile: (file, data, cb) => {
     if (file && data) {
-      cb(null, { data });
+      cb(null);
     } else {
       cb("Error");
     }
