@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const fs = require("fs");
 const { promisify } = require("util");
 const path = require("path");
@@ -7,29 +8,25 @@ const log = require("electron-log");
 const writeFileAsync = promisify(fs.writeFile);
 const version = (() => app.getVersion())();
 const settings = Object.create(null);
-let config = {};
 
-(function loadSettings() {
-  // Allow using app root dir for saving the settings file,
-  // helpful for portable usage. Only for win32 platform.
-  if (process.platform === "win32") {
+function loadSettings(file) {
+  let _file;
+  let config = {};
+
+  if (file) {
+    _file = file;
+  } else {
     try {
-      settings.configFilePath = path.join(app.getPath("exe"), "config.json");
-      config = JSON.parse(fs.readFileSync(settings.configFilePath, "utf8"));
-      return;
+      _file = path.join(app.getAppPath(), "config.json");
+      fs.statSync(_file);
     } catch (error) {
-      // Ignore ENOENT errors (file does not exist), this is expected
-      if (error.code !== "ENOENT") {
-        log.error("Error in loadSettings");
-        log.error(error);
-      }
+      // Ignore error and set the default file path
+      _file = path.join(app.getPath("userData"), "config.json");
     }
   }
 
-  settings.configFilePath = path.join(app.getPath("userData"), "config.json");
-
   try {
-    config = JSON.parse(fs.readFileSync(settings.configFilePath, "utf8"));
+    config = JSON.parse(fs.readFileSync(_file, "utf8"));
   } catch (error) {
     // Ignore ENOENT errors (file does not exist), this is expected
     if (error.code !== "ENOENT") {
@@ -37,19 +34,28 @@ let config = {};
       log.error(error);
     }
   }
-}());
 
-log.info(`Settings location: ${settings.configFilePath}`);
+  settings.filePath = _file;
+  settings.windowButtonsPosition = config.windowButtonsPosition || "right";
+  settings.startMaximized = config.startMaximized || false;
+  settings.windowWidth = parseInt(config.windowWidth, 10) || 1200;
+  settings.windowHeight = parseInt(config.windowHeight, 10) || 700;
+  settings.backgroundColor = "#E0E0E0";
+  settings.webviews = config.webviews || [];
 
-settings.windowButtonsPosition = config.windowButtonsPosition || "right";
-settings.startMaximized = config.startMaximized || false;
-settings.windowWidth = parseInt(config.windowWidth, 10) || 1200;
-settings.windowHeight = parseInt(config.windowHeight, 10) || 700;
-settings.backgroundColor = "#E0E0E0";
-settings.webviews = config.webviews || [];
+  log.info(`Settings location: ${settings.filePath}`);
+}
 
-async function saveSettings(data) {
+loadSettings();
+
+async function saveSettings(data, file) {
   let dataJSON;
+  let _file;
+  if (file) {
+    _file = file;
+  } else {
+    _file = settings.filePath;
+  }
 
   try {
     dataJSON = JSON.stringify(data);
@@ -60,7 +66,7 @@ async function saveSettings(data) {
   }
 
   try {
-    await writeFileAsync(settings.configFilePath, dataJSON);
+    await writeFileAsync(_file, dataJSON);
   } catch (error) {
     log.error("Error during saving settings to disk");
     log.error(error);
@@ -68,4 +74,9 @@ async function saveSettings(data) {
   }
 }
 
-module.exports = { settings, version, saveSettings };
+module.exports = {
+  settings,
+  version,
+  loadSettings,
+  saveSettings,
+};
