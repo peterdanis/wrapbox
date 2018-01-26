@@ -18,6 +18,10 @@
     "watch": "jest --watch --noStackTrace --notify",
     "cover": "jest --coverage --silent --noStackTrace"
   },
+  "jest": {
+    "collectCoverageFrom": ["app/**/*.js", "!**/dependencies/**"],
+    "coverageReporters": ["lcov", "text"]
+  },
   "build": {
     "appId": "com.peterdanis.wrapbox",
     "productName": "Wrapbox",
