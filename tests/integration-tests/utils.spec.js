@@ -38,7 +38,7 @@ describe("Version", () => {
 describe("saveSettings", () => {
   test("saveSettings should return a promise", async () => {
     expect.assertions(2);
-    await expect(saveSettings()).rejects.toBeUndefined();
+    await expect(saveSettings()).resolves.toBeUndefined();
     await expect(saveSettings({})).resolves.toBeUndefined();
   });
 });
