@@ -1,9 +1,9 @@
 /* eslint-env node, jest */
-const { settings, version, saveSettings } = require("../app/scripts/utils");
+const { settings, version, saveSettings } = require("../../app/scripts/utils");
 
-jest.mock("electron");
-jest.mock("electron-log");
-jest.mock("fs");
+jest.mock("electron", () => require("../mocks/electron"));
+jest.mock("electron-log", () => require("../mocks/electron-log"));
+jest.unmock("fs");
 
 describe("Settings", () => {
   test("Settings should be object", () => {
@@ -39,7 +39,7 @@ describe("Version", () => {
 describe("saveSettings", () => {
   test("saveSettings should return a promise", async () => {
     expect.assertions(2);
-    await expect(saveSettings()).rejects.toThrow();
+    await expect(saveSettings()).resolves.toBeUndefined();
     await expect(saveSettings({})).resolves.toBeUndefined();
   });
 });

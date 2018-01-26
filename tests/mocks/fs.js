@@ -7,6 +7,9 @@ const fs = {
     }
   },
   readFileSync: () => JSON.stringify({}),
+  statSync: () => {
+    throw new Error();
+  },
 };
 
 module.exports = fs;

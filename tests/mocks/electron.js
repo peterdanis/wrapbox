@@ -2,8 +2,9 @@ const os = require("os");
 
 const electron = {
   app: {
-    getVersion: () => "0.0.0",
+    getAppPath: () => os.tmpdir(),
     getPath: () => os.tmpdir(),
+    getVersion: () => "0.0.0",
   },
 };
 
