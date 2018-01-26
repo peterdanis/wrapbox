@@ -1,4 +1,3 @@
-/* eslint-env node, browser */
 const utils = require("electron").remote.require("./scripts/utils"); // eslint-disable-line
 const EventEmitter = require("events");
 const addWindowButtons = require("./add-window-buttons");

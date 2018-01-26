@@ -1,4 +1,3 @@
-/* eslint-env node, jest */
 const { settings, version, saveSettings } = require("../../app/scripts/utils");
 
 jest.mock("electron", () => require("../mocks/electron"));

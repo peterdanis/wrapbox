@@ -18,12 +18,14 @@
     "test-u": "jest --noStackTrace unit",
     "test-i": "jest --noStackTrace integration",
     "watch": "jest --watch --noStackTrace --notify",
-    "cover": "jest --coverage --silent --noStackTrace"
+    "cover": "jest --coverage --silent --noStackTrace",
+    "lint": "eslint **/*.js"
   },
   "jest": {
-    "collectCoverageFrom": ["app/**/*.js", "!**/dependencies/**"],
+    "collectCoverageFrom": ["app/**/*.js", "!app/dependencies/**/*"],
     "coverageReporters": ["lcov", "text"]
   },
+  "eslintIgnore": ["app/dependencies/**/*", "coverage/**/*"],
   "build": {
     "appId": "com.peterdanis.wrapbox",
     "productName": "Wrapbox",

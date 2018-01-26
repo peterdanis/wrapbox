@@ -22,6 +22,9 @@
   },
   "overrides": {
     "files": "**/*.spec.js",
-    "env": { "jest": true }
+    "env": { "jest": true },
+    "rules": {
+      "global-require": "off"
+    }
   }
 }
