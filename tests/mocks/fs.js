@@ -1,15 +1,15 @@
 const fs = {
-  writeFile: (file, data, cb) => {
+  writeFile: jest.fn((file, data, cb) => {
     if (file && data) {
       cb(null);
     } else {
       cb("Error");
     }
-  },
-  readFileSync: () => JSON.stringify({}),
-  statSync: () => {
+  }),
+  readFileSync: jest.fn(() => JSON.stringify({})),
+  statSync: jest.fn(() => {
     throw new Error();
-  },
+  }),
 };
 
 module.exports = fs;

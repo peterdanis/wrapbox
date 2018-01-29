@@ -5,7 +5,7 @@ jest.mock("electron-log", () => require("../mocks/electron-log"));
 jest.unmock("fs");
 
 describe("Settings", () => {
-  test("Settings should be object", () => {
+  test("Should be object", () => {
     expect(typeof settings).toBe("object");
   });
   test("Window buttons position should be 'right' or 'left'", () => {
@@ -27,16 +27,16 @@ describe("Settings", () => {
 });
 
 describe("Version", () => {
-  test("Version should be a string", () => {
+  test("Should be a string", () => {
     expect(typeof version).toBe("string");
   });
-  test("Version should be '0.0.0'", () => {
+  test("Should be '0.0.0'", () => {
     expect(version).toBe("0.0.0");
   });
 });
 
-describe("saveSettings", () => {
-  test("saveSettings should return a promise", async () => {
+describe("SaveSettings", () => {
+  test("Should return a promise", async () => {
     expect.assertions(2);
     await expect(saveSettings()).resolves.toBeUndefined();
     await expect(saveSettings({})).resolves.toBeUndefined();
