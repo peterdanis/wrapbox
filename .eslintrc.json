@@ -21,7 +21,7 @@
     "node": true
   },
   "overrides": {
-    "files": "**/*.spec.js",
+    "files": ["**/mocks/*.js", "**/*.spec.js"],
     "env": { "jest": true },
     "rules": {
       "global-require": "off"
