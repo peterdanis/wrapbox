@@ -1,8 +1,9 @@
+const path = require("path");
 const os = require("os");
 
 const electron = {
   app: {
-    getAppPath: () => os.tmpdir(),
+    getAppPath: () => path.join(os.tmpdir(), "app"),
     getPath: () => os.tmpdir(),
     getVersion: () => "0.0.0",
   },

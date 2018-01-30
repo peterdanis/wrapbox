@@ -6,7 +6,7 @@ const fs = {
       cb("Error");
     }
   }),
-  readFileSync: jest.fn(() => JSON.stringify({})),
+  readFileSync: jest.fn(() => {}),
   statSync: jest.fn(() => {
     throw new Error();
   }),
