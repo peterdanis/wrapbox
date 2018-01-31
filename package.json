@@ -73,6 +73,7 @@
     "electron-updater": "^2.18.2"
   },
   "devDependencies": {
+    "@types/jest": "^22.1.1",
     "electron": "1.8.2-beta.3",
     "electron-builder": "^19.53.6",
     "electron-reload": "^1.2.2",
