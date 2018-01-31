@@ -4,10 +4,15 @@ const {
 const path = require("path");
 const os = require("os");
 const fs = require("fs");
+const log = require("electron-log");
 
 jest.mock("electron", () => require("../mocks/electron"));
 jest.mock("electron-log", () => require("../mocks/electron-log"));
 jest.mock("fs", () => require("../mocks/fs"));
+
+beforeEach(() => {
+  jest.clearAllMocks();
+});
 
 describe("Settings", () => {
   test("Should be object", () => {
@@ -47,11 +52,6 @@ describe("Version", () => {
 });
 
 describe("Function loadSettings", () => {
-  beforeEach(() => {
-    fs.readFileSync.mockClear();
-    fs.statSync.mockClear();
-  });
-
   test("Should try the app path first", () => {
     const file = path.join(os.tmpdir(), "app", "config.json");
     expect(loadSettings());
@@ -64,7 +64,7 @@ describe("Function loadSettings", () => {
     expect(fs.readFileSync).toHaveBeenCalledWith(file, "utf8");
   });
 
-  test("Should load the settings from JSON file to settings object", () => {
+  test("Should load the settings from JSON file", () => {
     const file = path.join(os.tmpdir(), "custom.json");
     const assertSettings = {
       filePath: file,
@@ -77,9 +77,10 @@ describe("Function loadSettings", () => {
     };
     fs.readFileSync.mockImplementationOnce(() => JSON.stringify(assertSettings));
     expect(loadSettings(file));
+    expect(settings).toEqual(assertSettings);
     expect(fs.statSync).not.toHaveBeenCalled();
     expect(fs.readFileSync).toHaveBeenCalledWith(file, "utf8");
-    expect(settings).toEqual(assertSettings);
+    expect(log.info).toHaveBeenCalledWith(`Settings location: ${file}`);
   });
 });
 

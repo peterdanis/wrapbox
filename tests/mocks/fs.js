@@ -1,15 +1,14 @@
-const fs = {
-  writeFile: jest.fn((file, data, cb) => {
-    if (file && data) {
-      cb(null);
-    } else {
-      cb("Error");
-    }
-  }),
-  readFileSync: jest.fn(() => {}),
-  statSync: jest.fn(() => {
-    throw new Error();
-  }),
-};
+const fs = jest.genMockFromModule("fs");
+
+fs.writeFile.mockImplementation((file, data, cb) => {
+  if (file && data) {
+    cb(null);
+  } else {
+    cb("Error");
+  }
+});
+fs.statSync.mockImplementation(() => {
+  throw new Error();
+});
 
 module.exports = fs;

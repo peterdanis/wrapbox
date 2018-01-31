@@ -1,6 +1,3 @@
-const electronLog = {
-  info: () => {},
-  error: () => {},
-};
+const log = jest.genMockFromModule("electron-log");
 
-module.exports = electronLog;
+module.exports = log;
