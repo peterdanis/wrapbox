@@ -304,9 +304,9 @@ module.exports = {
   BaseElement,
   Button,
   FabButton,
-  MiniFabButton,
   IconButton,
   MaterialIcon,
-  Webview,
+  MiniFabButton,
   TextField,
+  Webview,
 };

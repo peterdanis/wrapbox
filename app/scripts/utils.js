@@ -1,13 +1,13 @@
 /* eslint-disable no-underscore-dangle */
-const fs = require("fs");
-const { promisify } = require("util");
-const path = require("path");
 const { app } = require("electron"); // eslint-disable-line
+const { promisify } = require("util");
+const fs = require("fs");
 const log = require("electron-log");
+const path = require("path");
 
-const writeFileAsync = promisify(fs.writeFile);
-const version = (() => app.getVersion())();
 const settings = Object.create(null);
+const version = (() => app.getVersion())();
+const writeFileAsync = promisify(fs.writeFile);
 
 function loadSettings(file) {
   let _file;
@@ -46,8 +46,6 @@ function loadSettings(file) {
   log.info(`Settings location: ${settings.filePath}`);
 }
 
-loadSettings();
-
 async function saveSettings(data, file) {
   let dataJSON;
   let _file;
@@ -74,9 +72,11 @@ async function saveSettings(data, file) {
   }
 }
 
+loadSettings();
+
 module.exports = {
-  settings,
-  version,
   loadSettings,
   saveSettings,
+  settings,
+  version,
 };

@@ -1,6 +1,6 @@
-const utils = require("electron").remote.require("./scripts/utils"); // eslint-disable-line
-const ui = require("./ui");
 const { app } = require("electron").remote; // eslint-disable-line
+const ui = require("./ui");
+const utils = require("electron").remote.require("./scripts/utils"); // eslint-disable-line
 
 // Global variables, needed for addWebviewSetting and loadSettingsInPage functions
 let index = 0;

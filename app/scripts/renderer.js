@@ -1,10 +1,10 @@
-const utils = require("electron").remote.require("./scripts/utils"); // eslint-disable-line
-const EventEmitter = require("events");
-const addWindowButtons = require("./add-window-buttons");
-const setUpSettingsPage = require("./set-up-settings-page");
-const addWebviews = require("./add-webviews");
 const addWebviewButtons = require("./add-webview-buttons");
+const addWebviews = require("./add-webviews");
+const addWindowButtons = require("./add-window-buttons");
+const EventEmitter = require("events");
 const PerfectScrollbar = require("../dependencies/perfect-scrollbar.common");
+const setUpSettingsPage = require("./set-up-settings-page");
+const utils = require("electron").remote.require("./scripts/utils"); // eslint-disable-line
 
 // Event aggregator. Passed to functions as argument.
 const watcher = new EventEmitter();

@@ -1,5 +1,5 @@
-const ui = require("./ui");
 const addNavigationButtons = require("./add-navigation-buttons");
+const ui = require("./ui");
 
 /**
  * Add a button for each webview (from settings).
