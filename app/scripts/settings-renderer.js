@@ -51,8 +51,8 @@ function loadSettingsInPage() {
 
   webviews = document.getElementsByClassName("wb");
   // Delete all existing webview setting fields
-  for (let i = 0; i < webviews.length; i++) {
-    webviews[i].parentNode.remove();
+  while (webviews.length !== 0) {
+    webviews[0].parentNode.remove();
   }
 
   // Load webview settings
