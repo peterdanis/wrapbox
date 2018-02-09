@@ -1,10 +1,10 @@
 const {
   settings, version, loadSettings, saveSettings,
 } = require("../../app/scripts/utils");
-const path = require("path");
-const os = require("os");
 const fs = require("fs");
 const log = require("electron-log");
+const os = require("os");
+const path = require("path");
 
 jest.mock("electron", () => require("../mocks/electron"));
 jest.mock("electron-log", () => require("../mocks/electron-log"));
@@ -52,19 +52,33 @@ describe("Version", () => {
 });
 
 describe("Function loadSettings", () => {
-  test("Should try the app path first", () => {
-    const file = path.join(os.tmpdir(), "app", "config.json");
-    expect(loadSettings());
-    expect(fs.statSync).toHaveBeenCalledWith(file);
+  test("Should try the app path first and userData as second", () => {
+    const file1 = path.join(
+      os.tmpdir(),
+      "jest_wrapbox",
+      __filename
+        .split(path.sep)
+        .slice(-2)
+        .join(path.sep),
+      "appPath",
+      "config.json"
+    );
+    const file2 = path.join(
+      os.tmpdir(),
+      "jest_wrapbox",
+      __filename
+        .split(path.sep)
+        .slice(-2)
+        .join(path.sep),
+      "userData",
+      "config.json"
+    );
+    loadSettings();
+    expect(fs.statSync).toHaveBeenCalledWith(file1);
+    expect(fs.readFileSync).toHaveBeenCalledWith(file2, "utf8");
   });
 
-  test("Should try the userData path as second", () => {
-    const file = path.join(os.tmpdir(), "config.json");
-    expect(loadSettings());
-    expect(fs.readFileSync).toHaveBeenCalledWith(file, "utf8");
-  });
-
-  test("Should load the settings from JSON file", () => {
+  test("Should load the settings from its first argument", () => {
     const file = path.join(os.tmpdir(), "custom.json");
     const assertSettings = {
       filePath: file,

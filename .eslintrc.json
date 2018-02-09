@@ -1,5 +1,4 @@
 {
-  /* cSpell:disable */
   "extends": "airbnb",
   "rules": {
     "linebreak-style": "off",
@@ -21,7 +20,7 @@
     "node": true
   },
   "overrides": {
-    "files": ["**/mocks/*.js", "**/*.spec.js"],
+    "files": ["**/mocks/*.js", "**/*.spec.js", "**/*.test.js"],
     "env": { "jest": true },
     "rules": {
       "global-require": "off"
