@@ -16,6 +16,7 @@ File log locations:
 */
 
 // Require rest of the dependencies
+const { autoUpdater } = require("electron-updater");
 const path = require("path");
 const url = require("url");
 const utils = require("./scripts/utils");
@@ -93,3 +94,27 @@ app.on("activate", () => {
     createWindow();
   }
 });
+
+autoUpdater.logger = log;
+
+autoUpdater.on("checking-for-update", () => {
+  log.info("Checking for update...");
+});
+
+autoUpdater.on("update-available", (info) => {
+  log.info(`Update available.\n${info}`);
+});
+
+autoUpdater.on("update-not-available", (info) => {
+  log.info(`Update not available.\n${info}`);
+});
+
+autoUpdater.on("update-downloaded", (info) => {
+  log.info(`Update downloaded.\n${info}`);
+});
+
+autoUpdater.on("error", (err) => {
+  log.info(`Error in auto-updater: ${err}`);
+});
+
+autoUpdater.checkForUpdates();
