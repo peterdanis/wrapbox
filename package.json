@@ -40,7 +40,7 @@
       "icon": "icons/icon.icns"
     },
     "linux": {
-      "category": "public.app-category.office",
+      "category": "Utility",
       "target": ["AppImage", "deb", "rpm"],
       "icon": "icons/icon.png"
     },
