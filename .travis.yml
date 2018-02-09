@@ -3,3 +3,7 @@ node_js: "8"
 os:
   - linux
   - osx
+before_script:
+  - yarn lint
+  - yarn test
+script: yarn run dist --x64
