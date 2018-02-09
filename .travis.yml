@@ -17,6 +17,6 @@ before_script:
 - yarn test
 - |
     if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-      sudo apt install snapcraft rpm
+      sudo apt-get install snap rpm -y & sudo snap intall snapcraft
     fi
 script: yarn run dist --x64
