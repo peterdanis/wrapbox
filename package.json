@@ -4,8 +4,7 @@
   "description": "An Electron wrapper for web pages",
   "version": "0.0.5",
   "license": "MIT",
-  "author": "Peter Danis",
-  "email": "peter.danis@outlook.com",
+  "author": "Peter Danis <peter.danis@outlook.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/peterdanis/wrapbox"
