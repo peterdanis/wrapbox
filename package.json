@@ -35,10 +35,13 @@
       "icon": "icons/icon.ico"
     },
     "mac": {
-      "category": "public.app-category.productivity"
+      "category": "public.app-category.productivity",
+      "target": ["dmg", "pkg"],
+      "icon": "icons/icon.icns"
     },
     "linux": {
-      "target": ["AppImage", "deb"]
+      "target": ["AppImage", "deb", "rpm", "snap"],
+      "icon": "icons/icon.png"
     },
     "nsis": {
       "oneClick": false,
