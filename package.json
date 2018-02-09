@@ -41,7 +41,7 @@
     },
     "linux": {
       "category": "Utility",
-      "target": ["AppImage", "deb", "rpm"],
+      "target": ["AppImage", "deb", "rpm", "snap"],
       "icon": "icons/icon.png"
     },
     "nsis": {

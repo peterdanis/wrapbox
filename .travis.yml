@@ -5,6 +5,7 @@ matrix:
       language: node_js
       node_js: "8"
     - os: linux
+      sudo: required
       language: node_js
       node_js: "8"
 git:
@@ -14,4 +15,8 @@ env:
 before_script:
 - yarn lint
 - yarn test
+- |
+    if [ "$TRAVIS_OS_NAME" == "linux" ]; then
+      sudo apt install snapcraft rpm
+    fi
 script: yarn run dist --x64
