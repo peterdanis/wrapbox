@@ -1,11 +1,13 @@
 language: node_js
-node_js: "8"
+node_js: '8'
 os:
-  - linux
-  - osx
+- linux
+- osx
 git:
   depth: 1
+env:
+  secure: k48KjQkgaJywEA9mmnOnF2NdAvTfkKOPKF8TQ6XNVwoShqGWpPZfIesbAJ+MlUekFU9WvWFX1FqoIn4sJfqjY8rx43Rvka0uu1z+rRiTX9Wno/Z37GcKuoXkg5UpOWcuBWEOCyBthrhr8vspfeMfbewtRB56xpH5YtXlEO3vitXMYHMsEFDwc5x7ZSaOB5NR+vpyyPbEFUSczjuQFCDZm+JKzMqPZesC23itaFADvUtk7NGAtqVhysrxMzYVADeZgo4z1Cvf8trVKXkM3VY8vAq+FPTsonve4MDcpRQkPj2cLsgptQvvpnmFTZaoP3iwppExtR0UMfg/R7GzZM9aR2pP5tU+X1XaXwWg1dcDSpcGW1UEwjufBOUWEpIA15RB0iIAiIhaQEDv0NcTRitC3JJdmGTcdCbAEK/Hr08kGXeb0PHzTnOcaH65cu+q53Jpn963dwjSVDTkn5oYOi4UMkUB3noamytgcEE0GSLWm/iqBju6t7zY566f9u35ais5aHlncvEVPc9AQyVVYA+e7mxhrzm05a84WH0l02w3nYVDsR5AvkKs3uvX8YP2B1/52Tt+OnPtyKVsvUt5/nvCg8iM1uE35lxHWk2pBEWNs/SOrjNuhITAYINru/A63Agj+KUG8NJ3qgHhCYrBZUA0wxnoPmvTO2jYIYg2YGawjWA=
 before_script:
-  - yarn lint
-  - yarn test
+- yarn lint
+- yarn test
 script: yarn run dist --x64
