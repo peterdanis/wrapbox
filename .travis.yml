@@ -20,3 +20,5 @@ before_script:
       sudo apt-get install snapd rpm liblz4-1 -y && sudo snap install snapcraft --classic && export PATH=/snap/bin:$PATH
     fi
 script: yarn run dist --x64
+notifications:
+  email: false
