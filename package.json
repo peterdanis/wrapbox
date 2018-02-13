@@ -31,6 +31,7 @@
     "productName": "Wrapbox",
     "copyright": "Copyright © 2018 Peter Danis",
     "asar": false,
+    "electronUpdaterCompatibility": ">=2.16",
     "win": {
       "artifactName": "${productName}_v${version}.${ext}",
       "target": ["nsis", "zip"],
@@ -67,6 +68,9 @@
           "path": "/Applications"
         }
       ]
+    },
+    "snap": {
+      "artifactName": "${name}_v${version}.${ext}"
     },
     "files": ["app/**"],
     "directories": {
