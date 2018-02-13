@@ -31,11 +31,11 @@
     "productName": "Wrapbox",
     "copyright": "Copyright © 2018 Peter Danis",
     "asar": false,
-    "electronUpdaterCompatibility": ">=2.16",
     "win": {
       "artifactName": "${productName}_v${version}.${ext}",
       "target": ["nsis", "zip"],
-      "icon": "icons/icon.ico"
+      "icon": "icons/icon.ico",
+      "electronUpdaterCompatibility": ">=2.16"
     },
     "mac": {
       "artifactName": "${name}_v${version}.${ext}",
