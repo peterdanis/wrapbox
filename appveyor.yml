@@ -11,4 +11,4 @@ test_script:
   - cmd: yarn lint
   - cmd: yarn test
 deploy_script:
-  - cmd: yarn run dist --ia32 --x64
+  - cmd: yarn run dist --x64

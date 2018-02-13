@@ -30,16 +30,20 @@
     "appId": "com.peterdanis.wrapbox",
     "productName": "Wrapbox",
     "copyright": "Copyright © 2018 Peter Danis",
+    "asar": false,
     "win": {
-      "target": ["nsis", "portable", "zip"],
+      "artifactName": "${productName}_v${version}.${ext}",
+      "target": ["nsis", "zip"],
       "icon": "icons/icon.ico"
     },
     "mac": {
+      "artifactName": "${name}_v${version}.${ext}",
       "category": "public.app-category.productivity",
       "target": ["dmg", "pkg"],
       "icon": "icons/icon.icns"
     },
     "linux": {
+      "artifactName": "${name}_v${version}.${ext}",
       "category": "Utility",
       "target": ["AppImage", "deb", "rpm", "snap"],
       "icon": "icons/icon.png"
@@ -48,10 +52,7 @@
       "oneClick": false,
       "perMachine": false,
       "allowToChangeInstallationDirectory": true,
-      "artifactName": "${productName}_${version}_Installer.${ext}"
-    },
-    "portable": {
-      "artifactName": "${productName}_Portable.${ext}"
+      "artifactName": "${productName}_v${version}_Installer.${ext}"
     },
     "dmg": {
       "contents": [
@@ -79,7 +80,7 @@
   "devDependencies": {
     "@types/jest": "^22.1.1",
     "electron": "1.8.2",
-    "electron-builder": "20.0.2",
+    "electron-builder": "20.0.4",
     "electron-reload": "^1.2.2",
     "eslint": "^4.15.0",
     "eslint-config-airbnb": "^16.1.0",
