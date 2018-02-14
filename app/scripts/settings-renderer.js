@@ -1,6 +1,7 @@
 const { app } = require("electron").remote; // eslint-disable-line
 const ui = require("./ui");
 const utils = require("electron").remote.require("./scripts/utils"); // eslint-disable-line
+const codepoints = require("../dependencies/material-icon-codepoints");
 
 // Global variables, needed for addWebviewSetting and loadSettingsInPage functions
 let index = 0;
@@ -9,6 +10,26 @@ let resY;
 let maximized;
 let windowButtons;
 let webviews;
+let iconDialog;
+
+//
+function createIconDialog() {
+  iconDialog = new ui.BaseElement({
+    type: "dialog",
+    class: "mdl-dialog",
+  }).appendTo("body");
+
+  const icons = ui.arrayToElements(
+    ui.IconButton,
+    codepoints.map(e => ({
+      innerHTML: new ui.MaterialIcon({ innerHTML: `${e}` }).element.outerHTML,
+    }))
+  );
+
+  icons.forEach((e) => {
+    e.appendTo(iconDialog.element);
+  });
+}
 
 /**
  * Creates a textfield for webviews.
@@ -25,18 +46,18 @@ function addWebviewSetting(parent, webview) {
     class: "mdl-cell mdl-cell--12-col",
   }).appendTo(parent);
 
-  //
-  new ui.BaseElement({
-    type: "div",
-    style: "display: inline",
-    innerHTML: new ui.MiniFabButton({
-      id: `i${index}`,
-      class: `${_webview.icon ? "" : "infinite pulse "}mdl-shadow--2dp`,
-      color: "blue-A200",
-      textColor: "white",
-      innerHTML: `<i class="material-icons">${_webview.icon || "more_horiz"}</i>`,
-    }).element.outerHTML,
-  }).appendTo(parentDiv.element);
+  new ui.MiniFabButton({
+    id: `i${index}`,
+    class: `${_webview.icon ? "" : "infinite pulse "}mdl-shadow--2dp`,
+    color: "blue-A200",
+    textColor: "white",
+    innerHTML: `<i class="material-icons">${_webview.icon || "more_horiz"}</i>`,
+  })
+    .addEventListener("click", (event) => {
+      event.currentTarget.classList.remove("pulse", "infinite");
+      iconDialog.element.showModal();
+    })
+    .appendTo(parentDiv.element);
 
   // Create new MDL textfield and fill in the values.
   new ui.TextField({
@@ -163,6 +184,7 @@ function start() {
   loadSettingsInPage();
   activateButtons();
   version();
+  createIconDialog();
 }
 
 // Start the main function when the page is ready.
