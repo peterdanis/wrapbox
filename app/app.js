@@ -95,7 +95,7 @@ app.on("activate", () => {
   }
 });
 
-autoUpdater.logger = log;
+autoUpdater.logger = null;
 
 autoUpdater.on("checking-for-update", () => {
   log.info("Checking for update...");
@@ -114,7 +114,11 @@ autoUpdater.on("update-downloaded", (info) => {
 });
 
 autoUpdater.on("error", (err) => {
-  log.info(`Error in auto-updater: ${err}`);
+  let message = err.message.slice(0, 600);
+  if (err.message.length > 600) {
+    message += "...\n( error truncated)";
+  }
+  log.error(`Error in auto-updater:\n${message}`);
 });
 
 autoUpdater.checkForUpdates();
