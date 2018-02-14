@@ -1,3 +1,7 @@
+.infinite {
+  animation-iteration-count: infinite;
+}
+
 .fadeInDown {
   animation-name: fadeInDown;
   animation-duration: 0.75s;
@@ -21,6 +25,12 @@
 .fadeIn {
   animation-name: fadeIn;
   animation-duration: 0.25s;
+}
+
+.pulse {
+  animation-name: pulse2;
+  animation-duration: 1.25s;
+  animation-fill-mode: both;
 }
 
 @keyframes fadeInDown {
@@ -70,5 +80,19 @@
 
   to {
     opacity: 1;
+  }
+}
+
+@keyframes pulse2 {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
   }
 }

@@ -15,17 +15,40 @@ let webviews;
  * @param {string|{}} parent
  * @param {string} url
  */
-function addWebviewSetting(parent, url) {
+function addWebviewSetting(parent, webview) {
+  // eslint-disable-next-line no-underscore-dangle
+  const _webview = webview || {};
+
+  //
+  const parentDiv = new ui.BaseElement({
+    type: "div",
+    class: "mdl-cell mdl-cell--12-col",
+  }).appendTo(parent);
+
+  //
+  new ui.BaseElement({
+    type: "div",
+    style: "display: inline",
+    innerHTML: new ui.MiniFabButton({
+      id: `i${index}`,
+      class: `${_webview.icon ? "" : "infinite pulse "}mdl-shadow--2dp`,
+      color: "blue-A200",
+      textColor: "white",
+      innerHTML: `<i class="material-icons">${_webview.icon || "more_horiz"}</i>`,
+    }).element.outerHTML,
+  }).appendTo(parentDiv.element);
+
   // Create new MDL textfield and fill in the values.
   new ui.TextField({
     innerId: `w${index}`,
-    value: url,
+    value: _webview.url,
     text: "A webview URL or relative file path",
     errorText: "Should be a valid URL",
     pattern: "^(https?://|file://|..?/)[a-zA-Z0-9/%.?=-]*",
-    class: "mdl-cell mdl-cell--7-col",
+    class: "mdl-cell mdl-cell--6-col",
     innerClass: "wb",
-  }).appendTo(parent);
+  }).appendTo(parentDiv.element);
+
   // Increment the global index variable.
   index++;
 }
@@ -52,12 +75,12 @@ function loadSettingsInPage() {
   webviews = document.getElementsByClassName("wb");
   // Delete all existing webview setting fields
   while (webviews.length !== 0) {
-    webviews[0].parentNode.remove();
+    webviews[0].parentNode.parentNode.remove();
   }
 
   // Load webview settings
   utils.settings.webviews.forEach((e) => {
-    addWebviewSetting("#webviews", e.url);
+    addWebviewSetting("#webviews", e);
   });
 }
 
