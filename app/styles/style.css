@@ -43,6 +43,12 @@
   -webkit-app-region: no-drag;
 }
 
+.mdl-dialog {
+  width: 70%;
+  height: 70%;
+  overflow-y: scroll;
+}
+
 .mdl-textfield__error {
   font-family: "Roboto" !important;
   font-size: 10px !important;
