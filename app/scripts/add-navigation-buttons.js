@@ -60,24 +60,25 @@ function addNavigationButtons(parent, eventAggregator) {
   navigationButtons.forEach((button) => {
     button
       .appendTo(navigationButtonsSection.element)
+      .addRipple()
       .addEventListener("click", (event) => {
+        const connectedWebview = document.querySelector(`#${parent.id.replace("wbdiv", "webview")}`);
         // eslint-disable-next-line default-case
         switch (event.currentTarget.id) {
           case "back":
-            document.querySelector(`#${parent.id.replace("wbdiv", "webview")}`).goBack();
+            connectedWebview.goBack();
             break;
           case "home":
-            document.querySelector(`#${parent.id.replace("wbdiv", "webview")}`).goToIndex(0);
+            connectedWebview.goToIndex(0);
             break;
           case "reload":
-            document.querySelector(`#${parent.id.replace("wbdiv", "webview")}`).reload();
+            connectedWebview.reload();
             break;
           case "forward":
-            document.querySelector(`#${parent.id.replace("wbdiv", "webview")}`).goForward();
+            connectedWebview.goForward();
             break;
         }
-      })
-      .addRipple();
+      });
   });
 }
 
