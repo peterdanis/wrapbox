@@ -6,9 +6,12 @@ environment:
 install:
   - ps: Install-Product node 8 x64
   - cmd: yarn
+  - cmd: yarn global add codecov
 build: off
 test_script:
   - cmd: yarn lint
-  - cmd: yarn test
+  - cmd: yarn cover
+after_test:
+  - cmd: codecov
 deploy_script:
   - cmd: yarn run dist --x64
