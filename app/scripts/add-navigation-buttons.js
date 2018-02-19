@@ -4,12 +4,12 @@ const ui = require("./ui");
  * Add webview navigation buttons to each webview button.
  * @param {string|{}} parent Parent object, or a string for document.querySelector().
  */
-function addNavigationButtons(parent, eventAggregator) {
+function addNavigationButtons(parent, eventAggregator, index) {
   // Create containing div.
   const navigationButtonsSection = new ui.BaseElement({
     type: "div",
-    id: "navbuttons",
-    class: "mdl-typography--text-right",
+    id: `nbdiv${index}`,
+    class: "navbuttons mdl-typography--text-right",
   })
     .hide()
     .appendTo(parent)
@@ -33,19 +33,15 @@ function addNavigationButtons(parent, eventAggregator) {
     ui.FabButton,
     [
       {
-        id: "back",
         innerHTML: new ui.MaterialIcon({ innerHTML: "navigate_before" }).element.outerHTML,
       },
       {
-        id: "home",
         innerHTML: new ui.MaterialIcon({ innerHTML: "home" }).element.outerHTML,
       },
       {
-        id: "reload",
         innerHTML: new ui.MaterialIcon({ innerHTML: "refresh" }).element.outerHTML,
       },
       {
-        id: "forward",
         innerHTML: new ui.MaterialIcon({ innerHTML: "navigate_next" }).element.outerHTML,
       },
     ],
@@ -64,17 +60,17 @@ function addNavigationButtons(parent, eventAggregator) {
       .addEventListener("click", (event) => {
         const connectedWebview = document.querySelector(`#${parent.id.replace("wbdiv", "webview")}`);
         // eslint-disable-next-line default-case
-        switch (event.currentTarget.id) {
-          case "back":
+        switch (event.currentTarget.innerText) {
+          case "navigate_before":
             connectedWebview.goBack();
             break;
           case "home":
             connectedWebview.goToIndex(0);
             break;
-          case "reload":
+          case "refresh":
             connectedWebview.reload();
             break;
-          case "forward":
+          case "navigate_next":
             connectedWebview.goForward();
             break;
         }

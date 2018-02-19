@@ -66,6 +66,20 @@
   padding-bottom: 3px;
 }
 
+.navbuttons {
+  position: fixed;
+  height: 30px;
+  width: 184px;
+}
+
+.navbuttons button {
+  min-height: 30px;
+  min-width: 30px;
+  max-height: 30px;
+  max-width: 30px;
+  margin-left: 2px;
+}
+
 .settingsButton {
   position: fixed;
   bottom: 8px;
@@ -135,20 +149,6 @@
 
 #leftpanel .active {
   background-color: #3f51b5 !important;
-}
-
-#navbuttons {
-  position: fixed;
-  height: 30px;
-  width: 184px;
-}
-
-#navbuttons button {
-  min-height: 30px;
-  min-width: 30px;
-  max-height: 30px;
-  max-width: 30px;
-  margin-left: 2px;
 }
 
 #save {

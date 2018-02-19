@@ -59,7 +59,7 @@ function addWebviewButtons(parent, webviewSettings, eventAggregator) {
       button.element.classList.add("active");
     }
     // Add webview navigation section to each button.
-    addNavigationButtons(wbcontainers[i].element, eventAggregator);
+    addNavigationButtons(wbcontainers[i].element, eventAggregator, i);
   });
 }
 
