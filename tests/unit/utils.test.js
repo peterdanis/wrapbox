@@ -15,44 +15,44 @@ beforeEach(() => {
 });
 
 describe("Settings", () => {
-  test("Should be object", () => {
+  test("is object", () => {
     expect(typeof settings).toBe("object");
   });
 
-  test("Window buttons position should be 'right'", () => {
+  test("default window buttons position is 'right'", () => {
     expect(settings.windowButtonsPosition).toBe("right");
   });
 
-  test("startMaximized should be a boolean", () => {
+  test("startMaximized is boolean", () => {
     expect(typeof settings.startMaximized).toBe("boolean");
   });
 
-  test("Width and height should be a number", () => {
+  test("width and height should are number", () => {
     expect(typeof settings.windowWidth).toBe("number");
     expect(typeof settings.windowHeight).toBe("number");
   });
 
-  test("backgroundColor should be a string", () => {
+  test("backgroundColor is string", () => {
     expect(typeof settings.backgroundColor).toBe("string");
   });
 
-  test("Webviews should be an array", () => {
+  test("webviews is array", () => {
     expect(Array.isArray(settings.webviews)).toBeTruthy();
   });
 });
 
 describe("Version", () => {
-  test("Should be a string", () => {
+  test("is string", () => {
     expect(typeof version).toBe("string");
   });
 
-  test("Should be '0.0.0'", () => {
+  test("is '0.0.0'", () => {
     expect(version).toBe("0.0.0");
   });
 });
 
 describe("Function loadSettings", () => {
-  test("Should try the app path first and userData as second", () => {
+  test("tries app path first and userData as second", () => {
     const file1 = path.join(
       os.tmpdir(),
       "jest_wrapbox",
@@ -78,7 +78,7 @@ describe("Function loadSettings", () => {
     expect(fs.readFileSync).toHaveBeenCalledWith(file2, "utf8");
   });
 
-  test("Should load the settings from its first argument", () => {
+  test("loads the settings from its first argument", () => {
     const file = path.join(os.tmpdir(), "custom.json");
     const assertSettings = {
       filePath: file,
@@ -99,7 +99,7 @@ describe("Function loadSettings", () => {
 });
 
 describe("Function saveSettings", () => {
-  test("Should resolve", async () => {
+  test("can resolve", async () => {
     const file = path.join(os.tmpdir(), "test.json");
     expect.assertions(3);
     await expect(saveSettings({})).resolves.toBeUndefined();
@@ -107,7 +107,7 @@ describe("Function saveSettings", () => {
     expect(fs.writeFile).toHaveBeenLastCalledWith(file, "{\"test\":\"test\"}", expect.any(Function));
   });
 
-  test("Should reject", async () => {
+  test("can reject", async () => {
     expect.assertions(1);
     await expect(saveSettings()).rejects.toThrow();
   });
