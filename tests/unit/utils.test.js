@@ -111,4 +111,11 @@ describe("Function saveSettings", () => {
     expect.assertions(1);
     await expect(saveSettings()).rejects.toThrow();
   });
+
+  test("can trow on JSON circular reference", async () => {
+    const data = {};
+    data.test = data;
+    expect.assertions(1);
+    await expect(saveSettings(data)).rejects.toThrow();
+  });
 });
