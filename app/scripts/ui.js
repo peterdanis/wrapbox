@@ -71,17 +71,20 @@ class BaseElement {
     return this;
   }
 
+  hideClass() {
+    // On macOS visibility: hidden is causing bugs in webview
+    if (this.element.tagName === "WEBVIEW" && process.platform === "darwin") {
+      return "zinvisible";
+    }
+    return "invisible";
+  }
+
   /**
    * Hide the element. Chainable.
    * @returns this
    */
   hide() {
-    // On macOS visibility: hidden is causing bugs in webview
-    if (this.element.tagName === "WEBVIEW" && process.platform === "darwin") {
-      this.element.classList.add("zinvisible");
-    } else {
-      this.element.classList.add("invisible");
-    }
+    this.element.classList.add(this.hideClass());
     return this;
   }
 
@@ -90,12 +93,7 @@ class BaseElement {
    * @returns this
    */
   show() {
-    // On macOS visibility: hidden is causing bugs in webview
-    if (this.element.tagName === "WEBVIEW" && process.platform === "darwin") {
-      this.element.classList.remove("zinvisible");
-    } else {
-      this.element.classList.remove("invisible");
-    }
+    this.element.classList.remove(this.hideClass());
     return this;
   }
 }
