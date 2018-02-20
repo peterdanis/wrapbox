@@ -47,49 +47,52 @@ function createWindow() {
     win.show();
   });
 
+  win.on("closed", () => {
+    log.info("Window closed");
+    win = null;
+  });
+
   win.loadURL(url.format({
     pathname: path.join(__dirname, "pages", "main.html"),
     protocol: "file:",
     slashes: true,
   }));
+}
 
-  win.on("closed", () => {
-    win = null;
-  });
-
-  ipcMain.on("minimize", () => {
-    win.minimize();
-  });
-
-  ipcMain.on("maximize", () => {
-    if (win.isMaximized()) {
-      win.unmaximize();
-    } else {
-      win.maximize();
-    }
-  });
-
-  ipcMain.on("close", () => {
-    if (process.platform !== "darwin") {
-      log.info("App quit");
-      app.quit();
-    }
-  });
+function appQuit() {
+  if (process.platform !== "darwin") {
+    log.info("App quit");
+    app.quit();
+  }
 }
 
 app.on("ready", () => {
   createWindow();
 });
 
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    log.info("App quit");
-    app.quit();
-  }
-});
-
 app.on("activate", () => {
   if (win === null) {
     createWindow();
   }
+});
+
+app.on("window-all-closed", () => {
+  log.info("All windows closed");
+  appQuit();
+});
+
+ipcMain.on("minimize", () => {
+  win.minimize();
+});
+
+ipcMain.on("maximize", () => {
+  if (win.isMaximized()) {
+    win.unmaximize();
+  } else {
+    win.maximize();
+  }
+});
+
+ipcMain.on("close", () => {
+  appQuit();
 });
