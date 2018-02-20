@@ -34,21 +34,6 @@ describe("AddNavButtons function", () => {
     expect(document.querySelector("#wbdiv1").childElementCount).toBe(0);
   });
 
-  test("navbuttons are hidden by default", () => {
-    expect(getNbdiv0().classList.contains("invisible")).toBeTruthy();
-  });
-
-  test("navbuttons are visible if parent node is 'active'", () => {
-    testEmitter.emit("showNavButtons", getDiv0());
-    expect(getNbdiv0().classList.contains("invisible")).toBeFalsy();
-  });
-
-  test("navbuttons are hidden", () => {
-    testEmitter.emit("hideNavButtons");
-    testEmitter.emit("showNavButtons", {});
-    expect(getNbdiv0().classList.contains("invisible")).toBeTruthy();
-  });
-
   test("adds 4 buttons to navbuttons element", () => {
     const buttons = getNbdiv0().childNodes;
     expect(buttons.length).toBe(4);
@@ -57,27 +42,44 @@ describe("AddNavButtons function", () => {
     }
   });
 
-  test("nabuttons maps to webview methods", () => {
-    const webview0 = document.createElement("div");
-    webview0.setAttribute("id", "webview0");
-    webview0.goBack = jest.fn(() => {});
-    webview0.goToIndex = jest.fn(() => {});
-    webview0.reload = jest.fn(() => {});
-    webview0.goForward = jest.fn(() => {});
-    document.body.appendChild(webview0);
-
-    getNbdiv0().childNodes[0].innerText = "navigate_before";
-    getNbdiv0().childNodes[1].innerText = "home";
-    getNbdiv0().childNodes[2].innerText = "refresh";
-    getNbdiv0().childNodes[3].innerText = "navigate_next";
-
-    getNbdiv0().childNodes.forEach((e) => {
-      e.click();
+  describe("Navbuttons section", () => {
+    test("is hidden by default", () => {
+      expect(getNbdiv0().classList.contains("invisible")).toBeTruthy();
     });
 
-    expect(webview0.goBack).toHaveBeenCalled();
-    expect(webview0.goToIndex).toHaveBeenCalledWith(0);
-    expect(webview0.reload).toHaveBeenCalled();
-    expect(webview0.goForward).toHaveBeenCalled();
+    test("is visible if parent node is 'active'", () => {
+      testEmitter.emit("showNavButtons", getDiv0());
+      expect(getNbdiv0().classList.contains("invisible")).toBeFalsy();
+    });
+
+    test("is hidden after mouseover event", () => {
+      testEmitter.emit("hideNavButtons");
+      testEmitter.emit("showNavButtons", {});
+      expect(getNbdiv0().classList.contains("invisible")).toBeTruthy();
+    });
+
+    test("buttons maps to webview methods", () => {
+      const webview0 = document.createElement("div");
+      webview0.setAttribute("id", "webview0");
+      webview0.goBack = jest.fn(() => {});
+      webview0.goToIndex = jest.fn(() => {});
+      webview0.reload = jest.fn(() => {});
+      webview0.goForward = jest.fn(() => {});
+      document.body.appendChild(webview0);
+
+      getNbdiv0().childNodes[0].innerText = "navigate_before";
+      getNbdiv0().childNodes[1].innerText = "home";
+      getNbdiv0().childNodes[2].innerText = "refresh";
+      getNbdiv0().childNodes[3].innerText = "navigate_next";
+
+      getNbdiv0().childNodes.forEach((e) => {
+        e.click();
+      });
+
+      expect(webview0.goBack).toHaveBeenCalled();
+      expect(webview0.goToIndex).toHaveBeenCalledWith(0);
+      expect(webview0.reload).toHaveBeenCalled();
+      expect(webview0.goForward).toHaveBeenCalled();
+    });
   });
 });

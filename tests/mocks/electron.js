@@ -25,6 +25,9 @@ const electron = {
       ),
     getVersion: () => "0.0.0",
   },
+  ipcRenderer: {
+    send: jest.fn(() => {}),
+  },
 };
 
 module.exports = electron;

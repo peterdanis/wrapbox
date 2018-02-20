@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddWinButtons function adds 3 buttons 1`] = `
+<button
+  class="mdl-button mdl-js-button mdl-color-text--white"
+  id="minimize"
+>
+  <i
+    class="material-icons"
+  >
+    expand_more
+  </i>
+</button>
+`;
+
+exports[`AddWinButtons function adds 3 buttons 2`] = `
+<button
+  class="mdl-button mdl-js-button mdl-color-text--white"
+  id="maximize"
+>
+  <i
+    class="material-icons"
+  >
+    expand_less
+  </i>
+</button>
+`;
+
+exports[`AddWinButtons function adds 3 buttons 3`] = `
+<button
+  class="mdl-button mdl-js-button mdl-color-text--white"
+  id="close"
+>
+  <i
+    class="material-icons"
+  >
+    close
+  </i>
+</button>
+`;
