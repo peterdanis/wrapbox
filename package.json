@@ -18,6 +18,7 @@
     "test-u": "jest --noStackTrace unit",
     "test-i": "jest --noStackTrace integration",
     "watch": "jest --watch --noStackTrace --notify",
+    "watch-st": "jest --watch --notify",
     "cover": "jest --coverage --silent --noStackTrace",
     "lint": "eslint **/*.js"
   },
