@@ -76,7 +76,12 @@ class BaseElement {
    * @returns this
    */
   hide() {
-    this.element.classList.add("invisible");
+    // On macOS visibility: hidden is causing bugs in webview
+    if (this.element.tagName === "WEBVIEW" && process.platform === "darwin") {
+      this.element.classList.add("zinvisible");
+    } else {
+      this.element.classList.add("invisible");
+    }
     return this;
   }
 
@@ -85,7 +90,12 @@ class BaseElement {
    * @returns this
    */
   show() {
-    this.element.classList.remove("invisible");
+    // On macOS visibility: hidden is causing bugs in webview
+    if (this.element.tagName === "WEBVIEW" && process.platform === "darwin") {
+      this.element.classList.remove("zinvisible");
+    } else {
+      this.element.classList.remove("invisible");
+    }
     return this;
   }
 }
@@ -223,34 +233,6 @@ class Webview extends BaseElement {
     options.customAttr.push("src", options.src);
     /* eslint-enable no-param-reassign */
     super(options);
-  }
-
-  /**
-   * Hide the webview. Chainable.
-   * @returns this
-   */
-  hide() {
-    // On macOS visibility: hidden is causing bugs in webview
-    if (process.platform === "darwin") {
-      this.element.classList.add("zinvisible");
-      return this;
-    }
-    super.hide();
-    return this;
-  }
-
-  /**
-   * Show the webview. Chainable.
-   * @returns this
-   */
-  show() {
-    // On macOS visibility: hidden is causing bugs in webview
-    if (process.platform === "darwin") {
-      this.element.classList.remove("zinvisible");
-      return this;
-    }
-    super.show();
-    return this;
   }
 }
 
