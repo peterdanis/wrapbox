@@ -2,40 +2,52 @@ const addNavButtons = require("../../app/scripts/add-navigation-buttons");
 const EventEmitter = require("events");
 
 const testEmitter = new EventEmitter();
+let activediv0;
+let nbdiv0;
+let webview0;
+let wbdiv0;
+let wbdiv1;
 
-function getDiv0() {
-  return document.querySelector("#wbdiv0");
+function createDiv(id) {
+  const div = document.createElement("div");
+  div.setAttribute("id", id);
+  document.body.appendChild(div);
+  return div;
 }
 
-function getNbdiv0() {
-  return document.querySelector("#nbdiv0");
+function mockWebviewFunctions(webview) {
+  /* eslint-disable no-param-reassign  */
+  webview.goBack = jest.fn(() => {});
+  webview.goToIndex = jest.fn(() => {});
+  webview.reload = jest.fn(() => {});
+  webview.goForward = jest.fn(() => {});
+  /* eslint-enable no-param-reassign  */
 }
 
-function createTestDocument() {
-  for (let i = 0; i < 2; i++) {
-    const div = document.createElement("div");
-    document.querySelector("body").appendChild(div);
-    div.setAttribute("id", `wbdiv${i}`);
-  }
-
-  const activeDiv = document.createElement("div");
-  activeDiv.classList.add("active");
-  getDiv0().appendChild(activeDiv);
-}
-
+// Prepare test DOM
 beforeAll(() => {
-  createTestDocument();
+  activediv0 = createDiv("activediv0");
+  webview0 = createDiv("webview0");
+  wbdiv0 = createDiv("wbdiv0");
+  wbdiv1 = createDiv("wbdiv1");
+
+  activediv0.classList.add("active");
+  wbdiv0.appendChild(activediv0);
+
+  mockWebviewFunctions(webview0);
+
+  addNavButtons(wbdiv0, testEmitter, 0);
+  nbdiv0 = document.querySelector("#nbdiv0");
 });
 
 describe("AddNavButtons function", () => {
   test("creates navbuttons section only in defined element", () => {
-    addNavButtons(getDiv0(), testEmitter, 0);
-    expect(getNbdiv0().parentNode.id).toBe("wbdiv0");
-    expect(document.querySelector("#wbdiv1").childElementCount).toBe(0);
+    expect(nbdiv0.parentNode.id).toBe("wbdiv0");
+    expect(wbdiv1.childElementCount).toBe(0);
   });
 
   test("adds 4 buttons to navbuttons element", () => {
-    const buttons = getNbdiv0().childNodes;
+    const buttons = nbdiv0.childNodes;
     expect(buttons.length).toBe(4);
     for (let i = 0; i < buttons.length; i++) {
       expect(buttons[i]).toMatchSnapshot();
@@ -44,35 +56,27 @@ describe("AddNavButtons function", () => {
 
   describe("Navbuttons section", () => {
     test("is hidden by default", () => {
-      expect(getNbdiv0().classList.contains("invisible")).toBeTruthy();
+      expect(nbdiv0.classList.contains("invisible")).toBeTruthy();
     });
 
     test("is visible if parent node is 'active'", () => {
-      testEmitter.emit("showNavButtons", getDiv0());
-      expect(getNbdiv0().classList.contains("invisible")).toBeFalsy();
+      testEmitter.emit("showNavButtons", wbdiv0);
+      expect(nbdiv0.classList.contains("invisible")).toBeFalsy();
     });
 
     test("is hidden after mouseover event", () => {
       testEmitter.emit("hideNavButtons");
       testEmitter.emit("showNavButtons", {});
-      expect(getNbdiv0().classList.contains("invisible")).toBeTruthy();
+      expect(nbdiv0.classList.contains("invisible")).toBeTruthy();
     });
 
     test("buttons maps to webview methods", () => {
-      const webview0 = document.createElement("div");
-      webview0.setAttribute("id", "webview0");
-      webview0.goBack = jest.fn(() => {});
-      webview0.goToIndex = jest.fn(() => {});
-      webview0.reload = jest.fn(() => {});
-      webview0.goForward = jest.fn(() => {});
-      document.body.appendChild(webview0);
+      nbdiv0.childNodes[0].innerText = "navigate_before";
+      nbdiv0.childNodes[1].innerText = "home";
+      nbdiv0.childNodes[2].innerText = "refresh";
+      nbdiv0.childNodes[3].innerText = "navigate_next";
 
-      getNbdiv0().childNodes[0].innerText = "navigate_before";
-      getNbdiv0().childNodes[1].innerText = "home";
-      getNbdiv0().childNodes[2].innerText = "refresh";
-      getNbdiv0().childNodes[3].innerText = "navigate_next";
-
-      getNbdiv0().childNodes.forEach((e) => {
+      nbdiv0.childNodes.forEach((e) => {
         e.click();
       });
 
