@@ -22,31 +22,35 @@ function createContainer(parent, eventAggregator, index) {
   return container;
 }
 
+function createIcon(text) {
+  return new ui.MaterialIcon({ innerHTML: text }).element.outerHTML;
+}
+
 function createButtons() {
   const buttons = ui.arrayToElements(
     ui.FabButton,
     [
       {
-        innerHTML: new ui.MaterialIcon({ innerHTML: "navigate_before" }).element.outerHTML,
+        innerHTML: createIcon("navigate_before"),
         wh: {
           method: "goBack",
         },
       },
       {
-        innerHTML: new ui.MaterialIcon({ innerHTML: "home" }).element.outerHTML,
+        innerHTML: createIcon("home"),
         wh: {
           method: "goToIndex",
           arg: 0,
         },
       },
       {
-        innerHTML: new ui.MaterialIcon({ innerHTML: "refresh" }).element.outerHTML,
+        innerHTML: createIcon("refresh"),
         wh: {
           method: "reload",
         },
       },
       {
-        innerHTML: new ui.MaterialIcon({ innerHTML: "navigate_next" }).element.outerHTML,
+        innerHTML: createIcon("navigate_next"),
         wh: {
           method: "goForward",
         },
