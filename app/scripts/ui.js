@@ -7,7 +7,12 @@
  */
 function arrayToElements(ElementClass, elements, commonOptions) {
   // Object.assign() combines an empty object, object in elements array and commonOptions object.
-  return (elements || []).map(e => new ElementClass(Object.assign({}, e, commonOptions)));
+  return (elements || []).map((e) => {
+    if (e.wh && commonOptions.wh) {
+      Object.assign(e.wh, commonOptions.wh);
+    }
+    return new ElementClass(Object.assign({}, commonOptions, e));
+  });
 }
 
 class BaseElement {
@@ -20,6 +25,7 @@ class BaseElement {
    * @param {string} [options.style]
    * @param {string} [options.innerHTML]
    * @param {string[]} [options.customAttr]
+   * @param {{}} [options.wh]
    */
   constructor(options) {
     this.element = document.createElement(options.type);
@@ -40,6 +46,7 @@ class BaseElement {
         this.element.setAttribute(options.customAttr[i], options.customAttr[i + 1]);
       }
     }
+    this.wh = options.wh || {};
   }
 
   /**
@@ -109,6 +116,7 @@ class Button extends BaseElement {
    * @param {string} [options.color]
    * @param {string} [options.textColor]
    * @param {string[]} [options.customAttr]
+   * @param {{}} [options.wh]
    */
   constructor(options) {
     /* eslint-disable no-param-reassign */
@@ -146,6 +154,7 @@ class FabButton extends Button {
    * @param {string} [options.color]
    * @param {string} [options.textColor]
    * @param {string[]} [options.customAttr]
+   * @param {{}} [options.wh]
    */
   constructor(options) {
     super(options);
@@ -164,6 +173,7 @@ class MiniFabButton extends FabButton {
    * @param {string} [options.color]
    * @param {string} [options.textColor]
    * @param {string[]} [options.customAttr]
+   * @param {{}} [options.wh]
    */
   constructor(options) {
     super(options);
@@ -182,6 +192,7 @@ class IconButton extends Button {
    * @param {string} [options.color]
    * @param {string} [options.textColor]
    * @param {string[]} [options.customAttr]
+   * @param {{}} [options.wh]
    */
   constructor(options) {
     super(options);
@@ -199,6 +210,7 @@ class MaterialIcon extends BaseElement {
    * @param {string} [options.innerHTML]
    * @param {string} [options.fontSize]
    * @param {string[]} [options.customAttr]
+   * @param {{}} [options.wh]
    */
   constructor(options) {
     /* eslint-disable no-param-reassign */
@@ -223,6 +235,7 @@ class Webview extends BaseElement {
    * @param {string} [options.style]
    * @param {string} [options.innerHTML]
    * @param {string[]} [options.customAttr]
+   * @param {{}} [options.wh]
    */
   constructor(options) {
     /* eslint-disable no-param-reassign */
@@ -249,6 +262,7 @@ class TextField extends BaseElement {
    * @param {string} [options.value]
    * @param {string} [options.text]
    * @param {string} [options.errorText]
+   * @param {{}} [options.wh]
    */
   constructor(options) {
     /* eslint-disable no-param-reassign */
