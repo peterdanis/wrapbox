@@ -235,6 +235,7 @@ class Webview extends BaseElement {
    * @param {string} [options.style]
    * @param {string} [options.innerHTML]
    * @param {string[]} [options.customAttr]
+   * @param {string} [options.src]
    * @param {{}} [options.wh]
    */
   constructor(options) {
