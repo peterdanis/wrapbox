@@ -85,7 +85,7 @@
   "devDependencies": {
     "@types/jest": "^22.1.1",
     "electron": "1.8.2",
-    "electron-builder": "20.0.4",
+    "electron-builder": "^20.0.4",
     "electron-reload": "^1.2.2",
     "eslint": "^4.15.0",
     "eslint-config-airbnb": "^16.1.0",
@@ -95,7 +95,7 @@
     "jest": "^22.1.4",
     "prettier-eslint": "^8.7.4",
     "prettier-stylelint": "^0.4.2",
-    "stylelint": "^8.4.0",
+    "stylelint": "^9.0.0",
     "stylelint-config-standard": "^18.0.0"
   }
 }
