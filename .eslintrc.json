@@ -1,5 +1,5 @@
 {
-  "extends": "airbnb",
+  "extends": ["airbnb", "plugin:jest/recommended"],
   "rules": {
     "linebreak-style": "off",
     "quotes": ["warn", "double"],
