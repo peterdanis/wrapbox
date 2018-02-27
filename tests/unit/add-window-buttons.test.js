@@ -16,7 +16,7 @@ describe("AddWinButtons function", () => {
   });
   test("adds 3 buttons", () => {
     const buttons = winButtons.childNodes;
-    expect(buttons.length).toBe(3);
+    expect(buttons).toHaveLength(3);
     for (let i = 0; i < buttons.length; i++) {
       expect(buttons[i]).toMatchSnapshot();
     }

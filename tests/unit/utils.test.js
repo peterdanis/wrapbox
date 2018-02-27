@@ -90,7 +90,7 @@ describe("Function loadSettings", () => {
       webviews: [{ url: "testurl", icon: "testicon" }],
     };
     fs.readFileSync.mockImplementationOnce(() => JSON.stringify(assertSettings));
-    expect(loadSettings(file));
+    loadSettings(file);
     expect(settings).toEqual(assertSettings);
     expect(fs.statSync).not.toHaveBeenCalled();
     expect(fs.readFileSync).toHaveBeenCalledWith(file, "utf8");

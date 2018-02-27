@@ -48,7 +48,7 @@ describe("AddNavButtons function", () => {
 
   test("adds 4 buttons to navbuttons element", () => {
     const buttons = nbdiv0.childNodes;
-    expect(buttons.length).toBe(4);
+    expect(buttons).toHaveLength(4);
     for (let i = 0; i < buttons.length; i++) {
       expect(buttons[i]).toMatchSnapshot();
     }

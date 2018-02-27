@@ -219,7 +219,7 @@ describe("arrayToElements function", () => {
     });
 
     expect(Array.isArray(elements)).toBeTruthy();
-    expect(elements.length).toBe(2);
+    expect(elements).toHaveLength(2);
     expect(qs("#xb").classList.contains("x")).toBeTruthy();
     expect(elements[0].wh).toMatchObject({ own: "", common: "" });
   });

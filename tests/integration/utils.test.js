@@ -26,7 +26,7 @@ describe("Function loadSettings", () => {
       backgroundColor: "#E0E0E0",
       webviews: [],
     };
-    expect(loadSettings());
+    loadSettings();
     expect(settings).toEqual(assertSettings);
   });
 });
