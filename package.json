@@ -47,8 +47,7 @@
     "linux": {
       "artifactName": "${name}_v${version}.${ext}",
       "category": "Utility",
-      "target": ["AppImage", "deb", "rpm", "snap"],
-      "icon": "icons/icon.png"
+      "target": ["AppImage", "deb", "rpm", "snap"]
     },
     "nsis": {
       "oneClick": false,
