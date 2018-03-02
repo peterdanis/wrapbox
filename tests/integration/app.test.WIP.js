@@ -34,6 +34,7 @@ describe("App", () => {
     "image matches",
     async () => {
       await app.start();
+      app.client.pause(1000);
       const image = await app.browserWindow.capturePage();
       await app.stop();
       expect(image).toMatchImageSnapshot();
