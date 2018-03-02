@@ -1,5 +1,8 @@
 const { Application } = require("spectron");
+const { toMatchImageSnapshot } = require("jest-image-snapshot");
 const path = require("path");
+
+expect.extend({ toMatchImageSnapshot });
 
 const electronPath = path.join(
   __dirname,
@@ -18,12 +21,22 @@ const app = new Application({
 
 describe("App", () => {
   test(
-    "should load index.html",
+    "starts",
     async () => {
       await app.start();
       const isVisible = await app.browserWindow.isVisible();
       await app.stop();
       expect(isVisible).toBe(true);
+    },
+    10000
+  );
+  test(
+    "image matches",
+    async () => {
+      await app.start();
+      const image = await app.browserWindow.capturePage();
+      await app.stop();
+      expect(image).toMatchImageSnapshot();
     },
     10000
   );
