@@ -93,6 +93,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
     "jest": "^22.1.4",
+    "jest-image-snapshot": "^2.3.0",
     "prettier-eslint": "^8.7.4",
     "prettier-stylelint": "^0.4.2",
     "spectron": "~3.8.0",
