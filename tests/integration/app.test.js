@@ -4,18 +4,15 @@ const path = require("path");
 
 expect.extend({ toMatchImageSnapshot });
 
-// const electronBin = (() => {
-//   if (process.platform === "win32") {
-//     return "electron.exe";
-//   }
-//   if (process.platform === "darwin") {
-//     return "electron.app";
-//   }
-//   return "electron";
-// })();
+const rootDir = path.join(__dirname, "..", "..");
+const appPath = [rootDir];
+const electronPath = (() => {
+  if (process.platform === "win32") {
+    return path.join(rootDir, "node_modules", "electron", "dist", "electron.exe");
+  }
+  return path.join(rootDir, "node_modules", ".bin", "electron");
+})();
 
-const electronPath = path.join(__dirname, "..", "..", "node_modules", ".bin", "electron");
-const appPath = [path.join(__dirname, "..", "..")];
 const app = new Application({
   path: electronPath,
   args: appPath,
