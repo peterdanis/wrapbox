@@ -56,7 +56,7 @@ describe("App", () => {
     "minimizes",
     async () => {
       await app.client.leftClick("#minimize");
-      await app.client.pause(500);
+      await app.client.pause(1500);
       const isVisible = await app.browserWindow.isVisible();
       await app.stop();
 
