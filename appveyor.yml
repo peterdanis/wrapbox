@@ -1,5 +1,5 @@
 version: '{branch}-{build}'
-image: Visual Studio 2017
+os: unstable
 environment:
   GH_TOKEN:
     secure: 1aigA+tF1hWwZVVARvg+fhwGlJmgNLfs4FDdlgW8mOWqe9MA+gjKLgKT99wO4D0e
