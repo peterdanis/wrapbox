@@ -24,8 +24,43 @@ describe("App", () => {
     async () => {
       await app.start();
       const isVisible = await app.browserWindow.isVisible();
-      await app.stop();
+      await app.client.waitUntilWindowLoaded();
+
       expect(isVisible).toBe(true);
+    },
+    10000
+  );
+  test(
+    "maximizes",
+    async () => {
+      await app.client.leftClick("#maximize");
+      await app.client.pause(500);
+      const isMaximized = await app.browserWindow.isMaximized();
+
+      expect(isMaximized).toBe(true);
+    },
+    10000
+  );
+  test(
+    "unmaximizes",
+    async () => {
+      await app.client.leftClick("#maximize");
+      await app.client.pause(500);
+      const isMaximized = await app.browserWindow.isMaximized();
+
+      expect(isMaximized).toBe(false);
+    },
+    10000
+  );
+  test(
+    "minimizes",
+    async () => {
+      await app.client.leftClick("#minimize");
+      await app.client.pause(500);
+      const isVisible = await app.browserWindow.isVisible();
+      await app.stop();
+
+      expect(isVisible).toBe(false);
     },
     10000
   );
