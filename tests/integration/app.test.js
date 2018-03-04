@@ -4,6 +4,13 @@ const path = require("path");
 
 expect.extend({ toMatchImageSnapshot });
 
+const electronBin = (() => {
+  if (process.platform === "win32") {
+    return "electron.exe";
+  }
+  return "electron";
+})();
+
 const electronPath = path.join(
   __dirname,
   "..",
@@ -11,7 +18,7 @@ const electronPath = path.join(
   "node_modules",
   "electron",
   "dist",
-  "electron"
+  electronBin
 );
 const appPath = [path.join(__dirname, "..", "..")];
 const app = new Application({
