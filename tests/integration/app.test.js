@@ -23,8 +23,8 @@ describe("App", () => {
     "starts",
     async () => {
       await app.start();
-      const isVisible = await app.browserWindow.isVisible();
       await app.client.waitUntilWindowLoaded();
+      const isVisible = await app.browserWindow.isVisible();
 
       expect(isVisible).toBe(true);
     },
@@ -33,8 +33,17 @@ describe("App", () => {
   test(
     "maximizes",
     async () => {
-      await app.client.leftClick("#maximize");
-      await app.client.waitUntilWindowLoaded();
+      if (process.platform === "darwin") {
+        await app.browserWindow.maximize();
+      } else {
+        await app.client.leftClick("#maximize");
+      }
+      await app.client.waitUntil(
+        async () => (await app.browserWindow.isMaximized()) === true,
+        5000,
+        "",
+        100
+      );
       const isMaximized = await app.browserWindow.isMaximized();
 
       expect(isMaximized).toBe(true);
@@ -44,8 +53,17 @@ describe("App", () => {
   test(
     "unmaximizes",
     async () => {
-      await app.client.leftClick("#maximize");
-      await app.client.waitUntilWindowLoaded();
+      if (process.platform === "darwin") {
+        await app.browserWindow.maximize();
+      } else {
+        await app.client.leftClick("#maximize");
+      }
+      await app.client.waitUntil(
+        async () => (await app.browserWindow.isMaximized()) === false,
+        5000,
+        "",
+        100
+      );
       const isMaximized = await app.browserWindow.isMaximized();
 
       expect(isMaximized).toBe(false);
@@ -55,8 +73,17 @@ describe("App", () => {
   test(
     "minimizes",
     async () => {
-      await app.client.leftClick("#minimize");
-      await app.client.waitUntilWindowLoaded();
+      if (process.platform === "darwin") {
+        await app.browserWindow.minimize();
+      } else {
+        await app.client.leftClick("#minimize");
+      }
+      await app.client.waitUntil(
+        async () => (await app.browserWindow.isMinimized()) === true,
+        5000,
+        "",
+        100
+      );
       const isMinimized = await app.browserWindow.isMinimized();
       await app.stop();
 
