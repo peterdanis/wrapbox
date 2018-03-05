@@ -34,7 +34,7 @@ describe("App", () => {
     "maximizes",
     async () => {
       await app.client.leftClick("#maximize");
-      await app.client.pause(500);
+      await app.client.waitUntilWindowLoaded();
       const isMaximized = await app.browserWindow.isMaximized();
 
       expect(isMaximized).toBe(true);
@@ -45,7 +45,7 @@ describe("App", () => {
     "unmaximizes",
     async () => {
       await app.client.leftClick("#maximize");
-      await app.client.pause(500);
+      await app.client.waitUntilWindowLoaded();
       const isMaximized = await app.browserWindow.isMaximized();
 
       expect(isMaximized).toBe(false);
@@ -56,11 +56,11 @@ describe("App", () => {
     "minimizes",
     async () => {
       await app.client.leftClick("#minimize");
-      await app.client.pause(1500);
-      const isVisible = await app.browserWindow.isVisible();
+      await app.client.waitUntilWindowLoaded();
+      const isMinimized = await app.browserWindow.isMinimized();
       await app.stop();
 
-      expect(isVisible).toBe(false);
+      expect(isMinimized).toBe(true);
     },
     10000
   );
