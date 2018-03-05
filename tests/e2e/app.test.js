@@ -1,31 +1,76 @@
 const { Application } = require("spectron");
 const { toMatchImageSnapshot } = require("jest-image-snapshot");
+const fs = require("fs");
 const path = require("path");
+const { promisify } = require("util");
+const NYC = require("nyc");
+
+const readFileAsync = promisify(fs.readFile);
+const writeFileAsync = promisify(fs.writeFile);
+const unlinkAsync = promisify(fs.unlink);
+const rootDir = path.join(__dirname, "..", "..");
+const appPath = [path.join(rootDir, "app", "app.instrumented.js")];
 
 expect.extend({ toMatchImageSnapshot });
 
-const rootDir = path.join(__dirname, "..", "..");
-const appPath = [rootDir];
-const electronPath = (() => {
-  if (process.platform === "win32") {
-    return path.join(rootDir, "node_modules", "electron", "dist", "electron.exe");
-  }
-  return path.join(rootDir, "node_modules", ".bin", "electron");
-})();
+let app;
 
-const app = new Application({
-  path: electronPath,
-  args: appPath,
+beforeAll(async () => {
+  const nyc = new NYC();
+
+  const appjs = path.join(rootDir, "app", "app.js");
+  const electronPath = (() => {
+    if (process.platform === "win32") {
+      return path.join(rootDir, "node_modules", "electron", "dist", "electron.exe");
+    }
+    return path.join(rootDir, "node_modules", ".bin", "electron");
+  })();
+
+  async function convert(file) {
+    const coverageSave = `
+
+    const fs = require("fs");
+    process.once("exit", () => {
+      const coverageDir = path.join(__dirname, "..", "coverage")
+      try {
+        fs.mkdirSync(coverageDir);
+      } catch (error) {}
+      fs.writeFile(
+        path.join(coverageDir, "coverage-" + "${path.basename(file)}" + ".json"),
+        JSON.stringify(global.__coverage__),
+        "UTF-8",
+        () => {}
+      );
+    });
+    `;
+
+    const orig = await readFileAsync(file, "UTF-8");
+    let code = nyc.instrumenter().instrumentSync(orig, appjs);
+    code += coverageSave;
+    await writeFileAsync(`${file.slice(0, -2)}instrumented.js`, code, "UTF-8");
+  }
+
+  convert(appjs);
+
+  app = new Application({
+    path: electronPath,
+    args: appPath,
+  });
+
+  await app.start();
+});
+
+afterAll(async () => {
+  await unlinkAsync(appPath[0]);
+  await app.stop();
 });
 
 describe("App", () => {
   test(
     "starts",
     async () => {
-      await app.start();
       await app.client.waitUntilWindowLoaded();
       const isVisible = await app.browserWindow.isVisible();
-      await app.stop();
 
       expect(isVisible).toBe(true);
     },
