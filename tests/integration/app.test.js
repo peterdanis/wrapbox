@@ -25,72 +25,73 @@ describe("App", () => {
       await app.start();
       await app.client.waitUntilWindowLoaded();
       const isVisible = await app.browserWindow.isVisible();
+      await app.stop();
 
       expect(isVisible).toBe(true);
     },
     10000
   );
-  test(
-    "maximizes",
-    async () => {
-      if (process.platform === "darwin") {
-        await app.browserWindow.maximize();
-      } else {
-        await app.client.leftClick("#maximize");
-      }
-      await app.client.waitUntil(
-        async () => (await app.browserWindow.isMaximized()) === true,
-        5000,
-        "",
-        100
-      );
-      const isMaximized = await app.browserWindow.isMaximized();
+  // test(
+  //   "maximizes",
+  //   async () => {
+  //     if (process.platform === "darwin") {
+  //       await app.browserWindow.maximize();
+  //     } else {
+  //       await app.client.leftClick("#maximize");
+  //     }
+  //     await app.client.waitUntil(
+  //       async () => (await app.browserWindow.isMaximized()) === true,
+  //       5000,
+  //       "",
+  //       100
+  //     );
+  //     const isMaximized = await app.browserWindow.isMaximized();
 
-      expect(isMaximized).toBe(true);
-    },
-    10000
-  );
-  test(
-    "unmaximizes",
-    async () => {
-      if (process.platform === "darwin") {
-        await app.browserWindow.maximize();
-      } else {
-        await app.client.leftClick("#maximize");
-      }
-      await app.client.waitUntil(
-        async () => (await app.browserWindow.isMaximized()) === false,
-        5000,
-        "",
-        100
-      );
-      const isMaximized = await app.browserWindow.isMaximized();
+  //     expect(isMaximized).toBe(true);
+  //   },
+  //   10000
+  // );
+  // test(
+  //   "unmaximizes",
+  //   async () => {
+  //     if (process.platform === "darwin") {
+  //       await app.browserWindow.maximize();
+  //     } else {
+  //       await app.client.leftClick("#maximize");
+  //     }
+  //     await app.client.waitUntil(
+  //       async () => (await app.browserWindow.isMaximized()) === false,
+  //       5000,
+  //       "",
+  //       100
+  //     );
+  //     const isMaximized = await app.browserWindow.isMaximized();
 
-      expect(isMaximized).toBe(false);
-    },
-    10000
-  );
-  test(
-    "minimizes",
-    async () => {
-      if (process.platform === "darwin") {
-        await app.browserWindow.minimize();
-      } else {
-        await app.client.leftClick("#minimize");
-      }
-      await app.client.waitUntil(
-        async () => (await app.browserWindow.isMinimized()) === true,
-        5000,
-        "",
-        100
-      );
-      const isMinimized = await app.browserWindow.isMinimized();
-      await app.stop();
+  //     expect(isMaximized).toBe(false);
+  //   },
+  //   10000
+  // );
+  // test(
+  //   "minimizes",
+  //   async () => {
+  //     if (process.platform === "darwin") {
+  //       await app.browserWindow.minimize();
+  //     } else {
+  //       await app.client.leftClick("#minimize");
+  //     }
+  //     await app.client.waitUntil(
+  //       async () => (await app.browserWindow.isMinimized()) === true,
+  //       5000,
+  //       "",
+  //       100
+  //     );
+  //     const isMinimized = await app.browserWindow.isMinimized();
+  //     await app.stop();
 
-      expect(isMinimized).toBe(true);
-    },
-    10000
-  );
+  //     expect(isMinimized).toBe(true);
+  //   },
+  //   10000
+  // );
   // test(
   //   "image matches",
   //   async () => {
