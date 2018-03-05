@@ -35,11 +35,10 @@ beforeAll(async () => {
       try {
         fs.mkdirSync(coverageDir);
       } catch (error) {}
-      fs.writeFile(
+      fs.writeFileSync(
         path.join(coverageDir, "coverage-" + "${path.basename(file)}" + ".json"),
         JSON.stringify(global.__coverage__),
-        "UTF-8",
-        () => {}
+        "UTF-8"
       );
     });
     `;
@@ -55,6 +54,7 @@ beforeAll(async () => {
   app = new Application({
     path: electronPath,
     args: appPath,
+    startTimeout: 10000,
   });
 
   await app.start();
