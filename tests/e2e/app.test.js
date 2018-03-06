@@ -1,9 +1,11 @@
+const electron = require("electron");
 const { Application } = require("spectron");
 const { toMatchImageSnapshot } = require("jest-image-snapshot");
 const fs = require("fs");
 const path = require("path");
 const { promisify } = require("util");
 const NYC = require("nyc");
+const uuid = require("uuid/v4");
 
 const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
@@ -19,12 +21,6 @@ beforeAll(async () => {
   const nyc = new NYC();
 
   const appjs = path.join(rootDir, "app", "app.js");
-  const electronPath = (() => {
-    if (process.platform === "win32") {
-      return path.join(rootDir, "node_modules", "electron", "dist", "electron.exe");
-    }
-    return path.join(rootDir, "node_modules", ".bin", "electron");
-  })();
 
   async function convert(file) {
     const coverageSave = `
@@ -36,7 +32,7 @@ beforeAll(async () => {
         fs.mkdirSync(coverageDir);
       } catch (error) {}
       fs.writeFileSync(
-        path.join(coverageDir, "coverage-" + "${path.basename(file)}" + ".json"),
+        path.join(coverageDir, "coverage-" + "${uuid()}" + ".json"),
         JSON.stringify(global.__coverage__),
         "UTF-8"
       );
@@ -52,18 +48,18 @@ beforeAll(async () => {
   convert(appjs);
 
   app = new Application({
-    path: electronPath,
+    path: electron,
     args: appPath,
     startTimeout: 10000,
   });
 
   await app.start();
-});
+}, 20000);
 
 afterAll(async () => {
   await unlinkAsync(appPath[0]);
   await app.stop();
-});
+}, 20000);
 
 describe("App", () => {
   test(
