@@ -20,7 +20,7 @@
     "test-e2e": "jest --noStackTrace e2e",
     "watch": "jest --watch --noStackTrace --notify",
     "watch-st": "jest --watch --notify",
-    "cover": "jest --coverage --silent --noStackTrace && nyc report",
+    "cover": "nyc --clean jest --coverage",
     "lint": "eslint **/*.js"
   },
   "jest": {
