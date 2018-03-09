@@ -55,7 +55,7 @@ beforeAll(async () => {
 
 afterAll(async () => {
   instrumentedFiles.forEach(async (e) => {
-    // await unlinkAsync(e);
+    await unlinkAsync(e);
   });
   await app.stop();
 }, 20000);
