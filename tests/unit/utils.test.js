@@ -78,6 +78,18 @@ describe("Function loadSettings", () => {
     expect(fs.readFileSync).toHaveBeenCalledWith(file2, "utf8");
   });
 
+  test("uses same dir as portable exe dir", () => {
+    process.env.PORTABLE_EXECUTABLE_DIR = os.tmpdir();
+    loadSettings();
+    delete process.env.PORTABLE_EXECUTABLE_DIR;
+
+    expect(fs.statSync).not.toHaveBeenCalled();
+    expect(fs.readFileSync).toHaveBeenCalledWith(
+      path.join(os.tmpdir(), "Wrapbox-portable-config.json"),
+      "utf8"
+    );
+  });
+
   test("loads the settings from its first argument", () => {
     const file = path.join(os.tmpdir(), "custom.json");
     const assertSettings = {

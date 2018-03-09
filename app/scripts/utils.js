@@ -15,6 +15,8 @@ function loadSettings(file) {
 
   if (file) {
     _file = file;
+  } else if (process.env.PORTABLE_EXECUTABLE_DIR) {
+    _file = path.join(process.env.PORTABLE_EXECUTABLE_DIR, "Wrapbox-portable-config.json");
   } else {
     try {
       _file = path.join(app.getAppPath(), "config.json");
