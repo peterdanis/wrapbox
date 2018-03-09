@@ -12,18 +12,19 @@ const writeFileAsync = promisify(fs.writeFile);
 function loadSettings(file) {
   let _file;
   let config = {};
+  const configFileName = "wrapbox-config.json";
 
   if (file) {
     _file = file;
   } else if (process.env.PORTABLE_EXECUTABLE_DIR) {
-    _file = path.join(process.env.PORTABLE_EXECUTABLE_DIR, "Wrapbox-portable-config.json");
+    _file = path.join(process.env.PORTABLE_EXECUTABLE_DIR, configFileName);
   } else {
     try {
-      _file = path.join(app.getAppPath(), "config.json");
+      _file = path.join(app.getAppPath(), configFileName);
       fs.statSync(_file);
     } catch (error) {
       // Ignore error and set the default file path
-      _file = path.join(app.getPath("userData"), "config.json");
+      _file = path.join(app.getPath("userData"), configFileName);
     }
   }
 

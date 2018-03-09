@@ -61,7 +61,7 @@ describe("Function loadSettings", () => {
         .slice(-2)
         .join(path.sep),
       "appPath",
-      "config.json"
+      "wrapbox-config.json"
     );
     const file2 = path.join(
       os.tmpdir(),
@@ -71,7 +71,7 @@ describe("Function loadSettings", () => {
         .slice(-2)
         .join(path.sep),
       "userData",
-      "config.json"
+      "wrapbox-config.json"
     );
     loadSettings();
     expect(fs.statSync).toHaveBeenCalledWith(file1);
@@ -85,7 +85,7 @@ describe("Function loadSettings", () => {
 
     expect(fs.statSync).not.toHaveBeenCalled();
     expect(fs.readFileSync).toHaveBeenCalledWith(
-      path.join(os.tmpdir(), "Wrapbox-portable-config.json"),
+      path.join(os.tmpdir(), "wrapbox-config.json"),
       "utf8"
     );
   });
