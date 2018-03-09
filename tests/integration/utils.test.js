@@ -1,10 +1,14 @@
-const { loadSettings, settings } = require("../../app/scripts/utils");
+const { init, loadSettings, settings } = require("../../app/scripts/utils");
 const os = require("os");
 const path = require("path");
 
 jest.mock("electron", () => require("../mocks/electron"));
 jest.mock("electron-log", () => require("../mocks/electron-log"));
 jest.unmock("fs");
+
+beforeAll(() => {
+  init();
+});
 
 describe("Function loadSettings", () => {
   test("Should load default settings if no config file exists", () => {
@@ -17,7 +21,7 @@ describe("Function loadSettings", () => {
           .slice(-2)
           .join(path.sep),
         "userData",
-        "config.json"
+        "wrapbox-config.json"
       ),
       windowButtonsPosition: "right",
       startMaximized: false,

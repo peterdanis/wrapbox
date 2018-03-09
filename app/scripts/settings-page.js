@@ -1,4 +1,4 @@
-const { app } = require("electron").remote; // eslint-disable-line
+const { ipcRenderer } = require("electron"); // eslint-disable-line
 const ui = require("./ui");
 const utils = require("electron").remote.require("./scripts/utils"); // eslint-disable-line
 const codepoints = require("../dependencies/material-icon-codepoints");
@@ -133,9 +133,9 @@ function activateButtons() {
       message: "Settings saved",
       timeout: 5000,
       actionHandler: () => {
-        // Register the app to relaunch after close and close it.
-        app.relaunch();
-        app.quit();
+        // Will close window and create it again
+        // app.relaunch does not work with portable version
+        ipcRenderer.send("reload");
       },
       actionText: "Reload app",
     };

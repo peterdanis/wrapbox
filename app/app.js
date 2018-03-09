@@ -20,13 +20,14 @@ const path = require("path");
 const url = require("url");
 const utils = require("./scripts/utils");
 
+let reload;
 let win;
 
-try {
-  // eslint-disable-next-line
-  require("electron-reload")(__dirname);
-} catch (error) {
-  // Do nothing, electron-reload is used only for development
+function appQuit() {
+  if (process.platform !== "darwin") {
+    log.info("App quit");
+    app.quit();
+  }
 }
 
 function createWindow() {
@@ -43,13 +44,24 @@ function createWindow() {
     win.maximize();
   }
 
+  // Window listeners
   win.once("ready-to-show", () => {
     win.show();
+  });
+
+  win.on("close", () => {
+    log.info("Window closing");
   });
 
   win.on("closed", () => {
     log.info("Window closed");
     win = null;
+    if (reload) {
+      reload = false;
+      createWindow();
+    } else {
+      appQuit();
+    }
   });
 
   win.loadURL(url.format({
@@ -59,13 +71,18 @@ function createWindow() {
   }));
 }
 
-function appQuit() {
-  if (process.platform !== "darwin") {
-    log.info("App quit");
-    app.quit();
-  }
+// Init settings
+utils.init();
+
+// Load electron-reload for development
+try {
+  // eslint-disable-next-line
+  require("electron-reload")(__dirname);
+} catch (error) {
+  // Do nothing, electron-reload is used only for development
 }
 
+// App listeners
 app.on("ready", () => {
   createWindow();
 });
@@ -78,9 +95,9 @@ app.on("activate", () => {
 
 app.on("window-all-closed", () => {
   log.info("All windows closed");
-  appQuit();
 });
 
+// IPC listeners
 ipcMain.on("minimize", () => {
   win.minimize();
 });
@@ -94,5 +111,11 @@ ipcMain.on("maximize", () => {
 });
 
 ipcMain.on("close", () => {
-  appQuit();
+  win.close();
+});
+
+ipcMain.on("reload", () => {
+  utils.init();
+  reload = true;
+  win.close();
 });

@@ -1,63 +1,62 @@
-const electron = require("electron");
 const { Application } = require("spectron");
-const { toMatchImageSnapshot } = require("jest-image-snapshot");
-const fs = require("fs");
-const path = require("path");
 const { promisify } = require("util");
+const { toMatchImageSnapshot } = require("jest-image-snapshot");
+const electron = require("electron");
+const fs = require("fs");
 const NYC = require("nyc");
-const uuid = require("uuid/v4");
+const path = require("path");
 
+const getInstrumentedFileName = file => `${file.slice(0, -2)}instrumented.js`;
+const appDir = path.join(__dirname, "..", "..", "app");
+const appJs = path.join(appDir, "app.js");
+const mainPageJs = path.join(appDir, "scripts", "main-page.js");
+const instrumentedFiles = [];
+const nyc = new NYC();
 const readFileAsync = promisify(fs.readFile);
-const writeFileAsync = promisify(fs.writeFile);
 const unlinkAsync = promisify(fs.unlink);
-const rootDir = path.join(__dirname, "..", "..");
-const appPath = [path.join(rootDir, "app", "app.instrumented.js")];
-
-expect.extend({ toMatchImageSnapshot });
-
-let app;
-
-beforeAll(async () => {
-  const nyc = new NYC();
-
-  const appjs = path.join(rootDir, "app", "app.js");
-
-  async function convert(file) {
-    const coverageSave = `
+const writeFileAsync = promisify(fs.writeFile);
+const app = new Application({
+  path: electron,
+  args: [].concat(getInstrumentedFileName(appJs)),
+  startTimeout: 10000,
+});
+const convert = async (file) => {
+  const instrumentedFile = getInstrumentedFileName(file);
+  // prettier-ignore
+  const coverageSave = `
 
     const fs = require("fs");
     process.once("exit", () => {
-      const coverageDir = path.join(__dirname, "..", "coverage")
+      const coverageDir = path.join("${appDir.replace(/\\/g, "\\\\")}", "..", "coverage")
       try {
         fs.mkdirSync(coverageDir);
       } catch (error) {}
       fs.writeFileSync(
-        path.join(coverageDir, "coverage-" + "${uuid()}" + ".json"),
+        path.join(coverageDir, global.__coverage__["${file.replace(/\\/g, "\\\\")}"].hash + ".json"),
         JSON.stringify(global.__coverage__),
         "UTF-8"
       );
     });
     `;
 
-    const orig = await readFileAsync(file, "UTF-8");
-    let code = nyc.instrumenter().instrumentSync(orig, appjs);
-    code += coverageSave;
-    await writeFileAsync(`${file.slice(0, -2)}instrumented.js`, code, "UTF-8");
-  }
+  const orig = await readFileAsync(file, "UTF-8");
+  let code = nyc.instrumenter().instrumentSync(orig, file);
+  code += coverageSave;
+  await writeFileAsync(instrumentedFile, code, "UTF-8");
+  instrumentedFiles.push(instrumentedFile);
+};
 
-  convert(appjs);
-
-  app = new Application({
-    path: electron,
-    args: appPath,
-    startTimeout: 10000,
-  });
-
+beforeAll(async () => {
+  expect.extend({ toMatchImageSnapshot });
+  convert(appJs);
+  convert(mainPageJs);
   await app.start();
 }, 20000);
 
 afterAll(async () => {
-  await unlinkAsync(appPath[0]);
+  instrumentedFiles.forEach(async (e) => {
+    // await unlinkAsync(e);
+  });
   await app.stop();
 }, 20000);
 
@@ -72,76 +71,80 @@ describe("App", () => {
     },
     10000
   );
-  // test(
-  //   "maximizes",
-  //   async () => {
-  //     if (process.platform === "darwin") {
-  //       await app.browserWindow.maximize();
-  //     } else {
-  //       await app.client.leftClick("#maximize");
-  //     }
-  //     await app.client.waitUntil(
-  //       async () => (await app.browserWindow.isMaximized()) === true,
-  //       5000,
-  //       "",
-  //       100
-  //     );
-  //     const isMaximized = await app.browserWindow.isMaximized();
 
-  //     expect(isMaximized).toBe(true);
-  //   },
-  //   10000
-  // );
-  // test(
-  //   "unmaximizes",
-  //   async () => {
-  //     if (process.platform === "darwin") {
-  //       await app.browserWindow.maximize();
-  //     } else {
-  //       await app.client.leftClick("#maximize");
-  //     }
-  //     await app.client.waitUntil(
-  //       async () => (await app.browserWindow.isMaximized()) === false,
-  //       5000,
-  //       "",
-  //       100
-  //     );
-  //     const isMaximized = await app.browserWindow.isMaximized();
+  // TODO WIP tests
+  /*
+  test(
+    "maximizes",
+    async () => {
+      if (process.platform === "darwin") {
+        await app.browserWindow.maximize();
+      } else {
+        await app.client.leftClick("#maximize");
+      }
+      await app.client.waitUntil(
+        async () => (await app.browserWindow.isMaximized()) === true,
+        5000,
+        "",
+        100
+      );
+      const isMaximized = await app.browserWindow.isMaximized();
 
-  //     expect(isMaximized).toBe(false);
-  //   },
-  //   10000
-  // );
-  // test(
-  //   "minimizes",
-  //   async () => {
-  //     if (process.platform === "darwin") {
-  //       await app.browserWindow.minimize();
-  //     } else {
-  //       await app.client.leftClick("#minimize");
-  //     }
-  //     await app.client.waitUntil(
-  //       async () => (await app.browserWindow.isMinimized()) === true,
-  //       5000,
-  //       "",
-  //       100
-  //     );
-  //     const isMinimized = await app.browserWindow.isMinimized();
-  //     await app.stop();
+      expect(isMaximized).toBe(true);
+    },
+    10000
+  );
+  test(
+    "unmaximizes",
+    async () => {
+      if (process.platform === "darwin") {
+        await app.browserWindow.maximize();
+      } else {
+        await app.client.leftClick("#maximize");
+      }
+      await app.client.waitUntil(
+        async () => (await app.browserWindow.isMaximized()) === false,
+        5000,
+        "",
+        100
+      );
+      const isMaximized = await app.browserWindow.isMaximized();
 
-  //     expect(isMinimized).toBe(true);
-  //   },
-  //   10000
-  // );
-  // test(
-  //   "image matches",
-  //   async () => {
-  //     await app.start();
-  //     app.client.pause(1000);
-  //     const image = await app.browserWindow.capturePage();
-  //     await app.stop();
-  //     expect(image).toMatchImageSnapshot();
-  //   },
-  //   10000
-  // );
+      expect(isMaximized).toBe(false);
+    },
+    10000
+  );
+  test(
+    "minimizes",
+    async () => {
+      if (process.platform === "darwin") {
+        await app.browserWindow.minimize();
+      } else {
+        await app.client.leftClick("#minimize");
+      }
+      await app.client.waitUntil(
+        async () => (await app.browserWindow.isMinimized()) === true,
+        5000,
+        "",
+        100
+      );
+      const isMinimized = await app.browserWindow.isMinimized();
+      await app.stop();
+
+      expect(isMinimized).toBe(true);
+    },
+    10000
+  );
+  test(
+    "image matches",
+    async () => {
+      await app.start();
+      app.client.pause(1000);
+      const image = await app.browserWindow.capturePage();
+      await app.stop();
+      expect(image).toMatchImageSnapshot();
+    },
+    10000
+  );
+  */
 });

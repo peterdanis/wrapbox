@@ -75,9 +75,12 @@ async function saveSettings(data, file) {
   }
 }
 
-loadSettings();
+function init(file) {
+  loadSettings(file);
+}
 
 module.exports = {
+  init,
   loadSettings,
   saveSettings,
   settings,

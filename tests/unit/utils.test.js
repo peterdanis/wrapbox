@@ -1,5 +1,5 @@
 const {
-  settings, version, loadSettings, saveSettings,
+  init, settings, version, loadSettings, saveSettings,
 } = require("../../app/scripts/utils");
 const fs = require("fs");
 const log = require("electron-log");
@@ -9,6 +9,10 @@ const path = require("path");
 jest.mock("electron", () => require("../mocks/electron"));
 jest.mock("electron-log", () => require("../mocks/electron-log"));
 jest.mock("fs", () => require("../mocks/fs"));
+
+beforeAll(() => {
+  init();
+});
 
 beforeEach(() => {
   jest.clearAllMocks();
