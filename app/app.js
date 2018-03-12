@@ -20,6 +20,7 @@ const path = require("path");
 const url = require("url");
 const utils = require("./scripts/utils");
 
+let closeWindow = true;
 let reload;
 let win;
 
@@ -49,13 +50,26 @@ function createWindow() {
     win.show();
   });
 
-  win.on("close", () => {
+  win.on("close", (e) => {
+    if (closeWindow) {
     log.info("Window closing");
+      return;
+    }
+
+    e.preventDefault();
+
+    const result = dialog.showMessageBox({
+      message: "Quit app?",
+      buttons: ["Yes", "No"],
+    });
+    if (result === 0) {
+      closeWindow = true;
+      win.close();
+    }
   });
 
   win.on("closed", () => {
     log.info("Window closed");
-    win = null;
     if (reload) {
       reload = false;
       createWindow();
