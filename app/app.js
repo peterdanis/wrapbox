@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require("electron"); // eslint-disable-line
+const { app, BrowserWindow, ipcMain, dialog } = require("electron"); // eslint-disable-line
 const log = require("electron-log");
 
 // Change log level for file log to info and log app start
@@ -52,13 +52,12 @@ function createWindow() {
 
   win.on("close", (e) => {
     if (closeWindow) {
-    log.info("Window closing");
+      log.info("Window closing");
       return;
     }
 
     e.preventDefault();
-
-    const result = dialog.showMessageBox({
+    const result = dialog.showMessageBox(win, {
       message: "Quit app?",
       buttons: ["Yes", "No"],
     });
@@ -132,4 +131,23 @@ ipcMain.on("reload", () => {
   utils.init();
   reload = true;
   win.close();
+});
+
+ipcMain.on("prevent-unload", (e) => {
+  // eslint-disable-next-line no-underscore-dangle
+  if (!e.sender._events["will-prevent-unload"]) {
+    e.sender.on("will-prevent-unload", (event) => {
+      const choice = dialog.showMessageBox(win, {
+        type: "question",
+        buttons: ["Leave", "Stay"],
+        title: "Do you want to leave this site?",
+        message: "Changes you made may not be saved.",
+        defaultId: 0,
+        cancelId: 1,
+      });
+      if (choice === 0) {
+        event.preventDefault();
+      }
+    });
+  }
 });
