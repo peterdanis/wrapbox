@@ -4,7 +4,8 @@ const addWindowButtons = require("./add-window-buttons");
 const EventEmitter = require("events");
 const PerfectScrollbar = require("../dependencies/perfect-scrollbar.common");
 const setUpSettingsPage = require("./set-up-settings-page");
-const utils = require("electron").remote.require("./scripts/utils"); // eslint-disable-line
+const { remote } = require("electron"); // eslint-disable-line
+const utils = remote.require("./scripts/utils");
 
 // Event aggregator. Passed to functions as argument.
 const watcher = new EventEmitter();
@@ -27,6 +28,23 @@ function start() {
   // Add a custom scrollbar to leftpanel (panel with webview buttons)
   // eslint-disable-next-line no-new
   new PerfectScrollbar("#leftpanel");
+
+  window.onbeforeunload = () => {
+    const webContents = remote.getGlobal("registeredWebContents");
+    setImmediate(() => {
+      webContents.forEach((element) => {
+        try {
+          element.executeJavaScript("window.close()").then(() => {
+            // window.close()
+          });
+        } catch (error) {
+          //
+        }
+      });
+    });
+
+    return Array.from(document.querySelectorAll("webview")).find(el => el.id);
+  };
 }
 
 // Start the main function when the page is ready.

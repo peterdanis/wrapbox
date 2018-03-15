@@ -20,9 +20,10 @@ const path = require("path");
 const url = require("url");
 const utils = require("./scripts/utils");
 
-let closeWindow = true;
 let reload;
 let win;
+let closeTimeout;
+global.registeredWebContents = [];
 
 function appQuit() {
   if (process.platform !== "darwin") {
@@ -41,6 +42,12 @@ function createWindow() {
     show: false,
   });
 
+  win.loadURL(url.format({
+    pathname: path.join(__dirname, "pages", "main.html"),
+    protocol: "file:",
+    slashes: true,
+  }));
+
   if (utils.settings.startMaximized) {
     win.maximize();
   }
@@ -50,38 +57,25 @@ function createWindow() {
     win.show();
   });
 
-  win.on("close", (e) => {
-    if (closeWindow) {
-      log.info("Window closing");
-      return;
-    }
-
-    e.preventDefault();
-    const result = dialog.showMessageBox(win, {
-      message: "Quit app?",
-      buttons: ["Yes", "No"],
-    });
-    if (result === 0) {
-      closeWindow = true;
+  win.on("close", () => {
+    // Beforeunload event is fired after close event and prevent closing the main window,
+    // therefore repeat the close until beforeunload event return undefined or the timeout
+    // is cleared in event of reload or user deciding to stay
+    closeTimeout = setTimeout(() => {
       win.close();
-    }
+    }, 300);
   });
 
   win.on("closed", () => {
     log.info("Window closed");
     if (reload) {
+      clearTimeout(closeTimeout);
       reload = false;
       createWindow();
     } else {
       appQuit();
     }
   });
-
-  win.loadURL(url.format({
-    pathname: path.join(__dirname, "pages", "main.html"),
-    protocol: "file:",
-    slashes: true,
-  }));
 }
 
 // Init settings
@@ -133,10 +127,12 @@ ipcMain.on("reload", () => {
   win.close();
 });
 
-ipcMain.on("register", (e) => {
+ipcMain.on("register", (regEvent) => {
+  const webContents = regEvent.sender;
   // eslint-disable-next-line no-underscore-dangle
-  if (!e.sender._events["will-prevent-unload"]) {
-    e.sender.on("will-prevent-unload", (event) => {
+  if (!webContents._events["will-prevent-unload"]) {
+    global.registeredWebContents.push(webContents);
+    webContents.on("will-prevent-unload", (unloadEvent) => {
       const choice = dialog.showMessageBox(win, {
         type: "question",
         buttons: ["Leave", "Stay"],
@@ -145,8 +141,11 @@ ipcMain.on("register", (e) => {
         defaultId: 0,
         cancelId: 1,
       });
+      // preventDefault on will-prevent-unload allows the page to unload
       if (choice === 0) {
-        event.preventDefault();
+        unloadEvent.preventDefault();
+      } else {
+        clearTimeout(closeTimeout);
       }
     });
   }
