@@ -18,7 +18,7 @@ const writeFileAsync = promisify(fs.writeFile);
 const app = new Application({
   path: electron,
   args: [].concat(getInstrumentedFileName(appJs)),
-  startTimeout: 10000,
+  startTimeout: 30000,
 });
 const convert = async (file) => {
   const instrumentedFile = getInstrumentedFileName(file);
@@ -51,14 +51,14 @@ beforeAll(async () => {
   convert(appJs);
   convert(mainPageJs);
   await app.start();
-}, 20000);
+}, 30000);
 
 afterAll(async () => {
   instrumentedFiles.forEach(async (e) => {
     await unlinkAsync(e);
   });
   await app.stop();
-}, 20000);
+}, 30000);
 
 describe("App", () => {
   test(
