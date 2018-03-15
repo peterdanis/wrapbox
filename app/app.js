@@ -133,7 +133,7 @@ ipcMain.on("reload", () => {
   win.close();
 });
 
-ipcMain.on("prevent-unload", (e) => {
+ipcMain.on("register", (e) => {
   // eslint-disable-next-line no-underscore-dangle
   if (!e.sender._events["will-prevent-unload"]) {
     e.sender.on("will-prevent-unload", (event) => {
