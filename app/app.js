@@ -62,7 +62,11 @@ function createWindow() {
     // therefore repeat the close until beforeunload event return undefined or the timeout
     // is cleared in event of reload or user deciding to stay
     closeTimeout = setTimeout(() => {
-      win.close();
+      try {
+        win.close();
+      } catch (error) {
+        //
+      }
     }, 300);
   });
 

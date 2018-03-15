@@ -2,10 +2,13 @@ const addWebviewButtons = require("./add-webview-buttons");
 const addWebviews = require("./add-webviews");
 const addWindowButtons = require("./add-window-buttons");
 const EventEmitter = require("events");
+const path = require("path");
 const PerfectScrollbar = require("../dependencies/perfect-scrollbar.common");
-const setUpSettingsPage = require("./set-up-settings-page");
 const { remote } = require("electron"); // eslint-disable-line
+const setUpSettingsPage = require("./set-up-settings-page");
+
 const utils = remote.require("./scripts/utils");
+const blankPage = path.join(__dirname, "blank.html");
 
 // Event aggregator. Passed to functions as argument.
 const watcher = new EventEmitter();
@@ -19,7 +22,7 @@ function start() {
   }
 
   // Insert settings webview, for addWebviews function call
-  const webviews = utils.settings.webviews.concat([{ url: "../pages/settings.html" }]);
+  const webviews = utils.settings.webviews.concat([{ url: "settings.html" }]);
 
   addWebviews("#content", webviews, watcher);
   addWebviewButtons("#leftpanel", utils.settings.webviews, watcher);
@@ -33,17 +36,17 @@ function start() {
     const webContents = remote.getGlobal("registeredWebContents");
     setImmediate(() => {
       webContents.forEach((element) => {
-        try {
-          element.executeJavaScript("window.close()").then(() => {
-            // window.close()
-          });
-        } catch (error) {
-          //
+        if (!new RegExp(/pages\/(blank|settings)\.html/).test(element.history)) {
+          try {
+            element.executeJavaScript(`window.location = "file://${blankPage}"`);
+          } catch (error) {
+            //
+          }
         }
       });
     });
 
-    return Array.from(document.querySelectorAll("webview")).find(el => el.id);
+    return Array.from(document.querySelectorAll("webview")).find(el => !new RegExp(/pages\/(blank|settings)\.html/).test(el.src));
   };
 }
 

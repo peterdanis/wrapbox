@@ -30,9 +30,6 @@ function addWebviews(parent, webviewSettings, eventAggregator) {
         // eslint-disable-next-line no-console
         console.log(`${webview.element.src} console message:`, event.message);
       })
-      .addEventListener("close", () => {
-        webview.element.parentNode.removeChild(webview.element);
-      })
       .listenTo(eventAggregator, "changeWebview", (button) => {
         // eslint-disable-next-line eqeqeq
         if (button.id.replace("button", "") == i) {
