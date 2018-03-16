@@ -1,14 +1,11 @@
 const addWebviewButtons = require("./add-webview-buttons");
 const addWebviews = require("./add-webviews");
 const addWindowButtons = require("./add-window-buttons");
+const addBeforeUnload = require("./add-before-unload");
 const EventEmitter = require("events");
-const path = require("path");
 const PerfectScrollbar = require("../dependencies/perfect-scrollbar.common");
-const { remote } = require("electron"); // eslint-disable-line
 const setUpSettingsPage = require("./set-up-settings-page");
-
-const utils = remote.require("./scripts/utils");
-const blankPage = path.join(__dirname, "blank.html");
+const utils = require("electron").remote.require("./scripts/utils"); // eslint-disable-line
 
 // Event aggregator. Passed to functions as argument.
 const watcher = new EventEmitter();
@@ -27,27 +24,11 @@ function start() {
   addWebviews("#content", webviews, watcher);
   addWebviewButtons("#leftpanel", utils.settings.webviews, watcher);
   setUpSettingsPage(watcher);
+  addBeforeUnload();
 
   // Add a custom scrollbar to leftpanel (panel with webview buttons)
   // eslint-disable-next-line no-new
   new PerfectScrollbar("#leftpanel");
-
-  window.onbeforeunload = () => {
-    const webContents = remote.getGlobal("registeredWebContents");
-    setImmediate(() => {
-      webContents.forEach((element) => {
-        if (!new RegExp(/pages\/(blank|settings)\.html/).test(element.history)) {
-          try {
-            element.executeJavaScript(`window.location = "file://${blankPage}"`);
-          } catch (error) {
-            //
-          }
-        }
-      });
-    });
-
-    return Array.from(document.querySelectorAll("webview")).find(el => !new RegExp(/pages\/(blank|settings)\.html/).test(el.src));
-  };
 }
 
 // Start the main function when the page is ready.

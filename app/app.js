@@ -72,8 +72,8 @@ function createWindow() {
 
   win.on("closed", () => {
     log.info("Window closed");
+    clearTimeout(closeTimeout);
     if (reload) {
-      clearTimeout(closeTimeout);
       reload = false;
       createWindow();
     } else {
@@ -137,19 +137,26 @@ ipcMain.on("register", (regEvent) => {
   if (!webContents._events["will-prevent-unload"]) {
     global.registeredWebContents.push(webContents);
     webContents.on("will-prevent-unload", (unloadEvent) => {
-      const choice = dialog.showMessageBox(win, {
-        type: "question",
-        buttons: ["Leave", "Stay"],
-        title: "Do you want to leave this site?",
-        message: "Changes you made may not be saved.",
-        defaultId: 0,
-        cancelId: 1,
-      });
-      // preventDefault on will-prevent-unload allows the page to unload
-      if (choice === 0) {
+      if (webContents.dontAsk) {
         unloadEvent.preventDefault();
       } else {
-        clearTimeout(closeTimeout);
+        const choice = dialog.showMessageBox(win, {
+          type: "question",
+          buttons: ["Leave", "Stay"],
+          title: "Do you want to leave this site?",
+          message: "Changes you made may not be saved.",
+          defaultId: 0,
+          cancelId: 1,
+        });
+        // preventDefault on will-prevent-unload allows the page to unload
+        if (choice === 0) {
+          unloadEvent.preventDefault();
+          if (closeTimeout) {
+            webContents.dontAsk = true;
+          }
+        } else {
+          clearTimeout(closeTimeout);
+        }
       }
     });
   }

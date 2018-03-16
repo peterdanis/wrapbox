@@ -14,7 +14,16 @@ function addWebviews(parent, webviewSettings, eventAggregator) {
       id: `webview${i}`,
       src: e.url,
     })),
-    { customAttr: ["allowpopups", "", "preload", "../scripts/preload.js"] }
+    {
+      customAttr: [
+        "allowpopups",
+        "",
+        "preload",
+        "../scripts/preload.js",
+        "partition",
+        "persist:default",
+      ],
+    }
   );
   // Append each webview to parent, hide it (except the first one) and add event listeners.
   webviews.forEach((webview, i) => {
