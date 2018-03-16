@@ -1,7 +1,8 @@
 const { ipcRenderer } = require("electron"); // eslint-disable-line
+const codepoints = require("../dependencies/material-icon-codepoints");
+const onDocumentReady = require("./on-document-ready");
 const ui = require("./ui");
 const utils = require("electron").remote.require("./scripts/utils"); // eslint-disable-line
-const codepoints = require("../dependencies/material-icon-codepoints");
 
 // Global variables, needed for addWebviewSetting and loadSettingsInPage functions
 let index = 0;
@@ -180,7 +181,7 @@ function version() {
 }
 
 // Main function running all sub-tasks.
-function start() {
+function main() {
   loadSettingsInPage();
   activateButtons();
   version();
@@ -188,10 +189,4 @@ function start() {
 }
 
 // Start the main function when the page is ready.
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", () => {
-    start();
-  });
-} else {
-  start();
-}
+onDocumentReady(main);

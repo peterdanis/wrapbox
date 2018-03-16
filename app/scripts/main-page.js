@@ -3,6 +3,7 @@ const addWebviews = require("./add-webviews");
 const addWindowButtons = require("./add-window-buttons");
 const addBeforeUnload = require("./add-before-unload");
 const EventEmitter = require("events");
+const onDocumentReady = require("./on-document-ready");
 const PerfectScrollbar = require("../dependencies/perfect-scrollbar.common");
 const setUpSettingsPage = require("./set-up-settings-page");
 const utils = require("electron").remote.require("./scripts/utils"); // eslint-disable-line
@@ -12,7 +13,7 @@ const watcher = new EventEmitter();
 watcher.setMaxListeners(0);
 
 // Main function running all sub-tasks.
-function start() {
+function main() {
   // Do not display control buttons on MacOS, it has own inset buttons
   if (process.platform !== "darwin") {
     addWindowButtons("#titlebar", utils.settings.windowButtonsPosition);
@@ -32,10 +33,4 @@ function start() {
 }
 
 // Start the main function when the page is ready.
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", () => {
-    start();
-  });
-} else {
-  start();
-}
+onDocumentReady(main);
