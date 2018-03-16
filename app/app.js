@@ -143,8 +143,8 @@ ipcMain.on("register", (regEvent) => {
         const choice = dialog.showMessageBox(win, {
           type: "question",
           buttons: ["Leave", "Stay"],
-          title: "Do you want to leave this site?",
-          message: "Changes you made may not be saved.",
+          message: `Page: ${webContents.getTitle()}`,
+          detail: "Do you want to leave this site? Changes you made may not be saved.",
           defaultId: 0,
           cancelId: 1,
         });
