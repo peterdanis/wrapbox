@@ -4,7 +4,7 @@ const onDocumentReady = require("./on-document-ready");
 const ui = require("./ui");
 const utils = require("electron").remote.require("./scripts/utils"); // eslint-disable-line
 
-// Global variables, needed for addWebviewSetting and loadSettingsInPage functions
+// Global variables
 let index = 0;
 let resX;
 let resY;
@@ -13,22 +13,29 @@ let windowButtons;
 let webviews;
 let iconDialog;
 
-//
+/**
+ * Creates modal dialog for choosing webview button icon.
+ */
 function createIconDialog() {
   iconDialog = new ui.BaseElement({
     type: "dialog",
     class: "mdl-dialog",
+    innerHTML: "<h1>Choose an icon</h1>",
   }).appendTo("body");
 
   const icons = ui.arrayToElements(
     ui.IconButton,
     codepoints.map(e => ({
       innerHTML: new ui.MaterialIcon({ innerHTML: `${e}` }).element.outerHTML,
-    }))
+    })),
+    { textColor: "blue-A200" }
   );
 
   icons.forEach((e) => {
-    e.appendTo(iconDialog.element);
+    e.appendTo(iconDialog.element).addEventListener("click", (event) => {
+      iconDialog.currentTarget.firstChild.innerHTML = `${event.currentTarget.firstChild.innerHTML}`;
+      iconDialog.element.close();
+    });
   });
 }
 
@@ -49,6 +56,7 @@ function addWebviewSetting(parent, webview) {
 
   new ui.MiniFabButton({
     id: `i${index}`,
+    // If no icon is choosen add a pulse effect
     class: `${_webview.icon ? "" : "infinite pulse "}mdl-shadow--2dp`,
     color: "blue-A200",
     textColor: "white",
@@ -56,6 +64,7 @@ function addWebviewSetting(parent, webview) {
   })
     .addEventListener("click", (event) => {
       event.currentTarget.classList.remove("pulse", "infinite");
+      iconDialog.currentTarget = event.currentTarget;
       iconDialog.element.showModal();
     })
     .appendTo(parentDiv.element);
@@ -158,7 +167,10 @@ function activateButtons() {
         const arr = [];
         for (let i = 0; i < webviews.length; i++) {
           if (webviews[i].value) {
-            arr.push({ url: webviews[i].value });
+            arr.push({
+              url: webviews[i].value,
+              icon: webviews[i].parentNode.parentNode.firstChild.firstChild.innerHTML,
+            });
           }
         }
         return arr;
