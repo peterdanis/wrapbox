@@ -2,6 +2,20 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "node",
+      "request": "launch",
+      "name": "Electron Main",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+      "args": ["."]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Electron Main (w preload)",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+      "args": ["-r", "./test-preload.js", "."]
+    },
+    {
       "type": "chrome",
       "request": "launch",
       "name": "Chrome",
