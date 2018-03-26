@@ -24,13 +24,14 @@
     "lint": "eslint **/*.js"
   },
   "jest": {
-    "collectCoverageFrom": ["app/**/*.js", "!app/dependencies/**/*", "!**/*.instrumented.js"],
+    "collectCoverageFrom": ["app/**/*.js", "!app/dependencies/**/*"],
     "coverageReporters": ["json"]
   },
   "nyc": {
     "reporter": ["lcov", "text"],
     "tempDirectory": "./coverage",
-    "exclude": ["**/*.instrumented.js"]
+    "exclude": ["app/dependencies/**/*"],
+    "instrument": false
   },
   "eslintIgnore": [
     "app/dependencies/**",

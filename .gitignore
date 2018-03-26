@@ -48,6 +48,3 @@ ApiKeys.js
 
 # Release-builds
 release-builds
-
-# Files instrumented for code coverage
-*.instrumented.js
