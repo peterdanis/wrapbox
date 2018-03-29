@@ -17,8 +17,9 @@ before_script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sleep 3; fi
   - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then ( sudo Xvfb :99 -ac -screen 0 1024x768x8; echo ok )& fi
+  - yarn global add codecov
   - yarn lint
-  - yarn test
+  - yarn cover
   - |
     if [ "$TRAVIS_OS_NAME" == "linux" ];
       then sudo apt-get install snapd rpm liblz4-1 -y && sudo snap install snapcraft --classic && export PATH=/snap/bin:$PATH
