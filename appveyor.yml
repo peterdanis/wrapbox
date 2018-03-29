@@ -13,10 +13,17 @@ test_script:
   - cmd: yarn cover
 after_test:
   - cmd: codecov
-deploy_script:
-  - ps: >-
-      If ($env:APPVEYOR_REPO_BRANCH -Match "master") {
-      yarn run dist --x64
-      } Else {
-      yarn run build --x64
-      }
+
+for:
+-
+  branches:
+    only:
+      - master
+  deploy_script: 
+    - cmd: yarn run dist --x64
+-
+  branches:
+    except::
+      - master
+  deploy_script: 
+    - cmd: yarn run dist --x64
