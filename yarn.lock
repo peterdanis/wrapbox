@@ -739,22 +739,13 @@ builder-util-runtime@4.1.0:
     fs-extra-p "^4.5.2"
     sax "^1.2.4"
 
-builder-util-runtime@4.2.0, builder-util-runtime@^4.1.0, builder-util-runtime@^4.2.0:
+builder-util-runtime@4.2.0, builder-util-runtime@^4.1.0, builder-util-runtime@^4.2.0, builder-util-runtime@~4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/builder-util-runtime/-/builder-util-runtime-4.2.0.tgz#c56aa18d34390143da031c418c9d3a055fbd3522"
   dependencies:
     bluebird-lst "^1.0.5"
     debug "^3.1.0"
     fs-extra-p "^4.5.2"
-    sax "^1.2.4"
-
-builder-util-runtime@~4.0.5:
-  version "4.0.5"
-  resolved "https://registry.yarnpkg.com/builder-util-runtime/-/builder-util-runtime-4.0.5.tgz#5340cf9886b9283ea6e5b20dc09b5e3e461aef62"
-  dependencies:
-    bluebird-lst "^1.0.5"
-    debug "^3.1.0"
-    fs-extra-p "^4.5.0"
     sax "^1.2.4"
 
 builder-util@5.6.7:
@@ -1666,19 +1657,19 @@ electron-to-chromium@^1.3.36:
   version "1.3.38"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.38.tgz#49234b00c0592f62921f9426bccefee23de086bb"
 
-electron-updater@^2.18.2:
-  version "2.21.0"
-  resolved "https://registry.yarnpkg.com/electron-updater/-/electron-updater-2.21.0.tgz#3c8765af946090100f7df982127e4c3412cbc1af"
+electron-updater@^2.21.4:
+  version "2.21.4"
+  resolved "https://registry.yarnpkg.com/electron-updater/-/electron-updater-2.21.4.tgz#56326defc8072e78e339cc656838ac78e708f50c"
   dependencies:
     bluebird-lst "^1.0.5"
-    builder-util-runtime "~4.0.5"
+    builder-util-runtime "~4.2.0"
     electron-is-dev "^0.3.0"
     fs-extra-p "^4.5.2"
-    js-yaml "^3.10.0"
+    js-yaml "^3.11.0"
     lazy-val "^1.0.3"
     lodash.isequal "^4.5.0"
     semver "^5.5.0"
-    source-map-support "^0.5.3"
+    source-map-support "^0.5.4"
 
 electron@1.8.2:
   version "1.8.2"
@@ -5225,7 +5216,7 @@ source-map-support@^0.5.0:
   dependencies:
     source-map "^0.6.0"
 
-source-map-support@^0.5.3, source-map-support@^0.5.4:
+source-map-support@^0.5.4:
   version "0.5.4"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.4.tgz#54456efa89caa9270af7cd624cc2f123e51fbae8"
   dependencies:
