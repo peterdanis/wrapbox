@@ -20,6 +20,7 @@ before_script:
   - yarn global add codecov
   - yarn lint
   - yarn cover
+  - codecov
   - |
     if [ "$TRAVIS_OS_NAME" == "linux" ];
       then sudo apt-get install snapd rpm liblz4-1 -y && sudo snap install snapcraft --classic && export PATH=/snap/bin:$PATH
