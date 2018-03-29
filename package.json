@@ -2,7 +2,7 @@
   "name": "wrapbox",
   "productName": "Wrapbox",
   "description": "An Electron wrapper for web pages",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "license": "MIT",
   "author": "Peter Danis <peter.danis@outlook.com>",
   "repository": {
@@ -41,51 +41,46 @@
     "copyright": "Copyright © 2018 Peter Danis",
     "asar": false,
     "win": {
-      "artifactName": "${productName}_v${version}.${ext}",
       "target": ["nsis", "portable", "zip"],
-      "icon": "icons/icon.ico",
-      "electronUpdaterCompatibility": ">=2.16"
+      "icon": "icons/icon.ico"
     },
     "mac": {
-      "artifactName": "${name}_v${version}.${ext}",
+      "artifactName": "${name}-${version}-mac.${ext}",
       "category": "public.app-category.productivity",
-
       "target": ["dmg", "zip"],
       "icon": "icons/icon.icns",
       "electronUpdaterCompatibility": ">=2.16"
     },
     "linux": {
-      "artifactName": "${name}_v${version}.${ext}",
+      "artifactName": "${name}-${version}.${ext}",
       "category": "Utility",
-      "target": ["AppImage", "deb", "rpm", "snap"],
+      "target": ["AppImage"],
       "icon": "icons/icon.icns"
     },
     "nsis": {
       "oneClick": false,
       "perMachine": false,
       "allowToChangeInstallationDirectory": true,
-      "artifactName": "${productName}_v${version}_Installer.${ext}"
+      "artifactName": "${productName}_Installer.${ext}"
     },
     "portable": {
       "useZip": true,
-      "artifactName": "${productName}_v${version}_Portable.${ext}"
+      "artifactName": "${productName}_Portable.${ext}"
     },
     "dmg": {
+      "artifactName": "${name}-${version}.${ext}",
       "contents": [
         {
           "x": 110,
           "y": 150
         },
         {
-          "x": 240,
+          "x": 420,
           "y": 150,
           "type": "link",
           "path": "/Applications"
         }
       ]
-    },
-    "snap": {
-      "artifactName": "${name}_v${version}.${ext}"
     },
     "files": ["app/**"],
     "directories": {

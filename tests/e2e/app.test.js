@@ -39,7 +39,7 @@ describe("App", () => {
     10000
   );
 
-  // TODO WIP tests
+  // TODO: WIP tests
   /*
   test(
     "maximizes",

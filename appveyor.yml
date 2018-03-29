@@ -1,5 +1,4 @@
 version: '{branch}-{build}'
-os: unstable
 environment:
   GH_TOKEN:
     secure: 1aigA+tF1hWwZVVARvg+fhwGlJmgNLfs4FDdlgW8mOWqe9MA+gjKLgKT99wO4D0e

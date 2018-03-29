@@ -17,9 +17,18 @@ File log locations:
 
 // Require rest of the dependencies
 const path = require("path");
+const update = require("./scripts/update");
 const url = require("url");
 const utils = require("./scripts/utils");
 
+const appImageIcon = (() => {
+  // On Windows and MacOS the icons on taskbar are automatically set to the app icon,
+  // for Linux manually setting it in BrowserWindow is needed.
+  if (process.env.APPDIR) {
+    return path.join(process.env.APPDIR, "wrapbox.png");
+  }
+  return undefined;
+})();
 let reload;
 let win;
 let closeTimeout;
@@ -40,6 +49,7 @@ function createWindow() {
     backgroundColor: utils.settings.backgroundColor,
     titleBarStyle: "hiddenInset",
     show: false,
+    icon: appImageIcon,
   });
 
   win.loadURL(url.format({
@@ -97,6 +107,7 @@ try {
 // App listeners
 app.on("ready", () => {
   createWindow();
+  update.checkForUpdatesAndNotify();
 });
 
 app.on("activate", () => {
