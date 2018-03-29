@@ -13,22 +13,21 @@ git:
 env:
   secure: k48KjQkgaJywEA9mmnOnF2NdAvTfkKOPKF8TQ6XNVwoShqGWpPZfIesbAJ+MlUekFU9WvWFX1FqoIn4sJfqjY8rx43Rvka0uu1z+rRiTX9Wno/Z37GcKuoXkg5UpOWcuBWEOCyBthrhr8vspfeMfbewtRB56xpH5YtXlEO3vitXMYHMsEFDwc5x7ZSaOB5NR+vpyyPbEFUSczjuQFCDZm+JKzMqPZesC23itaFADvUtk7NGAtqVhysrxMzYVADeZgo4z1Cvf8trVKXkM3VY8vAq+FPTsonve4MDcpRQkPj2cLsgptQvvpnmFTZaoP3iwppExtR0UMfg/R7GzZM9aR2pP5tU+X1XaXwWg1dcDSpcGW1UEwjufBOUWEpIA15RB0iIAiIhaQEDv0NcTRitC3JJdmGTcdCbAEK/Hr08kGXeb0PHzTnOcaH65cu+q53Jpn963dwjSVDTkn5oYOi4UMkUB3noamytgcEE0GSLWm/iqBju6t7zY566f9u35ais5aHlncvEVPc9AQyVVYA+e7mxhrzm05a84WH0l02w3nYVDsR5AvkKs3uvX8YP2B1/52Tt+OnPtyKVsvUt5/nvCg8iM1uE35lxHWk2pBEWNs/SOrjNuhITAYINru/A63Agj+KUG8NJ3qgHhCYrBZUA0wxnoPmvTO2jYIYg2YGawjWA=
 before_script:
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DISPLAY=:99.0; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sleep 3; fi
-- if [ "${TRAVIS_OS_NAME}" = "osx" ]; then ( sudo Xvfb :99 -ac -screen 0 1024x768x8; echo ok )& fi
-- yarn lint
-- yarn test
-- |
-    if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-      sudo apt-get install snapd rpm liblz4-1 -y && sudo snap install snapcraft --classic && export PATH=/snap/bin:$PATH
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DISPLAY=:99.0; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sleep 3; fi
+  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then ( sudo Xvfb :99 -ac -screen 0 1024x768x8; echo ok )& fi
+  - yarn lint
+  - yarn test
+  - |
+    if [ "$TRAVIS_OS_NAME" == "linux" ];
+      then sudo apt-get install snapd rpm liblz4-1 -y && sudo snap install snapcraft --classic && export PATH=/snap/bin:$PATH
     fi
-script: yarn run build --x64
-deploy:
-  provider: script
-  skip_cleanup: true
-  script: yarn run dist --x64
-  on:
-    branch: master
+script:
+  - |
+    if [[ $TRAVIS_BRANCH == 'master' ]];
+      then yarn run dist --x64;
+      else yarn run build --x64;
+    fi
 notifications:
   email: false
