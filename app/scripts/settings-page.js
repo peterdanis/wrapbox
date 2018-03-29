@@ -20,7 +20,7 @@ function createIconDialog() {
   iconDialog = new ui.BaseElement({
     type: "dialog",
     class: "mdl-dialog",
-    innerHTML: "<h1>Choose an icon</h1>",
+    innerHTML: "<h5 class=\"mdl-color-text--blue-A200\">Choose an icon</h5>",
   }).appendTo("body");
 
   const icons = ui.arrayToElements(
