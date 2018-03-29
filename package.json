@@ -24,21 +24,16 @@
     "lint": "eslint **/*.js"
   },
   "jest": {
-    "collectCoverageFrom": ["app/**/*.js", "!app/dependencies/**/*"],
+    "collectCoverageFrom": ["app/**/*.js", "!app/dependencies/**"],
     "coverageReporters": ["json"]
   },
   "nyc": {
     "reporter": ["lcov", "text"],
     "tempDirectory": "./coverage",
-    "exclude": ["app/dependencies/**/*"],
+    "exclude": ["app/dependencies/**", "tests/**"],
     "instrument": false
   },
-  "eslintIgnore": [
-    "app/dependencies/**",
-    "coverage/**",
-    "release-builds/**",
-    "**/*.instrumented.js"
-  ],
+  "eslintIgnore": ["app/dependencies/**", "coverage/**", "release-builds/**"],
   "build": {
     "appId": "com.peterdanis.wrapbox",
     "productName": "Wrapbox",
