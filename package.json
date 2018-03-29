@@ -98,7 +98,7 @@
     "electron": "1.8.2",
     "electron-builder": "^20.8.1",
     "electron-reload": "^1.2.2",
-    "eslint": "^4.18.1",
+    "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jest": "^21.12.2",
