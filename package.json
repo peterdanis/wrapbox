@@ -2,7 +2,7 @@
   "name": "wrapbox",
   "productName": "Wrapbox",
   "description": "An Electron wrapper for web pages",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "MIT",
   "author": "Peter Danis <peter.danis@outlook.com>",
   "repository": {
