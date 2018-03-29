@@ -23,6 +23,12 @@ before_script:
     if [ "$TRAVIS_OS_NAME" == "linux" ]; then
       sudo apt-get install snapd rpm liblz4-1 -y && sudo snap install snapcraft --classic && export PATH=/snap/bin:$PATH
     fi
-script: yarn run dist --x64
+script: yarn run build --x64
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: yarn run dist --x64
+  on:
+    branch: master
 notifications:
   email: false

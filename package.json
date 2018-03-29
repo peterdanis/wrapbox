@@ -11,17 +11,18 @@
   },
   "main": "app/app.js",
   "scripts": {
-    "start": "electron .",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder",
-    "test": "jest --noStackTrace",
-    "test-u": "jest --noStackTrace unit",
-    "test-i": "jest --noStackTrace integration",
-    "test-e2e": "jest --noStackTrace e2e",
-    "watch": "jest --watch --noStackTrace --notify",
-    "watch-st": "jest --watch --notify",
+    "build": "electron-builder -p never",
     "cover": "nyc --clean jest --coverage",
-    "lint": "eslint **/*.js"
+    "dist": "electron-builder",
+    "lint": "eslint **/*.js",
+    "pack": "electron-builder --dir",
+    "start": "electron .",
+    "test-e2e": "jest --noStackTrace e2e",
+    "test-i": "jest --noStackTrace integration",
+    "test-u": "jest --noStackTrace unit",
+    "test": "jest --noStackTrace",
+    "watch-st": "jest --watch --notify",
+    "watch": "jest --watch --noStackTrace --notify"
   },
   "jest": {
     "collectCoverageFrom": ["app/**/*.js", "!app/dependencies/**"],
