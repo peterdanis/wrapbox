@@ -26,4 +26,4 @@ for:
     except::
       - master
   deploy_script: 
-    - cmd: yarn run dist --x64
+    - cmd: yarn run build --x64
