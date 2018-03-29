@@ -23,7 +23,7 @@ for:
     - cmd: yarn run dist --x64
 -
   branches:
-    except::
+    except:
       - master
   deploy_script: 
     - cmd: yarn run build --x64
