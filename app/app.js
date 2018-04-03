@@ -71,6 +71,7 @@ function createWindow() {
   });
 
   win.on("closed", () => {
+    win = null;
     log.info("Window closed");
     clearTimeout(closeTimeout);
     if (reload) {
