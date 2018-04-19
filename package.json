@@ -92,7 +92,7 @@
   },
   "dependencies": {
     "electron-log": "^2.2.14",
-    "electron-updater": "^2.21.4"
+    "electron-updater": "^2.21.8"
   },
   "devDependencies": {
     "@types/jest": "^22.2.3",
