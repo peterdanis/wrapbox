@@ -49,8 +49,10 @@
     "mac": {
       "artifactName": "${name}_v${version}.${ext}",
       "category": "public.app-category.productivity",
-      "target": ["dmg", "pkg"],
-      "icon": "icons/icon.icns"
+
+      "target": ["dmg", "zip"],
+      "icon": "icons/icon.icns",
+      "electronUpdaterCompatibility": ">=2.16"
     },
     "linux": {
       "artifactName": "${name}_v${version}.${ext}",
