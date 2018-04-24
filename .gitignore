@@ -48,3 +48,6 @@ ApiKeys.js
 
 # Release-builds
 release-builds
+
+# MacOS DS store
+.DS_Store
