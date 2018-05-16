@@ -96,7 +96,7 @@
   },
   "devDependencies": {
     "@types/jest": "^22.2.3",
-    "electron": "1.8.4",
+    "electron": "1.8.7",
     "electron-builder": "^20.11.1",
     "electron-reload": "^1.2.2",
     "eslint": "^4.19.1",
