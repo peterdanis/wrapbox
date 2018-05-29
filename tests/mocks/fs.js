@@ -4,7 +4,7 @@ fs.writeFile.mockImplementation((file, data, cb) => {
   if (file && data) {
     cb(null);
   } else {
-    cb("Error");
+    cb(new Error());
   }
 });
 fs.statSync.mockImplementation(() => {
