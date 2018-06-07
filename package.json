@@ -106,7 +106,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.9.1",
     "jest": "^23.1.0",
-    "jest-image-snapshot": "^2.4.2",
+    "jest-image-snapshot": "^2.4.3",
     "nyc": "^12.0.2",
     "prettier-eslint": "^8.7.4",
     "prettier-stylelint": "^0.4.2",
