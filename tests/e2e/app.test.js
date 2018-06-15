@@ -24,7 +24,7 @@ beforeAll(async () => {
 
 afterAll(async () => {
   await app.stop();
-  await delay(3000);
+  await delay(5000);
 }, 30000);
 
 describe("App", () => {
