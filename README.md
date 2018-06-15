@@ -6,6 +6,9 @@
 [![codecov](https://codecov.io/gh/peterdanis/wrapbox/branch/master/graph/badge.svg)](https://codecov.io/gh/peterdanis/wrapbox)
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 
-An Electron wrapper for Google Inbox, Outlook.com calendar, Trello, Feedly, Facebook Messenger and other site I use daily.
+An Electron wrapper for webpages one uses daily.
 
 ![image](https://user-images.githubusercontent.com/26599181/41470670-988eb210-70b1-11e8-8f85-7eaa21c63363.png)
+
+Any number of webpages can be specified in the setting:
+![image](https://user-images.githubusercontent.com/26599181/41470833-1fd3b6da-70b2-11e8-8334-177dc3589d0e.png)
