@@ -18,13 +18,21 @@ beforeAll(async () => {
     path: electron,
     args: ["-r", preloadFile, "."],
     startTimeout: 30000,
+    quitTimeout: 10000,
+    webdriverOptions: {
+      deprecationWarnings: false,
+    },
   });
   await app.start();
 }, 30000);
 
 afterAll(async () => {
-  await app.stop();
-  await delay(3000);
+  if (process.platform === "darwin") {
+    await app.browserWindow.close();
+  } else {
+    await app.client.leftClick("#close");
+  }
+  await delay(8000);
 }, 30000);
 
 describe("App", () => {
@@ -39,8 +47,17 @@ describe("App", () => {
     10000
   );
 
-  // TODO WIP tests
-  /*
+  test(
+    "image matches",
+    async () => {
+      await delay(2000);
+      const image = await app.browserWindow.capturePage();
+
+      expect(image).toMatchImageSnapshot();
+    },
+    15000
+  );
+
   test(
     "maximizes",
     async () => {
@@ -53,7 +70,7 @@ describe("App", () => {
         async () => (await app.browserWindow.isMaximized()) === true,
         5000,
         "",
-        100
+        300
       );
       const isMaximized = await app.browserWindow.isMaximized();
 
@@ -61,6 +78,7 @@ describe("App", () => {
     },
     10000
   );
+
   test(
     "unmaximizes",
     async () => {
@@ -73,7 +91,7 @@ describe("App", () => {
         async () => (await app.browserWindow.isMaximized()) === false,
         5000,
         "",
-        100
+        300
       );
       const isMaximized = await app.browserWindow.isMaximized();
 
@@ -81,6 +99,7 @@ describe("App", () => {
     },
     10000
   );
+
   test(
     "minimizes",
     async () => {
@@ -93,25 +112,12 @@ describe("App", () => {
         async () => (await app.browserWindow.isMinimized()) === true,
         5000,
         "",
-        100
+        300
       );
       const isMinimized = await app.browserWindow.isMinimized();
-      await app.stop();
 
       expect(isMinimized).toBe(true);
     },
     10000
   );
-  test(
-    "image matches",
-    async () => {
-      await app.start();
-      app.client.pause(1000);
-      const image = await app.browserWindow.capturePage();
-      await app.stop();
-      expect(image).toMatchImageSnapshot();
-    },
-    10000
-  );
-  */
 });
