@@ -7,3 +7,5 @@
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 
 An Electron wrapper for Google Inbox, Outlook.com calendar, Trello, Feedly, Facebook Messenger and other site I use daily.
+
+![image](https://user-images.githubusercontent.com/26599181/41470670-988eb210-70b1-11e8-8f85-7eaa21c63363.png)
