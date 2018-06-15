@@ -48,17 +48,6 @@ describe("App", () => {
   );
 
   test(
-    "image matches",
-    async () => {
-      await delay(2000);
-      const image = await app.browserWindow.capturePage();
-
-      expect(image).toMatchImageSnapshot();
-    },
-    15000
-  );
-
-  test(
     "maximizes",
     async () => {
       if (process.platform === "darwin") {
