@@ -88,7 +88,7 @@
     }
   },
   "dependencies": {
-    "electron-log": "^2.2.14",
+    "electron-log": "^2.2.15",
     "electron-updater": "^2.21.10"
   },
   "devDependencies": {
