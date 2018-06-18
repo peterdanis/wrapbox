@@ -8,17 +8,21 @@ and this project adheres to
 
 ## [Unreleased]
 
-* Page loading spinner
-* Dark theme
-* Option to have separate sessions
-* Rework the UI
-* Rework notifications
-* Rework settings
+- Page loading spinner
+- Dark theme
+- Option to have separate sessions
+- Rework the UI
+- Rework notifications
+- Rework settings
+
+## [0.1.2]
+
+- Fix the portable (Windows) version, to not download and install a new version
 
 ## [0.1.1]
 
-* Fix the AppImage (Linux distribution format) build process
+- Fix the AppImage (Linux distribution format) build process
 
 ## [0.1.0]
 
-* Initial release
+- Initial release
