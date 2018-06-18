@@ -107,7 +107,9 @@ try {
 // App listeners
 app.on("ready", () => {
   createWindow();
-  update.checkForUpdatesAndNotify();
+  if (!process.env.PORTABLE_EXECUTABLE_DIR) {
+    update.checkForUpdatesAndNotify();
+  }
 });
 
 app.on("activate", () => {
