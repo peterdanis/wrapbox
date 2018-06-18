@@ -8,10 +8,17 @@ and this project adheres to
 
 ## [Unreleased]
 
-* installers for win/mac/linux
-* update checking
-* fix zombie process
-* page loading spinner
-* dark theme
-* option to have separate sessions
-* option to have window control buttons on left or right
+* Page loading spinner
+* Dark theme
+* Option to have separate sessions
+* Rework the UI
+* Rework notifications
+* Rework settings
+
+## [0.1.1]
+
+* Fix the AppImage (Linux distribution format) build process
+
+## [0.1.0]
+
+* Initial release
