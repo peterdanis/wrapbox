@@ -15,6 +15,10 @@ and this project adheres to
 - Rework notifications
 - Rework settings
 
+## [0.1.3]
+
+- Fix app closing
+
 ## [0.1.2]
 
 - Fix the portable (Windows) version, to not download and install a new version

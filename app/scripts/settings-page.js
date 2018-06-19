@@ -75,7 +75,7 @@ function addWebviewSetting(parent, webview) {
     value: _webview.url,
     text: "A webview URL or relative file path",
     errorText: "Should be a valid URL",
-    pattern: "^(https?://|file://|..?/)[a-zA-Z0-9/%.?=-]*",
+    pattern: "^(https?://|file://|..?/)[a-zA-Z0-9/%.?=-+]*",
     class: "mdl-cell mdl-cell--6-col",
     innerClass: "wb",
   }).appendTo(parentDiv.element);

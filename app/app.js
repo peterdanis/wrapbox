@@ -77,7 +77,7 @@ function createWindow() {
       } catch (error) {
         //
       }
-    }, 300);
+    }, 600);
   });
 
   win.on("closed", () => {
