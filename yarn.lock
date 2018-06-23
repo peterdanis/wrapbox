@@ -1627,9 +1627,9 @@ electron-publish@20.14.6:
     lazy-val "^1.0.3"
     mime "^2.3.1"
 
-electron-reload@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/electron-reload/-/electron-reload-1.2.2.tgz#621ddb443b9fbba1c5e29a5fdd683322b5c42284"
+electron-reload@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/electron-reload/-/electron-reload-1.2.3.tgz#15f2d0ad9b41a149756cf2ee57d1cd95248df02c"
   dependencies:
     chokidar "^1.5.1"
 
