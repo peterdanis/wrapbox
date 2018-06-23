@@ -105,7 +105,7 @@
     "jest": "^23.1.0",
     "jest-image-snapshot": "^2.4.3",
     "nyc": "^12.0.2",
-    "prettier-eslint": "^8.7.4",
+    "prettier-eslint": "^8.8.2",
     "prettier-stylelint": "^0.4.2",
     "spectron": "~3.8.0",
     "stylelint": "^9.2.1",
