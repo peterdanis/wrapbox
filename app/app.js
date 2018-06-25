@@ -17,8 +17,8 @@ File log locations:
 
 // Require rest of the dependencies
 const path = require("path");
-const update = require("./scripts/update");
 const url = require("url");
+const update = require("./scripts/update");
 const utils = require("./scripts/utils");
 
 const appImageIcon = (() => {
@@ -52,11 +52,13 @@ function createWindow() {
     icon: appImageIcon,
   });
 
-  win.loadURL(url.format({
-    pathname: path.join(__dirname, "pages", "main.html"),
-    protocol: "file:",
-    slashes: true,
-  }));
+  win.loadURL(
+    url.format({
+      pathname: path.join(__dirname, "pages", "main.html"),
+      protocol: "file:",
+      slashes: true,
+    })
+  );
 
   if (utils.settings.startMaximized) {
     win.maximize();

@@ -1,10 +1,10 @@
-const {
-  init, settings, version, loadSettings, saveSettings,
-} = require("../../app/scripts/utils");
 const fs = require("fs");
 const log = require("electron-log");
 const os = require("os");
 const path = require("path");
+const {
+  init, settings, version, loadSettings, saveSettings,
+} = require("../../app/scripts/utils");
 
 jest.mock("electron", () => require("../mocks/electron"));
 jest.mock("electron-log", () => require("../mocks/electron-log"));

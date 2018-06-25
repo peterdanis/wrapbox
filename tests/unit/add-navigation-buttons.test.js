@@ -1,5 +1,5 @@
-const addNavButtons = require("../../app/scripts/add-navigation-buttons");
 const EventEmitter = require("events");
+const addNavButtons = require("../../app/scripts/add-navigation-buttons");
 
 const testEmitter = new EventEmitter();
 let activediv0;
