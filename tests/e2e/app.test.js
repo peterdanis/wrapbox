@@ -3,12 +3,11 @@ const { toMatchImageSnapshot } = require("jest-image-snapshot");
 const electron = require("electron");
 const path = require("path");
 
-const delay = ms =>
-  new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, ms);
-  });
+const delay = ms => new Promise((resolve) => {
+  setTimeout(() => {
+    resolve();
+  }, ms);
+});
 let app;
 
 beforeAll(async () => {
