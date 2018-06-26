@@ -249,6 +249,10 @@ app-builder-bin@1.9.12:
   version "1.9.12"
   resolved "https://registry.yarnpkg.com/app-builder-bin/-/app-builder-bin-1.9.12.tgz#0c4db2d217955e1e1936e3e36d59fc0897a0c595"
 
+app-builder-bin@1.9.16:
+  version "1.9.16"
+  resolved "https://registry.yarnpkg.com/app-builder-bin/-/app-builder-bin-1.9.16.tgz#c9e8bc837bfc5452b5396bc6959ed81cfff5fb6a"
+
 append-transform@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/append-transform/-/append-transform-0.4.0.tgz#d76ebf8ca94d276e247a36bad44a4b74ab611991"
@@ -793,6 +797,25 @@ builder-util@5.11.5, builder-util@^5.11.5:
   dependencies:
     "7zip-bin" "~4.0.2"
     app-builder-bin "1.9.12"
+    bluebird-lst "^1.0.5"
+    builder-util-runtime "^4.2.2"
+    chalk "^2.4.1"
+    debug "^3.1.0"
+    fs-extra-p "^4.6.1"
+    is-ci "^1.1.0"
+    js-yaml "^3.12.0"
+    lazy-val "^1.0.3"
+    semver "^5.5.0"
+    source-map-support "^0.5.6"
+    stat-mode "^0.2.2"
+    temp-file "^3.1.2"
+
+builder-util@5.11.9:
+  version "5.11.9"
+  resolved "https://registry.yarnpkg.com/builder-util/-/builder-util-5.11.9.tgz#97e246230254218a086a81d5406d7ebbc9618b88"
+  dependencies:
+    "7zip-bin" "~4.0.2"
+    app-builder-bin "1.9.16"
     bluebird-lst "^1.0.5"
     builder-util-runtime "^4.2.2"
     chalk "^2.4.1"
@@ -1500,7 +1523,37 @@ ejs@~2.5.6:
   version "2.5.7"
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.5.7.tgz#cc872c168880ae3c7189762fd5ffc00896c9518a"
 
-electron-builder-lib@20.16.0, electron-builder-lib@~20.16.0:
+electron-builder-lib@20.16.4:
+  version "20.16.4"
+  resolved "https://registry.yarnpkg.com/electron-builder-lib/-/electron-builder-lib-20.16.4.tgz#b5e89688e730f56566a4bb513bf8e1ba38912d37"
+  dependencies:
+    "7zip-bin" "~4.0.2"
+    app-builder-bin "1.9.16"
+    async-exit-hook "^2.0.1"
+    bluebird-lst "^1.0.5"
+    builder-util "5.11.9"
+    builder-util-runtime "4.2.2"
+    chromium-pickle-js "^0.2.0"
+    debug "^3.1.0"
+    ejs "^2.6.1"
+    electron-osx-sign "0.4.10"
+    electron-publish "20.16.0"
+    fs-extra-p "^4.6.1"
+    hosted-git-info "^2.6.1"
+    is-ci "^1.1.0"
+    isbinaryfile "^3.0.2"
+    js-yaml "^3.12.0"
+    lazy-val "^1.0.3"
+    minimatch "^3.0.4"
+    normalize-package-data "^2.4.0"
+    plist "^3.0.1"
+    read-config-file "3.0.2"
+    sanitize-filename "^1.6.1"
+    semver "^5.5.0"
+    stream-json "^1.0.2"
+    temp-file "^3.1.2"
+
+electron-builder-lib@~20.16.0:
   version "20.16.0"
   resolved "https://registry.yarnpkg.com/electron-builder-lib/-/electron-builder-lib-20.16.0.tgz#a756ef43d90bc10f39789b6f94e7f18297ce5670"
   dependencies:
@@ -1530,16 +1583,16 @@ electron-builder-lib@20.16.0, electron-builder-lib@~20.16.0:
     stream-json "^1.0.2"
     temp-file "^3.1.2"
 
-electron-builder@20.16.0:
-  version "20.16.0"
-  resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-20.16.0.tgz#b2d3c4d72adcefcd1fae28e6a23db811c88cbb12"
+electron-builder@20.16.4:
+  version "20.16.4"
+  resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-20.16.4.tgz#c5908384e3b3e0d26cd7371997f9cbd8970ecc19"
   dependencies:
     bluebird-lst "^1.0.5"
-    builder-util "5.11.5"
+    builder-util "5.11.9"
     builder-util-runtime "4.2.2"
     chalk "^2.4.1"
     dmg-builder "4.10.2"
-    electron-builder-lib "20.16.0"
+    electron-builder-lib "20.16.4"
     electron-download-tf "4.3.4"
     fs-extra-p "^4.6.1"
     is-ci "^1.1.0"
@@ -1547,7 +1600,7 @@ electron-builder@20.16.0:
     read-config-file "3.0.2"
     sanitize-filename "^1.6.1"
     update-notifier "^2.5.0"
-    yargs "^11.0.0"
+    yargs "^12.0.0"
 
 electron-chromedriver@~1.8.0:
   version "1.8.0"
@@ -2664,6 +2717,10 @@ home-path@^1.0.1:
 hosted-git-info@^2.1.4, hosted-git-info@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.6.0.tgz#23235b29ab230c576aab0d4f13fc046b0b038222"
+
+hosted-git-info@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.6.1.tgz#6e4cee78b01bb849dcf93527708c69fdbee410df"
 
 html-encoding-sniffer@^1.0.2:
   version "1.0.2"
@@ -6630,6 +6687,10 @@ y18n@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/y18n/-/y18n-3.2.1.tgz#6d15fba884c08679c0d77e88e7759e811e07fa41"
 
+"y18n@^3.2.1 || ^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/y18n/-/y18n-4.0.0.tgz#95ef94f85ecc81d007c264e190a120f0a3c8566b"
+
 yallist@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-2.1.2.tgz#1c11f9218f076089a47dd512f93c6699a6a81d52"
@@ -6685,6 +6746,23 @@ yargs@^11.0.0:
     which-module "^2.0.0"
     y18n "^3.2.1"
     yargs-parser "^9.0.2"
+
+yargs@^12.0.0:
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-12.0.0.tgz#8274480fd7332c77888bc33b6594340d31ed40d3"
+  dependencies:
+    cliui "^4.0.0"
+    decamelize "^1.1.1"
+    find-up "^2.1.0"
+    get-caller-file "^1.0.1"
+    os-locale "^2.0.0"
+    require-directory "^2.1.1"
+    require-main-filename "^1.0.1"
+    set-blocking "^2.0.0"
+    string-width "^2.0.0"
+    which-module "^2.0.0"
+    y18n "^3.2.1 || ^4.0.0"
+    yargs-parser "^10.0.0"
 
 yargs@~3.10.0:
   version "3.10.0"
