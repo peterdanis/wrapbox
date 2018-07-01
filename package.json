@@ -95,7 +95,7 @@
     "@types/jest": "^23.1.2",
     "electron": "2.0.3",
     "electron-builder": "20.16.4",
-    "electron-reload": "^1.2.3",
+    "electron-reload": "^1.2.5",
     "eslint": "^5.0.1",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-plugin-import": "^2.13.0",
