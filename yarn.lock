@@ -1701,9 +1701,9 @@ electron-updater@^2.22.1:
     semver "^5.5.0"
     source-map-support "^0.5.6"
 
-electron@2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-2.0.3.tgz#8e591e820cae2ccdb0c3fd74c6d07834913fc133"
+electron@2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-2.0.4.tgz#87b86b8d9c13748032868c1be97e2b7021a51808"
   dependencies:
     "@types/node" "^8.0.24"
     electron-download "^3.0.1"
