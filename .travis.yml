@@ -5,7 +5,7 @@ matrix:
       language: node_js
       node_js: "8"
       before_install:
-        - sudo Xvfb :99 -ac -screen 0 1600x900x32 & sleep 3
+        - sudo Xvfb :99 -ac -screen 0 1600x900x32
         - sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain Wrapbox.cer
     - os: linux
       dist: trusty
@@ -13,9 +13,10 @@ matrix:
       language: node_js
       node_js: "8"
       before_install:
+        - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
+        - export PATH=$HOME/.yarn/bin:$PATH
         - export DISPLAY=:99.0
         - sh -e /etc/init.d/xvfb start
-        - sleep 3
 git:
   depth: 1
 env:
