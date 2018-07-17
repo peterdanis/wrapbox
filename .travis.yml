@@ -4,7 +4,7 @@ matrix:
       osx_image: xcode9.3
       language: node_js
       node_js: "8"
-      before_script:
+      before_install:
         - sudo Xvfb :99 -ac -screen 0 1600x900x32 & sleep 3
         - sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain Wrapbox.cer
     - os: linux
@@ -12,7 +12,7 @@ matrix:
       sudo: false
       language: node_js
       node_js: "8"
-      before_script:
+      before_install:
         - export DISPLAY=:99.0
         - sh -e /etc/init.d/xvfb start
         - sleep 3
@@ -26,10 +26,6 @@ before_script:
   - yarn cover
   - codecov
 script:
-  - |
-    if [ $TRAVIS_BRANCH = "master" ];
-      then yarn run dist --x64;
-      else yarn run build --x64;
-    fi
+  - if [ $TRAVIS_BRANCH = "master" ]; then yarn run dist --x64; else yarn run build --x64; fi
 notifications:
   email: false
