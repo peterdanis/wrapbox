@@ -98,14 +98,6 @@ function createWindow() {
 // Init settings
 utils.init();
 
-// Load electron-reload for development
-try {
-  // eslint-disable-next-line
-  require("electron-reload")(__dirname);
-} catch (error) {
-  // Do nothing, electron-reload is used only for development
-}
-
 // Fix for Win10 notifications
 app.setAppUserModelId("com.peterdanis.wrapbox");
 
