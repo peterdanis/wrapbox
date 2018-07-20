@@ -106,6 +106,9 @@ try {
   // Do nothing, electron-reload is used only for development
 }
 
+// Fix for Win10 notifications
+app.setAppUserModelId("com.peterdanis.wrapbox");
+
 // App listeners
 app.on("ready", () => {
   createWindow();
