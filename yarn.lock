@@ -258,7 +258,38 @@ app-builder-bin@1.11.4:
   version "1.11.4"
   resolved "https://registry.yarnpkg.com/app-builder-bin/-/app-builder-bin-1.11.4.tgz#5e6fe03654e91aa5339a221b6d0811c55a09480b"
 
-app-builder-lib@20.24.3, app-builder-lib@~20.24.2:
+app-builder-lib@20.24.4:
+  version "20.24.4"
+  resolved "https://registry.yarnpkg.com/app-builder-lib/-/app-builder-lib-20.24.4.tgz#f2fa4108f50b9a94e24e2ab7b7918caa9f13d105"
+  dependencies:
+    "7zip-bin" "~4.0.2"
+    app-builder-bin "1.11.4"
+    async-exit-hook "^2.0.1"
+    bluebird-lst "^1.0.5"
+    builder-util "5.18.0"
+    builder-util-runtime "4.4.1"
+    chromium-pickle-js "^0.2.0"
+    debug "^3.1.0"
+    ejs "^2.6.1"
+    electron-osx-sign "0.4.10"
+    electron-publish "20.24.2"
+    env-paths "^1.0.0"
+    fs-extra-p "^4.6.1"
+    hosted-git-info "^2.7.1"
+    is-ci "^1.1.0"
+    isbinaryfile "^3.0.2"
+    js-yaml "^3.12.0"
+    lazy-val "^1.0.3"
+    minimatch "^3.0.4"
+    normalize-package-data "^2.4.0"
+    plist "^3.0.1"
+    read-config-file "3.1.0"
+    sanitize-filename "^1.6.1"
+    semver "^5.5.0"
+    sumchecker "^2.0.2"
+    temp-file "^3.1.3"
+
+app-builder-lib@~20.24.2:
   version "20.24.3"
   resolved "https://registry.yarnpkg.com/app-builder-lib/-/app-builder-lib-20.24.3.tgz#ecf208aa6f5773a6d219357934c1f1807bedec5b"
   dependencies:
@@ -1514,11 +1545,11 @@ ejs@~2.5.6:
   version "2.5.7"
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.5.7.tgz#cc872c168880ae3c7189762fd5ffc00896c9518a"
 
-electron-builder@20.24.3:
-  version "20.24.3"
-  resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-20.24.3.tgz#22aec49b6059c342b1cd57b4d90684f8241c5916"
+electron-builder@20.24.4:
+  version "20.24.4"
+  resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-20.24.4.tgz#4c3884edfc565ba94ccec61aa1db6a7cb91a5d36"
   dependencies:
-    app-builder-lib "20.24.3"
+    app-builder-lib "20.24.4"
     bluebird-lst "^1.0.5"
     builder-util "5.18.0"
     builder-util-runtime "4.4.1"
