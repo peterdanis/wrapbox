@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, dialog } = require("electron"); // eslint-disable-line
+const { app, BrowserWindow, dialog, ipcMain, Menu, shell } = require("electron"); // eslint-disable-line
 const log = require("electron-log");
 
 // Change log level for file log to info and log app start
@@ -162,6 +162,38 @@ ipcMain.on("register", (regEvent) => {
           clearTimeout(closeTimeout);
         }
       }
+    });
+  }
+  // TODO: check whether if statement is necessary - whether webContents has context-menu event
+  // eslint-disable-next-line no-underscore-dangle
+  if (!webContents._events["context-menu"]) {
+    webContents.on("context-menu", (clickEvent, args) => {
+      // Create context menu
+      const contextMenu = Menu.buildFromTemplate([
+        {
+          label: "Open link in browser",
+          click: () => {
+            shell.openExternal(args.linkURL);
+            log.info(args);
+          },
+          visible: args.linkURL !== "",
+        },
+        { role: "cut" },
+        { role: "copy" },
+        { role: "paste" },
+        {
+          label: "View",
+          submenu: [{ role: "resetzoom" }, { role: "zoomin" }, { role: "zoomout" }],
+        },
+        { type: "separator" },
+        {
+          label: "Open this page in browser",
+          click: () => {
+            shell.openExternal(args.pageURL);
+          },
+        },
+      ]);
+      contextMenu.popup({});
     });
   }
 });
