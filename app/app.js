@@ -166,19 +166,37 @@ ipcMain.on("register", (regEvent) => {
     // Context menu inside if statement, to prevent multiple attached listeners
     // eslint-disable-next-line no-underscore-dangle
     webContents.on("context-menu", (clickEvent, args) => {
+      function can(type) {
+        return args.editFlags[`can${type}`];
+      }
       // Create context menu, inside listener, to have access to args
+      // More or less taken from https://github.com/sindresorhus/electron-context-menu
       const contextMenu = Menu.buildFromTemplate([
         {
           label: "Open link in browser",
           click: () => {
             shell.openExternal(args.linkURL);
-            log.info(args);
           },
           visible: args.linkURL !== "",
         },
-        { role: "cut" },
-        { role: "copy" },
-        { role: "paste" },
+        {
+          label: "Cut",
+          role: can("Cut") ? "cut" : "",
+          enabled: can("Cut"),
+        },
+        {
+          label: "Copy",
+          role: can("Copy") ? "copy" : "",
+          enabled: can("Copy"),
+        },
+        {
+          label: "Paste",
+          role: can("Paste") ? "paste" : "",
+          enabled: can("Paste"),
+        },
+        {
+          type: "separator",
+        },
         {
           label: "View",
           submenu: [{ role: "resetzoom" }, { role: "zoomin" }, { role: "zoomout" }],
