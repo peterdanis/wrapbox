@@ -21,8 +21,6 @@ const url = require("url");
 const update = require("./scripts/update");
 const utils = require("./scripts/utils");
 
-// Set taskbar icon for Linux manually.
-const appImageIcon = process.env.APPDIR ? path.join(process.env.APPDIR, "wrapbox.png") : undefined;
 let reload;
 let win;
 let closeTimeout;
@@ -43,7 +41,8 @@ function createWindow() {
     backgroundColor: utils.settings.backgroundColor,
     titleBarStyle: "hiddenInset",
     show: false,
-    icon: appImageIcon,
+    // Set taskbar icon for Linux appimage manually.
+    icon: process.env.APPDIR ? path.join(process.env.APPDIR, "wrapbox.png") : undefined,
   });
 
   win.loadURL(
