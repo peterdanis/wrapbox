@@ -21,6 +21,7 @@ const url = require("url");
 const update = require("./scripts/update");
 const utils = require("./scripts/utils");
 
+// Set taskbar icon for Linux manually.
 const appImageIcon = process.env.APPDIR ? path.join(process.env.APPDIR, "wrapbox.png") : undefined;
 let reload;
 let win;
