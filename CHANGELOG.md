@@ -15,6 +15,10 @@ and this project adheres to
 - Rework notifications
 - Rework settings
 
+## [0.1.5]
+
+- Add context menu
+
 ## [0.1.4]
 
 - Fix notifications on Windows 10 Fall Creators update (and newer)

@@ -2,7 +2,7 @@
   "name": "wrapbox",
   "productName": "Wrapbox",
   "description": "An Electron wrapper for web pages",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "MIT",
   "author": "Peter Danis <peter.danis@outlook.com>",
   "repository": {
@@ -25,36 +25,60 @@
     "watch": "jest --watch --noStackTrace --notify"
   },
   "jest": {
-    "collectCoverageFrom": ["app/**/*.js", "!app/dependencies/**"],
-    "coverageReporters": ["json"]
+    "collectCoverageFrom": [
+      "app/**/*.js",
+      "!app/dependencies/**"
+    ],
+    "coverageReporters": [
+      "json"
+    ]
   },
   "nyc": {
-    "reporter": ["lcov", "text"],
+    "reporter": [
+      "lcov",
+      "text"
+    ],
     "tempDirectory": "./coverage",
-    "exclude": ["app/dependencies/**", "tests/**"],
+    "exclude": [
+      "app/dependencies/**",
+      "tests/**"
+    ],
     "instrument": false
   },
-  "eslintIgnore": ["app/dependencies/**", "coverage/**", "release-builds/**"],
+  "eslintIgnore": [
+    "app/dependencies/**",
+    "coverage/**",
+    "release-builds/**"
+  ],
   "build": {
     "appId": "com.peterdanis.wrapbox",
     "productName": "Wrapbox",
     "copyright": "Copyright © 2018 Peter Danis",
     "asar": false,
     "win": {
-      "target": ["nsis", "portable", "zip"],
+      "target": [
+        "nsis",
+        "portable",
+        "zip"
+      ],
       "icon": "icons/icon.ico"
     },
     "mac": {
       "artifactName": "${name}-${version}-mac.${ext}",
       "category": "public.app-category.productivity",
-      "target": ["dmg", "zip"],
+      "target": [
+        "dmg",
+        "zip"
+      ],
       "icon": "icons/icon.icns",
       "electronUpdaterCompatibility": ">=2.16"
     },
     "linux": {
       "artifactName": "${name}-${version}.${ext}",
       "category": "Utility",
-      "target": ["AppImage"],
+      "target": [
+        "AppImage"
+      ],
       "icon": "icons/icon.icns"
     },
     "nsis": {
@@ -82,7 +106,9 @@
         }
       ]
     },
-    "files": ["app/**"],
+    "files": [
+      "app/**"
+    ],
     "directories": {
       "output": "./release-builds"
     }
