@@ -163,12 +163,10 @@ ipcMain.on("register", (regEvent) => {
         }
       }
     });
-  }
-  // TODO: check whether if statement is necessary - whether webContents has context-menu event
-  // eslint-disable-next-line no-underscore-dangle
-  if (!webContents._events["context-menu"]) {
+    // Context menu inside if statement, to prevent multiple attached listeners
+    // eslint-disable-next-line no-underscore-dangle
     webContents.on("context-menu", (clickEvent, args) => {
-      // Create context menu
+      // Create context menu, inside listener, to have access to args
       const contextMenu = Menu.buildFromTemplate([
         {
           label: "Open link in browser",
