@@ -18,7 +18,6 @@ and this project adheres to
 ## [0.1.5]
 
 - Add context menu
-- Add menu (MacOS only)
 
 ## [0.1.4]
 
