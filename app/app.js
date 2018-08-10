@@ -21,14 +21,7 @@ const url = require("url");
 const update = require("./scripts/update");
 const utils = require("./scripts/utils");
 
-const appImageIcon = (() => {
-  // On Windows and MacOS the icons on taskbar are automatically set to the app icon,
-  // for Linux manually setting it in BrowserWindow is needed.
-  if (process.env.APPDIR) {
-    return path.join(process.env.APPDIR, "wrapbox.png");
-  }
-  return undefined;
-})();
+const appImageIcon = process.env.APPDIR ? path.join(process.env.APPDIR, "wrapbox.png") : undefined;
 let reload;
 let win;
 let closeTimeout;
