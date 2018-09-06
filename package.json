@@ -61,7 +61,8 @@
         "portable",
         "zip"
       ],
-      "icon": "icons/icon.ico"
+      "icon": "icons/icon.ico",
+      "publisherName": "Wrapbox"
     },
     "mac": {
       "artifactName": "${name}-${version}-mac.${ext}",
