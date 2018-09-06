@@ -1,9 +1,9 @@
-version: '{branch}-{build}'
+version: "{branch}-{build}"
 environment:
   GH_TOKEN:
     secure: 1aigA+tF1hWwZVVARvg+fhwGlJmgNLfs4FDdlgW8mOWqe9MA+gjKLgKT99wO4D0e
 install:
-  - ps: Install-Product node 8 x64
+  - ps: Install-Product node 10 x64
   - cmd: yarn
   - cmd: yarn global add codecov
 build: off
@@ -14,15 +14,13 @@ after_test:
   - cmd: codecov
 
 for:
--
-  branches:
-    only:
-      - master
-  deploy_script: 
-    - cmd: yarn run dist --x64
--
-  branches:
-    except:
-      - master
-  deploy_script: 
-    - cmd: yarn run build --x64
+  - branches:
+      only:
+        - master
+    deploy_script:
+      - cmd: yarn run dist --x64
+  - branches:
+      except:
+        - master
+    deploy_script:
+      - cmd: yarn run build --x64
