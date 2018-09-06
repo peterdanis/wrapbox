@@ -15,6 +15,11 @@ and this project adheres to
 - Rework notifications
 - Rework settings
 
+## [0.1.6]
+
+- Installer and application are now signed by self-signed certificate
+- Update Electron version
+
 ## [0.1.5]
 
 - Add context menu
