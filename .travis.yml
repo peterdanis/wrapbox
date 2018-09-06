@@ -5,7 +5,6 @@ matrix:
       node_js: "10"
       before_install:
         - sudo Xvfb :99 -ac -screen 0 1600x900x32 & sleep 3
-        - sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain Wrapbox.cer
     - os: linux
       dist: trusty
       sudo: false
