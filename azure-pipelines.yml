@@ -1,16 +1,116 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+# Set up triggers in GUI
+name: $(Build.SourceBranch)_$(Rev:r)
 
-pool:
-  vmImage: 'Ubuntu 16.04'
+resources:
+  containers:
+    - container: ubuntu
+      image: ubuntu:xenial
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+jobs:
+  # - job: LinuxYarnTest
+  #   timeoutInMinutes: 10
+  #   pool:
+  #     vmImage: "ubuntu-16.04"
+  #   steps:
+  #     - script: yarn --version
+  #       displayName: "Yarn version"
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  - job: Linux
+    timeoutInMinutes: 10
+    pool:
+      vmImage: "ubuntu-16.04"
+    steps:
+      - task: geeklearningio.gl-vsts-tasks-yarn.yarn-installer-task.YarnInstaller@2
+        displayName: "Use Yarn 1.x"
+        inputs:
+          checkLatest: true
+      - script: cat /etc/os-release
+        displayName: "Get os release info"
+      - script: yarn
+        displayName: "Yarn install"
+      - script: yarn lint
+        displayName: "Lint"
+      - script: sudo apt-get update && sudo apt-get install libgconf-2-4 -y
+        displayName: Install dependency
+      - script: "xvfb-run --auto-servernum --server-args='-screen 0, 1600x900x24' yarn cover"
+        displayName: "Run tests with coverage report"
+      - script: npx codecov
+        displayName: "Upload coverage report"
+        env: { CODECOV_TOKEN: $(CODECOV_TOKEN) }
+      - script: yarn dist --x64
+        displayName: "Build & publish"
+        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+        env: { GH_TOKEN: $(GH_TOKEN) }
+      - script: yarn build --x64
+        displayName: "Build"
+        condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+        env: { GH_TOKEN: $(GH_TOKEN) }
+      - task: PublishBuildArtifacts@1
+        displayName: "Publish Artifact: Release"
+        inputs:
+          PathtoPublish: "$(Build.SourcesDirectory)/release-builds"
+          ArtifactName: Release
+
+  - job: macOS
+    timeoutInMinutes: 10
+    pool:
+      vmImage: "xcode9-macos10.13"
+    steps:
+      - task: NodeTool@0
+        displayName: "Use Node 10"
+        inputs:
+          versionSpec: 10.x
+      - script: yarn
+        displayName: "Yarn install"
+      - script: yarn lint
+        displayName: "Lint"
+      - script: yarn cover
+        displayName: "Run tests with coverage report"
+      - script: npx codecov
+        displayName: "Upload coverage report"
+        env: { CODECOV_TOKEN: $(CODECOV_TOKEN) }
+      - script: yarn dist --x64
+        displayName: "Build & publish"
+        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+        env: { GH_TOKEN: $(GH_TOKEN) }
+      - script: yarn build --x64
+        displayName: "Build"
+        condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+        env: { GH_TOKEN: $(GH_TOKEN) }
+      - task: PublishBuildArtifacts@1
+        displayName: "Publish Artifact: Release"
+        inputs:
+          PathtoPublish: "$(Build.SourcesDirectory)/release-builds"
+          ArtifactName: Release
+
+  - job: Windows
+    timeoutInMinutes: 10
+    pool:
+      vmImage: "vs2017-win2016"
+    steps:
+      - task: NodeTool@0
+        displayName: "Use Node 10"
+        inputs:
+          versionSpec: 10.x
+      - script: yarn
+        displayName: "Yarn install"
+      - script: yarn lint
+        displayName: "Lint"
+      - script: yarn cover
+        displayName: "Run tests with coverage report"
+      - script: npx codecov
+        displayName: "Upload coverage report"
+        env: { CODECOV_TOKEN: $(CODECOV_TOKEN) }
+      - script: yarn dist --x64
+        displayName: "Build & publish"
+        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+        env: { GH_TOKEN: $(GH_TOKEN) }
+      - script: yarn build --x64
+        displayName: "Build"
+        condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+        env: { GH_TOKEN: $(GH_TOKEN) }
+      - task: PublishBuildArtifacts@1
+        displayName: "Publish Artifact: Release"
+        inputs:
+          PathtoPublish: "$(Build.SourcesDirectory)/release-builds"
+          ArtifactName: Release
