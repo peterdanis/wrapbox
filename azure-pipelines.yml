@@ -20,6 +20,10 @@ jobs:
     pool:
       vmImage: "ubuntu-16.04"
     steps:
+      - task: NodeTool@0
+        displayName: "Use Node 10"
+        inputs:
+          versionSpec: 10.x
       - task: geeklearningio.gl-vsts-tasks-yarn.yarn-installer-task.YarnInstaller@2
         displayName: "Use Yarn 1.x"
         inputs:
@@ -72,11 +76,16 @@ jobs:
       - script: yarn dist --x64
         displayName: "Build & publish"
         condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-        env: { GH_TOKEN: $(GH_TOKEN) }
+        env:
+          {
+            GH_TOKEN: $(GH_TOKEN),
+            CSC_LINK: $(CSC_LINK),
+            CSC_KEY_PASSWORD: $(CSC_KEY_PASSWORD),
+          }
       - script: yarn build --x64
         displayName: "Build"
         condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
-        env: { GH_TOKEN: $(GH_TOKEN) }
+        env: { CSC_LINK: $(CSC_LINK), CSC_KEY_PASSWORD: $(CSC_KEY_PASSWORD) }
       - task: PublishBuildArtifacts@1
         displayName: "Publish Artifact: Release"
         inputs:
@@ -104,11 +113,16 @@ jobs:
       - script: yarn dist --x64
         displayName: "Build & publish"
         condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-        env: { GH_TOKEN: $(GH_TOKEN) }
+        env:
+          {
+            GH_TOKEN: $(GH_TOKEN),
+            CSC_LINK: $(CSC_LINK),
+            CSC_KEY_PASSWORD: $(CSC_KEY_PASSWORD),
+          }
       - script: yarn build --x64
         displayName: "Build"
         condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
-        env: { GH_TOKEN: $(GH_TOKEN) }
+        env: { CSC_LINK: $(CSC_LINK), CSC_KEY_PASSWORD: $(CSC_KEY_PASSWORD) }
       - task: PublishBuildArtifacts@1
         displayName: "Publish Artifact: Release"
         inputs:
