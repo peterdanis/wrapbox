@@ -73,6 +73,8 @@ jobs:
       - script: npx codecov
         displayName: "Upload coverage report"
         env: { CODECOV_TOKEN: $(CODECOV_TOKEN) }
+      - script: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain Wrapbox.cer
+        displayName: "Add certificate as trusted"
       - script: yarn dist --x64
         displayName: "Build & publish"
         condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
