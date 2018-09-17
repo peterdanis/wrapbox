@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.org/peterdanis/wrapbox.svg?branch=master)](https://travis-ci.org/peterdanis/wrapbox)
-[![Build status](https://ci.appveyor.com/api/projects/status/l4lpc5f689l0rw0x/branch/master?svg=true)](https://ci.appveyor.com/project/peterdanis/wrapbox/branch/master)
+[![Build Status](https://dev.azure.com/peterdanis/wrapbox/_apis/build/status/wrapbox-ci?branchName=master)](https://dev.azure.com/peterdanis/wrapbox/_build/latest?definitionId=5)
 [![Maintainability](https://api.codeclimate.com/v1/badges/0746b7ce5b2c1fe231de/maintainability)](https://codeclimate.com/github/peterdanis/wrapbox/maintainability)
 [![codecov](https://codecov.io/gh/peterdanis/wrapbox/branch/master/graph/badge.svg)](https://codecov.io/gh/peterdanis/wrapbox)
 
