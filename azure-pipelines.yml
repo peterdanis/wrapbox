@@ -1,5 +1,5 @@
 # Set up triggers in GUI
-name: $(Build.SourceBranch)_$(Rev:r)
+name: $(Build.Reason)_$(Build.SourceBranch)_$(Rev:r)
 
 resources:
   containers:
