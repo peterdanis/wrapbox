@@ -2,14 +2,6 @@
 name: $(Build.Reason)_$(Build.SourceBranch)_$(Rev:r)
 
 jobs:
-  - job: LinuxYarnTest
-    timeoutInMinutes: 10
-    pool:
-      name: Hosted Linux Preview
-    steps:
-      - script: yarn --version
-        displayName: "Yarn version"
-
   - job: Linux
     timeoutInMinutes: 15
     pool:
@@ -19,10 +11,6 @@ jobs:
         displayName: "Use Node 10"
         inputs:
           versionSpec: 10.x
-      - task: geeklearningio.gl-vsts-tasks-yarn.yarn-installer-task.YarnInstaller@2
-        displayName: "Use Yarn 1.x"
-        inputs:
-          checkLatest: true
       - script: cat /etc/os-release
         displayName: "Get os release info"
       - script: yarn
