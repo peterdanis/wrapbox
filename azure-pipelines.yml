@@ -2,18 +2,18 @@
 name: $(Build.Reason)_$(Build.SourceBranch)_$(Rev:r)
 
 jobs:
-  # - job: LinuxYarnTest
-  #   timeoutInMinutes: 10
-  #   pool:
-  #     vmImage: "ubuntu-16.04"
-  #   steps:
-  #     - script: yarn --version
-  #       displayName: "Yarn version"
+  - job: LinuxYarnTest
+    timeoutInMinutes: 10
+    pool:
+      name: Hosted Linux Preview
+    steps:
+      - script: yarn --version
+        displayName: "Yarn version"
 
   - job: Linux
     timeoutInMinutes: 15
     pool:
-      vmImage: "ubuntu-16.04"
+      name: Hosted Linux Preview
     steps:
       - task: NodeTool@0
         displayName: "Use Node 10"
