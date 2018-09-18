@@ -16,7 +16,7 @@ jobs:
   #       displayName: "Yarn version"
 
   - job: Linux
-    timeoutInMinutes: 10
+    timeoutInMinutes: 15
     pool:
       vmImage: "ubuntu-16.04"
     steps:
@@ -56,7 +56,7 @@ jobs:
           ArtifactName: Release
 
   - job: macOS
-    timeoutInMinutes: 10
+    timeoutInMinutes: 15
     pool:
       vmImage: "xcode9-macos10.13"
     steps:
@@ -95,7 +95,7 @@ jobs:
           ArtifactName: Release
 
   - job: Windows
-    timeoutInMinutes: 10
+    timeoutInMinutes: 15
     pool:
       vmImage: "vs2017-win2016"
     steps:
