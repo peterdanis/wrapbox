@@ -33,7 +33,7 @@ jobs:
         displayName: Install dependency
       - script: "xvfb-run --auto-servernum --server-args='-screen 0, 1600x900x24' yarn cover"
         displayName: "Run tests with coverage report"
-      - script: npx codecov
+      - script: npx codecov -F Linux
         displayName: "Upload coverage report"
         env: { CODECOV_TOKEN: $(CODECOV_TOKEN) }
       - script: yarn dist --x64
@@ -64,7 +64,7 @@ jobs:
         displayName: "Lint"
       - script: yarn cover
         displayName: "Run tests with coverage report"
-      - script: npx codecov
+      - script: npx codecov -F macOS
         displayName: "Upload coverage report"
         env: { CODECOV_TOKEN: $(CODECOV_TOKEN) }
       - script: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain Wrapbox.cer
@@ -102,7 +102,7 @@ jobs:
         displayName: "Lint"
       - script: yarn cover
         displayName: "Run tests with coverage report"
-      - script: npx codecov
+      - script: npx codecov -F Windows
         displayName: "Upload coverage report"
         env: { CODECOV_TOKEN: $(CODECOV_TOKEN) }
       - script: yarn dist --x64
