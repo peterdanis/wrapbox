@@ -1,11 +1,6 @@
 # Set up triggers in GUI
 name: $(Build.Reason)_$(Build.SourceBranch)_$(Rev:r)
 
-resources:
-  containers:
-    - container: ubuntu
-      image: ubuntu:xenial
-
 jobs:
   # - job: LinuxYarnTest
   #   timeoutInMinutes: 10
@@ -48,9 +43,8 @@ jobs:
       - script: yarn build --x64
         displayName: "Build"
         condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
-        env: { GH_TOKEN: $(GH_TOKEN) }
       - task: PublishBuildArtifacts@1
-        displayName: "Publish Artifact: Release"
+        displayName: "Upload artifacts"
         inputs:
           PathtoPublish: "$(Build.SourcesDirectory)/release-builds"
           ArtifactName: Release
@@ -87,9 +81,8 @@ jobs:
       - script: yarn build --x64
         displayName: "Build"
         condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
-        env: { CSC_LINK: $(CSC_LINK), CSC_KEY_PASSWORD: $(CSC_KEY_PASSWORD) }
       - task: PublishBuildArtifacts@1
-        displayName: "Publish Artifact: Release"
+        displayName: "Upload artifacts"
         inputs:
           PathtoPublish: "$(Build.SourcesDirectory)/release-builds"
           ArtifactName: Release
@@ -124,9 +117,8 @@ jobs:
       - script: yarn build --x64
         displayName: "Build"
         condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
-        env: { CSC_LINK: $(CSC_LINK), CSC_KEY_PASSWORD: $(CSC_KEY_PASSWORD) }
       - task: PublishBuildArtifacts@1
-        displayName: "Publish Artifact: Release"
+        displayName: "Upload artifacts"
         inputs:
           PathtoPublish: "$(Build.SourcesDirectory)/release-builds"
           ArtifactName: Release
