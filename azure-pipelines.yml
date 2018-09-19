@@ -15,27 +15,10 @@ jobs:
         displayName: "Get os release info"
       - script: yarn
         displayName: "Yarn install"
-      - script: yarn lint
-        displayName: "Lint"
       - script: sudo apt-get update && sudo apt-get install libgconf-2-4 -y
         displayName: Install dependency
-      - script: "xvfb-run --auto-servernum --server-args='-screen 0, 1600x900x24' yarn cover"
-        displayName: "Run tests with coverage report"
-      - script: npx codecov -F Linux
-        displayName: "Upload coverage report"
-        env: { CODECOV_TOKEN: $(CODECOV_TOKEN) }
-      - script: yarn dist --x64
-        displayName: "Build & publish"
-        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-        env: { GH_TOKEN: $(GH_TOKEN) }
-      - script: yarn build --x64
-        displayName: "Build"
-        condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
-      - task: PublishBuildArtifacts@1
-        displayName: "Upload artifacts"
-        inputs:
-          PathtoPublish: "$(Build.SourcesDirectory)/release-builds"
-          ArtifactName: Release
+      - script: "xvfb-run --auto-servernum --server-args='-screen 0, 1600x900x24' yarn electron ."
+        displayName: "Start electron"
 
   - job: macOS
     timeoutInMinutes: 15
@@ -48,32 +31,8 @@ jobs:
           versionSpec: 10.x
       - script: yarn
         displayName: "Yarn install"
-      - script: yarn lint
-        displayName: "Lint"
-      - script: yarn cover
-        displayName: "Run tests with coverage report"
-      - script: npx codecov -F macOS
-        displayName: "Upload coverage report"
-        env: { CODECOV_TOKEN: $(CODECOV_TOKEN) }
-      - script: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain Wrapbox.cer
-        displayName: "Add certificate as trusted"
-      - script: yarn dist --x64
-        displayName: "Build & publish"
-        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-        env:
-          {
-            GH_TOKEN: $(GH_TOKEN),
-            CSC_LINK: $(CSC_LINK),
-            CSC_KEY_PASSWORD: $(CSC_KEY_PASSWORD),
-          }
-      - script: yarn build --x64
-        displayName: "Build"
-        condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
-      - task: PublishBuildArtifacts@1
-        displayName: "Upload artifacts"
-        inputs:
-          PathtoPublish: "$(Build.SourcesDirectory)/release-builds"
-          ArtifactName: Release
+      - script: yarn electron .
+        displayName: "Start electron"
 
   - job: Windows
     timeoutInMinutes: 15
@@ -88,25 +47,5 @@ jobs:
         displayName: "Yarn install"
       - script: yarn lint
         displayName: "Lint"
-      - script: yarn cover
-        displayName: "Run tests with coverage report"
-      - script: npx codecov -F Windows
-        displayName: "Upload coverage report"
-        env: { CODECOV_TOKEN: $(CODECOV_TOKEN) }
-      - script: yarn dist --x64
-        displayName: "Build & publish"
-        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-        env:
-          {
-            GH_TOKEN: $(GH_TOKEN),
-            CSC_LINK: $(CSC_LINK),
-            CSC_KEY_PASSWORD: $(CSC_KEY_PASSWORD),
-          }
-      - script: yarn build --x64
-        displayName: "Build"
-        condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
-      - task: PublishBuildArtifacts@1
-        displayName: "Upload artifacts"
-        inputs:
-          PathtoPublish: "$(Build.SourcesDirectory)/release-builds"
-          ArtifactName: Release
+      - script: yarn electron .
+        displayName: "Start electron"
