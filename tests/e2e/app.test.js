@@ -36,7 +36,7 @@ describe("App", () => {
 
       expect(isVisible).toBe(true);
     },
-    60000
+    120000
   );
 
   // TODO: WIP tests
