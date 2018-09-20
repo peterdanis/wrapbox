@@ -17,6 +17,7 @@ beforeAll(async () => {
     path: electron,
     args: ["-r", preloadFile, "."],
     startTimeout: 30000,
+    waitTimeout: 30000,
   });
   await app.start();
 }, 30000);
