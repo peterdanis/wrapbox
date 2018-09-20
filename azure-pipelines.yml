@@ -15,7 +15,6 @@ jobs:
         displayName: "Get os release info"
       - script: yarn
         displayName: "Yarn install"
-      - script: yarn chromedriver
       - script: yarn lint
         displayName: "Lint"
       - script: sudo apt-get update && sudo apt-get install libgconf-2-4 -y
