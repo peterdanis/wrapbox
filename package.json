@@ -122,7 +122,6 @@
     "@types/jest": "^23.3.2",
     "electron": "3.0.0",
     "electron-builder": "20.28.4",
-    "electron-chromedriver": "3.0.0-beta.1",
     "eslint": "^5.6.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
@@ -134,7 +133,7 @@
     "nyc": "^13.0.1",
     "prettier-eslint": "^8.8.2",
     "prettier-stylelint": "^0.4.2",
-    "spectron": "~4.0.0",
+    "spectron": "peterdanis/spectron",
     "stylelint": "^9.5.0",
     "stylelint-config-standard": "^18.0.0"
   }
