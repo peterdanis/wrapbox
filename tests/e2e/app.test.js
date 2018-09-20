@@ -31,7 +31,7 @@ describe("App", () => {
   test(
     "starts",
     async () => {
-      await app.client.waitUntilWindowLoaded();
+      await app.client.waitUntilWindowLoaded(15000);
       const isVisible = await app.browserWindow.isVisible("#titlebar");
 
       expect(isVisible).toBe(true);
