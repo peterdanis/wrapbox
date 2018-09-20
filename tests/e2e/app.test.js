@@ -32,7 +32,7 @@ describe("App", () => {
     "starts",
     async () => {
       await app.client.waitUntilWindowLoaded(15000);
-      const isVisible = await app.browserWindow.isVisible("#titlebar");
+      const isVisible = await app.browserWindow.isVisible("#titlebar", 15000);
 
       expect(isVisible).toBe(true);
     },
