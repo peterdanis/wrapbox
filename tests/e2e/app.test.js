@@ -17,7 +17,7 @@ beforeAll(async () => {
     path: electron,
     args: ["-r", preloadFile, "."],
     startTimeout: 30000,
-    waitTimeout: 120000,
+    waitTimeout: 300000,
   });
   await app.start();
 }, 30000);
@@ -36,7 +36,7 @@ describe("App", () => {
 
       expect(isVisible).toBe(true);
     },
-    120000
+    300000
   );
 
   // TODO: WIP tests
