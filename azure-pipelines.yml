@@ -5,7 +5,7 @@ jobs:
   - job: Linux
     timeoutInMinutes: 15
     pool:
-      name: Hosted Linux Preview
+      vmImage: ubuntu-16.04
     steps:
       - task: NodeTool@0
         displayName: "Use Node 10"
