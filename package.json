@@ -133,7 +133,7 @@
     "nyc": "^13.0.1",
     "prettier-eslint": "^8.8.2",
     "prettier-stylelint": "^0.4.2",
-    "spectron": "~4.0.0",
+    "spectron": "~5.0.0",
     "stylelint": "^9.6.0",
     "stylelint-config-standard": "^18.0.0"
   }
