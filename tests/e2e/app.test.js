@@ -30,7 +30,6 @@ describe("App", () => {
   test(
     "starts",
     async () => {
-      await app.client.waitUntilWindowLoaded();
       const isVisible = await app.browserWindow.isVisible();
 
       expect(isVisible).toBe(true);
