@@ -15,7 +15,7 @@ beforeAll(async () => {
   // const preloadFile = path.posix.join(__dirname, "test-preload.js");
   app = new Application({
     path: electron,
-    args: ["."],
+    args: ["-r", preloadFile, "."],
     startTimeout: 30000,
   });
   await app.start();
