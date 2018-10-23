@@ -1,7 +1,7 @@
 const { Application } = require("spectron");
 const { toMatchImageSnapshot } = require("jest-image-snapshot");
 const electron = require("electron");
-const path = require("path");
+// const path = require("path");
 
 const delay = ms => new Promise((resolve) => {
   setTimeout(() => {
