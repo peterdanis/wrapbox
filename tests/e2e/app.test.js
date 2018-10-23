@@ -1,7 +1,7 @@
 const { Application } = require("spectron");
 const { toMatchImageSnapshot } = require("jest-image-snapshot");
 const electron = require("electron");
-// const path = require("path");
+const path = require("path");
 
 const delay = ms => new Promise((resolve) => {
   setTimeout(() => {
@@ -12,7 +12,7 @@ let app;
 
 beforeAll(async () => {
   expect.extend({ toMatchImageSnapshot });
-  // const preloadFile = path.posix.join(__dirname, "test-preload.js");
+  const preloadFile = path.posix.join(__dirname, "test-preload.js");
   app = new Application({
     path: electron,
     args: ["-r", preloadFile, "."],
