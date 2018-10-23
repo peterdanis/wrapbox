@@ -14,7 +14,7 @@
     "build": "electron-builder -p never",
     "cover": "nyc --clean jest --coverage",
     "dist": "electron-builder",
-    "lint": "eslint **/*.js",
+    "lint": "eslint .",
     "pack": "electron-builder --dir",
     "start": "electron .",
     "test-e2e": "jest --noStackTrace e2e",
