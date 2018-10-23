@@ -12,7 +12,7 @@ let app;
 
 beforeAll(async () => {
   expect.extend({ toMatchImageSnapshot });
-  const preloadFile = path.posix.join(__dirname, "test-preload.js");
+  // const preloadFile = path.posix.join(__dirname, "test-preload.js");
   app = new Application({
     path: electron,
     args: ["."],
