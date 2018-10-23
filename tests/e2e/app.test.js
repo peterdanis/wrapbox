@@ -19,12 +19,12 @@ beforeAll(async () => {
     startTimeout: 30000,
   });
   await app.start();
-}, 30000);
+}, 60000);
 
 afterAll(async () => {
   await app.stop();
   await delay(5000);
-}, 30000);
+}, 60000);
 
 describe("App", () => {
   test(
