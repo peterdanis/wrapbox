@@ -930,12 +930,21 @@ buffer-from@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.0.0.tgz#4cb8832d23612589b0406e9e2956c17f06fdf531"
 
-builder-util-runtime@4.4.1, builder-util-runtime@^4.4.1, builder-util-runtime@~4.4.1:
+builder-util-runtime@4.4.1, builder-util-runtime@^4.4.1:
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/builder-util-runtime/-/builder-util-runtime-4.4.1.tgz#2770d03241e51fde46acacc7ed3ed8a9f45f02cb"
   dependencies:
     bluebird-lst "^1.0.5"
     debug "^3.1.0"
+    fs-extra-p "^4.6.1"
+    sax "^1.2.4"
+
+builder-util-runtime@~5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/builder-util-runtime/-/builder-util-runtime-5.0.0.tgz#1f35cc28c87ca7de336efa098c6d3fd550db15a5"
+  dependencies:
+    bluebird-lst "^1.0.5"
+    debug "^4.1.0"
     fs-extra-p "^4.6.1"
     sax "^1.2.4"
 
@@ -1448,7 +1457,7 @@ debug@^4.0.0:
   dependencies:
     ms "^2.1.1"
 
-debug@^4.0.1:
+debug@^4.0.1, debug@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.1.0.tgz#373687bffa678b38b1cd91f861b63850035ddc87"
   dependencies:
@@ -1748,18 +1757,18 @@ electron-to-chromium@^1.3.52:
   version "1.3.52"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.52.tgz#d2d9f1270ba4a3b967b831c40ef71fb4d9ab5ce0"
 
-electron-updater@^3.1.2:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/electron-updater/-/electron-updater-3.1.2.tgz#30d9790d5b16048e4afc74a31748790348b153bf"
+electron-updater@^3.1.5:
+  version "3.1.5"
+  resolved "https://registry.yarnpkg.com/electron-updater/-/electron-updater-3.1.5.tgz#8624ac28a5867022adcf3d2fe59eba886cf52de1"
   dependencies:
     bluebird-lst "^1.0.5"
-    builder-util-runtime "~4.4.1"
+    builder-util-runtime "~5.0.0"
     electron-is-dev "^0.3.0"
     fs-extra-p "^4.6.1"
     js-yaml "^3.12.0"
     lazy-val "^1.0.3"
     lodash.isequal "^4.5.0"
-    semver "^5.5.1"
+    semver "^5.6.0"
     source-map-support "^0.5.9"
 
 electron@3.0.6:
@@ -5702,6 +5711,10 @@ semver-diff@^2.0.0:
 semver@^5.5.1:
   version "5.5.1"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.5.1.tgz#7dfdd8814bdb7cabc7be0fb1d734cfb66c940477"
+
+semver@^5.6.0:
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-5.6.0.tgz#7e74256fbaa49c75aa7c7a205cc22799cac80004"
 
 set-blocking@^2.0.0, set-blocking@~2.0.0:
   version "2.0.0"
