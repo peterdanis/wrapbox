@@ -134,7 +134,7 @@
     "prettier-eslint": "^8.8.2",
     "prettier-stylelint": "^0.4.2",
     "spectron": "~5.0.0",
-    "stylelint": "^9.7.0",
+    "stylelint": "^9.7.1",
     "stylelint-config-standard": "^18.0.0"
   }
 }
