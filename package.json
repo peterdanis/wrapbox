@@ -120,7 +120,7 @@
   },
   "devDependencies": {
     "@types/jest": "^23.3.9",
-    "electron": "3.0.7",
+    "electron": "3.0.8",
     "electron-builder": "20.31.2",
     "eslint": "^5.8.0",
     "eslint-config-airbnb": "^17.1.0",
