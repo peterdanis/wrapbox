@@ -119,7 +119,7 @@
     "electron-updater": "^4.0.4"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.9",
+    "@types/jest": "^23.3.10",
     "electron": "3.0.10",
     "electron-builder": "20.36.2",
     "eslint": "^5.9.0",
