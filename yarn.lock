@@ -246,9 +246,9 @@
   version "23.3.10"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.10.tgz#4897974cc317bf99d4fe6af1efa15957fa9c94de"
 
-"@types/node@^8.0.24":
-  version "8.10.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.1.tgz#aac98b810c50568054486f2bb8c486d824713be8"
+"@types/node@^10.12.18":
+  version "10.12.18"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.18.tgz#1d3ca764718915584fcd9f6344621b7672665c67"
 
 abab@^1.0.4:
   version "1.0.4"
@@ -1845,11 +1845,11 @@ electron-updater@^4.0.6:
     semver "^5.6.0"
     source-map-support "^0.5.9"
 
-electron@4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-4.0.0.tgz#6ccb40cc8bf2d49954dcea73b97ae7ad12ee04b3"
+electron@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-4.0.1.tgz#c41eaee9e081c2e5e4a4a4a761b7577a77d2eb18"
   dependencies:
-    "@types/node" "^8.0.24"
+    "@types/node" "^10.12.18"
     electron-download "^4.1.0"
     extract-zip "^1.0.3"
 
