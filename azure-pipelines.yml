@@ -15,6 +15,9 @@ jobs:
         displayName: "Get os release info"
       - script: yarn
         displayName: "Yarn install"
+        env: {
+            PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: true
+        }
       - script: yarn lint
         displayName: "Lint"
       - script: sudo apt-get update && sudo apt-get install libgconf-2-4 -y
@@ -36,6 +39,12 @@ jobs:
         inputs:
           PathtoPublish: "$(Build.SourcesDirectory)/release-builds"
           ArtifactName: Release
+      - task: PublishBuildArtifacts@1
+        displayName: "Upload image snapshots"
+        condition: always()
+        inputs:
+          PathtoPublish: "$(Build.SourcesDirectory)/tests/e2e/__image_snapshots__"
+          ArtifactName: Snaphots
 
   - job: macOS
     timeoutInMinutes: 15
@@ -48,6 +57,9 @@ jobs:
           versionSpec: 10.x
       - script: yarn
         displayName: "Yarn install"
+        env: {
+            PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: true
+        }
       - script: yarn lint
         displayName: "Lint"
       - script: yarn cover
@@ -74,6 +86,12 @@ jobs:
         inputs:
           PathtoPublish: "$(Build.SourcesDirectory)/release-builds"
           ArtifactName: Release
+      - task: PublishBuildArtifacts@1
+        displayName: "Upload image snapshots"
+        condition: always()
+        inputs:
+          PathtoPublish: "$(Build.SourcesDirectory)/tests/e2e/__image_snapshots__"
+          ArtifactName: Snaphots
 
   - job: Windows
     timeoutInMinutes: 15
@@ -86,6 +104,9 @@ jobs:
           versionSpec: 10.x
       - script: yarn
         displayName: "Yarn install"
+        env: {
+            PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: true
+        }
       - script: yarn lint
         displayName: "Lint"
       - script: yarn cover
@@ -110,3 +131,9 @@ jobs:
         inputs:
           PathtoPublish: "$(Build.SourcesDirectory)/release-builds"
           ArtifactName: Release
+      - task: PublishBuildArtifacts@1
+        displayName: "Upload image snapshots"
+        condition: always()
+        inputs:
+          PathtoPublish: "$(Build.SourcesDirectory)/tests/e2e/__image_snapshots__"
+          ArtifactName: Snaphots
