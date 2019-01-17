@@ -38,7 +38,7 @@
       "lcov",
       "text"
     ],
-    "tempDirectory": "./coverage",
+    "tempDir": "./coverage",
     "exclude": [
       "app/dependencies/**",
       "tests/**"

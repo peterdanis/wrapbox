@@ -1,6 +1,6 @@
 const { toMatchImageSnapshot } = require("jest-image-snapshot");
 const electron = require("electron");
-// const path = require("path");
+const path = require("path");
 const puppeteer = require("puppeteer");
 
 const delay = ms => new Promise((resolve) => {
@@ -14,10 +14,10 @@ let page;
 
 beforeAll(async () => {
   expect.extend({ toMatchImageSnapshot });
-  // const preloadFile = path.posix.join(__dirname, "test-preload.js");
+  const preloadFile = path.posix.join(__dirname, "test-preload.js");
   app = await puppeteer.launch({
     executablePath: electron,
-    args: ["."],
+    args: ["-r", preloadFile, "."],
     headless: false,
   });
   const pages = await app.pages();
@@ -26,7 +26,13 @@ beforeAll(async () => {
 }, 30000);
 
 afterAll(async () => {
-  await app.close();
+  try {
+    await page.close();
+    await app.close();
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }
 }, 30000);
 
 describe("App", () => {
