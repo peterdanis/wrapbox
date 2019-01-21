@@ -1,7 +1,7 @@
 const { toMatchImageSnapshot } = require("jest-image-snapshot");
 const electron = require("electron");
 const path = require("path");
-const puppeteer = require("puppeteer");
+const puppeteer = require("puppeteer-core");
 
 const delay = ms => new Promise((resolve) => {
   setTimeout(() => {
@@ -11,6 +11,8 @@ const delay = ms => new Promise((resolve) => {
 
 let app;
 let page;
+
+jest.setTimeout(50000);
 
 beforeAll(async () => {
   expect.extend({ toMatchImageSnapshot });
@@ -22,18 +24,19 @@ beforeAll(async () => {
   });
   const pages = await app.pages();
   [page] = pages;
-  page.setViewport({ width: 1200, height: 700 });
-}, 30000);
+  await page.setViewport({ width: 1200, height: 700 });
+});
 
 afterAll(async () => {
   try {
     await page.close();
+    delay(1000);
     await app.close();
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error);
   }
-}, 30000);
+});
 
 describe("App", () => {
   test("starts", async () => {
@@ -44,5 +47,5 @@ describe("App", () => {
       failureThreshold: "0.5",
       failureThresholdType: "percent",
     });
-  }, 10000);
+  });
 });
