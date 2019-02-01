@@ -38,7 +38,7 @@ describe("App", () => {
       closed = true;
     });
     if (process.platform === "darwin") {
-      await page.close();
+      await app.close();
     } else {
       await page.waitForSelector("#close");
       await page.waitFor(2000);
