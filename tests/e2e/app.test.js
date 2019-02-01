@@ -3,12 +3,6 @@ const electron = require("electron");
 const path = require("path");
 const puppeteer = require("puppeteer-core");
 
-const delay = ms => new Promise((resolve) => {
-  setTimeout(() => {
-    resolve();
-  }, ms);
-});
-
 let app;
 let page;
 
@@ -27,25 +21,34 @@ beforeAll(async () => {
   await page.setViewport({ width: 1200, height: 700 });
 });
 
-afterAll(async () => {
-  try {
-    await page.close();
-    delay(1000);
-    await app.close();
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
-  }
-});
-
 describe("App", () => {
   test("starts", async () => {
-    await delay(5000);
+    await page.waitFor(5000);
     const image = await page.screenshot();
     expect(image).toMatchImageSnapshot({
       customDiffConfig: { threshold: 0.1 },
-      failureThreshold: "0.5",
+      failureThreshold: "0.1",
       failureThresholdType: "percent",
     });
+  });
+
+  test("closes", async () => {
+    let closed;
+    app.on("disconnected", () => {
+      closed = true;
+    });
+    if (process.platform === "darwin") {
+      await page.close();
+    } else {
+      await page.waitForSelector("#close");
+      await page.waitFor(2000);
+      await page.click("#close");
+      await page.waitFor(2000);
+    }
+    while (!closed) {
+      // eslint-disable-next-line no-await-in-loop
+      await page.waitFor(500);
+    }
+    expect(closed).toBeTruthy();
   });
 });
