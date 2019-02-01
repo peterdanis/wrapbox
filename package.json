@@ -122,7 +122,7 @@
     "@types/jest": "^23.3.13",
     "electron": "4.0.3",
     "electron-builder": "20.38.5",
-    "eslint": "^5.12.1",
+    "eslint": "^5.13.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jest": "^22.2.0",
