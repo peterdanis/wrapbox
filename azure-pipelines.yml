@@ -22,7 +22,7 @@ jobs:
         displayName: "Lint"
       - script: sudo apt-get update && sudo apt-get install libgconf-2-4 -y
         displayName: Install dependency
-      - script: "xvfb-run --auto-servernum --server-args="-screen 0, 1600x900x24" yarn cover"
+      - script: "xvfb-run --auto-servernum --server-args='-screen 0, 1600x900x24' yarn cover"
         displayName: "Run tests with coverage report"
       - task: PublishTestResults@2
         displayName: "Publish test results"
