@@ -31,7 +31,15 @@
     ],
     "coverageReporters": [
       "json"
+    ],
+    "reporters": [
+      "default",
+      "jest-junit"
     ]
+  },
+  "jest-junit": {
+    "outputDirectory": "./coverage",
+    "outputName": "./junit.xml"
   },
   "nyc": {
     "reporter": [
@@ -131,6 +139,7 @@
     "eslint-plugin-security": "^1.4.0",
     "jest": "^23.6.0",
     "jest-image-snapshot": "^2.7.0",
+    "jest-junit": "^6.2.1",
     "nyc": "^13.0.1",
     "prettier-eslint": "^8.8.2",
     "prettier-stylelint": "^0.4.2",
