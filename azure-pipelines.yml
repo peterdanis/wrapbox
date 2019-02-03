@@ -22,24 +22,24 @@ jobs:
         displayName: "Lint"
       - script: sudo apt-get update && sudo apt-get install libgconf-2-4 -y
         displayName: Install dependency
-      - script: "xvfb-run --auto-servernum --server-args='-screen 0, 1600x900x24' yarn cover"
+      - script: "xvfb-run --auto-servernum --server-args="-screen 0, 1600x900x24" yarn cover"
         displayName: "Run tests with coverage report"
       - task: PublishTestResults@2
         displayName: "Publish test results"
         inputs:
-          testResultsFormat: 'JUnit'
-          testResultsFiles: '/coverage/junit.xml' 
+          testResultsFormat: "JUnit"
+          testResultsFiles: "$(Build.SourcesDirectory)/coverage/junit.xml" 
         condition: always()
       - script: npx codecov -F Linux
         displayName: "Upload coverage report"
         env: { CODECOV_TOKEN: $(CODECOV_TOKEN) }
       - script: yarn dist --x64
         displayName: "Build & publish"
-        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+        condition: and(succeeded(), eq(variables["Build.SourceBranch"], "refs/heads/master"))
         env: { GH_TOKEN: $(GH_TOKEN) }
       - script: yarn build --x64
         displayName: "Build"
-        condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+        condition: and(succeeded(), ne(variables["Build.SourceBranch"], "refs/heads/master"))
       - task: PublishBuildArtifacts@1
         displayName: "Upload artifacts"
         inputs:
@@ -73,8 +73,8 @@ jobs:
       - task: PublishTestResults@2
         displayName: "Publish test results"
         inputs:
-          testResultsFormat: 'JUnit'
-          testResultsFiles: '/coverage/junit.xml' 
+          testResultsFormat: "JUnit"
+          testResultsFiles: "$(Build.SourcesDirectory)/coverage/junit.xml" 
         condition: always()
       - script: npx codecov -F macOS
         displayName: "Upload coverage report"
@@ -83,7 +83,7 @@ jobs:
         displayName: "Add certificate as trusted"
       - script: yarn dist --x64
         displayName: "Build & publish"
-        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+        condition: and(succeeded(), eq(variables["Build.SourceBranch"], "refs/heads/master"))
         env:
           {
             GH_TOKEN: $(GH_TOKEN),
@@ -92,7 +92,7 @@ jobs:
           }
       - script: yarn build --x64
         displayName: "Build"
-        condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+        condition: and(succeeded(), ne(variables["Build.SourceBranch"], "refs/heads/master"))
       - task: PublishBuildArtifacts@1
         displayName: "Upload artifacts"
         inputs:
@@ -126,15 +126,15 @@ jobs:
       - task: PublishTestResults@2
         displayName: "Publish test results"
         inputs:
-          testResultsFormat: 'JUnit'
-          testResultsFiles: '/coverage/junit.xml' 
+          testResultsFormat: "JUnit"
+          testResultsFiles: "$(Build.SourcesDirectory)/coverage/junit.xml" 
         condition: always()
       - script: npx codecov -F Windows
         displayName: "Upload coverage report"
         env: { CODECOV_TOKEN: $(CODECOV_TOKEN) }
       - script: yarn dist --x64
         displayName: "Build & publish"
-        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+        condition: and(succeeded(), eq(variables["Build.SourceBranch"], "refs/heads/master"))
         env:
           {
             GH_TOKEN: $(GH_TOKEN),
@@ -143,7 +143,7 @@ jobs:
           }
       - script: yarn build --x64
         displayName: "Build"
-        condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+        condition: and(succeeded(), ne(variables["Build.SourceBranch"], "refs/heads/master"))
       - task: PublishBuildArtifacts@1
         displayName: "Upload artifacts"
         inputs:
