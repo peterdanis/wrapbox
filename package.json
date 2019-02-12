@@ -127,7 +127,7 @@
     "electron-updater": "^4.0.6"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.0",
+    "@types/jest": "^24.0.3",
     "babel-register": "^6.26.0",
     "electron": "4.0.4",
     "electron-builder": "20.38.5",
