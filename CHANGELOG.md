@@ -15,6 +15,10 @@ and this project adheres to
 - Rework notifications
 - Rework settings
 
+## [0.1.7]
+
+- Update Electron version
+
 ## [0.1.6]
 
 - Installer and application are now signed by self-signed certificate
