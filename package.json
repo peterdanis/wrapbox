@@ -70,9 +70,7 @@
         "zip"
       ],
       "icon": "icons/icon.ico",
-      "publisherName": "Wrapbox",
-      "verifyUpdateCodeSignature": false,
-      "certificateSubjectName": "Wrapbox"
+      "verifyUpdateCodeSignature": false
     },
     "mac": {
       "artifactName": "${name}-${version}-mac.${ext}",
@@ -81,8 +79,7 @@
         "dmg",
         "zip"
       ],
-      "icon": "icons/icon.icns",
-      "electronUpdaterCompatibility": ">=2.16"
+      "icon": "icons/icon.icns"
     },
     "linux": {
       "artifactName": "${name}-${version}.${ext}",
@@ -126,13 +123,13 @@
   },
   "dependencies": {
     "electron-log": "^2.2.17",
-    "electron-updater": "3.1.2"
+    "electron-updater": "4.0.6"
   },
   "devDependencies": {
     "@types/jest": "^24.0.0",
     "babel-register": "^6.26.0",
     "electron": "4.0.4",
-    "electron-builder": "20.28.4",
+    "electron-builder": "20.38.5",
     "eslint": "^5.13.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.16.0",
