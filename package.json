@@ -70,7 +70,8 @@
         "zip"
       ],
       "icon": "icons/icon.ico",
-      "publisherName": "Wrapbox"
+      "publisherName": "Wrapbox",
+      "verifyUpdateCodeSignature": false
     },
     "mac": {
       "artifactName": "${name}-${version}-mac.${ext}",
@@ -124,7 +125,7 @@
   },
   "dependencies": {
     "electron-log": "^2.2.17",
-    "electron-updater": "^4.0.6"
+    "electron-updater": "3.1.2"
   },
   "devDependencies": {
     "@types/jest": "^24.0.0",
