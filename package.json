@@ -71,7 +71,8 @@
       ],
       "icon": "icons/icon.ico",
       "publisherName": "Wrapbox",
-      "verifyUpdateCodeSignature": false
+      "verifyUpdateCodeSignature": false,
+      "certificateSubjectName": "Wrapbox"
     },
     "mac": {
       "artifactName": "${name}-${version}-mac.${ext}",
