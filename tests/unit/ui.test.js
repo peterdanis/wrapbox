@@ -128,29 +128,6 @@ describe("UI element", () => {
       expect(bu.element.parentNode.id).toBe("body");
     });
 
-    test("hideClass output depends on process.platform and tag type", () => {
-      const { platform } = process;
-
-      // On macOS visibility: hidden is causing bugs in webview
-      Object.defineProperty(process, "platform", {
-        value: "darwin",
-      });
-      expect(bu.hideClass()).toBe("invisible");
-      expect(wb.hideClass()).toBe("zinvisible");
-
-      // Needed to pass the test on macOs
-      Object.defineProperty(process, "platform", {
-        value: "win32",
-      });
-      expect(bu.hideClass()).toBe("invisible");
-      expect(wb.hideClass()).toBe("invisible");
-
-      // Change the process.platform back to default
-      Object.defineProperty(process, "platform", {
-        value: platform,
-      });
-    });
-
     test("hide adds class", () => {
       bu.hide();
 
