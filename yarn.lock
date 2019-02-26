@@ -1680,10 +1680,10 @@ electron-download@^4.1.0:
     semver "^5.4.1"
     sumchecker "^2.0.2"
 
-electron-log@^2.2.17:
-  version "2.2.17"
-  resolved "https://registry.yarnpkg.com/electron-log/-/electron-log-2.2.17.tgz#e71e2ebb949fc96ded7cdb99eeee7202e48981d2"
-  integrity sha512-v+Af5W5z99ehhaLOfE9eTSXUwjzh2wFlQjz51dvkZ6ZIrET6OB/zAZPvsuwT6tm3t5x+M1r+Ed3U3xtPZYAyuQ==
+electron-log@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/electron-log/-/electron-log-3.0.1.tgz#5c60913e8ae1a8645560eea8b3c47c60d101e797"
+  integrity sha512-bomFcrYvkEXj0H00T5GjBee50TBA/VwdoDFpPQ2jz3LDGi+4wKF3xrB+N1qXiZYoqDeaK5lNRAkNsHKmXeCPfg==
 
 electron-osx-sign@0.4.11:
   version "0.4.11"
@@ -1715,7 +1715,7 @@ electron-to-chromium@^1.3.30, electron-to-chromium@^1.3.96:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.100.tgz#899fb088def210aee6b838a47655bbb299190e13"
   integrity sha512-cEUzis2g/RatrVf8x26L8lK5VEls1AGnLHk6msluBUg/NTB4wcXzExTsGscFq+Vs4WBBU2zbLLySvD4C0C3hwg==
 
-electron-updater@^4.0.6:
+electron-updater@4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/electron-updater/-/electron-updater-4.0.6.tgz#9c4f495ae0e80bf4425e3e1b801c5ed2ab933c2d"
   integrity sha512-JPGLME6fxJcHG8hX7HWFl6Aew6iVm0DkcrENreKa5SUJCHG+uUaAhxDGDt+YGcNkyx1uJ6eBGMvFxDTLUv67pg==
