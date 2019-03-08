@@ -128,7 +128,7 @@
   "devDependencies": {
     "@types/jest": "^24.0.9",
     "babel-register": "^6.26.0",
-    "electron": "4.0.7",
+    "electron": "4.0.8",
     "electron-builder": "20.38.5",
     "eslint": "^5.15.1",
     "eslint-config-airbnb": "^17.1.0",
