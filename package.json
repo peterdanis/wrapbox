@@ -129,7 +129,7 @@
     "@types/jest": "^24.0.9",
     "babel-register": "^6.26.0",
     "electron": "4.0.7",
-    "electron-builder": "20.38.5",
+    "electron-builder": "20.39.0",
     "eslint": "^5.15.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.16.0",
