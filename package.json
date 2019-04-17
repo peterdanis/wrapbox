@@ -144,7 +144,7 @@
     "prettier-eslint": "^8.8.2",
     "prettier-stylelint": "^0.4.2",
     "puppeteer-core": "1.14.0",
-    "stylelint": "^9.10.1",
+    "stylelint": "^10.0.1",
     "stylelint-config-standard": "^18.3.0"
   }
 }
