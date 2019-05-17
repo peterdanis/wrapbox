@@ -419,6 +419,21 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.18.tgz#1d3ca764718915584fcd9f6344621b7672665c67"
   integrity sha512-fh+pAqt4xRzPfqA6eh3Z2y6fyZavRIumvjhaCL753+TVkGKGhpPeyrJG2JftD0T9q4GF00KjefsQ+PQNDdWQaQ==
 
+"@types/puppeteer@1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@types/puppeteer/-/puppeteer-1.3.0.tgz#dbee1fa65e24b6ad628e4a35867ad389faf81a5b"
+  integrity sha512-kp1R8cTYymvYezTYWSECtSEDbxnCQaNe3i+fdsZh3dVz7umB8q6LATv0VdJp1DT0evS8YqCrFI5+DaDYJYo6Vg==
+  dependencies:
+    "@types/events" "*"
+    "@types/node" "*"
+
+"@types/react@16.3.13":
+  version "16.3.13"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.3.13.tgz#47d466462b774556c1174ea0eda22c0578643362"
+  integrity sha512-YMFH/E9ryjUm2AoOy8KdTuG1SufaMuYmO/5xACROl0pm9dRmE2RN3d2zjv/eHALF6LGRZPVb7G9kqP0n5dWttQ==
+  dependencies:
+    csstype "^2.2.0"
+
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
@@ -1688,6 +1703,11 @@ cssstyle@^1.0.0:
   integrity sha512-364AI1l/M5TYcFH83JnOH/pSqgaNnKmYgKrm0didZMGKWjQB60dymwWy1rKUgL3J1ffdq9xVi2yGLHdSjjSNog==
   dependencies:
     cssom "0.3.x"
+
+csstype@^2.2.0:
+  version "2.6.4"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.4.tgz#d585a6062096e324e7187f80e04f92bd0f00e37f"
+  integrity sha512-lAJUJP3M6HxFXbqtGRc0iZrdyeN+WzOWeY0q/VnFzI+kqVrYIzC7bWlKqCW7oCIdzoPkvfp82EVvrTlQ8zsWQg==
 
 currently-unhandled@^0.4.1:
   version "0.4.1"
