@@ -419,6 +419,11 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.18.tgz#1d3ca764718915584fcd9f6344621b7672665c67"
   integrity sha512-fh+pAqt4xRzPfqA6eh3Z2y6fyZavRIumvjhaCL753+TVkGKGhpPeyrJG2JftD0T9q4GF00KjefsQ+PQNDdWQaQ==
 
+"@types/prop-types@*":
+  version "15.7.1"
+  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.1.tgz#f1a11e7babb0c3cad68100be381d1e064c68f1f6"
+  integrity sha512-CFzn9idOEpHrgdw8JsoTkaDDyRWk1jrzIV8djzcgpq0y9tG4B4lFT+Nxh52DVpDXV+n4+NPNv7M1Dj5uMp6XFg==
+
 "@types/puppeteer@1.12.4":
   version "1.12.4"
   resolved "https://registry.yarnpkg.com/@types/puppeteer/-/puppeteer-1.12.4.tgz#8388efdb0b30a54a7e7c4831ca0d709191d77ff1"
@@ -426,11 +431,12 @@
   dependencies:
     "@types/node" "*"
 
-"@types/react@16.3.13":
-  version "16.3.13"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.3.13.tgz#47d466462b774556c1174ea0eda22c0578643362"
-  integrity sha512-YMFH/E9ryjUm2AoOy8KdTuG1SufaMuYmO/5xACROl0pm9dRmE2RN3d2zjv/eHALF6LGRZPVb7G9kqP0n5dWttQ==
+"@types/react@16.8.17":
+  version "16.8.17"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.8.17.tgz#f287b76a5badb93bc9aa3f54521a3eb53d6c2374"
+  integrity sha512-pln3mgc6VfkNg92WXODul/ONo140huK9OMsx62GlBlZ2lvjNK86PQJhYMPLO1i66aF5O9OPyZefogvNltBIszA==
   dependencies:
+    "@types/prop-types" "*"
     csstype "^2.2.0"
 
 "@types/stack-utils@^1.0.1":
