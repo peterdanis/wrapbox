@@ -142,7 +142,7 @@
     "jest": "^24.8.0",
     "jest-image-snapshot": "^2.8.2",
     "jest-junit": "^6.4.0",
-    "nyc": "^14.0.0",
+    "nyc": "^14.1.1",
     "prettier-eslint": "^8.8.2",
     "prettier-stylelint": "^0.4.2",
     "puppeteer-core": "1.17.0",
