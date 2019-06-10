@@ -1,8 +1,8 @@
 {
   "name": "wrapbox",
+  "version": "0.2.0",
   "productName": "Wrapbox",
   "description": "An Electron wrapper for web pages",
-  "version": "0.1.7",
   "license": "MIT",
   "author": "Peter Danis <peter.danis@outlook.com>",
   "repository": {
@@ -11,53 +11,148 @@
   },
   "main": "app/app.js",
   "scripts": {
-    "build": "electron-builder -p never",
-    "cover": "nyc --clean jest --coverage",
+    "start:react": "react-scripts start",
+    "build:react": "react-scripts build",
+    "test": "react-scripts test",
+    "test:all": "react-scripts test --watchAll=false",
+    "cover": "yarn test:all --coverage",
+    "lint": "eslint ./src/**/*.{ts,tsx}",
+    "build:electron": "electron-builder -p never",
     "dist": "electron-builder",
-    "lint": "eslint .",
     "pack": "electron-builder --dir",
-    "start": "electron .",
-    "test-e2e": "jest --noStackTrace e2e",
-    "test-i": "jest --noStackTrace integration",
-    "test-u": "jest --noStackTrace unit",
-    "test": "jest --noStackTrace",
-    "watch-st": "jest --watch --notify",
-    "watch": "jest --watch --noStackTrace --notify"
+    "start:electron": "electron ."
   },
-  "jest": {
-    "collectCoverageFrom": [
-      "app/**/*.js",
-      "!app/dependencies/**"
+  "dependencies": {
+    "electron-log": "^3.0.5",
+    "electron-updater": "4.0.6",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@types/jest": "24.0.13",
+    "@types/node": "12.0.4",
+    "@types/puppeteer": "1.12.4",
+    "@types/react": "16.8.19",
+    "@types/react-dom": "16.8.4",
+    "@typescript-eslint/eslint-plugin": "^1.6.0",
+    "@typescript-eslint/parser": "^1.6.0",
+    "electron": "5.0.3",
+    "electron-builder": "20.41.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jest": "^22.6.4",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.13.0",
+    "eslint-plugin-security": "^1.4.0",
+    "prettier": "^1.16.4",
+    "prettier-eslint": "^8.8.2",
+    "prettier-stylelint": "^0.4.2",
+    "puppeteer-core": "1.17.0",
+    "react-scripts": "3.0.1",
+    "stylelint": "^10.0.1",
+    "stylelint-config-standard": "^18.3.0",
+    "typescript": "3.5.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "airbnb",
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:jest/recommended",
+      "plugin:prettier/recommended",
+      "plugin:react/recommended",
+      "plugin:security/recommended",
+      "prettier/@typescript-eslint"
     ],
-    "coverageReporters": [
-      "json"
+    "plugins": [
+      "@typescript-eslint",
+      "prettier",
+      "react",
+      "security"
     ],
-    "reporters": [
-      "default",
-      "jest-junit"
+    "rules": {
+      "linebreak-style": "off",
+      "quotes": [
+        "warn",
+        "double"
+      ],
+      "no-plusplus": "off",
+      "comma-dangle": [
+        "warn",
+        {
+          "arrays": "always-multiline",
+          "objects": "always-multiline",
+          "imports": "always-multiline",
+          "exports": "always-multiline",
+          "functions": "always-multiline"
+        }
+      ],
+      "react/jsx-filename-extension": [
+        "warn",
+        {
+          "extensions": [
+            ".jsx",
+            ".tsx"
+          ]
+        }
+      ],
+      "@typescript-eslint/explicit-function-return-type": [
+        "warn",
+        {
+          "allowExpressions": true,
+          "allowTypedFunctionExpressions": true
+        }
+      ]
+    },
+    "settings": {
+      "react": {
+        "pragma": "React",
+        "version": "detect"
+      },
+      "import/resolver": {
+        "node": {
+          "extensions": [
+            ".js",
+            ".jsx",
+            ".ts",
+            ".tsx"
+          ]
+        }
+      }
+    },
+    "parser": "@typescript-eslint/parser",
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "overrides": [
+      {
+        "files": [
+          "**/mocks/*.js",
+          "**/*.spec.js",
+          "**/*.test.js"
+        ],
+        "env": {
+          "jest": true
+        },
+        "rules": {
+          "global-require": "off"
+        }
+      }
     ]
   },
-  "jest-junit": {
-    "outputDirectory": "./coverage",
-    "outputName": "./junit.xml"
-  },
-  "nyc": {
-    "reporter": [
-      "lcov",
-      "text"
+  "browserslist": {
+    "production": [
+      "last 1 chrome version"
     ],
-    "tempDir": "./coverage",
-    "exclude": [
-      "app/dependencies/**",
-      "tests/**"
-    ],
-    "instrument": false
+    "development": [
+      "last 1 chrome version"
+    ]
   },
-  "eslintIgnore": [
-    "app/dependencies/**",
-    "coverage/**",
-    "release-builds/**"
-  ],
   "build": {
     "appId": "com.peterdanis.wrapbox",
     "productName": "Wrapbox",
@@ -120,33 +215,5 @@
     "directories": {
       "output": "./release-builds"
     }
-  },
-  "dependencies": {
-    "electron-log": "^3.0.5",
-    "electron-updater": "4.0.6"
-  },
-  "devDependencies": {
-    "@types/jest": "^24.0.13",
-    "@types/puppeteer": "1.12.4",
-    "@types/react": "16.8.19",
-    "babel-register": "^6.26.0",
-    "electron": "4.1.4",
-    "electron-builder": "20.41.0",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.17.2",
-    "eslint-plugin-jest": "^22.6.4",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.13.0",
-    "eslint-plugin-security": "^1.4.0",
-    "jest": "^24.8.0",
-    "jest-image-snapshot": "^2.8.2",
-    "jest-junit": "^6.4.0",
-    "nyc": "^14.0.0",
-    "prettier-eslint": "^8.8.2",
-    "prettier-stylelint": "^0.4.2",
-    "puppeteer-core": "1.17.0",
-    "stylelint": "^10.0.1",
-    "stylelint-config-standard": "^18.3.0"
   }
 }
