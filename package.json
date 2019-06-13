@@ -215,5 +215,8 @@
     "directories": {
       "output": "./release-builds"
     }
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard"
   }
 }
