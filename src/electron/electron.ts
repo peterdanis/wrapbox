@@ -1,7 +1,8 @@
 import { app, BrowserWindow } from "electron"; // eslint-disable-line import/no-extraneous-dependencies
-import path from "path";
 import log from "electron-log";
+import path from "path";
 import url from "url";
+import Store from "electron-store";
 
 // Change log level for file log to info and log app start
 log.transports.file.level = "info";
@@ -16,6 +17,8 @@ File log locations:
   on OS X: ~/Library/Logs/<app name>/log.log
   on Windows: %USERPROFILE%\AppData\Roaming\<app name>\log.log
 */
+
+const store = new Store();
 
 let mainWindow: Electron.BrowserWindow | null;
 
