@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron"; // eslint-disable-line import/no-extraneous-dependencies
+import { app, BrowserWindow, BrowserView } from "electron"; // eslint-disable-line import/no-extraneous-dependencies
 import log from "electron-log";
 import path from "path";
 import url from "url";
@@ -31,9 +31,9 @@ const createWindow = (): void => {
   mainWindow = new BrowserWindow({
     width: store.get("windowWidth"),
     height: store.get("windowHeight"),
-    frame: false,
+    // frame: false,
     backgroundColor: store.get("backgroundColor"),
-    titleBarStyle: "hiddenInset",
+    // titleBarStyle: "hiddenInset",
     show: false,
     // Set taskbar icon for Linux appimage manually.
     icon: process.env.APPDIR
@@ -66,6 +66,33 @@ const createWindow = (): void => {
     log.info("Window closed");
     appQuit();
   });
+
+  // Create BrowserViews
+  let browserViews = {
+    main: new BrowserView(),
+  };
+
+  const offset = 50;
+
+  browserViews.main.setBounds({
+    x: 0,
+    y: 0 + offset,
+    width: mainWindow.getBounds().width - offset,
+    height: mainWindow.getBounds().height - offset - 80,
+  });
+
+  mainWindow.on("resize", () => {
+    browserViews.main.setBounds({
+      x: 0,
+      y: 0 + offset,
+      width: mainWindow.getBounds().width - offset,
+      height: mainWindow.getBounds().height - offset - 80,
+    });
+  });
+
+  mainWindow.addBrowserView(browserViews.main);
+
+  browserViews.main.webContents.loadURL("https://www.google.sk");
 };
 
 // Fix for Win10 notifications
@@ -79,9 +106,6 @@ app.on("ready", () => {
     // update.checkForUpdatesAndNotify();
   }
 });
-
-// @ts-ignore
-app.on("ready", createWindow);
 
 app.on("activate", () => {
   if (mainWindow === null) {
