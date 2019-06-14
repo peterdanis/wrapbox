@@ -26,8 +26,27 @@ const appQuit = (): void => {
   }
 };
 
+// TODO: Read settings from file
+const settings = {
+  windowWidth: 1200,
+  windowHeight: 700,
+  backgroundColor: "#000000",
+  startMaximized: false,
+};
+
 const createWindow = (): void => {
-  mainWindow = new BrowserWindow({ width: 900, height: 680 });
+  mainWindow = new BrowserWindow({
+    width: settings.windowWidth,
+    height: settings.windowHeight,
+    frame: false,
+    backgroundColor: settings.backgroundColor,
+    titleBarStyle: "hiddenInset",
+    show: false,
+    // Set taskbar icon for Linux appimage manually.
+    icon: process.env.APPDIR
+      ? path.join(process.env.APPDIR, "wrapbox.png")
+      : undefined,
+  });
   mainWindow.loadURL(
     app.isPackaged
       ? url.format({
@@ -38,10 +57,9 @@ const createWindow = (): void => {
       : "http://localhost:3000",
   );
 
-  // TODO: Add after setting up storage
-  // if (utils.settings.startMaximized) {
-  //   mainWindow.maximize();
-  // }
+  if (settings.startMaximized) {
+    mainWindow.maximize();
+  }
 
   // Window listeners
   mainWindow.once("ready-to-show", () => {
