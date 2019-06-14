@@ -2,7 +2,7 @@ import { app, BrowserWindow } from "electron"; // eslint-disable-line import/no-
 import log from "electron-log";
 import path from "path";
 import url from "url";
-import Store from "electron-store";
+import store from "./store";
 
 // Change log level for file log to info and log app start
 log.transports.file.level = "info";
@@ -18,8 +18,6 @@ File log locations:
   on Windows: %USERPROFILE%\AppData\Roaming\<app name>\log.log
 */
 
-const store = new Store();
-
 let mainWindow: Electron.BrowserWindow | null;
 
 const appQuit = (): void => {
@@ -29,20 +27,12 @@ const appQuit = (): void => {
   }
 };
 
-// TODO: Read settings from file
-const settings = {
-  windowWidth: 1200,
-  windowHeight: 700,
-  backgroundColor: "#000000",
-  startMaximized: false,
-};
-
 const createWindow = (): void => {
   mainWindow = new BrowserWindow({
-    width: settings.windowWidth,
-    height: settings.windowHeight,
+    width: store.get("windowWidth"),
+    height: store.get("windowHeight"),
     frame: false,
-    backgroundColor: settings.backgroundColor,
+    backgroundColor: store.get("backgroundColor"),
     titleBarStyle: "hiddenInset",
     show: false,
     // Set taskbar icon for Linux appimage manually.
@@ -50,6 +40,7 @@ const createWindow = (): void => {
       ? path.join(process.env.APPDIR, "wrapbox.png")
       : undefined,
   });
+
   mainWindow.loadURL(
     app.isPackaged
       ? url.format({
@@ -60,15 +51,14 @@ const createWindow = (): void => {
       : "http://localhost:3000",
   );
 
-  if (settings.startMaximized) {
+  if (store.get("startMaximized")) {
     mainWindow.maximize();
   }
 
   // Window listeners
   mainWindow.once("ready-to-show", () => {
-    if (mainWindow) {
-      mainWindow.show();
-    }
+    // @ts-ignore
+    mainWindow.show();
   });
 
   mainWindow.on("closed", () => {
