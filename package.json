@@ -94,7 +94,7 @@
           "objects": "always-multiline",
           "imports": "always-multiline",
           "exports": "always-multiline",
-          "functions": "never"
+          "functions": "always-multiline"
         }
       ],
       "react/jsx-filename-extension": [
@@ -111,6 +111,12 @@
         {
           "allowExpressions": true,
           "allowTypedFunctionExpressions": true
+        }
+      ],
+      "prettier/prettier": [
+        "warn",
+        {
+          "trailingComma": "all"
         }
       ]
     },
@@ -224,5 +230,10 @@
   },
   "stylelint": {
     "extends": "stylelint-config-standard"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "trailingComma": "all",
+    "singleQuote": false
   }
 }
