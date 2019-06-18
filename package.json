@@ -30,8 +30,8 @@
     "electron-log": "^3.0.5",
     "electron-store": "3.3.0",
     "electron-updater": "4.0.6",
-    "react-dom": "^16.8.6",
-    "react": "^16.8.6"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "@types/jest": "^24.0.13",
@@ -42,11 +42,11 @@
     "@typescript-eslint/eslint-plugin": "^1.6.0",
     "@typescript-eslint/parser": "^1.6.0",
     "concurrently": "^4.1.0",
-    "electron": "5.0.3",
+    "electron": "^5.0.4",
     "electron-builder": "20.43.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-prettier": "^4.1.0",
+    "eslint-config-prettier": "^5.0.0",
     "eslint-config-react": "^1.1.7",
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-jest": "^22.6.4",
@@ -55,7 +55,7 @@
     "eslint-plugin-react": "^7.13.0",
     "eslint-plugin-security": "^1.4.0",
     "prettier": "^1.16.4",
-    "prettier-eslint": "^8.8.2",
+    "prettier-eslint": "^9.0.0",
     "prettier-stylelint": "^0.4.2",
     "puppeteer-core": "1.17.0",
     "react-scripts": "3.0.1",
