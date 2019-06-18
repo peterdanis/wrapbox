@@ -1,4 +1,4 @@
-import { app, BrowserWindow, BrowserView, ipcMain } from "electron"; // eslint-disable-line import/no-extraneous-dependencies
+import { app, BrowserWindow, ipcMain } from "electron"; // eslint-disable-line import/no-extraneous-dependencies
 import log from "electron-log";
 import path from "path";
 import url from "url";
