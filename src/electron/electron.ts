@@ -1,4 +1,4 @@
-import { app, BrowserWindow, BrowserView } from "electron"; // eslint-disable-line import/no-extraneous-dependencies
+import { app, BrowserWindow, BrowserView, ipcMain } from "electron"; // eslint-disable-line import/no-extraneous-dependencies
 import log from "electron-log";
 import path from "path";
 import url from "url";
@@ -39,6 +39,10 @@ const createWindow = (): void => {
     icon: process.env.APPDIR
       ? path.join(process.env.APPDIR, "wrapbox.png")
       : undefined,
+    webPreferences: {
+      preload: __dirname + "/preload.js",
+      nodeIntegration: false,
+    },
   });
 
   mainWindow.loadURL(
@@ -66,33 +70,6 @@ const createWindow = (): void => {
     log.info("Window closed");
     appQuit();
   });
-
-  // Create BrowserViews
-  let browserViews = {
-    main: new BrowserView(),
-  };
-
-  const offset = 50;
-
-  browserViews.main.setBounds({
-    x: 0,
-    y: 0 + offset,
-    width: mainWindow.getBounds().width - offset,
-    height: mainWindow.getBounds().height - offset - 80,
-  });
-
-  mainWindow.on("resize", () => {
-    browserViews.main.setBounds({
-      x: 0,
-      y: 0 + offset,
-      width: mainWindow.getBounds().width - offset,
-      height: mainWindow.getBounds().height - offset - 80,
-    });
-  });
-
-  mainWindow.addBrowserView(browserViews.main);
-
-  browserViews.main.webContents.loadURL("https://www.google.sk");
 };
 
 // Fix for Win10 notifications
@@ -115,4 +92,8 @@ app.on("activate", () => {
 
 app.on("window-all-closed", () => {
   log.info("All windows closed");
+});
+
+ipcMain.on("test", (event: Event, msg: string): void => {
+  log.info(msg);
 });
