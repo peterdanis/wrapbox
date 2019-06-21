@@ -70,6 +70,13 @@ const createWindow = (): void => {
     log.info("Window closed");
     appQuit();
   });
+
+  // Add react-dev-tools extension for development
+  if (!app.isPackaged) {
+    import("./react-dev-tools").then(module => {
+      module.default(log);
+    });
+  }
 };
 
 // Fix for Win10 notifications
