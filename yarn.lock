@@ -4824,12 +4824,7 @@ mime-types@^2.1.12, mime-types@~2.1.19:
   dependencies:
     mime-db "~1.37.0"
 
-mime@^2.0.3:
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/mime/-/mime-2.4.2.tgz#ce5229a5e99ffc313abac806b482c10e7ba6ac78"
-  integrity sha512-zJBfZDkwRu+j3Pdd2aHsR5GfH2jIWhmL1ZzBoc+X+3JEti2hbArWcyJ+1laC1D2/U/W1a/+Cegj0/OnEU2ybjg==
-
-mime@^2.4.2:
+mime@^2.0.3, mime@^2.4.2:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/mime/-/mime-2.4.3.tgz#229687331e86f68924e6cb59e1cdd937f18275fe"
   integrity sha512-QgrPRJfE+riq5TPZMcHZOtm8c6K/yYrMbKIoRfapfiGLxS8OTeIfRhUGW5LU7MlRa52KOAGCfUNruqLrIBvWZw==
@@ -5942,10 +5937,10 @@ punycode@^2.1.0, punycode@^2.1.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
-puppeteer-core@1.17.0:
-  version "1.17.0"
-  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-1.17.0.tgz#c3e58c52cdfc5e03b6946c7a6f48cc21d32a05f0"
-  integrity sha512-3Em/zPGO9Y6PVxiIBCEUiCXhKLyNfyuEIDP7OO5ZEG1N/XNaeoDCIGUsJSUqXMe+kdPQITsJjvw0/7pyecjL4w==
+puppeteer-core@1.18.0:
+  version "1.18.0"
+  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-1.18.0.tgz#8bb948def94d1c47da13c563b7aa58ed93b74000"
+  integrity sha512-ufdJzdyXICTZ15w+PIMNWWHkURAnF9Gp4yEd7Vrl8QSsFUBMTCOmPtMWXBF3oSgSjcNoeLwVneFTtXmXSyV72g==
   dependencies:
     debug "^4.1.0"
     extract-zip "^1.6.6"
