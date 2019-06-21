@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { IpcRenderer } from "electron"; // eslint-disable-line import/no-extraneous-dependencies
+import Button from "@material-ui/core/Button";
 
 declare global {
   interface Window {
@@ -20,6 +21,9 @@ const App: React.FC = () => (
           ipcRenderer.send("test", "argument");
         }}
       />
+      <Button variant="contained" color="primary">
+        Test button
+      </Button>
       <a
         className="App-link"
         href="https://reactjs.org"
