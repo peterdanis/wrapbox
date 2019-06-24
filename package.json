@@ -122,6 +122,35 @@
         {
           "trailingComma": "all"
         }
+      ],
+      "sort-keys": [
+        "warn",
+        "asc",
+        {
+          "caseSensitive": false,
+          "natural": true
+        }
+      ],
+      "sort-imports": [
+        "warn",
+        {
+          "ignoreCase": true,
+          "ignoreDeclarationSort": false,
+          "ignoreMemberSort": false,
+          "memberSyntaxSortOrder": [
+            "none",
+            "all",
+            "multiple",
+            "single"
+          ]
+        }
+      ],
+      "import/order": [
+        "error",
+        {
+          "groups": [],
+          "newlines-between": "never"
+        }
       ]
     },
     "settings": {
@@ -138,7 +167,10 @@
             ".tsx"
           ]
         }
-      }
+      },
+      "import/core-modules": [
+        "electron"
+      ]
     },
     "parser": "@typescript-eslint/parser",
     "env": {

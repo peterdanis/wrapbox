@@ -1,21 +1,21 @@
 import Store from "electron-store";
 
 const schema = {
-  windowWidth: {
-    type: "number",
-    default: 1200,
-  },
-  windowHeight: {
-    type: "number",
-    default: 700,
+  backgroundColor: {
+    default: "#FF0000",
+    type: "string",
   },
   startMaximized: {
-    type: "boolean",
     default: false,
+    type: "boolean",
   },
-  backgroundColor: {
-    type: "string",
-    default: "#FF0000",
+  windowHeight: {
+    default: 700,
+    type: "number",
+  },
+  windowWidth: {
+    default: 1200,
+    type: "number",
   },
 };
 

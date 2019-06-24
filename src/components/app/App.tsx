@@ -1,7 +1,7 @@
-import React from "react";
 import "./App.css";
-import { IpcRenderer } from "electron"; // eslint-disable-line import/no-extraneous-dependencies
-import Button from "@material-ui/core/Button";
+import Button from "@material-ui/core/Button"; // eslint-disable-line import/no-extraneous-dependencies
+import { IpcRenderer } from "electron";
+import React from "react";
 
 declare global {
   interface Window {

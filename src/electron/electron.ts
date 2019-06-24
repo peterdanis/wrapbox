@@ -1,8 +1,8 @@
-import { app, BrowserWindow, ipcMain } from "electron"; // eslint-disable-line import/no-extraneous-dependencies
+import { app, BrowserWindow, ipcMain } from "electron";
 import log from "electron-log";
 import path from "path";
-import url from "url";
 import store from "./store";
+import url from "url";
 
 // Change log level for file log to info and log app start
 log.transports.file.level = "info";
@@ -29,20 +29,20 @@ const appQuit = (): void => {
 
 const createWindow = (): void => {
   mainWindow = new BrowserWindow({
-    width: store.get("windowWidth"),
-    height: store.get("windowHeight"),
     // frame: false,
-    backgroundColor: store.get("backgroundColor"),
     // titleBarStyle: "hiddenInset",
-    show: false,
+    backgroundColor: store.get("backgroundColor"),
+    height: store.get("windowHeight"),
     // Set taskbar icon for Linux appimage manually.
     icon: process.env.APPDIR
       ? path.join(process.env.APPDIR, "wrapbox.png")
       : undefined,
+    show: false,
     webPreferences: {
-      preload: __dirname + "/preload.js",
       nodeIntegration: false,
+      preload: path.join(__dirname, "preload.js"),
     },
+    width: store.get("windowWidth"),
   });
 
   mainWindow.loadURL(
