@@ -10,8 +10,10 @@
     "url": "https://github.com/peterdanis/wrapbox"
   },
   "homepage": "./",
-  "main": "build/electron.js",
+  "main": "build/electron-main.js",
   "scripts": {
+    "analyze": "source-map-explorer 'build/*.js'",
+    "analyze:react": "source-map-explorer 'build/static/js/*.js'",
     "build": "yarn build:react && yarn build:electron && yarn build:app",
     "build:app": "electron-builder -p never",
     "build:electron": "tsc --p src/electron/",
@@ -62,6 +64,7 @@
     "prettier-stylelint": "^0.4.2",
     "puppeteer-core": "^1.18.0",
     "react-scripts": "3.0.1",
+    "source-map-explorer": "^2.0.1",
     "stylelint": "^10.0.1",
     "stylelint-config-standard": "^18.3.0",
     "typescript": "^3.5.1",

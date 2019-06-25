@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2018",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -11,6 +11,7 @@
     "moduleResolution": "node",
     "isolatedModules": true,
     "jsx": "preserve",
-    "outDir": "../../build"
+    "outDir": "../../build",
+    "sourceMap": true
   }
 }
