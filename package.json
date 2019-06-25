@@ -1,6 +1,6 @@
 {
   "name": "wrapbox",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "productName": "Wrapbox",
   "description": "An Electron wrapper for web pages",
   "license": "MIT",
@@ -205,6 +205,7 @@
     ]
   },
   "build": {
+    "extends": null,
     "appId": "com.peterdanis.wrapbox",
     "productName": "Wrapbox",
     "copyright": "Copyright © 2018 Peter Danis",
