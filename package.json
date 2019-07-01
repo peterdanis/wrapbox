@@ -120,6 +120,12 @@
           "allowTypedFunctionExpressions": true
         }
       ],
+      "@typescript-eslint/explicit-member-accessibility": [
+        "error",
+        {
+          "accessibility": "no-public"
+        }
+      ],
       "prettier/prettier": [
         "warn",
         {

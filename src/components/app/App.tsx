@@ -9,31 +9,33 @@ declare global {
   }
 }
 
-const ipcRenderer = window.ipcRenderer;
+class App extends React.Component {
+  state = {
+    showButton: false,
+  };
 
-const App: React.FC = () => (
-  <div className="App">
-    <header className="App-header">
-      <p>Edit and save to reload.</p>
-      <button
-        type="button"
-        onClick={() => {
-          ipcRenderer.send("test", "argument");
-        }}
-      />
-      <Button variant="contained" color="primary">
-        Test button
-      </Button>
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a>
-    </header>
-  </div>
-);
+  render(): React.ReactElement {
+    const { showButton } = this.state;
+
+    return (
+      <React.Fragment>
+        {showButton ? (
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              window.ipcRenderer.send("test", "argument");
+            }}
+          >
+            Test button
+          </Button>
+        ) : null}
+        <div id="content">
+          <webview className="webview" />
+        </div>
+      </React.Fragment>
+    );
+  }
+}
 
 export default App;

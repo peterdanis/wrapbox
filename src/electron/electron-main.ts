@@ -45,24 +45,18 @@ const createWindow = (): void => {
     width: store.get("windowWidth"),
   });
 
-  mainWindow.loadURL(
-    app.isPackaged
-      ? url.format({
-          pathname: path.join(__dirname, "index.html"),
-          protocol: "file:",
-          slashes: true,
-        })
-      : "http://localhost:3000",
-  );
-
-  if (store.get("startMaximized")) {
-    mainWindow.maximize();
-  }
+  app.isPackaged
+    ? mainWindow.loadFile(path.join(__dirname, "index.html"))
+    : mainWindow.loadURL("http://localhost:3000");
 
   // Window listeners
   mainWindow.once("ready-to-show", () => {
-    // @ts-ignore
-    mainWindow.show();
+    if (mainWindow) {
+      if (store.get("startMaximized")) {
+        mainWindow.maximize();
+      }
+      mainWindow.show();
+    }
   });
 
   mainWindow.on("closed", () => {
