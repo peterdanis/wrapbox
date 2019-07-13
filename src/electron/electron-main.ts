@@ -2,7 +2,6 @@ import { app, BrowserWindow, ipcMain } from "electron";
 import log from "electron-log";
 import path from "path";
 import store from "./store";
-import url from "url";
 
 // Change log level for file log to info and log app start
 log.transports.file.level = "info";
@@ -11,6 +10,7 @@ log.info(`Version: ${app.getVersion()}`);
 log.info(`Platform: ${process.platform}`);
 log.info(`Arch: ${process.arch}`);
 log.info(`Log file location: ${log.transports.file.file}`);
+log.info(`Settings location: ${store.path}`);
 /*
 File log locations:
   on Linux: ~/.config/<app name>/log.log
@@ -18,12 +18,15 @@ File log locations:
   on Windows: %USERPROFILE%\AppData\Roaming\<app name>\log.log
 */
 
-let mainWindow: Electron.BrowserWindow | null;
+let mainWindow: Electron.BrowserWindow;
 
 const appQuit = (): void => {
   if (process.platform !== "darwin") {
     log.info("App quit");
     app.quit();
+  } else {
+    // @ts-ignore
+    mainWindow = null;
   }
 };
 
@@ -45,31 +48,27 @@ const createWindow = (): void => {
     width: store.get("windowWidth"),
   });
 
-  app.isPackaged
-    ? mainWindow.loadFile(path.join(__dirname, "index.html"))
-    : mainWindow.loadURL("http://localhost:3000");
-
   // Window listeners
   mainWindow.once("ready-to-show", () => {
-    if (mainWindow) {
-      if (store.get("startMaximized")) {
-        mainWindow.maximize();
-      }
-      mainWindow.show();
+    if (store.get("startMaximized")) {
+      mainWindow.maximize();
     }
+    mainWindow.show();
   });
 
   mainWindow.on("closed", () => {
-    mainWindow = null;
     log.info("Window closed");
     appQuit();
   });
 
-  // Add react-dev-tools extension for development
-  if (!app.isPackaged) {
+  if (app.isPackaged) {
+    mainWindow.loadFile(path.join(__dirname, "index.html"));
+  } else {
+    // Add react-dev-tools extension for development
     import("./react-dev-tools").then(module => {
       module.default(log);
     });
+    mainWindow.loadURL("http://localhost:3000");
   }
 };
 
@@ -95,6 +94,37 @@ app.on("window-all-closed", () => {
   log.info("All windows closed");
 });
 
-ipcMain.on("test", (event: Event, msg: string): void => {
-  log.info(msg);
+// IPC listeners
+interface IpcMainEvent extends Event {
+  reply: Function;
+  returnValue: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+}
+
+ipcMain.on("setSettings", (event: IpcMainEvent, settings: {}): void => {
+  try {
+    store.set(settings);
+  } catch (error) {
+    log.error(error);
+  }
+});
+
+ipcMain.on("getSetting", (event: IpcMainEvent, setting: string) => {
+  event.returnValue = store.get(setting);
+});
+
+ipcMain.on("getAllSettings", (event: IpcMainEvent) => {
+  event.returnValue = store.store;
+});
+
+ipcMain.on("logInfo", (event: IpcMainEvent, message: string) => {
+  log.info(message);
+});
+
+ipcMain.on("logError", (event: IpcMainEvent, message: string) => {
+  log.error(message);
+});
+
+// Store listeners
+store.onDidAnyChange((newState: {}) => {
+  mainWindow.webContents.send("store", newState);
 });

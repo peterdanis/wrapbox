@@ -2,8 +2,19 @@ import Store from "electron-store";
 
 const schema = {
   backgroundColor: {
-    default: "#FF0000",
+    default: "#000000",
     type: "string",
+  },
+  controlsOnRight: {
+    default: "right",
+    type: "string",
+  },
+  pages: {
+    default: [],
+    items: {
+      type: "object",
+    },
+    type: "array",
   },
   startMaximized: {
     default: false,
@@ -18,6 +29,10 @@ const schema = {
     type: "number",
   },
 };
+
+interface Schema {
+  set(setting: "test"): void;
+}
 
 // @ts-ignore
 export default new Store({ schema });
