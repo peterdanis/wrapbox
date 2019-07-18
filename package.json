@@ -84,7 +84,8 @@
       "@typescript-eslint",
       "prettier",
       "react",
-      "security"
+      "security",
+      "react-hooks"
     ],
     "rules": {
       "linebreak-style": "off",
@@ -159,7 +160,9 @@
           "groups": [],
           "newlines-between": "never"
         }
-      ]
+      ],
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"
     },
     "settings": {
       "react": {
