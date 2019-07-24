@@ -145,7 +145,7 @@
     "nyc": "^14.0.0",
     "prettier-eslint": "^8.8.2",
     "prettier-stylelint": "^0.4.2",
-    "puppeteer-core": "1.17.0",
+    "puppeteer-core": "1.19.0",
     "stylelint": "^10.0.1",
     "stylelint-config-standard": "^18.3.0"
   }
