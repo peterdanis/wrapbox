@@ -25,8 +25,8 @@
     "start": "yarn build:electron && concurrently -k \"yarn start:react\" \"wait-on http://localhost:3000 && yarn start:electron\"",
     "start:electron": "electron .",
     "start:react": "react-scripts start",
-    "test:all": "react-scripts test --watchAll=false",
-    "test": "react-scripts test"
+    "test:all": "react-scripts test --watchAll=false src",
+    "test": "react-scripts test src"
   },
   "dependencies": {
     "electron-log": "^3.0.5",
