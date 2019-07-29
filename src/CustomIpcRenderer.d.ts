@@ -8,10 +8,9 @@ interface CustomIpcRenderer extends IpcRenderer {
   sendSync(channel: "logError", message: string): void;
 }
 
+// ipcRenderer will be attached to window object via preload script. This ensures that it will work both in development and in production.
 declare global {
   interface Window {
     ipcRenderer: CustomIpcRenderer;
   }
 }
-
-export default window.ipcRenderer;

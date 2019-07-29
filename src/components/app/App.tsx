@@ -1,7 +1,6 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
 import AppBar from "@material-ui/core/AppBar"; // eslint-disable-line import/no-extraneous-dependencies
-import ipcRenderer from "../../utils/ipcRenderer";
 import { makeStyles } from "@material-ui/core/styles"; // eslint-disable-line import/no-extraneous-dependencies
 import Tab from "@material-ui/core/Tab"; // eslint-disable-line import/no-extraneous-dependencies
 import Tabs from "@material-ui/core/Tabs"; // eslint-disable-line import/no-extraneous-dependencies
@@ -25,7 +24,7 @@ export default function App(): React.ReactElement {
   };
 
   useEffect(() => {
-    console.log(ipcRenderer.sendSync("getAllSettings")); // eslint-disable-line
+    console.log(window.ipcRenderer.sendSync("getAllSettings")); // eslint-disable-line
   }, []);
 
   return (
