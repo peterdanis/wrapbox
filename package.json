@@ -25,8 +25,8 @@
     "start": "yarn build:electron && concurrently -k \"yarn start:react\" \"wait-on http://localhost:3000 && yarn start:electron\"",
     "start:electron": "electron .",
     "start:react": "react-scripts start",
-    "test:all": "react-scripts test --watchAll=false src",
-    "test": "react-scripts test src"
+    "test:all": "react-scripts test --watchAll=false src/*",
+    "test": "react-scripts test src/*"
   },
   "dependencies": {
     "electron-log": "^3.0.5",
@@ -46,7 +46,7 @@
     "@typescript-eslint/eslint-plugin": "^1.12.0",
     "@typescript-eslint/parser": "^1.12.0",
     "concurrently": "^4.1.1",
-    "electron": "^5.0.7",
+    "electron": "6.0.0",
     "electron-builder": "^20.44.4",
     "electron-devtools-installer": "^2.2.4",
     "eslint": "^5.0.0",
@@ -61,7 +61,7 @@
     "eslint-plugin-security": "^1.4.0",
     "prettier": "^1.16.4",
     "prettier-stylelint": "^0.4.2",
-    "puppeteer-core": "^1.18.1",
+    "puppeteer-core": "1.18.1",
     "react-scripts": "3.0.1",
     "source-map-explorer": "^2.0.1",
     "stylelint": "^10.0.1",
