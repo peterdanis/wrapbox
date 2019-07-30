@@ -1,6 +1,5 @@
-import "./App.css";
 import React, { Fragment } from "react";
-import TopBar from "../TopBar";
+import TopBar from "./TopBar";
 
 export default function App(): React.ReactElement {
   return (

@@ -1,4 +1,5 @@
-import App from "./components/app/App";
+import "./index.css";
+import App from "./components/App";
 import { GlobalState } from "./components/GlobalState";
 import React from "react";
 import ReactDOM from "react-dom";
