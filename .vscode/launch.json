@@ -16,6 +16,14 @@
       "args": ["-r", "./test-preload.js", "."]
     },
     {
+      "type": "node",
+      "request": "launch",
+      "name": "Electron Main (wo source maps)",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+      "args": ["."],
+      "sourceMaps": false
+    },
+    {
       "type": "chrome",
       "request": "launch",
       "name": "Chrome",
