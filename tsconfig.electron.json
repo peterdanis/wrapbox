@@ -11,7 +11,8 @@
     "moduleResolution": "node",
     "isolatedModules": true,
     "jsx": "preserve",
-    "outDir": "../../build",
+    "outDir": "./build",
     "sourceMap": true
-  }
+  },
+  "include": ["src/electron"]
 }

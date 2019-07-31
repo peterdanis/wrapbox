@@ -16,7 +16,7 @@
     "analyze:react": "source-map-explorer 'build/static/js/*.js'",
     "build": "yarn build:react && yarn build:electron && yarn build:app",
     "build:app": "electron-builder -p never",
-    "build:electron": "tsc --p src/electron/",
+    "build:electron": "tsc --p tsconfig.electron.json",
     "build:react": "react-scripts build",
     "cover": "yarn test:all --coverage",
     "dist": "electron-builder",
