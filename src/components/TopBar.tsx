@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import AppBar from "@material-ui/core/AppBar"; // eslint-disable-line import/no-extraneous-dependencies
+import AppBar from "@material-ui/core/AppBar";
 import { GlobalContext } from "./GlobalState";
-import { makeStyles } from "@material-ui/core/styles"; // eslint-disable-line import/no-extraneous-dependencies
-import Tab from "@material-ui/core/Tab"; // eslint-disable-line import/no-extraneous-dependencies
-import Tabs from "@material-ui/core/Tabs"; // eslint-disable-line import/no-extraneous-dependencies
+import { makeStyles } from "@material-ui/core/styles";
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
 
 export default function TopBar(): React.ReactElement {
   const { activeTab, setActiveTab } = useContext(GlobalContext);

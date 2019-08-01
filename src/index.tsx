@@ -1,4 +1,4 @@
-import "typeface-roboto"; // eslint-disable-line import/no-extraneous-dependencies
+import "typeface-roboto";
 import App from "./components/App";
 import { GlobalState } from "./components/GlobalState";
 import React from "react";
