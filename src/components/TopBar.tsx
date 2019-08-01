@@ -1,23 +1,16 @@
 import React, { useContext } from "react";
-import AppBar from "@material-ui/core/AppBar";
 import { GlobalContext } from "./GlobalState";
-import { makeStyles } from "@material-ui/core/styles";
+import { Paper } from "@material-ui/core";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 
 export default function TopBar(): React.ReactElement {
   const { activeTab, setActiveTab } = useContext(GlobalContext);
 
-  const useStyles = makeStyles({
-    root: {
-      flexGrow: 1,
-    },
-  });
-
-  const classes = useStyles();
+  const dummyTabs = ["A", "B", "C", "D", "E"];
 
   return (
-    <AppBar position="static" color="default" className={classes.root}>
+    <Paper square>
       <Tabs
         value={activeTab}
         onChange={setActiveTab}
@@ -26,14 +19,10 @@ export default function TopBar(): React.ReactElement {
         variant="scrollable"
         scrollButtons="on"
       >
-        <Tab label="Item One" />
-        <Tab label="Item Two" />
-        <Tab label="Item Three" />
-        <Tab label="Item Four" />
-        <Tab label="Item Five" />
-        <Tab label="Item Six" />
-        <Tab label="Item Seven" />
+        {dummyTabs.map(tab => (
+          <Tab key={tab} label={tab} disableRipple />
+        ))}
       </Tabs>
-    </AppBar>
+    </Paper>
   );
 }

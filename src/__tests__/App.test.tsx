@@ -15,6 +15,6 @@ it("renders without crashing", () => {
       <App />
     </GlobalState>,
     document.getElementById("root"),
-  ),
-    ReactDOM.unmountComponentAtNode(div);
+  );
+  ReactDOM.unmountComponentAtNode(div);
 });
