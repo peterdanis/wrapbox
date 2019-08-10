@@ -108,12 +108,12 @@ ipcMain.on("setSettings", (event: IpcMainEvent, settings: {}): void => {
   }
 });
 
-ipcMain.on("getSetting", (event: IpcMainEvent, setting: string) => {
-  event.returnValue = store.get(setting);
+ipcMain.on("getSetting", (event: IpcMainEvent, settingKey: string) => {
+  event.returnValue = store.get(settingKey); // eslint-disable-line no-param-reassign
 });
 
 ipcMain.on("getAllSettings", (event: IpcMainEvent) => {
-  event.returnValue = store.store;
+  event.returnValue = store.store; // eslint-disable-line no-param-reassign
 });
 
 ipcMain.on("logInfo", (event: IpcMainEvent, message: string) => {
@@ -125,6 +125,7 @@ ipcMain.on("logError", (event: IpcMainEvent, message: string) => {
 });
 
 // Store listeners
+// TODO: check whether necessary
 store.onDidAnyChange((newState: {}) => {
   mainWindow.webContents.send("store", newState);
 });

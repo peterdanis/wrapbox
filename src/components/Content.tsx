@@ -4,7 +4,7 @@ import { GlobalContext } from "./GlobalState";
 
 export default function Content(): React.ReactElement {
   // @ts-ignore TODO:remove comment
-  const { activeTab, setActiveTab } = useContext(GlobalContext);
+  const { activePage, setActivePage } = useContext(GlobalContext);
 
   const Background = styled(Paper)({
     height: "100%",

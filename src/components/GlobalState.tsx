@@ -1,31 +1,37 @@
 import React, { createContext, ReactNode, useEffect, useState } from "react";
+import { Page } from "../wrapbox";
 
 interface Props {
   children?: ReactNode;
 }
 
 interface State {
-  activeTab: number;
-  setActiveTab: Function;
+  activePage: string;
+  pages: Page[];
+  setActivePage(value: string): void;
 }
 
-// @ts-ignore
+// @ts-ignore TODO: check ignore
 export const GlobalContext = createContext<State>();
 
 export const GlobalState: React.FunctionComponent = (props: Props) => {
   const { children } = props;
-  const [activeTab, setActiveTab] = useState(0);
+  const [pages, setPages] = useState();
+  const [activePage, setActivePage] = useState("");
 
   useEffect(() => {
-    console.log(window.ipcRenderer.sendSync("getAllSettings")); // eslint-disable-line
+    const settings = window.ipcRenderer.sendSync("getAllSettings");
+    console.log(settings); // eslint-disable-line
+    setPages(settings.pages);
   }, []);
 
   return (
     <GlobalContext.Provider
       value={{
-        activeTab,
-        setActiveTab: (event: Event, number: number) => {
-          setActiveTab(number);
+        activePage,
+        pages,
+        setActivePage: (event: Event, value: string) => {
+          setActivePage(value);
         },
       }}
     >
