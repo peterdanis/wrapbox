@@ -1,6 +1,9 @@
+import { JSONSchema } from "json-schema-typed";
 import Store from "electron-store";
 
-const schema = {
+type Schema = { [key: string]: JSONSchema };
+
+const schema: Schema = {
   backgroundColor: {
     default: "#000000",
     type: "string",
@@ -9,18 +12,18 @@ const schema = {
   //   default: "right",
   //   type: "string",
   // },
-  pages: {
-    default: [],
-    items: {
-      properties: {
-        icon: { type: "string" },
-        id: { type: "string" },
-        url: { type: "string" },
-      },
-      type: "object",
-    },
-    type: "array",
-  },
+  // pages: {
+  //   default: [],
+  //   items: {
+  //     properties: {
+  //       icon: { type: "string" },
+  //       id: { type: "string" },
+  //       url: { type: "string" },
+  //     },
+  //     type: "object",
+  //   },
+  //   type: "array",
+  // },
   // startMaximized: {
   //   default: false,
   //   type: "boolean",
@@ -35,5 +38,4 @@ const schema = {
   // },
 };
 
-// @ts-ignore
 export default new Store({ schema });

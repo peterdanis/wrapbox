@@ -1,5 +1,12 @@
-import React, { createContext, ReactNode, useEffect, useState } from "react";
-import { Page } from "../wrapbox";
+import React, {
+  ChangeEvent,
+  createContext,
+  FunctionComponent,
+  ReactNode,
+  useEffect,
+  useState,
+} from "react";
+import { Page } from "../wrapbox"; // eslint-disable-line import/no-unresolved
 
 interface Props {
   children?: ReactNode;
@@ -8,16 +15,26 @@ interface Props {
 interface State {
   activePage: string;
   pages: Page[];
-  setActivePage(value: string): void;
+  setActivePage(event: ChangeEvent<{}>, value: string): void;
 }
 
-// @ts-ignore TODO: check ignore
-export const GlobalContext = createContext<State>();
+const initialState: State = (() => {
+  const { pages } = window.ipcRenderer.sendSync("getAllSettings");
+  return {
+    activePage: pages[0].id,
+    pages,
+    setActivePage() {
+      //
+    },
+  };
+})();
 
-export const GlobalState: React.FunctionComponent = (props: Props) => {
+export const GlobalContext = createContext(initialState);
+
+export const GlobalState: FunctionComponent = (props: Props) => {
   const { children } = props;
   const [pages, setPages] = useState();
-  const [activePage, setActivePage] = useState("");
+  const [activePage, setActivePage] = useState();
 
   useEffect(() => {
     const settings = window.ipcRenderer.sendSync("getAllSettings");
@@ -30,7 +47,7 @@ export const GlobalState: React.FunctionComponent = (props: Props) => {
       value={{
         activePage,
         pages,
-        setActivePage: (event: Event, value: string) => {
+        setActivePage: (event, value) => {
           setActivePage(value);
         },
       }}

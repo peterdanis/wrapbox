@@ -8,7 +8,7 @@ interface CustomIpcRenderer extends IpcRenderer {
   sendSync(channel: "logError", message: string): void;
 }
 
-interface Page {
+export interface Page {
   icon: string;
   id: string;
   url: string;

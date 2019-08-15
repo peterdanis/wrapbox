@@ -18,14 +18,13 @@ File log locations:
   on Windows: %USERPROFILE%\AppData\Roaming\<app name>\log.log
 */
 
-let mainWindow: Electron.BrowserWindow;
+let mainWindow: Electron.BrowserWindow | null;
 
 const appQuit = (): void => {
   if (process.platform !== "darwin") {
     log.info("App quit");
     app.quit();
   } else {
-    // @ts-ignore
     mainWindow = null;
   }
 };
@@ -34,8 +33,8 @@ const createWindow = (): void => {
   mainWindow = new BrowserWindow({
     // frame: false,
     // titleBarStyle: "hiddenInset",
-    backgroundColor: store.get("backgroundColor"),
-    height: store.get("windowHeight"),
+    backgroundColor: store.get("backgroundColor") as string,
+    height: store.get("windowHeight") as number,
     // Set taskbar icon for Linux appimage manually.
     icon: process.env.APPDIR
       ? path.join(process.env.APPDIR, "wrapbox.png")
@@ -45,15 +44,15 @@ const createWindow = (): void => {
       nodeIntegration: false,
       preload: path.join(__dirname, "preload.js"),
     },
-    width: store.get("windowWidth"),
+    width: store.get("windowWidth") as number,
   });
 
   // Window listeners
   mainWindow.once("ready-to-show", () => {
     if (store.get("startMaximized")) {
-      mainWindow.maximize();
+      mainWindow!.maximize(); // eslint-disable-line @typescript-eslint/no-non-null-assertion
     }
-    mainWindow.show();
+    mainWindow!.show(); // eslint-disable-line @typescript-eslint/no-non-null-assertion
   });
 
   mainWindow.on("closed", () => {
@@ -126,6 +125,6 @@ ipcMain.on("logError", (event: IpcMainEvent, message: string) => {
 
 // Store listeners
 // TODO: check whether necessary
-store.onDidAnyChange((newState: {}) => {
-  mainWindow.webContents.send("store", newState);
+store.onDidAnyChange(newState => {
+  mainWindow!.webContents.send("store", newState); // eslint-disable-line @typescript-eslint/no-non-null-assertion
 });
