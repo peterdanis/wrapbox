@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2018",
-    "allowJs": true,
+    "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -12,7 +12,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "outDir": "./build",
-    "sourceMap": true
+    "sourceMap": false
   },
-  "include": ["src/electron"]
+  "include": ["src/electron"],
+  "exclude": ["node_modules"]
 }
