@@ -50,16 +50,18 @@ export default function TopBar(): React.ReactElement {
         variant="scrollable"
         scrollButtons="on"
       >
-        {pages.map(page => {
-          return (
-            <Tab
-              value={page.id}
-              key={page.id}
-              icon={<DynamicIcon iconName={page.icon} />}
-              disableRipple
-            />
-          );
-        })}
+        {Array.isArray(pages)
+          ? pages.map(page => {
+              return (
+                <Tab
+                  value={page.id}
+                  key={page.id}
+                  icon={<DynamicIcon iconName={page.icon} />}
+                  disableRipple
+                />
+              );
+            })
+          : null}
       </Tabs>
     </Paper>
   );
