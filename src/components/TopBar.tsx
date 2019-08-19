@@ -4,38 +4,6 @@ import { GlobalContext } from "./GlobalState";
 import { Paper } from "@material-ui/core";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
-// import uuid from "uuid/v4";
-
-// const dummyTabs = [
-//   {
-//     // icon: "UserArrowRight",
-//     id: uuid(),
-//   },
-//   {
-//     icon: "PersonArrowRight",
-//     id: uuid(),
-//   },
-//   {
-//     icon: "PersonArrowRight",
-//     id: uuid(),
-//   },
-//   {
-//     icon: "PersonArrowRight",
-//     id: uuid(),
-//   },
-//   {
-//     icon: "Google",
-//     id: uuid(),
-//   },
-//   {
-//     icon: "Account",
-//     id: uuid(),
-//   },
-//   {
-//     icon: "Adobe",
-//     id: uuid(),
-//   },
-// ];
 
 export default function TopBar(): React.ReactElement {
   const { activePage, pages, setActivePage } = useContext(GlobalContext);
