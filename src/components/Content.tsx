@@ -3,14 +3,12 @@ import React, { useContext } from "react";
 import { GlobalContext } from "./GlobalState";
 
 export default function Content(): React.ReactElement {
-  // @ts-ignore TODO:remove comment
-  const { activePage, setActivePage } = useContext(GlobalContext);
+  const { activePage, pages } = useContext(GlobalContext);
 
   const Background = styled(Paper)({
-    height: "100%",
+    height: "calc(100% - 48px)",
     position: "absolute",
     webkitAppRegion: "no-drag",
-    // top: 32px;
     width: "100%",
   });
 
@@ -22,7 +20,7 @@ export default function Content(): React.ReactElement {
 
   return (
     <Background square>
-      <Webview />
+      <Webview src={pages.filter(page => page.id === activePage)[0].url} />
     </Background>
   );
 }
