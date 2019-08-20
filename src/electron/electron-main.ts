@@ -18,6 +18,9 @@ File log locations:
   on Windows: %USERPROFILE%\AppData\Roaming\<app name>\log.log
 */
 
+// Enable Overlay scrollbar
+app.commandLine.appendSwitch("--enable-features", "OverlayScrollbar");
+
 let mainWindow: Electron.BrowserWindow | null;
 
 const appQuit = (): void => {
@@ -43,6 +46,7 @@ const createWindow = (): void => {
     webPreferences: {
       nodeIntegration: false,
       preload: path.join(__dirname, "preload.js"),
+      webviewTag: true,
     },
     width: store.get("windowWidth") as number,
   });
@@ -121,10 +125,4 @@ ipcMain.on("logInfo", (event: IpcMainEvent, message: string) => {
 
 ipcMain.on("logError", (event: IpcMainEvent, message: string) => {
   log.error(message);
-});
-
-// Store listeners
-// TODO: check whether necessary
-store.onDidAnyChange(newState => {
-  mainWindow!.webContents.send("store", newState); // eslint-disable-line @typescript-eslint/no-non-null-assertion
 });
