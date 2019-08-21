@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import DynamicIcon from "./DynamicIcon";
 import { GlobalContext } from "./GlobalState";
-import { Paper } from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 

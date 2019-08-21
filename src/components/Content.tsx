@@ -1,26 +1,25 @@
-import { Paper, styled } from "@material-ui/core";
 import React, { useContext } from "react";
 import { GlobalContext } from "./GlobalState";
+import Paper from "@material-ui/core/Paper";
+import Webview from "./Webview";
 
 export default function Content(): React.ReactElement {
-  const { activePage, pages } = useContext(GlobalContext);
-
-  const Background = styled(Paper)({
-    height: "calc(100% - 48px)",
-    position: "absolute",
-    webkitAppRegion: "no-drag",
-    width: "100%",
-  });
-
-  const Webview = styled("webview")({
-    height: "100%",
-    position: "absolute",
-    width: "100%",
-  });
+  const { pages } = useContext(GlobalContext);
 
   return (
-    <Background square>
-      <Webview src={pages.filter(page => page.id === activePage)[0].url} />
-    </Background>
+    <Paper
+      square
+      style={{
+        height: "calc(100% - 48px)",
+        position: "absolute",
+        width: "100%",
+      }}
+    >
+      {Array.isArray(pages)
+        ? pages.map(page => {
+            return <Webview id={page.id} key={page.id} src={page.url} />;
+          })
+        : null}
+    </Paper>
   );
 }
