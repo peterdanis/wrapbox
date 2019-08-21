@@ -168,7 +168,16 @@
       ],
       "import/no-extraneous-dependencies": "off",
       "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "warn"
+      "react-hooks/exhaustive-deps": "warn",
+      "spaced-comment": [
+        "warn",
+        "always",
+        {
+          "markers": [
+            "/ <reference"
+          ]
+        }
+      ]
     },
     "settings": {
       "react": {
