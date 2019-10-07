@@ -15,6 +15,7 @@ export default function TopBar(): React.ReactElement {
     <Paper
       square
       style={{
+        boxShadow: "inset 0 -1px rgba(0, 0, 0, 0.05)",
         display: "flex",
         height,
       }}
