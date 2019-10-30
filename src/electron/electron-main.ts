@@ -46,6 +46,7 @@ const createWindow = (): void => {
     webPreferences: {
       nodeIntegration: false,
       preload: path.join(__dirname, "preload.js"),
+      sandbox: true,
       webviewTag: true,
     },
     width: store.get("windowWidth") as number,
