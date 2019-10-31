@@ -5,6 +5,7 @@ import Paper from "@material-ui/core/Paper";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import VerticalDivider from "./VerticalDivider";
+import WindowConstrols from "./WindowControls";
 
 const divStyle = {
   display: "flex",
@@ -35,7 +36,9 @@ export default function TopBar(): React.ReactElement {
 
   return (
     <Paper square style={topBarStyle}>
-      <div style={divStyle} />
+      <div style={divStyle}>
+        <WindowConstrols />
+      </div>
       <VerticalDivider />
       <Tabs
         indicatorColor="primary"
