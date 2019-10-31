@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow, ipcMain, shell } from "electron";
 import log from "electron-log";
 import path from "path";
 import store from "./store";
@@ -69,9 +69,10 @@ const createWindow = (): void => {
     mainWindow.loadFile(path.join(__dirname, "index.html"));
   } else {
     // Add react-dev-tools extension for development
-    import("./react-dev-tools").then(module => {
+    (async () => {
+      const module = await import("./react-dev-tools");
       module.default(log);
-    });
+    })();
     mainWindow.loadURL("http://localhost:3000");
   }
 };
@@ -98,13 +99,24 @@ app.on("window-all-closed", () => {
   log.info("All windows closed");
 });
 
+app.on("web-contents-created", (event, contents) => {
+  if (contents.getType() === "webview") {
+    contents.on("new-window", (newWindowEvent, url, frameName, disposition) => {
+      if (disposition !== "new-window") {
+        newWindowEvent.preventDefault();
+        shell.openExternal(url);
+      }
+    });
+  }
+});
+
 // IPC listeners
 interface IpcMainEvent extends Event {
   reply: Function;
   returnValue: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
-ipcMain.on("setSettings", (event: IpcMainEvent, settings: {}): void => {
+ipcMain.on("setSettings", (event, settings: {}): void => {
   try {
     store.set(settings);
   } catch (error) {
@@ -120,10 +132,10 @@ ipcMain.on("getAllSettings", (event: IpcMainEvent) => {
   event.returnValue = store.store; // eslint-disable-line no-param-reassign
 });
 
-ipcMain.on("logInfo", (event: IpcMainEvent, message: string) => {
+ipcMain.on("logInfo", (event, message: string) => {
   log.info(message);
 });
 
-ipcMain.on("logError", (event: IpcMainEvent, message: string) => {
+ipcMain.on("logError", (event, message: string) => {
   log.error(message);
 });

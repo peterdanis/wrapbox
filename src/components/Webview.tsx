@@ -1,7 +1,6 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext } from "react";
 import { GlobalContext } from "./GlobalState";
 import { Page } from "../wrapbox"; // eslint-disable-line import/no-unresolved
-// import { WebviewTag } from "electron";
 
 interface Props {
   id: Page["id"];
@@ -18,15 +17,12 @@ declare module "react" {
 export default function Webview(props: Props): React.ReactElement {
   const { activePage } = useContext(GlobalContext);
   const { id, src } = props;
-  const webviewRef = useRef(null);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const trueAsAny = "true" as any;
+  const trueAsAny: any = "true"; // eslint-disable-line @typescript-eslint/no-explicit-any
 
   return (
     <webview
       allowpopups={trueAsAny}
       enableremotemodule="false"
-      ref={webviewRef}
       src={src}
       style={{
         height: "100%",
