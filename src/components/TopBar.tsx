@@ -6,47 +6,55 @@ import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import VerticalDivider from "./VerticalDivider";
 
+const divStyle = {
+  display: "flex",
+  height: "inherit",
+  width: "50px",
+};
+
+const topBarStyle = {
+  boxShadow: "inset 0 -1px rgba(0, 0, 0, 0.05)",
+  display: "flex",
+  height: "40px",
+  WebkitAppRegion: "drag",
+};
+
+const tabStyle = {
+  minHeight: "inherit",
+  minWidth: "80px",
+  WebkitAppRegion: "none",
+};
+
+const tabsStyle = {
+  minHeight: "inherit",
+};
+
 // TODO: delete div and extract "height"
 export default function TopBar(): React.ReactElement {
   const { activePage, pages, setActivePage } = useContext(GlobalContext);
-  const height = "40px";
 
   return (
-    <Paper
-      square
-      style={{
-        boxShadow: "inset 0 -1px rgba(0, 0, 0, 0.05)",
-        display: "flex",
-        height,
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          height,
-          width: "50px",
-        }}
-      />
+    <Paper square style={topBarStyle}>
+      <div style={divStyle} />
       <VerticalDivider />
       <Tabs
-        value={activePage}
-        onChange={setActivePage}
         indicatorColor="primary"
-        textColor="primary"
-        variant="scrollable"
+        onChange={setActivePage}
         scrollButtons="on"
-        style={{
-          minHeight: height,
-        }}
+        style={tabsStyle}
+        textColor="primary"
+        value={activePage}
+        variant="scrollable"
       >
         {Array.isArray(pages)
           ? pages.map(page => {
               return (
                 <Tab
-                  value={page.id}
-                  key={page.id}
-                  icon={<DynamicIcon iconName={page.icon} />}
                   disableRipple
+                  icon={<DynamicIcon iconName={page.icon} />}
+                  key={page.id}
+                  style={tabStyle}
+                  value={page.id}
                 />
               );
             })

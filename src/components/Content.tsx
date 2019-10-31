@@ -10,7 +10,7 @@ export default function Content(): React.ReactElement {
     <Paper
       square
       style={{
-        height: "calc(100% - 41px)",
+        height: "calc(100% - 40px)",
         position: "absolute",
         width: "100%",
       }}

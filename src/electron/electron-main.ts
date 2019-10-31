@@ -34,15 +34,15 @@ const appQuit = (): void => {
 
 const createWindow = (): void => {
   mainWindow = new BrowserWindow({
-    // frame: false,
-    // titleBarStyle: "hiddenInset",
     backgroundColor: store.get("backgroundColor") as string,
+    frame: false,
     height: store.get("windowHeight") as number,
     // Set taskbar icon for Linux appimage manually.
     icon: process.env.APPDIR
       ? path.join(process.env.APPDIR, "wrapbox.png")
       : undefined,
     show: false,
+    titleBarStyle: "hiddenInset",
     webPreferences: {
       nodeIntegration: false,
       preload: path.join(__dirname, "preload.js"),
@@ -68,12 +68,12 @@ const createWindow = (): void => {
   if (app.isPackaged) {
     mainWindow.loadFile(path.join(__dirname, "index.html"));
   } else {
+    mainWindow.loadURL("http://localhost:3000");
     // Add react-dev-tools extension for development
     (async () => {
       const module = await import("./react-dev-tools");
       module.default(log);
     })();
-    mainWindow.loadURL("http://localhost:3000");
   }
 };
 
