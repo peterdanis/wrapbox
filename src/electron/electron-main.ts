@@ -13,9 +13,9 @@ log.info(`Log file location: ${log.transports.file.file}`);
 log.info(`Settings location: ${store.path}`);
 /*
 File log locations:
-  on Linux: ~/.config/<app name>/log.log
-  on OS X: ~/Library/Logs/<app name>/log.log
-  on Windows: %USERPROFILE%\AppData\Roaming\<app name>\log.log
+  on Linux: ~/.config/{app name}/logs/{process type}.log
+  on macOS: ~/Library/Logs/{app name}/{process type}.log
+  on Windows: %USERPROFILE%\AppData\Roaming\{app name}\{process type}.log
 */
 
 // Enable Overlay scrollbar
