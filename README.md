@@ -4,7 +4,7 @@
 
 # Wrapbox
 
-Purpose of this project is to have all pages you use frequently ready for you in one application. App works on Windows, MacOS and Linux. It is using (Electron)[https://www.electronjs.org/], which uses Chromium and Node  under the hood.
+Purpose of this project is to have all pages you use frequently ready for you in one application. App is cross-platform - works on Windows, MacOS and Linux. It is using (Electron)[https://www.electronjs.org/], which merges Chromium and Node under into one framework.
 
 ![image](https://res.cloudinary.com/d3/image/upload/v1580457966/wrapbox_jd6uyg.png)
 
@@ -13,14 +13,48 @@ Versions available (x64 only):
 - MacOS .dmg and .zip
 - Linux AppImage
 
-
-
 #### [Download](https://github.com/peterdanis/wrapbox/releases/latest)
 
- > Note for MacOS users: app is signed only by self-signed certificate, you will have to confirm the installation.
+ > Note: app is signed only by self-signed certificate, you will have to confirm the installation.
 
 ## Contributing
 
 Any contributions (new features, bug fixes, bug report, ideas and others) are welcome. For code contributions please use branch [v2](https://github.com/peterdanis/wrapbox/tree/v2). Rework to newer Electron version, Typescript and React is being done there.
 
-### How to contribute
+### How to start / build it on your own from the source code
+
+- Clone this repository
+
+```bash
+git git clone https://github.com/peterdanis/wrapbox.git
+cd wrapbox
+```
+
+- Install dependencies
+
+```bash
+npm install
+```
+or
+```bash
+yarn install
+```
+- Build it
+
+```bash
+npm run build
+```
+or
+```bash
+yarn build
+```
+
+- Start it
+
+```bash
+npm run start
+```
+or
+```bash
+yarn start
+```
