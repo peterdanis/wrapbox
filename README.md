@@ -32,29 +32,12 @@ cd wrapbox
 
 - Install dependencies
 
-```bash
-npm install
-```
-or
-```bash
-yarn install
-```
+`npm install` or `yarn`
+
 - Build it
 
-```bash
-npm run build
-```
-or
-```bash
-yarn build
-```
+`npm run build` or `yarn build`
 
 - Start it
 
-```bash
-npm run start
-```
-or
-```bash
-yarn start
-```
+`npm run start` or `yarn start`
