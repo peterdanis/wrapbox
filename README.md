@@ -4,7 +4,9 @@
 
 # Wrapbox
 
-Purpose of this project is to have all pages you use frequently ready for you in one application. App is cross-platform - works on Windows, MacOS and Linux. It is using [Electron](https://www.electronjs.org/), which merges Chromium and Node under into one framework.
+Purpose of the project is to have pages you use frequently ready for you in one application. For example opening multiple Sharepoint sites + your online Outlook inbox and calendar + your news agregator + Slack + JIRA each day in work is not fun and they get easily lost in the browser while doing other stuff in it.
+
+App is cross-platform - works on Windows, MacOS and Linux. It is using [Electron](https://www.electronjs.org/), which merges Chromium and Node into one framework.
 
 ![image](https://res.cloudinary.com/d3/image/upload/v1580457966/wrapbox_jd6uyg.png)
 
