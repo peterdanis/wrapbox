@@ -3,11 +3,9 @@
 [![codecov](https://codecov.io/gh/peterdanis/wrapbox/branch/master/graph/badge.svg)](https://codecov.io/gh/peterdanis/wrapbox)
 
 # Wrapbox
-## Browser replacement for webpages one uses daily.
 
-App works on Windows, MacOS and Linux. It uses Electron, which uses Chromium under the hood and it is as efficient as having the pages open in a proper browser.
+Purpose of this project is to have all pages you use frequently ready for you in one application. App works on Windows, MacOS and Linux. It is using (Electron)[https://www.electronjs.org/], which uses Chromium and Node  under the hood.
 
-Screenshot:
 ![image](https://res.cloudinary.com/d3/image/upload/v1580457966/wrapbox_jd6uyg.png)
 
 Versions available (x64 only):
@@ -15,14 +13,14 @@ Versions available (x64 only):
 - MacOS .dmg and .zip
 - Linux AppImage
 
+
+
+#### [Download](https://github.com/peterdanis/wrapbox/releases/latest)
+
  > Note for MacOS users: app is signed only by self-signed certificate, you will have to confirm the installation.
-
-### [Download it here](https://github.com/peterdanis/wrapbox/releases/latest)
-
-
 
 ## Contributing
 
-Any contributions (new features, bug fixes, bug report, ideas and others) are welcome. For code contributions please use branch [v2](https://github.com/peterdanis/wrapbox/tree/v2), rework to newer Electron version, Typescript and React is being done there.
+Any contributions (new features, bug fixes, bug report, ideas and others) are welcome. For code contributions please use branch [v2](https://github.com/peterdanis/wrapbox/tree/v2). Rework to newer Electron version, Typescript and React is being done there.
 
 ### How to contribute
