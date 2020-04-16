@@ -75,14 +75,9 @@
     "uuid": "^7.0.3",
     "wait-on": "^4.0.2"
   },
-  "browserslist": {
-    "production": [
-      "chrome 78"
-    ],
-    "development": [
-      "chrome 78"
-    ]
-  },
+  "browserslist": [
+    "chrome 80"
+  ],
   "build": {
     "extends": null,
     "appId": "com.peterdanis.wrapbox",
