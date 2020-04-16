@@ -1,6 +1,6 @@
 import React, { createContext, useState } from "react";
 import { Page } from "../wrapbox"; // eslint-disable-line import/no-unresolved
-import uuid from "uuid/v4";
+import { v4 as uuid } from "uuid";
 
 type AddPage = (url: Page["url"], icon: Page["icon"]) => void;
 
