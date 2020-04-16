@@ -50,7 +50,7 @@ export default function TopBar(): React.ReactElement {
         variant="scrollable"
       >
         {Array.isArray(pages)
-          ? pages.map(page => {
+          ? pages.map((page) => {
               return (
                 <Tab
                   disableRipple

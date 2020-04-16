@@ -9,8 +9,8 @@ interface Logger {
 
 const init = (logger: Logger): void => {
   installExtension(REACT_DEVELOPER_TOOLS)
-    .then(name => logger.info(`Added Extension:  ${name}`))
-    .catch(err => logger.info("An error occurred: ", err));
+    .then((name) => logger.info(`Added Extension:  ${name}`))
+    .catch((err) => logger.info("An error occurred: ", err));
 };
 
 export default init;

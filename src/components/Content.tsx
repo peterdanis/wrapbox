@@ -16,7 +16,7 @@ export default function Content(): React.ReactElement {
       }}
     >
       {Array.isArray(pages)
-        ? pages.map(page => {
+        ? pages.map((page) => {
             return <Webview id={page.id} key={page.id} src={page.url} />;
           })
         : null}
