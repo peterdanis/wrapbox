@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { Page } from "../wrapbox"; // eslint-disable-line import/no-unresolved
 import { v4 as uuid } from "uuid";
 
@@ -17,22 +17,29 @@ interface State {
   setActivePage?: SetActivePage;
 }
 
-const initialState: State = (() => {
-  const { pages } = window.ipcRenderer.sendSync("getAllSettings");
-  return {
-    activePage: pages[0] ? pages[0].id : "",
-    pages,
-  };
-})();
+const blankState: State = {
+  activePage: "",
+  pages: [],
+};
 
-export const GlobalContext = createContext(initialState);
+export const GlobalContext = createContext(blankState);
 
 export const GlobalState: React.FunctionComponent = (props: Props) => {
   const { children } = props;
-  const [pages, setPages] = useState(initialState.pages);
-  const [activePage, setActivePage] = useState(initialState.activePage);
+  const [pages, setPages] = useState(blankState.pages);
+  const [activePage, setActivePage] = useState(blankState.activePage);
 
-  const addPage: AddPage = (url, icon) => {
+  useEffect(() => {
+    (async () => {
+      const { pages: loadedPages } = await window.ipcRenderer.invoke(
+        "getAllSettings",
+      );
+      setPages(loadedPages);
+      setActivePage(loadedPages[0].id);
+    })();
+  }, []);
+
+  const addPage: AddPage = async (url, icon) => {
     const newPages = [
       ...pages,
       {
@@ -41,7 +48,7 @@ export const GlobalState: React.FunctionComponent = (props: Props) => {
         url,
       },
     ];
-    window.ipcRenderer.send("setSettings", { pages: newPages });
+    await window.ipcRenderer.invoke("setSettings", { pages: newPages });
     setPages(newPages);
   };
 

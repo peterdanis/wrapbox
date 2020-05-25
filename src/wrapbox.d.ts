@@ -1,11 +1,9 @@
-import { IpcRenderer } from "electron";
-
-interface CustomIpcRenderer extends IpcRenderer {
-  send(channel: "logInfo", message: string): void;
-  send(channel: "setSettings", settings: {}): void;
-  sendSync(channel: "getAllSettings"): Settings;
-  sendSync(channel: "getSetting", settingKey: string): {} | string;
-  sendSync(channel: "logError", message: string): void;
+interface CustomIpcRenderer {
+  // invoke(channel: "logInfo", message: string): void;
+  invoke(channel: "setSettings", settings: Settings): void;
+  invoke(channel: "getAllSettings"): Settings;
+  // invoke(channel: "getSetting", settingKey: string): {} | string;
+  // invoke(channel: "logError", message: string): void;
 }
 
 export interface Page {

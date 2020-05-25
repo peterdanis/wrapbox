@@ -111,10 +111,6 @@ app.on("web-contents-created", (event, contents) => {
 });
 
 // IPC listeners
-interface IpcMainEvent extends Event {
-  reply: Function;
-  returnValue: any; // eslint-disable-line @typescript-eslint/no-explicit-any
-}
 
 ipcMain.on("setSettings", (event, settings: {}): void => {
   try {
@@ -124,13 +120,26 @@ ipcMain.on("setSettings", (event, settings: {}): void => {
   }
 });
 
-ipcMain.on("getSetting", (event: IpcMainEvent, settingKey: string) => {
+ipcMain.on("getSetting", (event, settingKey: string) => {
   event.returnValue = store.get(settingKey); // eslint-disable-line no-param-reassign
 });
 
-ipcMain.on("getAllSettings", (event: IpcMainEvent) => {
-  event.returnValue = store.store; // eslint-disable-line no-param-reassign
-});
+const a = {
+  backgroundColor: "#000000",
+  pages: [
+    {
+      icon: "Google",
+      id: "bbd0561a-62e2-44c0-9069-708f516d089e",
+      url: "https://maps.google.com",
+    },
+  ],
+  windowHeight: 700,
+  windowWidth: 1200,
+};
+
+ipcMain.handle("getAllSettings", () => {
+  return a;
+}); //store.store);
 
 ipcMain.on("logInfo", (event, message: string) => {
   log.info(message);
