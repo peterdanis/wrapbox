@@ -31,12 +31,14 @@
         "functions": "always-multiline"
       }
     ],
+    "no-use-before-define": "off", // see https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-use-before-define.md#how-to-use
     "react/jsx-filename-extension": [
       "warn",
       {
         "extensions": [".jsx", ".tsx"]
       }
     ],
+    "@typescript-eslint/no-use-before-define": ["error"],
     "@typescript-eslint/explicit-function-return-type": [
       "warn",
       {
