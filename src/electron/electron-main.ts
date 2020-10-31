@@ -138,8 +138,9 @@ const a = {
 };
 
 ipcMain.handle("getAllSettings", () => {
-  return a;
-}); //store.store);
+  return store.store;
+  console.log(store.store);
+});
 
 ipcMain.on("logInfo", (event, message: string) => {
   log.info(message);
