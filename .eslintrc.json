@@ -86,6 +86,7 @@
     "import/extensions": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "react/require-default-props": "warn",
     "spaced-comment": [
       "warn",
       "always",
