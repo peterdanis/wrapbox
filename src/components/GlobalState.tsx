@@ -4,7 +4,7 @@ import { v4 as uuid } from "uuid";
 
 type AddPage = (url: Page["url"], icon: Page["icon"]) => void;
 
-type SetActivePage = (event: React.ChangeEvent<{}>, value: string) => void;
+type SetActivePage = (event: React.ChangeEvent<Element>, value: string) => void;
 
 interface Props {
   children?: React.ReactNode;

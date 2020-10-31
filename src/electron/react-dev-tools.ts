@@ -4,7 +4,7 @@ import installExtension, {
 } from "electron-devtools-installer";
 
 interface Logger {
-  info: Function;
+  info: (text: string, error?: Error) => void;
 }
 
 const init = (logger: Logger): void => {
