@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es2018",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": false,
     "checkJs": false,
     "skipLibCheck": true,
@@ -14,9 +18,15 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve",
-    "sourceMap": false
+    "jsx": "react",
+    "sourceMap": false,
+    "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
-  "exclude": ["src/electron", "node_modules"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "src/electron",
+    "node_modules"
+  ]
 }

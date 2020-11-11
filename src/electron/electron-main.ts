@@ -112,7 +112,7 @@ app.on("web-contents-created", (event, contents) => {
 
 // IPC listeners
 
-ipcMain.on("setSettings", (event, settings: {}): void => {
+ipcMain.on("setSettings", (event, settings: Record<string, unknown>): void => {
   try {
     store.set(settings);
   } catch (error) {
