@@ -1,14 +1,37 @@
+import ButtonBase from "@material-ui/core/ButtonBase";
 import React from "react";
 import SvgIcon from "@material-ui/core/SvgIcon";
 
-const Close = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M7.11613 7.99992L2.55808 12.558L3.44196 13.4419L8.00002 8.88381L12.5581 13.4419L13.442 12.558L8.8839 7.99992L13.442 3.44187L12.5581 2.55798L8.00002 7.11604L3.44196 2.55798L2.55807 3.44187L7.11613 7.99992Z" fill="#C5C5C5"/>
-</svg>`;
+const buttonWidth = 30;
 
-const Maximize = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M3 3V13H13V3H3ZM12 12H4V4H12V12Z" fill="#C5C5C5"/>
-</svg>`;
+interface ElectronCSSProperties extends React.CSSProperties {
+  WebkitAppRegion: string;
+}
+
+const divStyle: ElectronCSSProperties = {
+  display: "flex",
+  height: "inherit",
+  WebkitAppRegion: "none",
+  width: `${3 * buttonWidth}px`,
+};
+
+const iconStyle: React.CSSProperties = {
+  margin: "auto",
+  // width: "40%",
+};
 
 export default function WindowConstrols(): React.ReactElement {
-  return <div />;
+  return (
+    <div style={divStyle}>
+      <SvgIcon style={iconStyle}>
+        <path d="M14 8v1H3V8h11z" />
+      </SvgIcon>
+      <SvgIcon style={iconStyle}>
+        <path d="M3 3v10h10V3H3zm9 9H4V4h8v8z" />
+      </SvgIcon>
+      <SvgIcon style={iconStyle}>
+        <path d="M7.116 8l-4.558 4.558l.884.884L8 8.884l4.558 4.558l.884-.884L8.884 8l4.558-4.558l-.884-.884L8 7.116L3.442 2.558l-.884.884L7.116 8z" />
+      </SvgIcon>
+    </div>
+  );
 }

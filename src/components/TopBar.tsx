@@ -36,9 +36,9 @@ export default function TopBar(): React.ReactElement {
 
   return (
     <Paper square style={topBarStyle}>
-      <div style={divStyle}>
-        <WindowControls />
-      </div>
+      {/* <div style={divStyle}> */}
+      <WindowControls />
+      {/* </div> */}
       <VerticalDivider />
       <Tabs
         indicatorColor="primary"
