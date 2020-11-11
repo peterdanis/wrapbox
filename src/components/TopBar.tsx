@@ -1,33 +1,45 @@
+import { ButtonBase, Tab, Tabs } from "@material-ui/core";
 import React, { useContext } from "react";
 import DynamicIcon from "./DynamicIcon";
+import { ElectronCSSProperties } from "../wrapbox"; // eslint-disable-line import/no-unresolved
 import { GlobalContext } from "./GlobalState";
 import Paper from "@material-ui/core/Paper";
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
+import Tune from "mdi-material-ui/Tune";
 import VerticalDivider from "./VerticalDivider";
 import WindowControls from "./WindowControls";
 
-const divStyle = {
+const rightDivStyle = {
   display: "flex",
+
   height: "inherit",
   width: "50px",
 };
 
-const topBarStyle = {
-  boxShadow: "inset 0 -1px rgba(0, 0, 0, 0.05)",
+const topBarStyle: ElectronCSSProperties = {
+  boxShadow: "inset 0 -1px rgba(0, 0, 0, 0.2)",
   display: "flex",
+  flexDirection: "row",
+  flexWrap: "nowrap",
   height: "40px",
+  justifyContent: "space-between",
   WebkitAppRegion: "drag",
 };
 
-const tabStyle = {
+const tabStyle: ElectronCSSProperties = {
   minHeight: "inherit",
-  minWidth: "80px",
+  minWidth: "70px",
   WebkitAppRegion: "none",
 };
 
 const tabsStyle = {
   minHeight: "inherit",
+};
+
+const settingsButtonStyle: ElectronCSSProperties = {
+  height: "25px",
+  maxWidth: "30px",
+  WebkitAppRegion: "none",
+  width: "30px",
 };
 
 // TODO: delete div and extract "height"
@@ -36,10 +48,14 @@ export default function TopBar(): React.ReactElement {
 
   return (
     <Paper square style={topBarStyle}>
+      <div style={rightDivStyle}>
+        <ButtonBase style={settingsButtonStyle}>
+          <Tune color="primary" />
+        </ButtonBase>
+      </div>
       {/* <div style={divStyle}> */}
-      <WindowControls />
       {/* </div> */}
-      <VerticalDivider />
+      {/* <VerticalDivider /> */}
       <Tabs
         indicatorColor="primary"
         onChange={setActivePage}
@@ -63,6 +79,7 @@ export default function TopBar(): React.ReactElement {
             })
           : null}
       </Tabs>
+      <WindowControls />
     </Paper>
   );
 }

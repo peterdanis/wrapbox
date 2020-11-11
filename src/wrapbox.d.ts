@@ -6,6 +6,10 @@ interface CustomIpcRenderer {
   // invoke(channel: "logError", message: string): void;
 }
 
+export interface ElectronCSSProperties extends React.CSSProperties {
+  WebkitAppRegion: string;
+}
+
 export interface Page {
   icon: string;
   id: string;
