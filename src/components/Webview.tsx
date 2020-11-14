@@ -8,8 +8,8 @@ interface Props {
 }
 
 declare module "react" {
-  interface WebViewHTMLAttributes<T>
-    extends HTMLAttributes<HTMLWebViewElement> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  interface WebViewHTMLAttributes<T> {
     enableremotemodule?: "false" | "true";
   }
 }
